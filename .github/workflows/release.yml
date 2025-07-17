@@ -12,34 +12,60 @@ jobs:
   build_pdf: # Job 이름 명확화
     runs-on: ubuntu-latest
     outputs: # build_pdf Job의 출력 정의 (다른 Job에서 접근 가능)
-      main_pdf_filename: ${{ steps.set_pdf_name.outputs.main_pdf_name }}
-      cover_pdf_filename: ${{ steps.set_pdf_name.outputs.cover_pdf_name }}
+      pdf_filenames: ${{ steps.generate_file_lists.outputs.pdf_filenames_for_release }}
 
     steps:
       - name: 저장소 체크아웃
         uses: actions/checkout@v4
 
-      - name: PDF 파일명 설정
-        id: set_pdf_name # 스텝 ID
+      - name: Typ 파일 목록 및 PDF 파일명 설정
+        id: generate_file_lists # 스텝 ID
         run: |
           # 현재 날짜 포맷 (예: 2025-07-14)
           CURRENT_DATE=$(date +%Y-%m-%d)
-          # main.typ의 최종 PDF 파일명 (예: 2025-07-14_resume_main.pdf)
-          MAIN_PDF_NAME="${CURRENT_DATE}_resume_main.pdf"
-          # cover.typ의 최종 PDF 파일명 (예: 2025-07-14_resume_cover.pdf)
-          COVER_PDF_NAME="${CURRENT_DATE}_resume_cover.pdf"
-          # 이 파일명들을 다음 스텝과 다른 Job에서 사용할 수 있도록 출력 변수로 설정
-          echo "main_pdf_name=$MAIN_PDF_NAME" >> "$GITHUB_OUTPUT"
-          echo "cover_pdf_name=$COVER_PDF_NAME" >> "$GITHUB_OUTPUT"
+
+          # Typst 소스 경로 및 출력 PDF 경로를 저장할 변수 초기화
+          TYP_SOURCE_PATHS=""
+          PDF_OUTPUT_PATHS=""
+          PDF_FILENAMES_FOR_RELEASE=""
+
+          # src/ 디렉토리 내의 모든 .typ 파일에 대해 반복
+          for typ_file_path in src/*.typ; do
+            # 파일명에서 .typ 확장자 제거 (예: main.typ -> main)
+            filename=$(basename "$typ_file_path" .typ)
+
+            # 소스 경로 목록에 추가 (한 줄에 하나씩)
+            TYP_SOURCE_PATHS+="$typ_file_path"$'\n'
+
+            # 최종 PDF 파일명 (예: 2025-07-14_main.pdf)
+            PDF_NAME="${CURRENT_DATE}_${filename}.pdf"
+            # 출력 경로 목록에 추가 (한 줄에 하나씩)
+            PDF_OUTPUT_PATHS+="src/$PDF_NAME"$'\n'
+            # 릴리스에 사용할 PDF 파일명 목록에 추가 (한 줄에 하나씩)
+            PDF_FILENAMES_FOR_RELEASE+="$PDF_NAME"$'\n'
+          done
+
+          # GITHUB_OUTPUT에 다중 라인 문자열로 출력 변수 설정
+          echo "typ_source_paths<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$TYP_SOURCE_PATHS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+          echo "pdf_output_paths<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$PDF_OUTPUT_PATHS" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
+          echo "pdf_filenames_for_release<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$PDF_FILENAMES_FOR_RELEASE" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: Typst로 PDF 컴파일
         uses: ammar-ahmed22/compile-typst-action@main
         with:
-          # 소스 경로를 공백으로 구분하여 나열합니다. (쉼표 대신 공백 사용)
-          source_paths: "src/main.typ src/cover.typ"
-          # 출력 경로도 공백으로 구분하여 나열합니다.
-          output_paths: "src/${{ steps.set_pdf_name.outputs.main_pdf_name }} src/${{ steps.set_pdf_name.outputs.cover_pdf_name }}"
-          fonts_path: 'src/resources/fonts'
+          # 동적으로 생성된 소스 경로 목록 사용
+          source_paths: ${{ steps.generate_file_lists.outputs.typ_source_paths }}
+          # 동적으로 생성된 출력 경로 목록 사용
+          output_paths: ${{ steps.generate_file_lists.outputs.pdf_output_paths }}
+          fonts_path: 'src/fonts'
 
       - name: 컴파일된 PDF 아티팩트 업로드
         uses: actions/upload-artifact@v4
@@ -72,6 +98,26 @@ jobs:
           TAG_DATE_TIME=$(date +'%Y.%m.%d-%H%M')
           echo "tag_datetime=$TAG_DATE_TIME" >> "$GITHUB_OUTPUT"
 
+      - name: 릴리스에 첨부할 파일 목록 준비
+        id: prepare_release_files
+        run: |
+          # build_pdf Job에서 전달된 PDF 파일명 목록을 가져옴
+          PDF_FILENAMES="${{ needs.build_pdf.outputs.pdf_filenames }}"
+
+          # 각 파일명 앞에 다운로드 경로를 붙여 릴리스 첨부 형식으로 변환
+          RELEASE_FILES=""
+          IFS=$'\n' # 개행 문자를 구분자로 설정
+          for filename in $PDF_FILENAMES; do
+            if [ -n "$filename" ]; then # 빈 줄이 아닌 경우에만 처리
+              RELEASE_FILES+="./downloaded_pdf/$filename"$'\n'
+            fi
+          done
+
+          # GITHUB_OUTPUT에 다중 라인 문자열로 출력 변수 설정
+          echo "release_files<<EOF" >> "$GITHUB_OUTPUT"
+          echo "$RELEASE_FILES" >> "$GITHUB_OUTPUT"
+          echo "EOF" >> "$GITHUB_OUTPUT"
+
       - name: GitHub 릴리스 생성
         uses: softprops/action-gh-release@v1
         with:
@@ -81,9 +127,7 @@ jobs:
           name: ${{ github.ref_name }} v${{ github.run_number }} (${{ steps.release_datetime.outputs.tag_datetime }})
           # 릴리스 본문
           body: 커밋 ${{ github.sha }}에 대한 PDF 이력서 자동 릴리스.
-          # 릴리스에 첨부할 파일 경로 (다운로드된 아티팩트 경로 + 파일명)
-          files: |
-            ./downloaded_pdf/${{ needs.build_pdf.outputs.main_pdf_filename }}
-            ./downloaded_pdf/${{ needs.build_pdf.outputs.cover_pdf_filename }}
+          # 동적으로 준비된 릴리스 첨부 파일 목록 사용
+          files: ${{ steps.prepare_release_files.outputs.release_files }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub 토큰 사용
