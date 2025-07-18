@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Bash 치트시트 (심화)",
+  title: "Bash 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )
@@ -53,7 +53,7 @@
 - `break`: 루프 종료
 - `continue`: 다음 반복으로 이동
 
-#pagebreak()
+
 
 = 4. 함수
 

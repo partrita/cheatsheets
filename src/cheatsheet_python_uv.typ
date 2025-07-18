@@ -56,7 +56,7 @@
   - `--resolution=highest|lowest`: 의존성 해결 전략을 선택합니다.
   - `--generate-hashes`: `requirements.txt`에 파일 해시를 포함하여 보안을 강화합니다.
 
-#pagebreak()
+
 
 = 5. 설치된 패키지 확인
 

@@ -37,7 +37,7 @@
 - `docker stats`: 실행 중인 컨테이너의 리소스 사용량(CPU, 메모리 등)을 실시간으로 보여줍니다.
 - `docker cp <container>:<src_path> <dest_path>`: 컨테이너와 호스트 간에 파일을 복사합니다.
 
-#pagebreak()
+
 
 = 2. 이미지 관리
 

@@ -54,7 +54,7 @@
   - `&self`: 불변으로 빌림, `&mut self`: 가변으로 빌림, `self`: 소유권 가져옴.
 - *연관 함수 (Associated Functions)*: `impl` 블록 내에 있지만 `self`를 받지 않는 함수. `String::from`처럼 `::`으로 호출.
 
-#pagebreak()
+
 
 = 5. 열거형 (Enums) 및 패턴 매칭
 

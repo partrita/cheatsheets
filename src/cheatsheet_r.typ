@@ -60,7 +60,7 @@
 - `remove.packages("package_name")`: 패키지 제거.
 - `help(package = "package_name")`: 패키지 도움말 보기.
 
-#pagebreak()
+
 
 = 5. `tidyverse` 생태계
 
