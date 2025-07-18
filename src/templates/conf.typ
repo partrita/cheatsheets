@@ -2,9 +2,10 @@
   // set the document basic properties.
   set document(title: title)
   set text(
-    font: "Noto Sans KR",
+    font: "Noto Serif KR",
     weight: "light",
-    size: 8pt,
+    size: 0.8em,
+    fill: rgb("#2e3440"),
     // stretch: 75%
   )
   set page("a4",
@@ -12,7 +13,7 @@
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(1em)[
+      #text(0.6em)[
         #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -22,7 +23,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(1em)[
+    footer: [#text(0.6em)[
       #footer
       #h(1fr)
       #context(counter(page).display(
@@ -39,20 +40,25 @@
   set par(spacing: 0.9em, hanging-indent: 0em, justify: false)
 
   // 제목 설정
-  set heading(numbering: "1.1.")
+  set heading(numbering: none)
 
   // 제목 스타일 설정
   show heading: it => [
     #set align(left)
-    #set text(1.0em, weight: "bold")
+    #set text(
+        font: "Noto Sans KR",
+        1.0em,
+        weight: "bold",
+        fill: rgb("#4c566a"),
+    )
     #block(it)
   ]
 
   // 코드 블록 스타일 설정
   show raw: set text(
-    size: 1.0em, font: "JBD2",
+    size: 0.8em, font: "JBD2",
     weight: "regular")
-  show raw.where(block: false): set text(fill: navy)
+  show raw.where(block: false): set text(fill: rgb("#b48ead"))
 
   pad(
     // Title row.
@@ -63,9 +69,10 @@
         text(
           font: "Noto Sans KR",
           // stretch: 100%,
+          fill: rgb("#3b4252"),
           weight: "bold", size: 1.8em, title)
       )
-      #line(length: 100%, stroke: 0.5pt)
+      #line(length: 100%, stroke: 0.5pt + rgb("#3b4252"))
       #v(1em, weak: true)
     ])
 
