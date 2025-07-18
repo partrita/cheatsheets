@@ -61,7 +61,7 @@
   class Developer extends Person { /* ... */ }
   ```
 
-#pagebreak()
+
 
 = 5. 배열 고급 메서드
 

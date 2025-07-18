@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Windows 치트시트 (심화)",
+  title: "Windows 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )
@@ -43,7 +43,7 @@
 - `find`: 파일에서 텍스트 문자열을 검색합니다.
 - `findstr`: `find`보다 강력한 문자열 검색 도구, 정규 표현식 지원.
 
-#pagebreak()
+
 
 = 2. 시스템 정보 및 네트워크 관리
 

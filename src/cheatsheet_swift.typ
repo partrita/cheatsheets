@@ -80,7 +80,7 @@
 - *후행 클로저 (Trailing Closure)*: 함수의 마지막 인수가 클로저일 때 `()` 밖에 작성 가능.
 - *@escaping 클로저*: 함수가 반환된 후에도 클로저가 호출될 필요가 있을 때.
 
-#pagebreak()
+
 
 = 6. 구조체와 클래스 (Structures and Classes)
 

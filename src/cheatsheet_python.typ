@@ -71,7 +71,7 @@
       print("Hello!")
   ```
 
-#pagebreak()
+
 
 = 4. 컴프리헨션 및 제너레이터
 
