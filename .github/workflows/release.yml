@@ -34,25 +34,24 @@ jobs:
             # 파일명에서 .typ 확장자 제거 (예: main.typ -> main)
             filename=$(basename "$typ_file_path" .typ)
 
-            # 소스 경로 목록에 추가 (한 줄에 하나씩)
-            TYP_SOURCE_PATHS+="$typ_file_path"$'\n'
+            # 소스 경로 목록에 추가 (공백으로 구분)
+            TYP_SOURCE_PATHS+="$typ_file_path "
 
             # 최종 PDF 파일명 (예: 2025-07-14_main.pdf)
             PDF_NAME="${CURRENT_DATE}_${filename}.pdf"
-            # 출력 경로 목록에 추가 (한 줄에 하나씩)
-            PDF_OUTPUT_PATHS+="src/$PDF_NAME"$'\n'
+            # 출력 경로 목록에 추가 (공백으로 구분)
+            PDF_OUTPUT_PATHS+="src/$PDF_NAME "
             # 릴리스에 사용할 PDF 파일명 목록에 추가 (한 줄에 하나씩)
             PDF_FILENAMES_FOR_RELEASE+="$PDF_NAME"$'\n'
           done
 
-          # GITHUB_OUTPUT에 다중 라인 문자열로 출력 변수 설정
-          echo "typ_source_paths<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$TYP_SOURCE_PATHS" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          # 마지막 공백 제거
+          TYP_SOURCE_PATHS=$(echo "$TYP_SOURCE_PATHS" | sed 's/ *$//')
+          PDF_OUTPUT_PATHS=$(echo "$PDF_OUTPUT_PATHS" | sed 's/ *$//')
 
-          echo "pdf_output_paths<<EOF" >> "$GITHUB_OUTPUT"
-          echo "$PDF_OUTPUT_PATHS" >> "$GITHUB_OUTPUT"
-          echo "EOF" >> "$GITHUB_OUTPUT"
+          # GITHUB_OUTPUT에 출력 변수 설정
+          echo "typ_source_paths=$TYP_SOURCE_PATHS" >> "$GITHUB_OUTPUT"
+          echo "pdf_output_paths=$PDF_OUTPUT_PATHS" >> "$GITHUB_OUTPUT"
 
           echo "pdf_filenames_for_release<<EOF" >> "$GITHUB_OUTPUT"
           echo "$PDF_FILENAMES_FOR_RELEASE" >> "$GITHUB_OUTPUT"
@@ -61,9 +60,9 @@ jobs:
       - name: Typst로 PDF 컴파일
         uses: ammar-ahmed22/compile-typst-action@main
         with:
-          # 동적으로 생성된 소스 경로 목록 사용
+          # 동적으로 생성된 소스 경로 목록 사용 (공백으로 구분된 문자열)
           source_paths: ${{ steps.generate_file_lists.outputs.typ_source_paths }}
-          # 동적으로 생성된 출력 경로 목록 사용
+          # 동적으로 생성된 출력 경로 목록 사용 (공백으로 구분된 문자열)
           output_paths: ${{ steps.generate_file_lists.outputs.pdf_output_paths }}
           fonts_path: 'src/fonts'
 
