@@ -18,10 +18,14 @@
 
 ## Typst 문서 빌드 방법
 
-1. [Typst](https://typst.app/)를 설치합니다.
+1. [pixi](https://prefix.dev)로 [Typst](https://typst.app)를 설치합니다.
+   ```bash
+   pixi add typst
+   ```
 2. 원하는 `.typ` 파일을 Typst로 컴파일하여 PDF 등으로 변환할 수 있습니다.
-   ```sh
+   ```bash
    typst compile src/cheatsheet_go.typ
+   ```
 
 
 # 라이선스
