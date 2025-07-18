@@ -85,7 +85,7 @@ we don't take action!
 // #circle(radius: 0.5cm, fill: red)
 
 #text(12pt, weight: "bold")[선]
-#line(length: 100%, stroke: 2pt + black)
+#line(length: 100%, stroke: 0.5pt + rgb("#2e3440"))
 
 = 섹션 4: 고급 기능(예시)
 
@@ -185,3 +185,4 @@ Typst는 가장 일반적인 문서 요소에 대한 내장 마크업을 제공�
 === 이스케이프
 
 이스케이프는 입력하기 어렵거나 Typst에서 특별한 의미를 갖는 특수 문자를 삽입하는 데 사용됩니다. 문자를 이스케이프하려면 백슬래시 앞에 붙입니다. 모든 유니코드 코드포인트를 삽입하려면 16진수 이스케이프 시퀀스: `[\u{1f600}]`를 작성할 수 있습니다.
+z
