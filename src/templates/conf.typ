@@ -1,19 +1,26 @@
+#let sans_font = "Noto Sans KR"
+#let serif_font = "Noto Serif KR"
+#let mono_font = "JBD2"
+
 #let template(title: "", header: "", footer: "", body) = {
   // set the document basic properties.
   set document(title: title)
+
+  // 본문 글꼴 설정
   set text(
-    font: "Noto Serif KR",
-    weight: "light",
+    font: serif_font,
+    weight: "regular",
     size: 0.8em,
     fill: rgb("#2e3440"),
     // stretch: 75%
   )
+
   set page("a4",
     flipped: true,  // 페이지를 가로로 설정
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(0.6em)[
+      #text(0.8em, font: sans_font)[
         #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -23,7 +30,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(0.6em)[
+    footer: [#text(0.8em, font: sans_font)[
       #footer
       #h(1fr)
       #context(counter(page).display(
@@ -46,19 +53,19 @@
   show heading: it => [
     #set align(left)
     #set text(
-        font: "Noto Sans KR",
+        font: sans_font,
         1.0em,
         weight: "bold",
-        fill: rgb("#4c566a"),
+        fill: rgb("#3b4252"),
     )
     #block(it)
   ]
 
   // 코드 블록 스타일 설정
   show raw: set text(
-    size: 0.8em, font: "JBD2",
+    size: 0.8em, font: mono_font,
     weight: "regular")
-  show raw.where(block: false): set text(fill: rgb("#b48ead"))
+  show raw.where(block: false): set text(fill: rgb("#bf616a"))
 
   pad(
     // Title row.
@@ -67,12 +74,12 @@
       // #line(length: 100%, stroke: 0.5pt)
       #block(
         text(
-          font: "Noto Sans KR",
+          font: sans_font,
           // stretch: 100%,
           fill: rgb("#3b4252"),
-          weight: "bold", size: 1.8em, title)
+          weight: "extrabold", size: 1.8em, title)
       )
-      #line(length: 100%, stroke: 0.5pt + rgb("#3b4252"))
+      #line(length: 100%, stroke: 0.5pt + rgb("#2e3440"))
       #v(1em, weak: true)
     ])
 
