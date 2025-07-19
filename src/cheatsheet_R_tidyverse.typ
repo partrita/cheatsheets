@@ -1,82 +1,85 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Seurat 치트 시트",
+  title: "타이디버스 치트시트",
   header: [#datetime.today().display()],
-  footer: "https://satijalab.org/seurat/articles/essential_commands.html",
+  footer: "",
 )
 
 // 여기에 문서 내용을 작성하세요
 
-= Introduction to the Tidyverse
 
-The data science life cycle begins with a question that can be answered with data and ends with an answer to that question. However, there are a lot of steps that happen after a question has been generated and before arriving at an answer. After generating their specific question, data scientists have to determine what data will be useful, import the data, tidy the data into a format that is easy to work with, explore the data, generate insightful visualizations, carry out the analysis, and communicate their findings. Throughout this process, it is often said that 50-80% of a data scientist’s time is spent wrangling data. It can be hard work to read the data in and get data into the format you need to ultimately answer the question. As a result, conceptual frameworks and software packages to make these steps easier have been developed.
+== 타이디버스 소개
 
-Within the R community, R packages that have been developed for this very purpose are often referred to as the Tidyverse. According to their website, the tidyverse is “an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.” There are currently about a dozen packages that make up the official tidyverse; however, there are dozens of tidyverse-adjacent packages that follow this philosophy, grammar, and data structures and work well with the official tidyverse packages. It is this whole set of packages that we have set out to teach in this specialization.
+데이터 과학은 데이터를 통한 질문 해결 과정이지만, 데이터 정리(wrangling)에 대부분의 시간이 소요됩니다. 이를 돕기 위해 R에서는 타이디버스(Tidyverse)라는 패키지 모음이 개발되었습니다. 타이디버스는 공통된 철학과 구조를 공유하며, 이 과정을 통해 깔끔한 데이터(tidy data) 개념과 타이디버스 활용법을 익히는 것이 목표입니다. 이 과정은 R 프로그래밍 기본 지식을 전제로 하며, R에 익숙하지 않다면 선행 학습을 권장합니다.
 
-In this course, we set out to introduce the conceptual framework behind tidy data and introduce the tidyverse and tidyverse-adjacent packages that we’ll be teaching throughout this specialization. Mastery of these fundamental concepts and familiarity with what can be accomplished using the tidyverse will be critical throughout the more technical courses ahead. So, be sure you are familiar with the vocabulary provided and have a clear understanding of the tidy data principles introduced here before moving forward.
 
-In this specialization we assume familiarity with the R programming language. If you are not yet familiar with R, we suggest you first complete R Programming before returning to complete this specialization. However, if you have some familiarity with R and want to learn how to work more efficiently with data, then you’ve come to the right place!
+== 깔끔한 데이터
 
-== Tidy Data
-Before we can discuss all the ways in which R makes it easy to work with tidy data, we have to first be sure we know what tidy data are. Tidy datasets, by design, are easier to manipulate, model, and visualize because the tidy data principles that we’ll discuss in this course impose a general framework and a consistent set of rules on data. In fact, a well-known quote from Hadley Wickham is that “tidy datasets are all alike but every messy dataset is messy in its own way.” Utilizing a consistent tidy data format allows for tools to be built that work well within this framework, ultimately simplifying the data wrangling, visualization, and analysis processes. By starting with data that are already in a tidy format or by spending the time at the beginning of a project to get data into a tidy format, the remaining steps of your data science project will be easier.
+깔끔한 데이터셋은 조작, 모델링, 시각화에 용이하도록 설계된 데이터입니다. 이는 일관된 원칙과 규칙을 따르기 때문인데, Hadley Wickham이 "깔끔한 데이터셋은 모두 비슷하지만, 모든 지저분한 데이터셋은 자신만의 방식으로 지저분하다"고 말했듯, 깔끔한 형식은 데이터 작업 과정을 크게 단순화합니다. 프로젝트 초기에 데이터를 깔끔한 형식으로 만들면 이후의 데이터 과학 과정이 훨씬 쉬워집니다.
 
-==  Tidy Data Benefits
+== 깔끔한 데이터의 이점
 
-There are a number of benefits to working within a tidy data framework:
+깔끔한 데이터 프레임워크 내에서 작업하는 데는 아래 여러 가지 이점이 있습니다.
 
-+ Tidy data have a consistent data structure - This eliminates the many different ways in which data can be stored. By imposing a uniform data structure, the cognitive load imposed on the analyst is minimized for each new project.
-+ Tidy data foster tool development - Software that all work within the tidy data framework can all work well with one another, even when developed by different individuals, ultimately increasing the variety and scope of tools available, without requiring analysts to learn an entirely new mental model with each new tool.
-+ Tidy data require only a small set of tools to be learned - When using a consistent data format, only a small set of tools is required and these tools can be reused from one project to the next.
-+ Tidy data allow for datasets to be combined - Data are often stored in multiple tables or in different locations. By getting each table into a tidy format, combining across tables or sources becomes trivial.
+- 깔끔한 데이터는 일관된 데이터 구조를 가집니다. 이는 데이터가 저장될 수 있는 다양한 방식을 제거합니다. 통일된 데이터 구조를 부과함으로써, 분석가가 새로운 프로젝트를 시작할 때마다 발생하는 인지 부하가 최소화됩니다.
+- 깔끔한 데이터는 도구 개발을 촉진합니다. 깔끔한 데이터 프레임워크 내에서 작동하는 소프트웨어는 서로 다른 개인이 개발하더라도 서로 잘 작동할 수 있으며, 궁극적으로 분석가가 새로운 도구를 배울 때마다 완전히 새로운 정신 모델을 배울 필요 없이 사용 가능한 도구의 다양성과 범위를 증가시킵니다.
+- 깔끔한 데이터는 소수의 도구만 배우면 됩니다. 일관된 데이터 형식을 사용할 때, 소수의 도구만 필요하며 이 도구들은 한 프로젝트에서 다음 프로젝트로 재사용할 수 있습니다.
+- 깔끔한 데이터는 데이터셋을 결합할 수 있도록 합니다. 데이터는 종종 여러 테이블이나 다른 위치에 저장됩니다. 각 테이블을 깔끔한 형식으로 만들면, 테이블이나 소스 간의 결합이 사소해집니다.
 
-===  Rules for Storing Tidy Data
 
-In addition to the four tidy data principles, there are a number of rules to follow when entering data to be stored, or when re-organizing untidy data that you have already been given for a project into a tidy format. They are rules that will help make data analysis and visualization easier down the road. They were formalized in a paper called “Data organization in spreadsheets”, written by two prominent data scientists, Karl Broman and Kara Woo. In this paper, in addition to ensuring that the data are tidy, they suggest following these guidelines when entering data into spreadsheets:
 
-- Be consistent
-- Choose good names for things
-- Write dates as YYYY-MM-DD
-- No empty cells
-- Put just one thing in a cell
-- Don’t use font color or highlighting as data
-- Save the data as plain text files
+=== 깔끔한 데이터를 저장하기 위한 규칙
 
-We’ll go through each of these to make sure we’re all clear on what a great tidy spreadsheet looks like.
+네 가지 깔끔한 데이터 원칙 외에도, 데이터를 입력하거나 이미 주어진 지저분한 데이터를 깔끔한 형식으로 재구성할 때 따라야 할 여러 규칙이 있습니다. 이는 나중에 데이터 분석 및 시각화를 더 쉽게 만드는 데 도움이 되는 규칙들입니다. 이 규칙들은 두 명의 저명한 데이터 과학자인 Karl Broman과 Kara Woo가 작성한 "스프레드시트의 데이터 구성"이라는 논문에서 공식화되었습니다. 이 논문에서 그들은 데이터가 깔끔한지 확인하는 것 외에도 스프레드시트에 데이터를 입력할 때 다음 지침을 따를 것을 제안합니다.
 
-= Wrangling Data in the Tidyverse
-In the last course we spent a ton of time talking about all the most common ways data are stored and reviewed how to get them into a tibble (or data.frame) in R.
+- 일관성을 유지하십시오.
+- 항목에 좋은 이름을 선택하십시오.
+- 날짜는 `YYYY-MM-DD` 형식으로 작성하십시오.
+- 빈 셀을 사용하지 마십시오.
+- 한 셀에 한 가지만 넣으십시오.
+- 글꼴 색상이나 강조 표시를 데이터로 사용하지 마십시오.
+- 데이터를 일반 텍스트 파일로 저장하십시오.
 
-So far we’ve discussed what tidy and untidy data are. We’ve (hopefully) convinced you that tidy data are the right type of data to work with. What we may not have made perfectly clear yet is that data are not always the tidiest when they come to you at the start of a project. An incredibly important skill of a data scientist is to be able to take data from an untidy format and get it into a tidy format. This process is often referred to as data wrangling. Generally, data wranglings skills are those that allow you to wrangle data from the format they’re currently in into the tidy format you actually want them in.
+이러한 각 규칙을 검토하여 훌륭한 깔끔한 스프레드시트가 어떤 모습인지 모두가 명확히 알 수 있도록 하겠습니다.
 
-Beyond data wrangling, it’s also important to make sure the data you have are accurate and what you need to answer your question of interest. After wrangling the data into a tidy format, there is often further work that has to be done to clean the data.
 
-== Tidy Data Review
-Before we move any further, let’s review the requirements for a tidy dataset:
 
-- Each variable is stored in a column
-- Each observation is stored in a row
-- Each cell stores a single value
+== 타이디버스에서 데이터 정리하기
 
-We had four tidy data principles in an earlier lesson, where the fourth was that each table should store a single type of information. That’s less critical here, as we’ll be working at first with single datasets, so let’s just keep those three tidy data principles at the front of our minds.
+데이터 과학자의 매우 중요한 기술은 지저분한 형식의 데이터를 가져와 깔끔한 형식으로 만드는 능력입니다. 이 과정은 종종 데이터 정리(data wrangling)라고 불립니다. 일반적으로 데이터 정리 기술은 현재 형식의 데이터를 원하는 깔끔한 형식으로 정리할 수 있도록 하는 기술입니다. 데이터 정리 외에도, 가지고 있는 데이터가 정확하고 관심 있는 질문에 답하는 데 필요한 것인지 확인하는 것도 중요합니다. 데이터를 깔끔한 형식으로 정리한 후에도 데이터를 정리하기 위해 추가 작업이 필요한 경우가 많습니다.
 
-== Reshaping Data
-Tidy data generally exist in two forms: wide data and long data. Both types of data are used and needed in data analysis, and fortunately, there are tools that can take you from wide-to-long format and from long-to-wide format. This makes it easy to work with any tidy dataset. We’ll discuss the basics of what wide and long data are and how to go back and forth between the two in R. Getting data into the right format will be crucial later when summarizing data and visualizing it.
+=== 깔끔한 데이터 검토
 
-=== Wide Data
-Wide data has a column for each variable and a row for each observation. Data are often entered and stored in this manner. This is because wide data are often easy to understand at a glance.
+더 나아가기 전에, 깔끔한 데이터셋의 요구 사항을 검토해 봅시다.
 
-=== Long Data
-Long data, on the other hand, has one column indicating the type of variable contained in that row and then a separate row for the value for that variable. Each row contains a single observation for a single variable.
+- 각 변수는 열에 저장됩니다.
+- 각 관측치는 행에 저장됩니다.
+- 각 셀은 단일 값을 저장합니다.
 
-== Working With Factors
-In R, categorical data are handled as factors. By definition, categorical data are limited in that they have a set number of possible values they can take. For example, there are 12 months in a calendar year. In a month variable, each observation is limited to taking one of these twelve values. Thus, with a limited number of possible values, month is a categorical variable. Categorical data, which will be referred to as factors for the rest of this lesson, are regularly found in data. Learning how to work with this type of variable effectively will be incredibly helpful.
+=== 데이터 재구성
 
-To make working with factors simpler, we’ll utilize the `forcats` package, a core tidyverse package. All functions within `forcats` begin with `fct_`, making them easier to look up and remember. As before, to see available functions you can type `?fct_` in your RStudio console. A drop-down menu will appear with all the possible `forcats` functions.
+깔끔한 데이터는 일반적으로 와이드(wide) 데이터와 롱(long) 데이터의 두 가지 형태로 존재합니다. 두 가지 유형의 데이터는 데이터 분석에서 모두 사용되고 필요하며, 다행히 와이드 형식을 롱 형식으로, 롱 형식을 와이드 형식으로 변경할 수 있는 도구가 있습니다. 이를 통해 모든 깔끔한 데이터셋을 쉽게 작업할 수 있습니다. 와이드 및 롱 데이터가 무엇이며 R에서 두 형식 간에 전환하는 방법에 대한 기본 사항을 논의할 것입니다. 데이터를 올바른 형식으로 만드는 것은 나중에 데이터를 요약하고 시각화할 때 매우 중요할 것입니다.
 
-In R, factors are comprised of two components: the actual values of the data and the possible levels within the factor. Thus, to create a factor, you need to supply both these pieces of information.
+==== 와이드 데이터
 
-For example, if we were to create a character vector of the twelve months, we could certainly do that:
+와이드 데이터는 각 변수마다 열이 있고 각 관측치마다 행이 있습니다. 데이터는 종종 이런 방식으로 입력되고 저장됩니다. 이는 와이드 데이터가 한눈에 이해하기 쉽기 때문입니다.
+
+==== 롱 데이터
+
+반면에 롱 데이터는 해당 행에 포함된 변수 유형을 나타내는 열이 하나 있고, 해당 변수에 대한 값을 위한 별도의 행이 있습니다. 각 행은 단일 변수에 대한 단일 관측치를 포함합니다.
+
+
+
+=== 팩터(Factors)로 작업하기
+
+R에서 범주형 데이터는 팩터(factors)로 처리됩니다. 정의상 범주형 데이터는 가질 수 있는 가능한 값의 수가 제한적입니다. 예를 들어, 한 달은 12개월이 있습니다. 월 변수에서 각 관측치는 이 12개 값 중 하나만 가질 수 있습니다. 따라서 가능한 값의 수가 제한되어 있으므로 월은 범주형 변수입니다. 이 단원의 나머지 부분에서는 팩터라고 불릴 범주형 데이터는 데이터에서 정기적으로 발견됩니다. 이러한 유형의 변수로 효과적으로 작업하는 방법을 배우는 것은 매우 유용할 것입니다.
+
+팩터로 작업하는 것을 더 간단하게 만들기 위해, 우리는 핵심 타이디버스 패키지인 `forcats` 패키지를 활용할 것입니다. `forcats` 내의 모든 함수는 `fct_`로 시작하여 찾아보기 쉽고 기억하기 쉽습니다. 이전과 마찬가지로 사용 가능한 함수를 보려면 RStudio 콘솔에 `?fct_`를 입력하면 됩니다. 가능한 모든 `forcats` 함수가 포함된 드롭다운 메뉴가 나타날 것입니다.
+
+`R`에서 팩터는 두 가지 구성 요소로 이루어져 있습니다: 데이터의 실제 값과 팩터 내의 가능한 수준(levels)입니다. 따라서 팩터를 생성하려면 이 두 가지 정보를 모두 제공해야 합니다.
+
+예를 들어, 12개월의 문자 벡터를 만들려면 다음과 같이 할 수 있습니다.
 
 ```r
 ## all 12 months
@@ -86,7 +89,7 @@ all_months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "
 some_months <- c("Mar", "Dec", "Jan",  "Apr", "Jul")
 ```
 
-However, if we were to sort this vector, R would sort this vector alphabetically.
+그러나 이 벡터를 정렬하면 R은 이 벡터를 알파벳순으로 정렬할 것입니다.
 
 ```r
 # alphabetical sort
@@ -94,8 +97,7 @@ sort(some_months)
 ## [1] "Apr" "Dec" "Jan" "Jul" "Mar"
 ```
 
-While you and I know that this is not how months should be ordered, we haven’t yet told R that. To do so, we need to let R know that it’s a factor variable and what the levels of that factor variable should be.
-
+우리와 여러분은 이것이 월이 정렬되어야 하는 방식이 아니라는 것을 알지만, 아직 R에게 알려주지 않았습니다. 그렇게 하려면, R에게 그것이 팩터 변수이고 해당 팩터 변수의 수준이 무엇이어야 하는지 알려주어야 합니다.
 
 ```r
 # create factor
@@ -112,55 +114,57 @@ sort(mon)
 
 
 
-= Easier analysis with the tidyverse
-// https://bookdown.org/marius_mather/Rad/tidyverse.html
+== 타이디버스를 통한 쉬운 분석
 
-Now that you know the basics of R, it’s time to learn that there are much better ways to do everything you just learnt!
+이제 R의 기본 사항을 알았으니, 방금 배운 모든 것을 훨씬 더 잘 할 수 있는 방법이 있다는 것을 배울 때입니다!
 
-== Introduction to the tidyverse
+=== 타이디버스 소개
 
-The tidyverse is a bundle of packages that make using R easier because they’re all designed to work together. Most “tidy” functions work well together because they:
+타이디버스는 R을 더 쉽게 사용할 수 있게 해주는 패키지들의 묶음입니다. 이 패키지들은 모두 함께 작동하도록 설계되었기 때문입니다. 대부분의 "타이디" 함수는 다음과 같은 이유로 서로 잘 작동합니다.
 
-- Take a dataframe as their input
-- Return as dataframe as their output
+- 데이터프레임을 입력으로 받습니다.
+- 데이터프레임을 출력으로 반환합니다.
 
-You might not use every package from the tidyverse in an analysis, but you can still load them all at the start of most analyses, and know you’ll have a standard set of tools available. To load them all, just use:
+분석에서 타이디버스 패키지를 모두 사용하지 않을 수도 있지만, 대부분의 분석 시작 시 모두 로드하여 표준 도구 세트를 사용할 수 있습니다. 모두 로드하려면 다음을 사용하십시오.
 
 ```r
 library(tidyverse)
 cow = carData::Cowles
 ```
 
-== dplyr: Turning complex analyses into simple steps
 
-As your analyses get more complicated, your code can get more complicated as well. To get to the answers you want, you might have to:
 
-- Drop certain rows from your dataset because they’re invalid or not relevant.
-- Calculate stats for each treatment group separately.
-- Use summary variables like the school mean to calculate a standardized score.
+=== `dplyr`: 복잡한 분석을 간단한 단계로 전환
 
-and more importantly, you might have to combine multiple different operations like these for each calculation you’re doing.
+분석이 복잡해질수록 코드도 더 복잡해질 수 있습니다. 원하는 답을 얻으려면 다음을 수행해야 할 수도 있습니다.
 
-The `dplyr` package in the tidyverse makes this easier by providing a small number of simple verbs that can be combined easily to perform complex tasks. Each one takes your current data, changes it, and returns it. The most common verbs you’ll use are:
+- 데이터셋에서 유효하지 않거나 관련 없는 특정 행을 삭제합니다.
+- 각 처리 그룹에 대해 별도로 통계를 계산합니다.
+- 학교 평균과 같은 요약 변수를 사용하여 표준화된 점수를 계산합니다.
 
-- `filter()`: choose rows to keep based on a logical test, dropping the rest.
-- `arrange()`: sort the data.
-- `select()`: choose columns to keep.
-- `mutate()`: add new columns.
-- `summarize()`: create columns that summarise the data down to a single row.
-- `count()`: Count the number of rows in the data.
-- `left_join()` (and `right_join()`, `inner_join()` etc.): Merge datasets based on a common identifier.
+그리고 더 중요하게는, 수행하는 각 계산에 대해 이러한 여러 가지 작업을 결합해야 할 수도 있습니다.
 
-And, possibly most importantly:
+타이디버스에 있는 `dplyr` 패키지는 복잡한 작업을 수행하기 위해 쉽게 결합할 수 있는 소수의 간단한 동사를 제공하여 이를 더 쉽게 만듭니다. 각 동사는 현재 데이터를 가져와 변경한 다음 반환합니다. 가장 일반적으로 사용될 동사는 다음과 같습니다.
 
-- group_by(): Split the data into groups, so that any subsequent steps happen separately for each group.
+- `filter()`: 논리적 테스트를 기반으로 유지할 행을 선택하고 나머지는 삭제합니다.
+- `arrange()`: 데이터를 정렬합니다.
+- `select()`: 유지할 열을 선택합니다.
+- `mutate()`: 새 열을 추가합니다.
+- `summarize()`: 데이터를 단일 행으로 요약하는 열을 만듭니다.
+- `count()`: 데이터의 행 수를 계산합니다.
+- `left_join()` (및 `right_join()`, `inner_join()` 등): 공통 식별자를 기반으로 데이터셋을 병합합니다.
 
-We will go over examples of all of these below.
+그리고 가장 중요한 것은 다음과 같습니다.
 
-== Bending the rules: Non-standard evaluation
+- `group_by()`: 데이터를 그룹으로 분할하여 이후의 모든 단계가 각 그룹에 대해 별도로 수행되도록 합니다.
 
-dplyr and other tidyverse packages bend the rules of R syntax, allowing you to just type column names like group and time rather than having to spell out the name of the dataframe each time (like `survey1$group`, `survey1$time`). Within tidyverse function calls you can just type the column name, e.g.
+아래에서 이 모든 예시를 다룰 것입니다.
 
+
+
+=== 규칙 구부리기: 비표준 평가
+
+`dplyr` 및 기타 타이디버스 패키지는 R 구문의 규칙을 구부려서 `survey1$group`, `survey1$time`처럼 매번 데이터프레임 이름을 모두 입력할 필요 없이 `group` 및 `time`과 같은 열 이름만 입력할 수 있도록 합니다. 타이디버스 함수 호출 내에서는 열 이름만 입력하면 됩니다. 예를 들면:
 
 ```r
 cow %>%
@@ -175,11 +179,13 @@ cow %>%
 ## 4 male   yes         248
 ```
 
-== Common tasks with dplyr
 
-Selecting columns with `select`
 
-You can select particular columns from a dataframe using `select()`. Using - in front of a column name excludes that column:
+=== `dplyr`을 사용한 일반적인 작업
+
+==== `select`를 이용한 열 선택
+
+`select()`를 사용하여 데이터프레임에서 특정 열을 선택할 수 있습니다. 열 이름 앞에 `-`를 사용하면 해당 열을 제외합니다.
 
 ```r
 # These both give the same result: inclusion vs. exclusion
@@ -197,11 +203,13 @@ cow %>%
 ## 2           8           14
 ```
 
-Instead of column names, you can also use a range of helper functions like `starts_with()` and `num_range()` to select multiple columns that match a particular pattern.
+열 이름 대신 `starts_with()` 및 `num_range()`와 같은 다양한 도우미 함수를 사용하여 특정 패턴과 일치하는 여러 열을 선택할 수도 있습니다.
 
-=== Creating/changing columns with mutate
 
-We can use mutate on a dataframe to add or change one or more columns:
+
+==== `mutate`를 이용한 열 생성/변경
+
+데이터프레임에 `mutate`를 사용하여 하나 이상의 열을 추가하거나 변경할 수 있습니다.
 
 ```r
 cow %>%
@@ -219,7 +227,7 @@ cow %>%
 ## 6           6           15   male        no              TRUE
 ```
 
-If we want these changes to be saved, we would need to save the result back to the original variable. By default, `mutate()` will just return an altered copy of the original data, but won’t change the original:
+이러한 변경 사항을 저장하려면 결과를 원래 변수에 다시 저장해야 합니다. 기본적으로 `mutate()`는 원본 데이터의 변경된 복사본을 반환할 뿐 원본을 변경하지는 않습니다.
 
 ```r
 # If we want to actually save the changes
@@ -228,10 +236,13 @@ cow = cow %>%
            high_neuroticism = neuroticism >= 15)
 ```
 
-On its own, the main advantage mutate offers is being able to spell out your calculations without including the name of the dataframe. However, it can be very useful in combination with other verbs.
+그 자체로 `mutate`가 제공하는 주요 장점은 데이터프레임 이름을 포함하지 않고도 계산을 명확하게 표현할 수 있다는 것입니다. 그러나 다른 동사와 결합하면 매우 유용할 수 있습니다.
 
-== Summarizing the data with summarize
-summarize is similar to mutate: it adds or changes columns. However, summarize also collapses the data down to a single row, so the values you calculate need to be single values like means or counts.
+
+
+=== `summarize`를 이용한 데이터 요약
+
+`summarize`는 `mutate`와 유사합니다. 열을 추가하거나 변경합니다. 그러나 `summarize`는 데이터를 단일 행으로 축소하므로 계산하는 값은 평균 또는 개수와 같은 단일 값이어야 합니다.
 
 ```r
 cow %>%
@@ -243,11 +254,13 @@ cow %>%
 ## 1     12.37298        597
 ```
 
-summarize is useful in combination with group_by, where it collapses the data down to one row per group.
+`summarize`는 `group_by`와 함께 사용하면 유용하며, 데이터를 그룹당 한 행으로 축소합니다.
 
-== Selecting rows with filter
 
-Choosing rows with a logical test with `filter()` works just like subsetting your data with a logical vector, it’s just easier to do it as part of a sequence of steps:
+
+=== `filter`를 이용한 행 선택
+
+`filter()`를 사용하여 논리적 테스트로 행을 선택하는 것은 논리 벡터로 데이터를 서브셋팅하는 것과 같습니다. 단지 일련의 단계의 일부로 수행하기가 더 쉽습니다.
 
 ```r
 cow %>%
@@ -262,8 +275,11 @@ cow %>%
 ## 6           5           16 male       yes
 ```
 
-== Sorting with arrange
-With arrange, you can sort by one or more columns. Use desc(column) (short for descending) to sort that column in the opposite direction:
+
+
+=== `arrange`를 이용한 정렬
+
+`arrange`를 사용하면 하나 이상의 열로 정렬할 수 있습니다. `desc(column)` (내림차순의 약어)을 사용하여 해당 열을 반대 방향으로 정렬하십시오.
 
 ```r
 cow %>%
@@ -278,13 +294,15 @@ cow %>%
 ## 6           5           20 female        no
 ```
 
-== group_by for calculations within groups
 
-`group_by()` is very useful for calculating different stats in subgroups of your data. This covers a lot of the more complex operations you might need to do with your data, so it unlocks a lot of possibilities.
 
-You can do things like:
+=== `group_by`를 이용한 그룹 내 계산
 
-- Mean-centering scores separately for males and females:
+`group_by()`는 데이터의 하위 그룹에서 다른 통계를 계산하는 데 매우 유용합니다. 이는 데이터로 수행해야 할 수 있는 더 복잡한 작업 중 상당 부분을 포함하므로 많은 가능성을 열어줍니다.
+
+다음과 같은 작업을 수행할 수 있습니다.
+
+- 남성과 여성에 대해 별도로 점수 평균 중심화:
 
 ```r
 cow %>%
@@ -302,7 +320,7 @@ cow %>%
 ##  4           8           20 female no                        7.58
 ```
 
-- calculating means and SDs for subgroups:
+- 하위 그룹에 대한 평균 및 표준 편차 계산:
 
 ```r
 cow %>%
@@ -319,9 +337,11 @@ cow %>%
 ## 4 male   yes        10.4  5.11
 ```
 
-== frequency tables with count
-`count()` gives you a straightforward way to create a frequency table. There’s no built-in way to calculate percentages, but you can easily add them using mutate():
 
+
+=== `count`를 이용한 빈도표
+
+`count()`는 빈도표를 만드는 간단한 방법을 제공합니다. 백분율을 계산하는 내장된 방법은 없지만, `mutate()`를 사용하여 쉽게 추가할 수 있습니다.
 
 ```r
 cow %>%
@@ -335,7 +355,7 @@ cow %>%
 ## 2 male     641    45.1
 ```
 
-If you have multiple levels of grouping, you need to think about how you want to calculate percentages. To get the percentage who volunteered within each sex:
+여러 그룹화 수준이 있는 경우 백분율을 어떻게 계산할지 고려해야 합니다. 각 성별 내에서 자원 봉사한 비율을 얻으려면 다음을 수행하십시오.
 
 ```r
 cow %>%
@@ -352,10 +372,13 @@ cow %>%
 ## 4 male   yes         248    38.7
 ```
 
-===  Merging data with left_join()
-To combine two dataframes, you can use functions like `left_join()` and `inner_join()`. In my experience, `left_join()` is what you want most of the time. To merge data successfully, all you need is a column that’s present in both datasets that they can be matched on, usually a participant ID or something similar.
 
-Joins can also be useful when you have to calculate a complex summary. You can create a separate table with the summary info, and merge it back into the main dataset. As a simple example, let’s summarize extraversion by both sex and volunteering status and merge it back into the main dataset:
+
+=== `left_join()`을 이용한 데이터 병합
+
+두 데이터프레임을 결합하려면 `left_join()` 및 `inner_join()`과 같은 함수를 사용할 수 있습니다. 제 경험상 `left_join()`이 대부분의 경우에 원하는 것입니다. 데이터를 성공적으로 병합하려면 일반적으로 참가자 ID 또는 이와 유사한 공통 식별자와 같이 두 데이터셋에 모두 존재하는 열만 있으면 됩니다.
+
+조인은 복잡한 요약을 계산해야 할 때도 유용할 수 있습니다. 요약 정보가 포함된 별도의 테이블을 만들고 이를 기본 데이터셋으로 다시 병합할 수 있습니다. 간단한 예로, 성별 및 자원 봉사 여부에 따라 외향성을 요약하고 이를 기본 데이터셋으로 다시 병합해 보겠습니다.
 
 ```r
 extraversion_info = cow %>%

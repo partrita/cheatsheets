@@ -2,7 +2,7 @@
 authors = ["fkt <deepthought@postech.ac.kr>"]
 channels = ["conda-forge"]
 name = "cheatsheets"
-platforms = ["win-64"]
+platforms = ["win-64", "osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]

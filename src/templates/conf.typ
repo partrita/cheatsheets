@@ -10,17 +10,19 @@
   set text(
     font: serif_font,
     weight: "regular",
-    size: 0.8em,
+    size: 0.7em,
     fill: rgb("#2e3440"),
     // stretch: 75%
   )
+  // 단락 설정
+  set par(spacing: 0.9em, hanging-indent: 0em, justify: true)
 
   set page("a4",
     flipped: true,  // 페이지를 가로로 설정
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(0.8em, font: sans_font)[
+      #text(0.8em, font: sans_font, fill: rgb("#4c566a"))[
         #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -30,7 +32,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(0.8em, font: sans_font)[
+    footer: [#text(0.8em, font: sans_font, fill: rgb("#4c566a"))[
       #footer
       #h(1fr)
       #context(counter(page).display(
@@ -43,9 +45,6 @@
     ]]
   )
 
-  // 단락 설정
-  set par(spacing: 0.9em, hanging-indent: 0em, justify: false)
-
   // 제목 설정
   set heading(numbering: none)
 
@@ -54,18 +53,39 @@
     #set align(left)
     #set text(
         font: sans_font,
-        1.0em,
         weight: "bold",
-        fill: rgb("#3b4252"),
+        // 제목 레벨에 따라 크기와 색상 변경
+        size: if it.level == 1 {
+          1.3em // 제목 1 크기
+        } else if it.level == 2 {
+          1.2em // 제목 2 크기
+        } else if it.level == 3 {
+          1.1em // 제목 3 크기 (기본 크기)
+        } else {
+          1.0em // 그 외 제목 크기 (기본 크기)
+        },
+        fill: if it.level == 1 {
+        rgb("#8fbcbb") // 제목 1 색상
+      } else if it.level == 2 {
+        rgb("#88c0d0") // 제목 2 색상
+      } else if it.level == 3 {
+        rgb("#81a1c1") // 제목 3 색상
+      } else {
+        rgb("#5e81ac") // 그 외 제목 색상
+      },
     )
     #block(it)
   ]
 
   // 코드 블록 스타일 설정
   show raw: set text(
-    size: 0.8em, font: mono_font,
+    size: 1.2em, font: mono_font,
     weight: "regular")
-  show raw.where(block: false): set text(fill: rgb("#bf616a"))
+  show raw.where(block: false): set text(
+    // size: 1.1em,
+    // weight: "bold",
+    fill: rgb("#bf616a")
+    )
 
   pad(
     // Title row.
@@ -79,12 +99,12 @@
           fill: rgb("#3b4252"),
           weight: "extrabold", size: 1.8em, title)
       )
-      #line(length: 100%, stroke: 0.5pt + rgb("#2e3440"))
+      #line(length: 100%, stroke: 0.5pt + rgb("#3b4252"))
       #v(1em, weak: true)
     ])
 
   // 4컬럼 레이아웃 적용
-  show: rest => columns(4, rest, gutter: 0.5em)
+  show: rest => columns(4, rest, gutter: 0.5cm)
 
   // main body
   body

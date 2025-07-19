@@ -24,7 +24,7 @@ NixOS는 선언적(declarative) 구성 모델을 사용하는 Linux 배포판입
 - `nix-env -e <package_name>`: 패키지를 제거합니다.
 - `nix-env -q`: 설치된 모든 패키지를 나열합니다.
 - `nix-env --upgrade`: 설치된 모든 패키지를 업그레이드합니다.
-- *참고*: 영구적인 시스템 구성을 위해서는 `configuration.nix`의 `environment.systemPackages`에 패키지를 추가하는 것이 권장됩니다. `nix-env`는 주로 임시적인 프로필 관리에 사용됩니다.
+- 참고: 영구적인 시스템 구성을 위해서는 `configuration.nix`의 `environment.systemPackages`에 패키지를 추가하는 것이 권장됩니다. `nix-env`는 주로 임시적인 프로필 관리에 사용됩니다.
 
 = Nix 셸 (임시 환경)
 - `nix-shell -p <package1> <package2>`: 특정 패키지들이 포함된 임시 셸을 시작합니다. 이 셸을 빠져나가면 시스템은 원래 상태로 돌아갑니다.
@@ -75,7 +75,7 @@ NixOS는 선언적(declarative) 구성 모델을 사용하는 Linux 배포판입
 ```
 
 = Nix 언어 기본
-- *let-in 블록*: `let x = 1; y = 2; in x + y`
-- *함수*: `x: x + 1`
-- *집합 (Attribute Set)*: `{ name = "value"; nested = { ... }; }`
+- let-in 블록: `let x = 1; y = 2; in x + y`
+- 함수: `x: x + 1`
+- 집합 (Attribute Set): `{ name = "value"; nested = { ... }; }`
 - `with pkgs; [ git vim ]`는 `[ pkgs.git pkgs.vim ]`와 같습니다.

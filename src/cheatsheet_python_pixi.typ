@@ -39,7 +39,7 @@
 
 `pixi`는 "features"라는 개념을 통해 여러 환경을 관리할 수 있습니다. 예를 들어, 기본 종속성 외에 테스트나 문서 빌드에만 필요한 추가적인 종속성을 그룹화할 수 있습니다.
 
-- *`pixi.toml`에서 feature 정의하기*:
+- `pixi.toml`에서 feature 정의하기:
   ```toml
   [feature.test.dependencies]
   pytest = "*"
@@ -48,9 +48,9 @@
   [feature.docs.dependencies]
   mkdocs = "*"
   ```
-- *Feature 환경 활성화*:
+- Feature 환경 활성화:
   - `pixi shell --env test`: `test` feature 환경이 활성화된 셸을 시작합니다. 기본 종속성과 `test` 종속성이 모두 설치됩니다.
-- *Feature 환경에서 작업 실행*:
+- Feature 환경에서 작업 실행:
   - `pixi run --env test pytest`
   - 또는 `pixi.toml`의 작업에 직접 환경을 지정할 수 있습니다:
     ```toml
@@ -121,7 +121,7 @@ mkdocs-material = "*"
 = 왜 Pixi를 사용하는가?
 
 Pixi는 `conda`의 강력한 패키지 관리 능력과 `pip`의 유연성을 결합하고, `cargo`나 `npm`과 같은 현대적인 도구의 사용자 경험을 제공합니다.
-- *재현성*: `pixi.lock` 파일을 통해 모든 플랫폼에서 동일한 환경을 정확하게 재현할 수 있습니다.
-- *속도*: 병렬 다운로드와 효율적인 해결(resolution)을 통해 환경을 빠르게 구성합니다.
-- *통합된 도구*: 종속성 관리, 작업 실행, 환경 관리를 하나의 도구로 해결합니다.
-- *크로스 플랫폼*: Windows, macOS, Linux에서 동일한 방식으로 작동합니다.
+- 재현성: `pixi.lock` 파일을 통해 모든 플랫폼에서 동일한 환경을 정확하게 재현할 수 있습니다.
+- 속도: 병렬 다운로드와 효율적인 해결(resolution)을 통해 환경을 빠르게 구성합니다.
+- 통합된 도구: 종속성 관리, 작업 실행, 환경 관리를 하나의 도구로 해결합니다.
+- 크로스 플랫폼: Windows, macOS, Linux에서 동일한 방식으로 작동합니다.

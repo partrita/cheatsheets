@@ -8,26 +8,26 @@
 
 = 1. 기본 데이터 타입 및 구조
 
-- *숫자형*: `int`, `float`, `complex` (복소수)
-- *시퀀스 타입*:
+- 숫자형: `int`, `float`, `complex` (복소수)
+- 시퀀스 타입:
   - `str`: 불변(immutable) 문자열. `f"name: {name}"` (f-string), ` "a" + "b" ` (연결), ` "a" * 3 ` (반복).
   - `list`: 가변(mutable) 리스트. `[1, "apple", 3.5]`
   - `tuple`: 불변(immutable) 튜플. `(1, "apple", 3.5)`
-- *매핑 타입*:
+- 매핑 타입:
   - `dict`: 키-값 쌍. `{"key": "value", "name": "John"}`
-- *집합 타입*:
+- 집합 타입:
   - `set`: 중복 없는 순서 없는 컬렉션. `{1, 2, 3}`. 합집합(`|`), 교집합(`&`), 차집합(`-`).
   - `frozenset`: 불변 집합.
 
 = 2. 제어 흐름
 
-- *if-elif-else*: 조건문.
-- *for 루프*:
+- if-elif-else: 조건문.
+- for 루프:
   - `for item in iterable: ...`
   - `for i, value in enumerate(my_list): ...`
-- *while 루프*: `while condition: ...`
-- *루프 제어*: `break` (종료), `continue` (건너뛰기), `else` (루프가 정상적으로 완료됐을 때 실행).
-- *try-except-else-finally*: 예외 처리.
+- while 루프: `while condition: ...`
+- 루프 제어: `break` (종료), `continue` (건너뛰기), `else` (루프가 정상적으로 완료됐을 때 실행).
+- try-except-else-finally: 예외 처리.
   ```python
   try:
       # 실행할 코드
@@ -41,22 +41,22 @@
   finally:
       print("This always runs.")
   ```
-- *with 문*: 컨텍스트 관리자. 파일, 락 등 자원을 안전하게 사용하고 자동 해제.
+- with 문: 컨텍스트 관리자. 파일, 락 등 자원을 안전하게 사용하고 자동 해제.
   `with open("file.txt", "r") as f: ...`
 
 = 3. 함수
 
-- *정의*: `def func_name(pos_arg, key_arg="default"): ...`
-- *인수 종류*:
+- 정의: `def func_name(pos_arg, key_arg="default"): ...`
+- 인수 종류:
   - `위치 인수 (Positional)`: 순서대로 전달.
   - `키워드 인수 (Keyword)`: `name=value` 형태로 전달.
   - `기본값 인수 (Default)`: 호출 시 생략 가능.
   - `가변 위치 인수 (*args)`: 여러 위치 인수를 튜플로 묶어 받음.
   - `가변 키워드 인수 (**kwargs)`: 여러 키워드 인수를 딕셔너리로 묶어 받음.
-- *람다 함수 (Lambda)*: 한 줄로 된 익명 함수. `lambda args: expression`
-- *타입 힌트 (Type Hints)*:
+- 람다 함수 (Lambda): 한 줄로 된 익명 함수. `lambda args: expression`
+- 타입 힌트 (Type Hints):
   `def greet(name: str) -> str: return f"Hello, {name}"`
-- *데코레이터 (Decorators)*: 함수를 수정하지 않고 기능을 추가하는 함수. `@` 구문 사용.
+- 데코레이터 (Decorators): 함수를 수정하지 않고 기능을 추가하는 함수. `@` 구문 사용.
   ```python
   def my_decorator(func):
       def wrapper(*args, **kwargs):
@@ -75,12 +75,12 @@
 
 = 4. 컴프리헨션 및 제너레이터
 
-- *리스트 컴프리헨션*: `[expression for item in iterable if condition]`
-- *딕셔너리 컴프리헨션*: `{key_expr: val_expr for item in iterable if condition}`
-- *집합 컴프리헨션*: `{expression for item in iterable if condition}`
-- *제너레이터 표현식*: `(expression for item in iterable if condition)`
+- 리스트 컴프리헨션: `[expression for item in iterable if condition]`
+- 딕셔너리 컴프리헨션: `{key_expr: val_expr for item in iterable if condition}`
+- 집합 컴프리헨션: `{expression for item in iterable if condition}`
+- 제너레이터 표현식: `(expression for item in iterable if condition)`
   - 메모리를 효율적으로 사용. 한 번에 하나의 항목만 생성.
-- *제너레이터 함수*: `yield` 키워드를 사용하여 함수를 제너레이터로 만듦.
+- 제너레이터 함수: `yield` 키워드를 사용하여 함수를 제너레이터로 만듦.
   ```python
   def count_up_to(max):
       count = 1
@@ -91,7 +91,7 @@
 
 = 5. 객체 지향 프로그래밍 (OOP)
 
-- *클래스 정의*:
+- 클래스 정의:
   ```python
   class MyClass:
       class_variable = "I am a class var"
@@ -110,8 +110,8 @@
       def static_method():
           return "Static method called"
   ```
-- *상속*: `class ChildClass(ParentClass): ...`
-- *매직 메서드 (Magic Methods)*: `__init__`, `__str__`, `__len__`, `__eq__` 등. 특별한 상황에 호출되는 메서드.
+- 상속: `class ChildClass(ParentClass): ...`
+- 매직 메서드 (Magic Methods): `__init__`, `__str__`, `__len__`, `__eq__` 등. 특별한 상황에 호출되는 메서드.
 
 = 6. 주요 표준 라이브러리 모듈
 
@@ -130,11 +130,11 @@
 
 = 7. 가상 환경 및 패키지 관리
 
-- *가상 환경*: 프로젝트별로 독립된 Python 환경을 제공.
+- 가상 환경: 프로젝트별로 독립된 Python 환경을 제공.
   - 생성: `python -m venv myenv`
   - 활성화 (Linux/macOS): `source myenv/bin/activate`
   - 활성화 (Windows): `myenv\Scripts\activate`
-- *pip*: Python 패키지 설치 및 관리 도구.
+- pip: Python 패키지 설치 및 관리 도구.
   - 설치: `pip install <package_name>`
   - 제거: `pip uninstall <package_name>`
   - 목록: `pip list`

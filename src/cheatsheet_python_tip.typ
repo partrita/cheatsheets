@@ -131,15 +131,15 @@ print(f'My name is {name}, and I am {age}')
 
 파이썬으로 작업하는 것을 정말 좋아하는 사람으로서, 이 목록을 짧게 유지하는 것이 힘들었습니다. 결과적으로, 포함되지 않은 몇 가지 추가 기능은 다음과 같습니다.
 
-  - For/Else 루프
-  - 허수(Imaginary numbers)
-  - `Any()` 및 `All()`
-  - 여러 값 반환 (튜플)
-  - 임의로 큰 정수
-  - 키워드 인수(Keyword arguments)
-  - 세트(Sets)
-  - 문자열 연결(Joining strings)
-  - 문자열 곱하기(Multiplying strings)
-  - Walrus operator (대입 표현식)
-  - 문자열 보간(String interpolation)
-  - 슬라이싱(Slicing)
+- For/Else 루프
+- 허수(Imaginary numbers)
+- `Any()` 및 `All()`
+- 여러 값 반환 (튜플)
+- 임의로 큰 정수
+- 키워드 인수(Keyword arguments)
+- 세트(Sets)
+- 문자열 연결(Joining strings)
+- 문자열 곱하기(Multiplying strings)
+- Walrus operator (대입 표현식)
+- 문자열 보간(String interpolation)
+- 슬라이싱(Slicing)
