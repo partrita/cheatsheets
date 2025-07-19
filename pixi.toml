@@ -9,3 +9,4 @@ version = "0.1.0"
 
 [dependencies]
 typst = ">=0.13.1,<0.14"
+pre-commit = ">=4.2.0,<5"
