@@ -15,10 +15,10 @@
 - `uv venv --python <version>`: 특정 Python 버전을 사용하여 가상 환경을 생성합니다.
   - 시스템에 설치된 `python3.11`, `python3.10` 등을 자동으로 찾아 사용합니다.
 - `uv venv --seed`: `pip`, `setuptools`, `wheel`을 가상 환경에 미리 설치합니다.
-- *활성화*:
+- 활성화:
   - Linux/macOS: `source .venv/bin/activate`
   - Windows: `.venv\Scripts\activate`
-- *비활성화*: `deactivate`
+- 비활성화: `deactivate`
 
 = 2. 패키지 설치 (`uv pip install`)
 
@@ -30,7 +30,7 @@
   - `uv pip install -r requirements.txt -r requirements-dev.txt`: 여러 요구사항 파일을 동시에 설치합니다.
   - `uv pip install .`: 현재 디렉토리의 `pyproject.toml`을 기반으로 프로젝트를 설치합니다.
   - `uv pip install ".[dev]"`: `dev` extra를 포함하여 설치합니다.
-- *주요 옵션*:
+- 주요 옵션:
   - `--no-deps`: 종속성 없이 패키지만 설치합니다.
   - `--reinstall`: 패키지를 강제로 다시 설치합니다.
   - `--index-url <url>`: 기본 PyPI 대신 사용할 인덱스 URL을 지정합니다.
@@ -51,7 +51,7 @@
 - `uv pip compile requirements.in -o requirements.txt`: `requirements.in` 파일의 종속성을 해결하여 `requirements.txt` 파일에 고정합니다.
 - `uv pip compile pyproject.toml -o requirements.txt`: `pyproject.toml`의 `[project.dependencies]`를 기반으로 컴파일합니다.
 - `uv pip compile pyproject.toml --extra dev -o requirements-dev.txt`: `dev` extra를 포함하여 컴파일합니다.
-- *주요 옵션*:
+- 주요 옵션:
   - `--upgrade`: 패키지를 최신 버전으로 업그레이드하면서 컴파일합니다.
   - `--resolution=highest|lowest`: 의존성 해결 전략을 선택합니다.
   - `--generate-hashes`: `requirements.txt`에 파일 해시를 포함하여 보안을 강화합니다.
@@ -74,36 +74,36 @@
 
 = 7. 왜 `uv`를 사용하는가?
 
-- *압도적인 속도*: Rust와 최신 비동기 기술을 사용하여 `pip`, `pip-tools`, `venv`를 합친 것보다 10배에서 100배까지 빠릅니다. CI/CD 시간을 크게 단축시킬 수 있습니다.
-- *통합된 경험*: 가상 환경 생성, 패키지 설치, 종속성 컴파일 등 파편화되어 있던 도구들을 `uv`라는 단일 실행 파일로 통합했습니다.
-- *Drop-in Replacement*: `pip` 및 `requirements.txt`와 완벽하게 호환되므로 기존 프로젝트에 점진적으로 도입하기 쉽습니다.
-- *효율적인 캐싱*: 글로벌 캐시를 통해 여러 프로젝트에서 동일한 패키지를 다시 다운로드할 필요가 없어 디스크 공간과 시간을 절약합니다.
-- *활발한 개발*: Astral (Ruff 개발사)에서 적극적으로 개발하고 있어 기능 개선과 안정화가 빠르게 이루어지고 있습니다.
+- 압도적인 속도: Rust와 최신 비동기 기술을 사용하여 `pip`, `pip-tools`, `venv`를 합친 것보다 10배에서 100배까지 빠릅니다. CI/CD 시간을 크게 단축시킬 수 있습니다.
+- 통합된 경험: 가상 환경 생성, 패키지 설치, 종속성 컴파일 등 파편화되어 있던 도구들을 `uv`라는 단일 실행 파일로 통합했습니다.
+- Drop-in Replacement: `pip` 및 `requirements.txt`와 완벽하게 호환되므로 기존 프로젝트에 점진적으로 도입하기 쉽습니다.
+- 효율적인 캐싱: 글로벌 캐시를 통해 여러 프로젝트에서 동일한 패키지를 다시 다운로드할 필요가 없어 디스크 공간과 시간을 절약합니다.
+- 활발한 개발: Astral (Ruff 개발사)에서 적극적으로 개발하고 있어 기능 개선과 안정화가 빠르게 이루어지고 있습니다.
 
 = `uv` 워크플로우 예시
 
-1. *프로젝트 시작*:
+1. *프로젝트 시작:
    ```bash
    # pyproject.toml 또는 requirements.in에 필요한 패키지 명시
    # 예: fastapi, uvicorn
    ```
-2. *가상 환경 생성 및 활성화*:
+2. *가상 환경 생성 및 활성화:
    ```bash
    uv venv
    source .venv/bin/activate
    ```
-3. *종속성 컴파일 및 설치*:
+3. *종속성 컴파일 및 설치:
    ```bash
    uv pip compile pyproject.toml -o requirements.txt
    uv pip sync requirements.txt
    ```
-4. *개발 중 패키지 추가*:
+4. *개발 중 패키지 추가:
    ```bash
    # pyproject.toml에 새 패키지 추가 (예: "httpx")
    uv pip compile pyproject.toml -o requirements.txt
    uv pip sync requirements.txt
    ```
-5. *실행*:
+5. *실행:
    ```bash
    uvicorn main:app --reload
    ```

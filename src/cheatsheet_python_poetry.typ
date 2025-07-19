@@ -98,16 +98,16 @@ my-script = "my_awesome_project.main:app"
 requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 ```
-- *Extras 설치*: `poetry install --extras "science"`
+- Extras 설치: `poetry install --extras "science"`
 
 = 6. Poetry 워크플로우
 
-1. *프로젝트 생성*: `poetry new my-project`
-2. *가상환경 설정*: `poetry config virtualenvs.in-project true` (권장)
-3. *의존성 추가*: `poetry add pandas`, `poetry add --group dev pytest`
-4. *개발*: `poetry run python my_project/main.py` 또는 `poetry shell` 후 `python ...`
-5. *테스트*: `poetry run pytest`
-6. *버전 관리*: `git add .`, `git commit ...` (`poetry.lock` 파일 포함)
-7. *배포*:
+1. 프로젝트 생성: `poetry new my-project`
+2. 가상환경 설정: `poetry config virtualenvs.in-project true` (권장)
+3. 의존성 추가: `poetry add pandas`, `poetry add --group dev pytest`
+4. 개발: `poetry run python my_project/main.py` 또는 `poetry shell` 후 `python ...`
+5. 테스트: `poetry run pytest`
+6. 버전 관리: `git add .`, `git commit ...` (`poetry.lock` 파일 포함)
+7. 배포:
    - 다른 프로젝트에서 사용: `pyproject.toml`에 `my-project = { path = "../my-project", develop = true }` 추가
    - PyPI 배포: `poetry publish --build`

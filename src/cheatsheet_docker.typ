@@ -57,13 +57,13 @@
 
 = 3. 네트워크 및 볼륨 관리
 
-- *네트워크*:
+- 네트워크:
   - `docker network ls`: Docker 네트워크 목록을 표시합니다.
   - `docker network create --driver bridge <name>`: 새 브리지 네트워크를 생성합니다.
   - `docker network rm <name>`: 네트워크를 삭제합니다.
   - `docker network inspect <name>`: 네트워크의 상세 정보를 표시합니다.
   - `docker network connect <network> <container>`: 컨테이너를 네트워크에 연결합니다.
-- *볼륨*:
+- 볼륨:
   - `docker volume ls`: Docker 볼륨 목록을 표시합니다.
   - `docker volume create <name>`: 새 볼륨을 생성합니다.
   - `docker volume rm <name>`: 볼륨을 삭제합니다.
