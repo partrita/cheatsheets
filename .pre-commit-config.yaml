@@ -1,0 +1,12 @@
+
+# .pre-commit-config.yaml
+repos:
+  - repo: local
+    hooks:
+      - id: typst-compile-check
+        name: Typst Compilation Check
+        entry: ./scripts/check_typst_compile.sh
+        language: system
+        files: '\.typ$' # This regex will match all files ending with .typ
+        pass_filenames: false # We'll handle file discovery within our script
+        always_run: true # Ensures it runs even if only non-.typ files are changed

@@ -91,8 +91,8 @@
 
 = 8. 에러 처리
 
-- panic!: 복구 불가능한 에러. 프로그램을 즉시 종료.
-- Result<T, E>: 복구 가능한 에러. `enum Result<T, E> { Ok(T), Err(E), }`
+- `panic!`: 복구 불가능한 에러. 프로그램을 즉시 종료.
+- `Result<T, E>`: 복구 가능한 에러. `enum Result<T, E> { Ok(T), Err(E), }`
 - `?` 연산자: `Result`를 반환하는 함수 내에서 에러 전파를 단순화. `Err`일 경우 즉시 반환.
   ```rust
   fn read_username_from_file() -> Result<String, io::Error> {
