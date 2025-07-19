@@ -82,28 +82,28 @@
 
 = `uv` 워크플로우 예시
 
-1. *프로젝트 시작:
+1. 프로젝트 시작:
    ```bash
    # pyproject.toml 또는 requirements.in에 필요한 패키지 명시
    # 예: fastapi, uvicorn
    ```
-2. *가상 환경 생성 및 활성화:
+2. 가상 환경 생성 및 활성화:
    ```bash
    uv venv
    source .venv/bin/activate
    ```
-3. *종속성 컴파일 및 설치:
+3. 종속성 컴파일 및 설치:
    ```bash
    uv pip compile pyproject.toml -o requirements.txt
    uv pip sync requirements.txt
    ```
-4. *개발 중 패키지 추가:
+4. 개발 중 패키지 추가:
    ```bash
    # pyproject.toml에 새 패키지 추가 (예: "httpx")
    uv pip compile pyproject.toml -o requirements.txt
    uv pip sync requirements.txt
    ```
-5. *실행:
+5. 실행:
    ```bash
    uvicorn main:app --reload
    ```
