@@ -243,7 +243,7 @@ merge(x = pbmc1, y = list(pbmc2, pbmc3))
 ```
 
 == 객체 병합 (통합 포함)
-자세한 정보는 [통합 소개](https://www.google.com/search?q=integration_introduction.html)를 참조하십시오.
+자세한 정보는 [통합 소개](https://satijalab.org/seurat/articles/integration_introduction.html)를 참조하십시오.
 
 ```r
 merged_obj <- merge(x = ifnb_list$CTRL, y = ifnb_list$STIM)
@@ -263,7 +263,7 @@ merged_obj[["RNA"]] <- JoinLayers(merged_obj)
 = 유사 벌크 분석 (Pseudobulk analysis)
 
 == 여러 범주를 기반으로 셀 그룹화
-`donor_id` 열을 메타데이터에 추가하는 방법에 대한 정보는 [DE 안내서](https://www.google.com/search?q=de_vignette.html)를 참조하십시오.
+`donor_id` 열을 메타데이터에 추가하는 방법에 대한 정보는 [DE 안내서](https://satijalab.org/seurat/articles/de_vignette.html)를 참조하십시오.
 
 ```r
 # 셀 유형별로만 유사 벌크화

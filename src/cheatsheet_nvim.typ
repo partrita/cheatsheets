@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Neovim cheat sheet",
+  title: "Neovim 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )

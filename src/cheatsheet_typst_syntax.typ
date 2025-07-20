@@ -2,9 +2,9 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "나만의 치트 시트",
+  title: "Typst 문법 치트시트",
   header: [#datetime.today().display()],
-  footer: "https://mypy.readthedocs.io/en/stable/cheat_sheet_py3.html",
+  footer: "https://typst.app/docs/",
 )
 
 // 여기에 문서 내용을 작성하세요
@@ -48,10 +48,10 @@
 #x + 5 // 15
 ```
 
-// #text(12pt, weight: "bold")[인용 블록]
-// #quote[
-// "Typst는 강력하고 사용하기 쉬운 조판 시스템입니다."
-// ]
+#text(12pt, weight: "bold")[인용 블록]
+#quote[
+"Typst는 강력하고 사용하기 쉬운 조판 시스템입니다."
+]
 
 #text(12pt, weight: "bold")[수식]
 $ x^2 + y^2 = z^2 $
@@ -78,11 +78,11 @@ align:(center, right),
 logo as the one shown in @logo will cease to exist if
 we don't take action!
 
-// #text(12pt, weight: "bold")[사각형]
-// #rect(width: 3cm, height: 1cm, fill: blue, radius: 4pt)
+#text(12pt, weight: "bold")[사각형]
+#rect(width: 3cm, height: 1cm, fill: blue, radius: 4pt)
 
-// #text(12pt, weight: "bold")[원]
-// #circle(radius: 0.5cm, fill: red)
+#text(12pt, weight: "bold")[원]
+#circle(radius: 0.5cm, fill: red)
 
 #text(12pt, weight: "bold")[선]
 #line(length: 100%, stroke: 0.5pt + rgb("#2e3440"))
