@@ -1,7 +1,7 @@
-#import "./templates/conf.typ":-
+#import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "uv 치트시트 ",
+  title: "uv 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )
