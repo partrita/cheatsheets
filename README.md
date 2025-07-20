@@ -1,10 +1,10 @@
 # cheatsheets🤗
 
-![GitHub Repo stars](https://img.shields.io/github/stars/cheatsheets-typst/cheatsheets?style=social)
-![GitHub last commit](https://img.shields.io/github/last-commit/cheatsheets-typst/cheatsheets)
-![GitHub issues](https://img.shields.io/github/issues/cheatsheets-typst/cheatsheets)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/cheatsheets-typst/cheatsheets)
-![GitHub license](https://img.shields.io/github/license/cheatsheets-typst/cheatsheets)
+![GitHub Repo stars](https://img.shields.io/github/stars/partrita/cheatsheets?style=social)
+![GitHub last commit](https://img.shields.io/github/last-commit/partrita/cheatsheets)
+![GitHub issues](https://img.shields.io/github/issues/partrita/cheatsheets)
+![GitHub pull requests](https://img.shields.io/github/issues-pr/partrita/cheatsheets)
+![GitHub license](https://img.shields.io/github/license/partrita/cheatsheets)
 
 
 ![](./cheatsheet_demo.png)
