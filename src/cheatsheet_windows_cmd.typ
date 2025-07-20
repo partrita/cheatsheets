@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Windows 치트시트",
+  title: "Windows cmd 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )

@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Pixi 치트시트 (심화)",
+  title: "Pixi 치트시트 ",
   header: [#datetime.today().display()],
   footer: "",
 )
