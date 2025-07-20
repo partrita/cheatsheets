@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Poetry 치트시트 (심화)",
+  title: "Poetry 치트시트 ",
   header: [#datetime.today().display()],
   footer: "",
 )
