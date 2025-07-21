@@ -65,6 +65,23 @@ align:(center, right),
 [데이터 2], [200],
 )
 
+#text(12pt, weight: "bold")[고급 테이블]
+
+#bordered-table(
+  columns: 3,
+  table.header(
+    [Substance],
+    [Subcritical °C],
+    [Supercritical °C],
+  ),
+  [Hydrochloric Acid],
+  [12.0], [92.1],
+  [Sodium Myreth Sulfate],
+  [16.6], [104],
+  [Potassium Hydroxide],
+  table.cell(colspan: 2)[24.7],
+)
+
 = 섹션 3: 이미지 및 도형
 
 #text(12pt, weight: "bold")[이미지 삽입]
@@ -185,4 +202,3 @@ Typst는 가장 일반적인 문서 요소에 대한 내장 마크업을 제공�
 === 이스케이프
 
 이스케이프는 입력하기 어렵거나 Typst에서 특별한 의미를 갖는 특수 문자를 삽입하는 데 사용됩니다. 문자를 이스케이프하려면 백슬래시 앞에 붙입니다. 모든 유니코드 코드포인트를 삽입하려면 16진수 이스케이프 시퀀스: `[\u{1f600}]`를 작성할 수 있습니다.
-z

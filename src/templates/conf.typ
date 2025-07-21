@@ -8,7 +8,7 @@
 
   // 본문 글꼴 설정
   set text(
-    font: serif_font,
+    font: (serif_font, "Noto Serif CJK KR"),
     weight: "regular",
     size: 0.7em,
     fill: rgb("#2e3440"),
@@ -22,7 +22,7 @@
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(0.8em, font: sans_font, fill: rgb("#4c566a"))[
+      #text(0.8em, font: (sans_font, "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
         #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -32,7 +32,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(0.8em, font: sans_font, fill: rgb("#4c566a"))[
+    footer: [#text(0.8em, font: (sans_font, "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
       #footer
       #h(1fr)
       #context(counter(page).display(
@@ -52,7 +52,7 @@
   show heading: it => [
     #set align(left)
     #set text(
-        font: sans_font,
+        font: (sans_font, "Noto Sans CJK KR"),
         weight: "bold",
         // 제목 레벨에 따라 크기와 색상 변경
         size: if it.level == 1 {
@@ -79,7 +79,7 @@
 
   // 코드 블록 스타일 설정
   show raw: set text(
-    size: 1.2em, font: mono_font,
+    size: 1.2em, font: (mono_font, "monospace"),
     weight: "regular")
   show raw.where(block: false): set text(
     // size: 1.1em,
@@ -94,7 +94,7 @@
       // #line(length: 100%, stroke: 0.5pt)
       #block(
         text(
-          font: sans_font,
+          font: (sans_font, "Noto Sans CJK KR"),
           // stretch: 100%,
           fill: rgb("#3b4252"),
           weight: "extrabold", size: 1.8em, title)
@@ -108,4 +108,32 @@
 
   // main body
   body
+}
+
+#let bordered-table(columns: none, ..children) = {
+  let data = children.pos()
+  let row-count = calc.ceil(data.len() / columns)
+
+  show table.cell.where(y: 0): strong
+  set table(
+    stroke: (x, y) => {
+      let strokes = (:)
+      // 헤더 하단과 상단 선
+      if y == 0 {
+        strokes.top = 0.7pt + black
+        strokes.bottom = 0.7pt + black
+      }
+      // 테이블 하단 선
+      if y == row-count - 1 {
+        strokes.bottom = 0.7pt + black
+      }
+      strokes
+    },
+    align: (x, y) => (
+      if x > 0 { center }
+      else { left }
+    ),
+  )
+
+  table(columns: columns, ..data)
 }
