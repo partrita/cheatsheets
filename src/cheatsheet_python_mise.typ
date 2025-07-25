@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "mise (asdf-vm) 치트시트",
+  title: "mise 치트시트",
   header: [#datetime.today().display()],
   footer: "",
 )
