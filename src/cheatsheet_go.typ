@@ -1,7 +1,7 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Go 언어",
+  title: "Go 언어 치트시트",
   header: [#datetime.today().display()],
   footer: "http://golang.site/go",
 )
