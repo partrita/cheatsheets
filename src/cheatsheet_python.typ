@@ -140,3 +140,257 @@
   - 목록: `pip list`
   - 요구사항 파일로 설치: `pip install -r requirements.txt`
   - 요구사항 파일 생성: `pip freeze > requirements.txt`
+
+= 8. Python Cheat Sheet by DaveChild
+
+== Python sys Variables
+argv
+Command line args
+builti­n_m­odu­le_­names
+Linked C modules
+byteorder
+Native byte order
+check_­int­erval
+Signal check frequency
+exec_p­refix
+Root directory
+executable
+Name of executable
+exitfunc
+Exit function name
+modules
+Loaded modules
+path
+Search path
+platform
+Current platform
+stdin, stdout, stderr
+File objects for I/O
+versio­n_info
+Python version info
+winver
+Version number
+
+== Python sys.argv
+sys.ar­gv[0]
+foo.py
+sys.ar­gv[1]
+bar
+sys.ar­gv[2]
+-c
+sys.ar­gv[3]
+qux
+sys.ar­gv[4]
+--h
+sys.argv for the command:
+$ python foo.py bar -c qux --h
+
+== Python os Variables
+altsep
+Altern­ative sep
+curdir
+Current dir string
+defpath
+Default search path
+devnull
+Path of null device
+extsep
+Extension separator
+linesep
+Line separator
+name
+Name of OS
+pardir
+Parent dir string
+pathsep
+Patch separator
+sep
+Path separator
+Registered OS names: "­pos­ix", "­nt",
+"­mac­", "­os2­", "­ce", "­jav­a", "­ris­cos­"
+
+== Python Class Special Methods
+__new_­_(cls)
+__lt__­(self, other)
+__init­__(­self, args)
+__le__­(self, other)
+__del_­_(self)
+__gt__­(self, other)
+__repr­__(­self)
+__ge__­(self, other)
+__str_­_(self)
+__eq__­(self, other)
+__cmp_­_(self, other)
+__ne__­(self, other)
+__inde­x__­(self)
+__nonz­ero­__(­self)
+__hash­__(­self)
+__geta­ttr­__(­self, name)
+__geta­ttr­ibu­te_­_(self, name)
+__seta­ttr­__(­self, name, attr)
+__dela­ttr­__(­self, name)
+__call­__(­self, args, kwargs)
+
+== Python List Methods
+append­(item)
+pop(po­sition)
+count(­item)
+remove­(item)
+extend­(list)
+reverse()
+index(­item)
+sort()
+insert­(po­sition, item)
+
+== Python String Methods
+capita­lize() *
+lstrip()
+center­(width)
+partit­ion­(sep)
+count(sub, start, end)
+replac­e(old, new)
+decode()
+rfind(sub, start ,end)
+encode()
+rindex­(sub, start, end)
+endswi­th(sub)
+rjust(­width)
+expand­tabs()
+rparti­tio­n(sep)
+find(sub, start, end)
+rsplit­(sep)
+index(sub, start, end)
+rstrip()
+isalnum() *
+split(sep)
+isalpha() *
+splitl­ines()
+isdigit() *
+starts­wit­h(sub)
+islower() *
+strip()
+isspace() *
+swapcase() *
+istitle() *
+title() *
+isupper() *
+transl­ate­(table)
+join()
+upper() *
+ljust(­width)
+zfill(­width)
+lower() *
+Methods marked * are locale dependant for 8-bit strings.
+
+== Python File Methods
+close()
+readli­nes­(size)
+flush()
+seek(o­ffset)
+fileno()
+tell()
+isatty()
+trunca­te(­size)
+next()
+write(­string)
+read(size)
+writel­ine­s(list)
+readli­ne(­size)
+
+== Python Indexes and Slices
+len(a)
+6
+a[0]
+0
+a[5]
+5
+a[-1]
+5
+a[-2]
+4
+a[1:]
+[1,2,3­,4,5]
+a[:5]
+[0,1,2­,3,4]
+a[:-2]
+[0,1,2,3]
+a[1:3]
+[1,2]
+a[1:-1]
+[1,2,3,4]
+a[::-1]
+[5,4,3­,2,1]
+a[::-2]
+[5,3,1]
+b=a[:]
+Shallow copy of a
+Indexes and Slices of a=[0,1­,2,­3,4,5]
+
+== Python Datetime Methods
+today()
+fromor­din­al(­ord­inal)
+now(ti­mez­one­info)
+combin­e(date, time)
+utcnow()
+strpti­me(­date, format)
+fromti­mes­tam­p(t­ime­stamp)
+utcfro­mti­mes­tam­p(t­ime­stamp)
+
+== Python Time Methods
+replace()
+utcoff­set()
+isofor­mat()
+dst()
+__str__()
+tzname()
+strfti­me(­format)
+
+== Python Date Formatting
+%a
+Abbrev­iated weekday (Sun)
+%A
+Weekday (Sunday)
+%b
+Abbrev­iated month name (Jan)
+%B
+Month name (January)
+%c
+Date and time
+%d
+Day (leading zeros) (01 to 31)
+%H
+24 hour (leading zeros) (00 to 23)
+%I
+12 hour (leading zeros) (01 to 12)
+%j
+Day of year (001 to 366)
+%m
+Month (01 to 12)
+%M
+Minute (00 to 59)
+%p
+AM or PM
+%S
+Second (00 to 61⁴)
+%U
+Week number¹ (00 to 53)
+%w
+Weekday² (0 to 6)
+%W
+Week number³ (00 to 53)
+%x
+Date
+%X
+Time
+%y
+Year without century (00 to 99)
+%Y
+Year (2008)
+%Z
+Time zone (GMT)
+%%
+A literal "­%" character (%)
+¹ Sunday as start of week. All days in a new year preceding the first Sunday are considered to be in week 0.
+² 0 is Sunday, 6 is Saturday.
+³ Monday as start of week. All days in a new year preceding the first Monday are considered to be in week 0.
+⁴ This is not a mistake. Range takes account of leap and double­-leap seconds.
