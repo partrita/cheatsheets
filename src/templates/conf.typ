@@ -23,7 +23,7 @@
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
       #text(0.8em, font: (sans_font, "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
-        #header
+        Last updated: #header
         #h(1fr)
         // #place(right, dy: -10pt,
         // square(width: 20pt, stroke: 2pt + blue),)
@@ -79,7 +79,7 @@
 
   // 코드 블록 스타일 설정
   show raw: set text(
-    size: 1.2em, font: (mono_font, "monospace"),
+    size: 1.2em, font: (mono_font, "JBD2"),
     weight: "regular")
   show raw.where(block: false): set text(
     // size: 1.1em,
