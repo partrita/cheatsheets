@@ -1,4 +1,4 @@
-# cheatsheets🤗
+# 각종 치트 시트 모음🤗
 
 ![GitHub Repo stars](https://img.shields.io/github/stars/partrita/cheatsheets?style=social)
 ![GitHub last commit](https://img.shields.io/github/last-commit/partrita/cheatsheets)
@@ -42,12 +42,12 @@ Typst 문서를 직접 빌드하여 PDF 또는 다른 형식으로 변환할 수
 
 1.  pixi를 사용하여 Typst를 설치합니다. pixi는 프로젝트별 종속성을 관리하는 데 유용합니다.
     ```bash
-    pixi add typst
+    pixi install
     ```
     (만약 pixi를 사용하지 않고 전역으로 Typst를 설치하고 싶다면, Typst 공식 설치 가이드를 참고하세요.)
 2.  설치가 완료되면, 원하는 `.typ` 파일을 Typst 컴파일러로 PDF 등 다양한 형식으로 변환할 수 있습니다.
     ```bash
-    typst compile src/cheatsheet_go.typ cheatsheet_go.pdf
+    pixi run typst compile --font-path "src/fonts" src/cheatsheet_go.typ
     ```
     위 명령은 `src/cheatsheet_go.typ` 파일을 `cheatsheet_go.pdf`로 컴파일합니다. 필요에 따라 출력 파일명과 경로를 조정할 수 있습니다.
 

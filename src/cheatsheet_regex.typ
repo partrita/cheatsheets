@@ -1,209 +1,120 @@
 #import "./templates/conf.typ": *
 
 #show: template.with(
-  title: "Regular Expressions Cheat Sheet",
+  title: "정규표현식 치트시트",
   header: [#datetime.today().display()],
-  footer: "",
+  footer: "https://cheatography.com/davechild/cheat-sheets/regular-expressions/",
 )
 
 // 여기에 문서 내용을 작성하세요
-== Regular Expressions Cheat Sheet by DaveChild
-A quick reference guide for regular expressions (regex), including symbols, ranges, grouping, assertions and some sample patterns to get you started.
 
-=== Anchors
-^
-Start of string, or start of line in multi-line pattern
-\A
-Start of string
-$
-End of string, or end of line in multi-line pattern
-\Z
-End of string
-\b
-Word boundary
-\B
-Not word boundary
-\<
-Start of word
-\>
-End of word
+== 데이브차일드의 정규표현식 치트시트
 
-=== Character Classes
-\c
-Control character
-\s
-White space
-\S
-Not white space
-\d
-Digit
-\D
-Not digit
-\w
-Word
-\W
-Not word
-\x
-Hexade­cimal digit
-\O
-Octal digit
+정규표현식(Regex)에 사용되는 기호, 범위, 그룹화, 어서션과 몇 가지 예시 패턴을 빠르게 참고할 수 있는 가이드.
 
-=== POSIX
-[:upper:]
-Upper case letters
-[:lower:]
-Lower case letters
-[:alpha:]
-All letters
-[:alnum:]
-Digits and letters
-[:digit:]
-Digits
-[:xdigit:]
-Hexade­cimal digits
-[:punct:]
-Punctu­ation
-[:blank:]
-Space and tab
-[:space:]
-Blank characters
-[:cntrl:]
-Control characters
-[:graph:]
-Printed characters
-[:print:]
-Printed characters and spaces
-[:word:]
-Digits, letters and underscore
+- Anchors (앵커)
+  - `^`: 문자열 시작, 또는 멀티라인 패턴에서 라인 시작
+  - `\A`: 문자열 시작
+  - `$`: 문자열 끝, 또는 멀티라인 패턴에서 라인 끝
+  - `\Z`: 문자열 끝
+  - `\b`: 단어 경계
+  - `\B`: 단어 경계 아님
+  - `\<`: 단어 시작
+  - `\>`: 단어 끝
 
-=== Assertions
-?=
-Lookahead assertion
-?!
-Negative lookahead
-?<=
-Lookbehind assertion
-?!= or ?<!
-Negative lookbehind
-?>
-Once-only Subexp­ression
-?()
-Condition [if then]
-?()|
-Condition [if then else]
-?#
-Comment
+- Character Classes (문자 클래스)
+  - `\c`: 제어 문자
+  - `\s`: 공백 문자
+  - `\S`: 공백 문자가 아님
+  - `\d`: 숫자
+  - `\D`: 숫자가 아님
+  - `\w`: 단어 문자
+  - `\W`: 단어 문자가 아님
+  - `\x`: 16진수 숫자
+  - `\O`: 8진수 숫자
 
-=== Quanti­fiers
-*
-0 or more
-{3}
-Exactly 3
-+
-1 or more
-{3,}
-3 or more
-?
-0 or 1
-{3,5}
-3, 4 or 5
-Add a ? to a quantifier to make it ungreedy.
+- POSIX
+  - `[:upper:]`: 대문자
+  - `[:lower:]`: 소문자
+  - `[:alpha:]`: 모든 문자 (알파벳)
+  - `[:alnum:]`: 숫자와 문자
+  - `[:digit:]`: 숫자
+  - `[:xdigit:]`: 16진수 숫자
+  - `[:punct:]`: 구두점
+  - `[:blank:]`: 스페이스와 탭
+  - `[:space:]`: 공백 문자
+  - `[:cntrl:]`: 제어 문자
+  - `[:graph:]`: 출력 가능한 문자
+  - `[:print:]`: 출력 가능한 문자와 공백
+  - `[:word:]`: 숫자, 문자 및 밑줄(`_`)
 
-=== Escape Sequences
-\
-Escape following character
-\Q
-Begin literal sequence
-\E
-End literal sequence
-"­Esc­api­ng" is a way of treating characters which have a special meaning in regular expres­sions literally, rather than as special charac­ters.
+- Assertions (어서션)
+  - `?=`: 긍정적 탐색
+  - `?!`: 부정적 탐색
+  - `?<=`: 긍정적 후방 탐색
+  - `?!=` 또는 `?<!`: 부정적 후방 탐색
+  - `?>`: 한번만 매칭되는 하위 표현식
+  - `?()`: 조건 (if then)
+  - `?()|`: 조건 (if then else)
+  - `?#`: 주석
 
-=== Common Metach­ara­cters
-^
-[
-.
-$
-{
-*
-(
-\
-+
-)
-|
-?
-<
->
-The escape character is usually \
+- Quantifiers (수량자)
+  - `*`: 0개 이상
+  - `{3}`: 정확히 3개
+  - `+`: 1개 이상
+  - `{3,}`: 3개 이상
+  - `?`: 0개 또는 1개
+  - `{3,5}`: 3,4 또는 5개
+  - 수량자 뒤에 `?`를 붙이면 탐욕성이 사라짐 (최소 매칭)
 
-=== Special Characters
-\n
-New line
-\r
-Carriage return
-\t
-Tab
-\v
-Vertical tab
-\f
-Form feed
-\xxx
-Octal character xxx
-\xhh
-Hex character hh
+- Escape Sequences (이스케이프 시퀀스)
+  - `\`: 다음 문자를 이스케이프
+  - `\Q`: 리터럴 시퀀스 시작
+  - `\E`: 리터럴 시퀀스 종료
+  - "이스케이핑"은 정규식의 특수 문자를 문자 그대로 처리하는 방법
 
-=== Groups and Ranges
-.
-Any character except new line (\n)
-(a|b)
-a or b
-(...)
-Group
-(?:...)
-Passive (non-c­apt­uring) group
-[abc]
-Range (a or b or c)
-[^abc]
-Not (a or b or c)
-[a-q]
-Lower case letter from a to q
-[A-Q]
-Upper case letter from A to Q
-[0-7]
-Digit from 0 to 7
-\x
-Group/­sub­pattern number "­x"
-Ranges are inclusive.
+- Common Metacharacters (일반 메타문자)
+  - `^`, `[`, `.`, `$`, `{`, `*`, `(`, `\`, `+`, `)`, `|` ,`?`, `<`,`>`  
+  - 이스케이프 문자는 보통 `\`
 
-=== Pattern Modifiers
-g
-Global match
-i *
-Case-i­nse­nsitive
-m *
-Multiple lines
-s *
-Treat string as single line
-x *
-Allow comments and whitespace in pattern
-e *
-Evaluate replac­ement
-U *
-Ungreedy pattern
-* PCRE modifier
+- Special Characters (특수 문자)
+  - `\n`: 줄 바꿈
+  - `\r`: 캐리지 리턴
+  - `\t`: 탭
+  - `\v`: 수직 탭
+  - `\f`: 폼 피드
+  - `\xxx`: 8진수 문자
+  - `\xhh`: 16진수 문자
 
-=== String Replac­ement
-$n
-nth non-pa­ssive group
-$2
-"­xyz­" in /^(abc­(xy­z))$/
-$1
-"­xyz­" in /^(?:a­bc)­(xyz)$/
-$`
-Before matched string
-$'
-After matched string
-$+
-Last matched string
-$&
-Entire matched string
-Some regex implem­ent­ations use \ instead of $.
+- Groups and Ranges (그룹과 범위)
+  - `.`: 줄 바꿈(\n)을 제외한 모든 문자
+  - `(a|b)`: a 또는 b
+  - `(...)`: 그룹
+  - `(?:...)`: 캡처하지 않는 그룹
+  - `[abc]`: a 또는 b 또는 c
+  - `[^abc]`: a 또는 b 또는 c가 아님
+  - `[a-q]`: a부터 q까지 소문자
+  - `[A-Q]`: A부터 Q까지 대문자
+  - `[0-7]`: 0부터 7까지 숫자
+  - `\x`: 하위 패턴 번호 x
+  - (범위는 포함 범위)
+
+- Pattern Modifiers (패턴 수정자):`*` 별표는 PCRE 패턴에서 지원하는 플래그임을 나타냅니다.
+
+  - `g` : 전역 매칭 (Global match) — 함수 호출 옵션으로 사용되며, PCRE 패턴 내부 플래그가 아님
+  - `i` `*` : 대소문자 구분 없음 (Case-insensitive) (`PCRE` 지원)
+  - `m` `*` :  멀티라인 모드 (Multi-line) (`PCRE` 지원)
+  - `s` `*` : 단일 라인(DOTALL) 모드 (`PCRE` 지원)
+  - `x` `*` : 확장 모드 (Extended mode), 공백과 주석 무시 (`PCRE` 지원)
+  - `e` `*` : 대체 결과 실행 (Evaluate replacement) — Perl, PHP preg_replace 등에서 지원 (`PCRE` 자체 수정자는 아님)
+  - `U` `*` : 비탐욕적(ungreedy) 매칭 (`PCRE` 지원)
+
+- String Replacement (문자열 치환)
+  - `$n`: n번째 캡처 그룹
+  - `$2`: 예시 `/^(abc(xyz))$/`에서 "xyz"
+  - `$1`: 예시 `/^(?:abc)(xyz)$/`에서 "xyz"
+  - `$'`: 매칭된 문자열 뒷 부분
+  - `$+`: 마지막 매칭 그룹
+  - `$&`: 전체 매칭 문자열
+  - 일부 정규식 구현에서는 `$` 대신 `\` 사용
+
