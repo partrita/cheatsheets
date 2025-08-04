@@ -8,7 +8,7 @@
 
 = 1. 기본 개념
 
-Helix는 Vim과 유사한 모달 편집기이지만, Kakoune에서 영감을 받은 '선택 우선(selection-first)' 모델을 사용합니다.
+Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 받은 '선택 우선(selection-first)' 모델을 사용합니다.
 
 - 전통적인 Vim: 동사-객체 (verb-object) 모델
 - Helix: 객체-동사 (object-verb) 모델
@@ -237,12 +237,12 @@ Helix는 Vim과 유사한 모달 편집기이지만, Kakoune에서 영감을 받
 
 == 윈도우 및 버퍼
 - `Space w`: 윈도우 메뉴
-  - `Space w w`: 다음 윈도우로 전환
-  - `Space w v`: 수직 분할
-  - `Space w s`: 수평 분할
-  - `Space w h/j/k/l`: 윈도우 간 이동
-  - `Space w c`: 윈도우 닫기
-  - `Space w o`: 현재 윈도우만 남기기
+- `Space w w`: 다음 윈도우로 전환
+- `Space w v`: 수직 분할
+- `Space w s`: 수평 분할
+- `Space w h/j/k/l`: 윈도우 간 이동
+- `Space w c`: 윈도우 닫기
+- `Space w o`: 현재 윈도우만 남기기
 
 == 기타 유용한 기능
 - `Space y`: 시스템 클립보드에 복사
@@ -290,7 +290,7 @@ Helix는 Vim과 유사한 모달 편집기이지만, Kakoune에서 영감을 받
 = 12. [ 및 ] 메뉴 (이전/다음)
 
 == 이동
-- `]d`, `[d`: 다음/이전 진단
+- `\]d`, `\[d`: 다음/이전 진단
 - `]D`, `[D`: 마지막/첫 번째 진단
 - `]f`, `[f`: 다음/이전 함수
 - `]c`, `[c`: 다음/이전 클래스
@@ -346,7 +346,7 @@ Helix는 Vim과 유사한 모달 편집기이지만, Kakoune에서 영감을 받
 - `Space F`: 파일 포맷팅
 
 == 진단
-- `]d`, `[d`: 다음/이전 진단
+- `\]d`, `\[d`: 다음/이전 진단
 - `]D`, `[D`: 마지막/첫 번째 진단
 - `Space g`: 진단 피커
 - `Space G`: 워크스페이스 진단 피커
@@ -399,10 +399,10 @@ Helix는 Vim과 유사한 모달 편집기이지만, Kakoune에서 영감을 받
 
 == 주요 설정 옵션
 ```toml
-# 테마 설정
+// 테마 설정
 theme = "onedark"
 
-# 편집기 설정
+// 편집기 설정
 [editor]
 auto-completion = true
 line-number = "relative"
@@ -410,15 +410,15 @@ cursorline = true
 mouse = true
 indent-guides.render = true
 
-# LSP 설정
+// LSP 설정
 [editor.lsp]
 display-messages = true
 
-# 파일 탐색기 설정
+// 파일 탐색기 설정
 [editor.file-picker]
 hidden = false
 
-# 키 바인딩 커스터마이징
+// 키 바인딩 커스터마이징
 [keys.normal]
 "C-s" = ":w"
 "C-c" = ["collapse_selection", "normal_mode"]
@@ -426,16 +426,16 @@ hidden = false
 
 == OS별 추가 설정
 ```toml
-# macOS에서 Option 키 문제 해결
+// macOS에서 Option 키 문제 해결
 [keys.normal]
 "A-w" = "extend_to_word"
 "A-b" = "move_prev_word_start"
 
-# Windows에서 유니코드 지원
+// Windows에서 유니코드 지원
 [editor]
 shell = ["powershell", "-c"]
 
-# Linux에서 클립보드 설정
+// Linux에서 클립보드 설정
 [editor.clipboard-provider]
 type = "xclip"
 ```
@@ -453,4 +453,3 @@ type = "xclip"
 - `:tutor`: 내장 튜토리얼 실행
 - `Space ?`: 키 바인딩 도움말
 - `:help`: 도움말 문서
-- 상태표시줄에서 현재 모드 및 키 입력 확인
