@@ -95,11 +95,4 @@ Git은 로컬 컴퓨터에서 GitHub 관련 작업을 담당하는 무료 오픈
 원하지 않는 파일의 스테이징 및 커밋 방지
 
 - `git config --global core.excludesfile [파일경로]`: 모든 로컬 저장소에 적용할 시스템 전역 무시 패턴 파일 설정
-
-```
-logs/
-*.notes
-pattern*/
-```
-
-`.gitignore` 파일을 생성하여 문자열 또는 와일드카드(glob) 패턴으로 제외할 파일을 지정 가능
+- `.gitignore` 파일을 생성하여 문자열 또는 와일드카드(glob) 패턴으로 제외할 파일을 지정 가능
