@@ -143,7 +143,6 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 - `i<`, `a<` 또는 `i>`, `a>`: 꺾쇠괄호 안 (angle brackets)
 - `i"`, `a"`: 쌍따옴표 안 (double quotes)
 - `i'`, `a'`: 홑따옴표 안 (single quotes)
-- `` i` ``, `` a` ``: 백틱 안 (backticks)
 
 == 정규식 선택
 - `s`: 정규식으로 선택 영역 분할
@@ -174,8 +173,6 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 == 변경 및 교체
 - `r<문자>`: 선택된 문자를 다른 문자로 교체
 - `~`: 대소문자 변경
-- `` ` ``: 소문자로 변경
-- `Alt-`` ` ``: 대문자로 변경
 - `I`: 선택된 줄들의 시작에 Insert 모드
 - `A`: 선택된 줄들의 끝에 Insert 모드
 - `o`: 선택된 줄들 아래에 새 줄 생성
@@ -291,14 +288,14 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 
 == 이동
 - `\]d`, `\[d`: 다음/이전 진단
-- `]D`, `[D`: 마지막/첫 번째 진단
-- `]f`, `[f`: 다음/이전 함수
-- `]c`, `[c`: 다음/이전 클래스
-- `]a`, `[a`: 다음/이전 인수
-- `]o`, `[o`: 다음/이전 주석
-- `]t`, `[t`: 다음/이전 테스트
-- `]p`, `[p`: 다음/이전 문단
-- `]space`, `[space`: 다음/이전 공백 줄 추가
+- `\]D`, `\[D`: 마지막/첫 번째 진단
+- `\]f`, `\[f`: 다음/이전 함수
+- `\]c`, `\[c`: 다음/이전 클래스
+- `\]a`, `\[a`: 다음/이전 인수
+- `\]o`, `\[o`: 다음/이전 주석
+- `\]t`, `\[t`: 다음/이전 테스트
+- `\]p`, `\[p`: 다음/이전 문단
+- `\]space`, `\[space`: 다음/이전 공백 줄 추가
 
 = 13. 명령어 모드
 
@@ -347,7 +344,7 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 
 == 진단
 - `\]d`, `\[d`: 다음/이전 진단
-- `]D`, `[D`: 마지막/첫 번째 진단
+- `\]D`, `\[D`: 마지막/첫 번째 진단
 - `Space g`: 진단 피커
 - `Space G`: 워크스페이스 진단 피커
 
@@ -362,8 +359,8 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 == 특수 레지스터
 - `""`: 기본 레지스터
 - `"+`: 시스템 클립보드
-- `"*`: 선택 영역 (X11)
-- `"_`: 블랙홀 레지스터 (삭제 시 저장하지 않음)
+- `"\*`: 선택 영역 (X11)
+- `"\_`: 블랙홀 레지스터 (삭제 시 저장하지 않음)
 - `"/`: 마지막 검색 패턴
 - `":`: 마지막 명령어
 
@@ -371,9 +368,9 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 
 == 기록 및 재생
 - `q<문자>`: 매크로 기록 시작/중지
-- `@<문자>`: 매크로 실행
-- `@@`: 마지막 매크로 재실행
-- `<숫자>@<문자>`: 매크로 여러 번 실행
+- `\@<문자>`: 매크로 실행
+- `\@\@`: 마지막 매크로 재실행
+- `<숫자>\@<문자>`: 매크로 여러 번 실행
 
 = 17. 트리시터 기능
 
@@ -397,49 +394,6 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 - Linux/macOS: `~/.config/helix/config.toml`
 - Windows: `%APPDATA%\helix\config.toml`
 
-== 주요 설정 옵션
-```toml
-// 테마 설정
-theme = "onedark"
-
-// 편집기 설정
-[editor]
-auto-completion = true
-line-number = "relative"
-cursorline = true
-mouse = true
-indent-guides.render = true
-
-// LSP 설정
-[editor.lsp]
-display-messages = true
-
-// 파일 탐색기 설정
-[editor.file-picker]
-hidden = false
-
-// 키 바인딩 커스터마이징
-[keys.normal]
-"C-s" = ":w"
-"C-c" = ["collapse_selection", "normal_mode"]
-```
-
-== OS별 추가 설정
-```toml
-// macOS에서 Option 키 문제 해결
-[keys.normal]
-"A-w" = "extend_to_word"
-"A-b" = "move_prev_word_start"
-
-// Windows에서 유니코드 지원
-[editor]
-shell = ["powershell", "-c"]
-
-// Linux에서 클립보드 설정
-[editor.clipboard-provider]
-type = "xclip"
-```
-
 = 19. 유용한 팁
 
 == 효율적인 편집
@@ -448,8 +402,3 @@ type = "xclip"
 - 텍스트 객체로 정확한 선택
 - 정규식을 활용한 복잡한 선택 및 교체
 - LSP 기능으로 코드 탐색 및 리팩토링
-
-== 학습 도구
-- `:tutor`: 내장 튜토리얼 실행
-- `Space ?`: 키 바인딩 도움말
-- `:help`: 도움말 문서
