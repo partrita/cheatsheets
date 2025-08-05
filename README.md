@@ -51,6 +51,11 @@ Typst 문서를 직접 빌드하여 PDF 또는 다른 형식으로 변환할 수
     ```
     위 명령은 `src/cheatsheet_go.typ` 파일을 `cheatsheet_go.pdf`로 컴파일합니다. 필요에 따라 출력 파일명과 경로를 조정할 수 있습니다.
 
+## 전체 Typst 문서 컴파일 오류 확인
+
+```bash
+pixi run bash scripts/check_typst_compile.sh
+```
 
 ## 🤝 기여 방법
 

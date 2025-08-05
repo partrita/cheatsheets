@@ -6,7 +6,6 @@ platforms = ["win-64", "osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
-start = " pre-commit install"
 
 [dependencies]
 typst = ">=0.13.1,<0.14"

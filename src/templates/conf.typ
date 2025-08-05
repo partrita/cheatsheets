@@ -1,7 +1,5 @@
-//#let sans_font = "KoPubWorldDotum"
-//#let serif_font = "KoPubWorldBatang"
-#let sans_font = "Noto Sans KR"
-#let serif_font = "Noto Serif KR"
+#let sans_font = "Pretendard"
+#let serif_font = "RIDIBatang"
 #let mono_font = "JBD2"
 
 #let template(title: "", header: "", footer: "", body) = {
@@ -10,7 +8,7 @@
 
   // 본문 글꼴 설정
   set text(
-    font: (serif_font, "Noto Serif KR", "Noto Serif CJK KR", "Arita Buri KR"),
+    font: (serif_font, "Noto Serif KR", "Noto Serif CJK KR"),
     weight: "regular",
     size: 0.7em,
     fill: rgb("#2e3440"),
@@ -24,7 +22,7 @@
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR", "Arita Dotum KR"), fill: rgb("#4c566a"))[
+      #text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
         Last updated: #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -34,7 +32,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR", "Arita Dotum KR"), fill: rgb("#4c566a"))[
+    footer: [#text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
       #footer
       #h(1fr)
       #context(counter(page).display(
@@ -54,7 +52,7 @@
   show heading: it => [
     #set align(left)
     #set text(
-        font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR", "Arita Dotum KR"),
+        font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"),
         weight: "bold",
         // 제목 레벨에 따라 크기와 색상 변경
         size: if it.level == 1 {
@@ -96,10 +94,10 @@
       // #line(length: 100%, stroke: 0.5pt)
       #block(
         text(
-          font: (sans_font, "Noto Sans CJK KR", "Noto Sans KR", "Arita Dotum KR"),
+          font: (sans_font, "Noto Sans CJK KR", "Noto Sans KR"),
           // stretch: 100%,
           fill: rgb("#3b4252"),
-          weight: "extrabold", size: 1.8em, title)
+          weight: "bold", size: 1.8em, title)
       )
       #line(length: 100%, stroke: 0.5pt + rgb("#3b4252"))
       #v(1em, weak: true)
