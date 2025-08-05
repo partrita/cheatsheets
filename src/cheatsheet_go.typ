@@ -685,10 +685,10 @@ package main
 import "fmt"
 
 func main() {
-    var a []int        //슬라이스 변수 선언
+    var a []int //슬라이스 변수 선언
     a = []int{1, 2, 3} //슬라이스에 리터럴값 지정
     a[1] = 10
-    fmt.Println(a)     // [1, 10, 3]출력
+    fmt.Println(a) // [1, 10, 3]출력
 }
 ```
 
@@ -743,7 +743,7 @@ fmt.Println(s) // 3, 4 출력
 func main() {
     s := []int{0, 1}
     // 하나 확장
-    s = append(s, 2)       // 0, 1, 2
+    s = append(s, 2) // 0, 1, 2
     // 복수 요소들 확장
     s = append(s, 3, 4, 5) // 0,1,2,3,4,5
     fmt.Println(s)

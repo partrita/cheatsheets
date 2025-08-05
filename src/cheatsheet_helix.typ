@@ -8,14 +8,7 @@
 
 = 1. 기본 개념
 
-Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 받은 '선택 우선(selection-first)' 모델을 사용합니다.
-
-- 전통적인 Vim: 동사-객체 (verb-object) 모델
-- Helix: 객체-동사 (object-verb) 모델
-- 먼저 선택(객체)을 하고, 그 다음 동작(동사)을 수행
-- 모든 변경 사항을 미리 볼 수 있어 더 안전한 편집
-- Tree-sitter를 통한 구문 하이라이팅
-- Language Server Protocol (LSP) 내장 지원
+Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 받은 '선택 우선(selection-first)' 모델을 사용합니다. 먼저 선택(객체)을 하고, 그 다음 동작(동사)을 수행, 모든 변경 사항을 미리 볼 수 있어 더 안전한 편집.
 
 = 2. 모드
 
@@ -391,9 +384,11 @@ Helix는 Vim과 유사한 텍스트 편집기이지만, Kakoune에서 영감을 
 = 18. 설정 및 커스터마이징
 
 == 설정 파일 위치
-- Linux/macOS: `~/.config/helix/config.toml`
-- Windows: `%APPDATA%\helix\config.toml`
-
+- Linux/macOS:
+  - `~/.config/helix/config.toml`
+- Windows:
+  - `%APPDATA%\helix\config.toml`
+  
 = 19. 유용한 팁
 
 == 효율적인 편집
