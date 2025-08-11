@@ -1,5 +1,7 @@
-#let sans_font = "Pretendard"
-#let serif_font = "RIDIBatang"
+// #let sans_font = "Pretendard"
+// #let serif_font = "RIDIBatang"
+#let sans_font = "Noto Sans KR"
+#let serif_font = "Noto Serif KR"
 #let mono_font = "JBD2"
 
 #let template(title: "", header: "", footer: "", body) = {
@@ -22,7 +24,7 @@
     margin: (
       left: 15mm, right: 15mm, top: 20mm, bottom:15mm),
     header: [
-      #text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
+      #text(0.9em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
         Last updated: #header
         #h(1fr)
         // #place(right, dy: -10pt,
@@ -32,7 +34,7 @@
     ],
     // numbering: "1/1",
     // number-align: center,
-    footer: [#text(0.8em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
+    footer: [#text(0.9em, font: (sans_font, "Noto Sans KR", "Noto Sans CJK KR"), fill: rgb("#4c566a"))[
       #footer
       #h(1fr)
       #context(counter(page).display(
