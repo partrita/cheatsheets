@@ -1,0 +1,388 @@
+#import "./templates/conf.typ": *
+
+#show: template.with(
+  title: "색상 테마 치트시트",
+  header: [#datetime.today().display()],
+  footer: "다양한 색상 테마 팔레트",
+)
+
+= Nord Theme
+
+Nord는 총 16가지의 엄선된 차분한 파스텔 색상으로 눈에 편안하면서도 다채로운 분위기를 제공합니다. 다양한 문법적 의미와 색상 효과를 제공하는 4가지 색상 팔레트로 구성되어 있어요. 각각의 색상 팔레트는 미니멀하고 플랫한 스타일로 명확하고 우아한 디자인을 가능하게 합니다. 각 색상은 `nord0`부터 `nord15`까지 번호가 매겨져 있고 이 문서는 UI 요소를 스타일링하는데 일련의 지침을 제공합니다.
+
+= Polar Night
+
+#let colors = (
+  ("nord0", "#2e3440"),
+  ("nord1", "#3b4252"),
+  ("nord2", "#434c5e"),
+  ("nord3", "#4c566a")
+)
+
+#grid(
+  columns: 4,
+  ..colors.map(((name, color)) => align(center)[
+     #box(square(fill: rgb(color)))
+     #linebreak()
+     #text(size: 7pt, font: "Noto Sans KR")[#name]
+  ])
+)
+
+Polar Night는 Light theme에서는 텍스트 색상, Dark theme에서는 배경과 같은 기본 요소에 사용되는 4가지 어두운 색상.
+
+== nord0
+
+`nord0`는 Polar Night 팔레트의 시작 색상.
+
+- Dark theme에서 배경색이나 일부 영역의 색상으로 사용해요. 강조에는 사용하지 않습니다.
+- Light theme의 경우 일반 텍스트, 텍스트 편집기 캐럿, 중괄호 및 대괄호와 같은 예약된 구문 문자 등과 같은 기본 요소에 사용 합니다. 테두리와 같은 수동적인 UI 요소에는 거의 사용하지 않고, 더 높은 대비와 더 나은 시각적 구별을 위해 큰 구성 요소 간에 사용할 수도 있어요.
+
+== nord1
+
+`nord0` 기반의 더 밝은 음영 색상.
+
+- Dark theme의 경우 아래와 같이 돌출되거나 더 눈에 띄는 UI 요소에 사용해요.
+  + 상태 표시줄 및 텍스트 편집기의 여백
+  + 패널, 모달 및 알림 또는 자동 완성 같은 떠다니는 팝업
+  + 버튼, 텍스트/선택 필드 또는 체크박스 같은 사용자 상호 작용/폼 구성 요소
+  + 테두리 또는 다른 구성 요소 간의 그림자와 같은 요소
+- Light theme의 경우 많은 시각적 주의가 필요 없는 미묘하고 눈에 띄지 않는 UI 텍스트 요소에 사용해요. 또는 버튼 위에 마우스를 올리거나 활성화되거나 초점이 맞춰질 때 텍스트 색상이 더 밝아지는 것과 같은 상태 애니메이션에 사용해요.
+
+== nord2
+
+`nord0`의 더 밝은 음영 색상.
+
+- Dark theme의 경우 현재 활성 텍스트 편집기 줄의 색상과 선택 및 텍스트 강조 색상등에 사용해요.
+- Light theme에서는 `nord1`과 동일한 대상 요소에 대한 더 밝은 변형으로 사용할 수 있어요.
+
+== nord3
+
+`nord0` 기반의 가장 밝은 음영 색상.
+
+- Dark theme의 경우 들여쓰기 및 줄 바꿈 가이드 마커와 같은 UI 요소에 사용해요. 코드 코드의 맥락에서는 주석 및 보이지 않거나 인쇄할 수 없는 문자에 사용해요.
+- Light theme의 경우 `nord1` 및 `nord2`와 같은 더 어두운 변형과 함께 많은 시각적 주의가 필요 없는 눈에 띄지 않는 UI 텍스트 요소에 사용해요.
+
+= Snow Storm
+
+#let colors = (
+  ("nord4", "#d8dee9"),
+  ("nord5", "#e5e9f0"),
+  ("nord6", "#eceff4")
+)
+
+#grid(
+  columns: 4,
+  ..colors.map(((name, color)) => align(center)[
+     #box(square(fill: rgb(color)))
+     #linebreak()
+     #text(size: 7pt, font: "Noto Sans KR")[#name]
+  ])
+)
+
+Snow Storm은 Dark theme에서 텍스트 색상 또는 기본 UI 요소에 일반적으로 사용되는 3가지 밝은 색상. 이 팔레트는 다음 두 가지 다른 음영 분위기 스타일에 사용해요.
+
+- 밝음에서 어두움(bright to dark): 이것은 `nord6`을 기본 색상으로 사용하고 `nord5`와 `nord4`로 다른 UI 요소를 강조하는 스타일입니다.
+- 어두움에서 밝음(semi-light): 이 스타일은 `nord4`를 기본 색상으로 사용하고 `nord5`와 `nord6`로 다른 UI 요소를 강조합니다.
+
+== nord4
+
+Snow Storm 팔레트의 시작 색상.
+
+- Dark theme의 경우 텍스트 편집기 커서와 같은 UI 요소에 사용해요. 코드에서는 변수, 상수, 속성 및 필드의 텍스트 색상으로 사용해요.
+- Light theme의 경우 다음과 같은 UI 요소에 사용해요.
+  - 상태 표시줄 및 텍스트 편집기 여백
+  - 패널, 모달 및 알림 또는 자동 완성 같은 떠다니는 팝업
+  - 버튼, 텍스트/선택 필드 또는 체크박스 같은 사용자 상호 작용/폼 구성 요소
+  - 테두리 또는 다른 구성 요소 간의 그림자와 같은 더 눈에 띄지 않고 수동적인 요소, 코드에는 전혀 사용하지 않습니다.
+
+== nord5
+
+`nord4`의 더 밝은 음영 색상.
+
+- Dark theme의 경우 많은 시각적 주의가 필요 없는 미묘하고 눈에 띄지 않는 UI 텍스트 요소에 사용해요. 다른 사용 사례로는 버튼 위에 마우스를 올리거나 활성화되거나 초점이 맞춰질 때 텍스트 색상이 더 밝아지는 것과 같은 상태 애니메이션도 있어요.
+- Light theme의 경우 현재 활성 텍스트 편집기 줄의 색상과 선택 및 텍스트 강조 색상에 사용해요.
+
+== nord6
+
+`nord4` 기반의 가장 밝은 음영 색상.
+
+- Dark theme의 경우  시각적 주의가 필요한 돌출된 UI 텍스트 요소에 사용해요. 코드의 맥락에서는 일반 텍스트 및 중괄호 및 대괄호와 같은 구문 문자의 텍스트 색상으로 사용해요.
+- Light theme의 경우 배경색이나 영역의 색상으로 사용되며, 코드에는 전혀 사용하지 않습니다.
+
+= Frost
+
+#let colors = (
+  ("nord7", "#8fbcbb"),
+  ("nord8", "#88c0d0"),
+  ("nord9", "#81a1c1"),
+  ("nord10", "#5e81ac")
+)
+
+#grid(
+  columns: 4,
+  ..colors.map(((name, color)) => align(center)[
+     #box(square(fill: rgb(color)))
+     #linebreak()
+     #text(size: 7pt, font: "Noto Sans KR")[#name]
+  ])
+)
+
+Frost는 Nord의 핵심 색상 팔레트입니다. 이 팔레트는 주로 UI의 기본 요소와 텍스트를 강조하는 데 사용되는 네 가지 푸르스름한 색상으로 구성되어 있어요. 이 색상들은 다크 테마와 라이트 테마 모두에서 동일하게 적용됩니다.
+
+== nord7
+
+얼어붙은 극지방의 물처럼 차분하지만 눈에 띄는 색상.
+
+- 기본 강조 색상인 `nord8` 외에, 특히 눈에 띄고 시선을 끌어야 하는 UI 요소에 사용됩니다.
+- 코드에서는 클래스, 타입, 그리고 기본적인 요소들을 강조할 때 사용됩니다.
+
+== nord8
+
+순수하고 맑은 얼음처럼 밝고 빛나는 기본 강조 색상.
+
+- 가장 많은 시각적 주의가 필요한 UI 요소에 사용됩니다.
+- 코드에서는 함수, 메서드, 그리고 루틴의 선언, 호출, 실행 문을 강조할 때 사용됩니다.
+
+== nord9
+
+북극해처럼 어둡고 채도가 낮은 색상.
+
+- 시각적 주의가 필요한 보조 UI 요소에 사용됩니다.
+- 코드에서는 언어별 키워드, 구문 관련 키워드, 예약된 키워드뿐만 아니라 지원 문자, 연산자, 태그, 단위, 세미콜론, 점, 쉼표 같은 구두점을 강조할 때 사용됩니다.
+
+== nord10
+
+깊은 북극해처럼 어둡고 강렬한 색상.
+
+- 기본 요소보다 시각적으로는 덜 중요하지만 그래도 사용자의 주의를 끌 필요가 있는 UI 요소에 사용됩니다.
+- 코드에서는 주석이나 보조적인 설정 문장을 강조할 때 사용됩니다.
+
+== HEX 코드, RGB 코드
+
+Nord 색상은 HEX 코드와 RGB 코드로 표현할 수 있어요. 아래는 각 색상의 HEX 코드와 RGB 코드입니다.
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [RGB Code], [Hex Code],
+  ),
+  cell(fill: rgb("#2e3440"), []), [Nord0], [`46,52,64`], [`#2e3440`],
+  cell(fill: rgb("#3b4252"), []), [Nord1], [`59,66,82`], [`#3b4252`],
+  cell(fill: rgb("#434c5e"), []), [Nord2], [`67,76,94`], [`#434c5e`],
+  cell(fill: rgb("#4c566a"), []), [Nord3], [`76,86,106`], [`#4c566a`],
+  cell(fill: rgb("#d8dee9"), []), [Nord4], [`216,222,233`], [`#d8dee9`],
+  cell(fill: rgb("#e5e9f0"), []), [Nord5], [`229,233,240`], [`#e5e9f0`],
+  cell(fill: rgb("#eceff4"), []), [Nord6], [`236,239,244`], [`#eceff4`],
+  cell(fill: rgb("#8fbcbb"), []), [Nord7], [`143,188,187`], [`#8fbcbb`],
+  cell(fill: rgb("#88c0d0"), []), [Nord8], [`136,192,208`], [`#88c0d0`],
+  cell(fill: rgb("#81a1c1"), []), [Nord9], [`129,161,193`], [`#81a1c1`],
+  cell(fill: rgb("#5e81ac"), []), [Nord10], [`94,129,172`], [`#5e81ac`],
+  cell(fill: rgb("#bf616a"), []), [Nord11], [`191,97,106`], [`#bf616a`],
+  cell(fill: rgb("#d08770"), []), [Nord12], [`208,135,112`], [`#d08770`],
+  cell(fill: rgb("#ebcb8b"), []), [Nord13], [`235,203,139`], [`#ebcb8b`],
+  cell(fill: rgb("#a3be8c"), []), [Nord14], [`163,190,140`], [`#a3be8c`],
+  cell(fill: rgb("#b48ead"), []), [Nord15], [`180,142,173`], [`#b48ead`],
+)
+
+= Catppuccin Theme
+
+Catppuccin은 부드러운 파스텔 색상으로 구성된 커뮤니티 주도 테마입니다. 눈의 피로를 줄이고 개발자의 생산성을 높이는 데 중점을 둡니다. Latte, Frappe, Macchiato, Mocha의 네 가지 "맛"(flavors)을 제공하며, 각각 고유한 분위기를 가집니다. 이 치트시트에서는 가장 인기 있는 Mocha 팔레트를 중점적으로 다룹니다.
+
+= Mocha Palette
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#f5e0dc"), []), [Rosewater], [`#f5e0dc`], [`245,224,220`],
+  cell(fill: rgb("#f2cdcd"), []), [Flamingo], [`#f2cdcd`], [`242,205,205`],
+  cell(fill: rgb("#f5c2e7"), []), [Pink], [`#f5c2e7`], [`245,194,231`],
+  cell(fill: rgb("#cba6f7"), []), [Mauve], [`#cba6f7`], [`203,166,247`],
+  cell(fill: rgb("#f38ba8"), []), [Red], [`#f38ba8`], [`243,139,168`],
+  cell(fill: rgb("#eba0ac"), []), [Maroon], [`#eba0ac`], [`235,160,172`],
+  cell(fill: rgb("#fab387"), []), [Peach], [`#fab387`], [`250,179,135`],
+  cell(fill: rgb("#f9e2af"), []), [Yellow], [`#f9e2af`], [`249,226,175`],
+  cell(fill: rgb("#a6e3a1"), []), [Green], [`#a6e3a1`], [`166,227,161`],
+  cell(fill: rgb("#94e2d5"), []), [Teal], [`#94e2d5`], [`148,226,213`],
+  cell(fill: rgb("#89dceb"), []), [Sky], [`#89dceb`], [`137,220,235`],
+  cell(fill: rgb("#74c7ec"), []), [Sapphire], [`#74c7ec`], [`116,199,236`],
+  cell(fill: rgb("#89b4fa"), []), [Blue], [`#89b4fa`], [`137,180,250`],
+  cell(fill: rgb("#b4befe"), []), [Lavender], [`#b4befe`], [`180,191,254`],
+  cell(fill: rgb("#cdd6f4"), []), [Text], [`#cdd6f4`], [`205,214,244`],
+  cell(fill: rgb("#bac2de"), []), [Subtext1], [`#bac2de`], [`186,194,222`],
+  cell(fill: rgb("#a6adc8"), []), [Subtext0], [`#a6adc8`], [`166,173,200`],
+  cell(fill: rgb("#9399b2"), []), [Overlay2], [`#9399b2`], [`147,153,178`],
+  cell(fill: rgb("#7f849c"), []), [Overlay1], [`#7f849c`], [`127,132,156`],
+  cell(fill: rgb("#6c7086"), []), [Overlay0], [`#6c7086`], [`108,112,134`],
+  cell(fill: rgb("#585b70"), []), [Surface2], [`#585b70`], [`88,91,112`],
+  cell(fill: rgb("#45475a"), []), [Surface1], [`#45475a`], [`69,71,90`],
+  cell(fill: rgb("#313244"), []), [Surface0], [`#313244`], [`49,50,68`],
+  cell(fill: rgb("#1e1e2e"), []), [Base], [`#1e1e2e`], [`30,30,46`],
+  cell(fill: rgb("#181825"), []), [Mantle], [`#181825`], [`24,24,37`],
+  cell(fill: rgb("#11111b"), []), [Crust], [`#11111b`], [`17,17,27`],
+)
+
+= Latte Palette
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#dc8a78"), []), [Rosewater], [`#dc8a78`], [`220,138,120`],
+  cell(fill: rgb("#dd7878"), []), [Flamingo], [`#dd7878`], [`221,120,120`],
+  cell(fill: rgb("#ea76cb"), []), [Pink], [`#ea76cb`], [`234,118,203`],
+  cell(fill: rgb("#8839ef"), []), [Mauve], [`#8839ef`], [`136,57,239`],
+  cell(fill: rgb("#d20f39"), []), [Red], [`#d20f39`], [`210,15,57`],
+  cell(fill: rgb("#e64553"), []), [Maroon], [`#e64553`], [`230,69,83`],
+  cell(fill: rgb("#fe640b"), []), [Peach], [`#fe640b`], [`254,100,11`],
+  cell(fill: rgb("#df8e1d"), []), [Yellow], [`#df8e1d`], [`223,142,29`],
+  cell(fill: rgb("#40a02b"), []), [Green], [`#40a02b`], [`64,160,43`],
+  cell(fill: rgb("#179299"), []), [Teal], [`#179299`], [`23,146,153`],
+  cell(fill: rgb("#04a5e5"), []), [Sky], [`#04a5e5`], [`4,165,229`],
+  cell(fill: rgb("#209fb5"), []), [Sapphire], [`#209fb5`], [`32,159,181`],
+  cell(fill: rgb("#1e66f5"), []), [Blue], [`#1e66f5`], [`30,102,245`],
+  cell(fill: rgb("#7287fd"), []), [Lavender], [`#7287fd`], [`114,135,253`],
+  cell(fill: rgb("#4c4f69"), []), [Text], [`#4c4f69`], [`76,79,105`],
+  cell(fill: rgb("#5c5f77"), []), [Subtext1], [`#5c5f77`], [`92,95,119`],
+  cell(fill: rgb("#6c6f85"), []), [Subtext0], [`#6c6f85`], [`108,111,133`],
+  cell(fill: rgb("#7c7f93"), []), [Overlay2], [`#7c7f93`], [`124,127,147`],
+  cell(fill: rgb("#8c8fa1"), []), [Overlay1], [`#8c8fa1`], [`140,143,161`],
+  cell(fill: rgb("#9ca0b0"), []), [Overlay0], [`#9ca0b0`], [`156,160,176`],
+  cell(fill: rgb("#acb0be"), []), [Surface2], [`#acb0be`], [`172,176,190`],
+  cell(fill: rgb("#bcc0cc"), []), [Surface1], [`#bcc0cc`], [`188,192,204`],
+  cell(fill: rgb("#ccd0da"), []), [Surface0], [`#ccd0da`], [`204,208,218`],
+  cell(fill: rgb("#eff1f5"), []), [Base], [`#eff1f5`], [`239,241,245`],
+  cell(fill: rgb("#e6e9ef"), []), [Mantle], [`#e6e9ef`], [`230,233,239`],
+  cell(fill: rgb("#dce0ee"), []), [Crust], [`#dce0ee`], [`220,224,238`],
+)
+
+= Frappe Palette
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#f2d5cf"), []), [Rosewater], [`#f2d5cf`], [`242,213,207`],
+  cell(fill: rgb("#eebebe"), []), [Flamingo], [`#eebebe`], [`238,190,190`],
+  cell(fill: rgb("#f4b8e4"), []), [Pink], [`#f4b8e4`], [`244,184,228`],
+  cell(fill: rgb("#ca9ee6"), []), [Mauve], [`#ca9ee6`], [`202,158,230`],
+  cell(fill: rgb("#e78284"), []), [Red], [`#e78284`], [`231,130,132`],
+  cell(fill: rgb("#ea999c"), []), [Maroon], [`#ea999c`], [`234,153,156`],
+  cell(fill: rgb("#ef9f76"), []), [Peach], [`#ef9f76`], [`239,159,118`],
+  cell(fill: rgb("#e5c890"), []), [Yellow], [`#e5c890`], [`229,200,144`],
+  cell(fill: rgb("#a6d189"), []), [Green], [`#a6d189`], [`166,209,137`],
+  cell(fill: rgb("#81c8be"), []), [Teal], [`#81c8be`], [`129,200,190`],
+  cell(fill: rgb("#99d1db"), []), [Sky], [`#99d1db`], [`153,209,219`],
+  cell(fill: rgb("#85c1dc"), []), [Sapphire], [`#85c1dc`], [`133,193,220`],
+  cell(fill: rgb("#8caaee"), []), [Blue], [`#8caaee`], [`140,170,238`],
+  cell(fill: rgb("#babbf1"), []), [Lavender], [`#babbf1`], [`186,187,241`],
+  cell(fill: rgb("#c6d0f5"), []), [Text], [`#c6d0f5`], [`198,208,245`],
+  cell(fill: rgb("#b5bfe2"), []), [Subtext1], [`#b5bfe2`], [`181,191,226`],
+  cell(fill: rgb("#a5adce"), []), [Subtext0], [`#a5adce`], [`165,173,206`],
+  cell(fill: rgb("#949cbb"), []), [Overlay2], [`#949cbb`], [`148,156,187`],
+  cell(fill: rgb("#838ba7"), []), [Overlay1], [`#838ba7`], [`131,139,167`],
+  cell(fill: rgb("#737994"), []), [Overlay0], [`#737994`], [`115,121,148`],
+  cell(fill: rgb("#626880"), []), [Surface2], [`#626880`], [`98,104,128`],
+  cell(fill: rgb("#51576d"), []), [Surface1], [`#51576d`], [`81,87,109`],
+  cell(fill: rgb("#414559"), []), [Surface0], [`#414559`], [`65,69,89`],
+  cell(fill: rgb("#303446"), []), [Base], [`#303446`], [`48,52,70`],
+  cell(fill: rgb("#292c3c"), []), [Mantle], [`#292c3c`], [`41,44,60`],
+  cell(fill: rgb("#232634"), []), [Crust], [`#232634`], [`35,38,52`],
+)
+
+= Macchiato Palette
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#f4dbd6"), []), [Rosewater], [`#f4dbd6`], [`244,219,214`],
+  cell(fill: rgb("#f0c6c6"), []), [Flamingo], [`#f0c6c6`], [`240,198,198`],
+  cell(fill: rgb("#f5bde6"), []), [Pink], [`#f5bde6`], [`245,189,230`],
+  cell(fill: rgb("#c6a0f6"), []), [Mauve], [`#c6a0f6`], [`198,160,246`],
+  cell(fill: rgb("#ed8796"), []), [Red], [`#ed8796`], [`237,135,150`],
+  cell(fill: rgb("#ee99a0"), []), [Maroon], [`#ee99a0`], [`238,153,160`],
+  cell(fill: rgb("#f5a97f"), []), [Peach], [`#f5a97f`], [`245,169,127`],
+  cell(fill: rgb("#eed49f"), []), [Yellow], [`#eed49f`], [`238,212,159`],
+  cell(fill: rgb("#a6da95"), []), [Green], [`#a6da95`], [`166,218,149`],
+  cell(fill: rgb("#8bd5ca"), []), [Teal], [`#8bd5ca`], [`139,213,202`],
+  cell(fill: rgb("#91d7e3"), []), [Sky], [`#91d7e3`], [`145,215,227`],
+  cell(fill: rgb("#7dc4e4"), []), [Sapphire], [`#7dc4e4`], [`125,196,228`],
+  cell(fill: rgb("#8aadf4"), []), [Blue], [`#8aadf4`], [`138,173,244`],
+  cell(fill: rgb("#b7bdf8"), []), [Lavender], [`#b7bdf8`], [`183,189,248`],
+  cell(fill: rgb("#cad3f5"), []), [Text], [`#cad3f5`], [`202,211,245`],
+  cell(fill: rgb("#b8c0e0"), []), [Subtext1], [`#b8c0e0`], [`184,192,224`],
+  cell(fill: rgb("#a5adcb"), []), [Subtext0], [`#a5adcb`], [`165,173,203`],
+  cell(fill: rgb("#939ab7"), []), [Overlay2], [`#939ab7`], [`147,154,183`],
+  cell(fill: rgb("#8087a2"), []), [Overlay1], [`#8087a2`], [`128,135,162`],
+  cell(fill: rgb("#6e738d"), []), [Overlay0], [`#6e738d`], [`110,115,141`],
+  cell(fill: rgb("#5b6078"), []), [Surface2], [`#5b6078`], [`91,96,120`],
+  cell(fill: rgb("#494d64"), []), [Surface1], [`#494d64`], [`73,77,100`],
+  cell(fill: rgb("#363a4f"), []), [Surface0], [`#363a4f`], [`54,58,79`],
+  cell(fill: rgb("#24273a"), []), [Base], [`#24273a`], [`36,39,58`],
+  cell(fill: rgb("#1e202e"), []), [Mantle], [`#1e202e`], [`30,32,46`],
+  cell(fill: rgb("#181926"), []), [Crust], [`#181926`], [`24,25,38`],
+)
+
+= Dracula Theme
+
+Dracula는 어둡고 차분한 색상 팔레트를 특징으로 하는 인기 있는 테마입니다. 개발자의 눈을 편안하게 하면서도 코드 가독성을 높이는 데 중점을 둡니다. 다양한 에디터와 터미널에서 일관된 경험을 제공합니다.
+
+= 색상 팔레트
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#282a36"), []), [Background], [`#282a36`], [`40,42,54`],
+  cell(fill: rgb("#44475a"), []), [Current Line/Selection], [`#44475a`], [`68,71,90`],
+  cell(fill: rgb("#f8f8f2"), []), [Foreground], [`#f8f8f2`], [`248,248,242`],
+  cell(fill: rgb("#6272a4"), []), [Comment], [`#6272a4`], [`98,114,164`],
+  cell(fill: rgb("#8be9fd"), []), [Cyan], [`#8be9fd`], [`139,233,253`],
+  cell(fill: rgb("#50fa7b"), []), [Green], [`#50fa7b`], [`80,250,123`],
+  cell(fill: rgb("#ffb86c"), []), [Orange], [`#ffb86c`], [`255,184,108`],
+  cell(fill: rgb("#ff79c6"), []), [Pink], [`#ff79c6`], [`255,121,198`],
+  cell(fill: rgb("#bd93f9"), []), [Purple], [`#bd93f9`], [`189,147,249`],
+  cell(fill: rgb("#ff5555"), []), [Red], [`#ff5555`], [`255,85,85`],
+  cell(fill: rgb("#f1fa8c"), []), [Yellow], [`#f1fa8c`], [`241,250,140`],
+)
+
+= Atom One Light Theme
+
+Atom One Light는 Atom 에디터의 기본 라이트 테마에서 영감을 받은 인기 있는 라이트 테마로, 균형 잡힌 색상과 좋은 대비로 알려져 있습니다. 다음은 이 테마의 주요 색상 팔레트입니다.
+
+#import table: cell, header
+
+#bordered-table(
+  columns: 4,
+  table.header(
+    [Color], [Name], [Hex Code], [RGB Code]
+  ),
+  cell(fill: rgb("#383a42"), []), [Foreground], [`#383a42`], [`56,58,66`],
+  cell(fill: rgb("#fafafa"), []), [Background], [`#fafafa`], [`250,250,250`],
+  cell(fill: rgb("#9d9d9f"), []), [Gutter], [`#9d9d9f`], [`157,157,159`],
+  cell(fill: rgb("#dcdcdf"), []), [Guide], [`#dcdcdf`], [`220,220,223`],
+  cell(fill: rgb("#e45649"), []), [Red], [`#e45649`], [`228,86,73`],
+  cell(fill: rgb("#50a14f"), []), [Green], [`#50a14f`], [`80,161,79`],
+  cell(fill: rgb("#c18401"), []), [Yellow], [`#c18401`], [`193,132,1`],
+  cell(fill: rgb("#4078f2"), []), [Blue], [`#4078f2`], [`64,120,242`],
+  cell(fill: rgb("#a626a4"), []), [Purple], [`#a626a4`], [`166,38,164`],
+  cell(fill: rgb("#0184bc"), []), [Cyan], [`#0184bc`], [`1,132,188`],
+)

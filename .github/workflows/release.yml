@@ -1,4 +1,4 @@
-name: 컴파일 및 이력서 릴리스 # 워크플로우 이름 명확화
+name: 컴파일 및 릴리스 # 워크플로우 이름 명확화
 
 on:
   push:
@@ -125,7 +125,7 @@ jobs:
           # 릴리스 이름
           name: ${{ github.ref_name }} v${{ github.run_number }} (${{ steps.release_datetime.outputs.tag_datetime }})
           # 릴리스 본문
-          body: 커밋 ${{ github.sha }}에 대한 PDF 이력서 자동 릴리스.
+          body: 커밋 ${{ github.sha }}에 대한 PDF 자동 릴리스.
           # 동적으로 준비된 릴리스 첨부 파일 목록 사용
           files: ${{ steps.prepare_release_files.outputs.release_files }}
         env:
