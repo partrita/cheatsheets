@@ -99,7 +99,6 @@
   - `tar -czvf archive.tar.gz /path/to/dir`: `gzip`으로 압축하며 아카이브 생성.
   - `tar -cjvf archive.tar.bz2 /path/to/dir`: `bzip2`로 압축하며 아카이브 생성.
   - `tar -cJvf archive.tar.xz /path/to/dir`: `xz`로 압축하며 아카이브 생성.
-  - ---
   - `tar -xvf archive.tar`: `.tar` 아카이브 풀기.
   - `tar -xzvf archive.tar.gz`: `gzip`으로 압축된 아카이브 풀기.
   - `tar -xjvf archive.tar.bz2`: `bzip2`로 압축된 아카이브 풀기.
