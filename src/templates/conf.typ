@@ -58,13 +58,11 @@
         weight: "bold",
         // 제목 레벨에 따라 크기와 색상 변경
         size: if it.level == 1 {
-          1.3em // 제목 1 크기
+          1.1em // 제목 1 크기
         } else if it.level == 2 {
-          1.2em // 제목 2 크기
-        } else if it.level == 3 {
-          1.1em // 제목 3 크기 (기본 크기)
-        } else {
-          1.0em // 그 외 제목 크기 (기본 크기)
+          1.0em // 제목 2 크기
+       } else {
+          0.9em // 그 외 제목 크기 (기본 크기)
         },
         fill: if it.level == 1 {
         rgb("#8fbcbb") // 제목 1 색상
