@@ -38,7 +38,6 @@ title: "Cheatsheets Collection"
 format:
   html:
     toc: true
-    theme: cosmo
 ---
 
 Welcome to the collection of cheatsheets. Below you can find various cheatsheets available for download.

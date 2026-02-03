@@ -14,6 +14,6 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: default
     css: styles.css
     copy-code: true
