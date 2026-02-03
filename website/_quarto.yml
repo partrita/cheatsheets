@@ -1,0 +1,19 @@
+project:
+  type: website
+  output-dir: ../site_output
+
+website:
+  title: "Cheatsheets"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+    right:
+      - icon: github
+        href: https://github.com/partrita/cheatsheets
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    copy-code: true

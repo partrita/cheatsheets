@@ -45,17 +45,32 @@ Typst 문서를 직접 빌드하여 PDF 또는 다른 형식으로 변환할 수
     pixi install
     ```
     (만약 pixi를 사용하지 않고 전역으로 Typst를 설치하고 싶다면, Typst 공식 설치 가이드를 참고하세요.)
-2.  설치가 완료되면, 원하는 `.typ` 파일을 Typst 컴파일러로 PDF 등 다양한 형식으로 변환할 수 있습니다.
+2.  설치가 완료되면, 다음 명령어로 모든 `.typ` 파일을 일괄 빌드할 수 있습니다.
     ```bash
-    pixi run typst compile --font-path "src/fonts" src/cheatsheet_go.typ
+    pixi run build
     ```
-    위 명령은 `src/cheatsheet_go.typ` 파일을 `cheatsheet_go.pdf`로 컴파일합니다. 필요에 따라 출력 파일명과 경로를 조정할 수 있습니다.
+    이 명령은 `dist/` 디렉토리에 모든 치트시트의 PDF 버전을 생성합니다.
 
 ## 전체 Typst 문서 컴파일 오류 확인
 
 ```bash
-pixi run bash scripts/check_typst_compile.sh
+pixi run check
 ```
+
+## 웹사이트 생성 및 미리보기
+
+이 프로젝트는 Quarto를 사용하여 웹사이트를 생성합니다. 로컬에서 웹사이트를 미리 확인하려면 다음 명령어를 사용하세요:
+
+```bash
+pixi run site-preview
+```
+
+웹사이트를 정적 파일로 생성하려면:
+
+```bash
+pixi run site-build
+```
+이 결과물은 `site_output/` 디렉토리에 생성됩니다.
 
 ## 🤝 기여 방법
 

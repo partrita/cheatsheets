@@ -122,3 +122,505 @@
 - `Rc<T>`: 다중 소유권을 가능하게 하는 참조 카운팅 스마트 포인터. (단일 스레드)
 - `Arc<T>`: `Rc<T>`의 원자적(스레드 안전) 버전.
 - `RefCell<T>`/`Mutex<T>`: 내부 가변성(interior mutability) 패턴을 제공. 런타임에 빌림 규칙을 검사.
+
+= 11. 고급 Rust 개념
+
+== 제네릭과 트레잇 바운드 심화
+```rust
+// 트레잇 바운드
+fn process<T: Clone + Debug>(item: T) -> T {
+    println!("{:?}", item);
+    item.clone()
+}
+
+// where 절 사용
+fn complex_function<T, U>(t: T, u: U) -> String
+where
+    T: Display + Clone,
+    U: Debug + PartialEq,
+{
+    format!("{} {:?}", t, u)
+}
+
+// 트레잇 객체
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle { radius: f64 }
+struct Rectangle { width: f64, height: f64 }
+
+impl Drawable for Circle {
+    fn draw(&self) {
+        println!("Drawing circle with radius {}", self.radius);
+    }
+}
+
+impl Drawable for Rectangle {
+    fn draw(&self) {
+        println!("Drawing rectangle {}x{}", self.width, self.height);
+    }
+}
+
+// 트레잇 객체 사용
+fn draw_shapes(shapes: &[Box<dyn Drawable>]) {
+    for shape in shapes {
+        shape.draw();
+    }
+}
+```
+
+== 라이프타임 심화
+```rust
+// 명시적 라이프타임
+struct ImportantExcerpt<'a> {
+    part: &'a str,
+}
+
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+    
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+
+// 라이프타임 엘리전 규칙
+fn first_word(s: &str) -> &str {
+    let bytes = s.as_bytes();
+    for (i, &item) in bytes.iter().enumerate() {
+        if item == b' ' {
+            return &s[0..i];
+        }
+    }
+    &s[..]
+}
+
+// 고차 라이프타임 바운드
+fn longest_with_an_announcement<'a, T>(
+    x: &'a str,
+    y: &'a str,
+    ann: T,
+) -> &'a str
+where
+    T: std::fmt::Display,
+{
+    println!("Announcement! {}", ann);
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
+}
+```
+
+== 매크로 시스템
+```rust
+// 선언적 매크로
+macro_rules! vec {
+    ( $( $x:expr ),* ) => {
+        {
+            let mut temp_vec = Vec::new();
+            $(
+                temp_vec.push($x);
+            )*
+            temp_vec
+        }
+    };
+}
+
+// 사용: let v = vec![1, 2, 3];
+
+// 프로시저 매크로 (derive 매크로 예제)
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+#[proc_macro_derive(HelloMacro)]
+pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
+    let ast = parse_macro_input!(input as DeriveInput);
+    let name = &ast.ident;
+    
+    let gen = quote! {
+        impl HelloMacro for #name {
+            fn hello_macro() {
+                println!("Hello, Macro! My name is {}!", stringify!(#name));
+            }
+        }
+    };
+    gen.into()
+}
+```
+
+== 비동기 프로그래밍 (async/await)
+```rust
+use tokio::time::{sleep, Duration};
+
+// 비동기 함수
+async fn fetch_data() -> String {
+    sleep(Duration::from_secs(1)).await;
+    "Data fetched".to_string()
+}
+
+async fn process_data(data: String) -> String {
+    sleep(Duration::from_secs(1)).await;
+    format!("Processed: {}", data)
+}
+
+// 비동기 함수 조합
+async fn fetch_and_process() -> String {
+    let data = fetch_data().await;
+    process_data(data).await
+}
+
+// 병렬 실행
+async fn parallel_execution() -> (String, String) {
+    let (result1, result2) = tokio::join!(
+        fetch_data(),
+        fetch_data()
+    );
+    (result1, result2)
+}
+
+// 비동기 스트림
+use futures::stream::{self, StreamExt};
+
+async fn process_stream() {
+    let mut stream = stream::iter(1..=5)
+        .map(|i| async move { i * 2 })
+        .buffer_unordered(3);
+    
+    while let Some(result) = stream.next().await {
+        println!("Result: {}", result);
+    }
+}
+```
+
+== 에러 처리 고급 패턴
+```rust
+use std::error::Error;
+use std::fmt;
+
+// 커스텀 에러 타입
+#[derive(Debug)]
+enum MyError {
+    Io(std::io::Error),
+    Parse(std::num::ParseIntError),
+    Custom(String),
+}
+
+impl fmt::Display for MyError {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            MyError::Io(err) => write!(f, "IO error: {}", err),
+            MyError::Parse(err) => write!(f, "Parse error: {}", err),
+            MyError::Custom(msg) => write!(f, "Custom error: {}", msg),
+        }
+    }
+}
+
+impl Error for MyError {}
+
+impl From<std::io::Error> for MyError {
+    fn from(err: std::io::Error) -> MyError {
+        MyError::Io(err)
+    }
+}
+
+impl From<std::num::ParseIntError> for MyError {
+    fn from(err: std::num::ParseIntError) -> MyError {
+        MyError::Parse(err)
+    }
+}
+
+// 에러 체이닝
+fn read_and_parse_file(filename: &str) -> Result<i32, MyError> {
+    let contents = std::fs::read_to_string(filename)?;
+    let number = contents.trim().parse::<i32>()?;
+    Ok(number)
+}
+
+// anyhow 크레이트 사용
+use anyhow::{Context, Result};
+
+fn read_config() -> Result<String> {
+    let config = std::fs::read_to_string("config.toml")
+        .context("Failed to read config file")?;
+    Ok(config)
+}
+```
+
+== 함수형 프로그래밍 패턴
+```rust
+// 클로저와 고차 함수
+fn apply_twice<F>(f: F, x: i32) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(f(x))
+}
+
+// 함수 조합
+fn compose<F, G>(f: F, g: G) -> impl Fn(i32) -> i32
+where
+    F: Fn(i32) -> i32,
+    G: Fn(i32) -> i32,
+{
+    move |x| f(g(x))
+}
+
+// 이터레이터 체이닝
+fn process_numbers(numbers: Vec<i32>) -> Vec<i32> {
+    numbers
+        .into_iter()
+        .filter(|&x| x > 0)
+        .map(|x| x * 2)
+        .collect()
+}
+
+// 커링
+fn add(x: i32) -> impl Fn(i32) -> i32 {
+    move |y| x + y
+}
+
+// 사용: let add_five = add(5); let result = add_five(3);
+```
+
+== 메모리 안전성과 성능
+
+=== Zero-Cost Abstractions
+```rust
+// 컴파일 타임에 최적화되는 추상화
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle { radius: f64 }
+struct Rectangle { width: f64, height: f64 }
+
+impl Drawable for Circle {
+    fn draw(&self) {
+        println!("Circle: {}", self.radius);
+    }
+}
+
+impl Drawable for Rectangle {
+    fn draw(&self) {
+        println!("Rectangle: {}x{}", self.width, self.height);
+    }
+}
+
+// 모노모피즘: 각 타입에 대해 별도의 함수 생성
+fn draw_all<T: Drawable>(items: &[T]) {
+    for item in items {
+        item.draw();
+    }
+}
+```
+
+=== 메모리 풀 패턴
+```rust
+use std::collections::VecDeque;
+
+struct MemoryPool<T> {
+    pool: VecDeque<T>,
+    factory: fn() -> T,
+}
+
+impl<T> MemoryPool<T> {
+    fn new(factory: fn() -> T) -> Self {
+        Self {
+            pool: VecDeque::new(),
+            factory,
+        }
+    }
+    
+    fn get(&mut self) -> T {
+        self.pool.pop_front().unwrap_or_else(self.factory)
+    }
+    
+    fn return_item(&mut self, item: T) {
+        self.pool.push_back(item);
+    }
+}
+```
+
+== 웹 개발 (Warp 웹 프레임워크)
+```rust
+use warp::Filter;
+use std::collections::HashMap;
+use serde::{Deserialize, Serialize};
+
+#[derive(Serialize, Deserialize)]
+struct User {
+    id: u32,
+    name: String,
+    email: String,
+}
+
+// 라우트 정의
+fn user_routes() -> impl Filter<Extract = impl warp::Reply, Error = warp::Rejection> + Clone {
+    let users = warp::path("users");
+    
+    let get_users = users
+        .and(warp::get())
+        .and_then(get_users_handler);
+    
+    let create_user = users
+        .and(warp::post())
+        .and(warp::body::json())
+        .and_then(create_user_handler);
+    
+    get_users.or(create_user)
+}
+
+async fn get_users_handler() -> Result<impl warp::Reply, warp::Rejection> {
+    let users = vec![
+        User { id: 1, name: "Alice".to_string(), email: "alice@example.com".to_string() },
+        User { id: 2, name: "Bob".to_string(), email: "bob@example.com".to_string() },
+    ];
+    Ok(warp::reply::json(&users))
+}
+
+async fn create_user_handler(user: User) -> Result<impl warp::Reply, warp::Rejection> {
+    // 사용자 생성 로직
+    Ok(warp::reply::json(&user))
+}
+
+#[tokio::main]
+async fn main() {
+    let routes = user_routes();
+    warp::serve(routes)
+        .run(([127, 0, 0, 1], 3030))
+        .await;
+}
+```
+
+== 시스템 프로그래밍
+```rust
+use std::fs::File;
+use std::io::{self, Read, Write};
+use std::os::unix::io::{AsRawFd, RawFd};
+
+// 파일 디스크립터 직접 조작
+fn duplicate_fd(fd: RawFd) -> io::Result<RawFd> {
+    unsafe {
+        let new_fd = libc::dup(fd);
+        if new_fd == -1 {
+            Err(io::Error::last_os_error())
+        } else {
+            Ok(new_fd)
+        }
+    }
+}
+
+// 메모리 매핑
+use memmap2::{Mmap, MmapOptions};
+
+fn memory_map_file(filename: &str) -> io::Result<Mmap> {
+    let file = File::open(filename)?;
+    unsafe { MmapOptions::new().map(&file) }
+}
+
+// 시그널 처리
+use signal_hook::{iterator::Signals, SIGINT, SIGTERM};
+
+fn setup_signal_handlers() -> io::Result<()> {
+    let mut signals = Signals::new(&[SIGINT, SIGTERM])?;
+    
+    std::thread::spawn(move || {
+        for sig in signals.forever() {
+            match sig {
+                SIGINT => println!("Received SIGINT"),
+                SIGTERM => println!("Received SIGTERM"),
+                _ => unreachable!(),
+            }
+        }
+    });
+    
+    Ok(())
+}
+```
+
+== 테스팅과 벤치마킹
+```rust
+#[cfg(test)]
+mod tests {
+    use super::*;
+    
+    #[test]
+    fn test_calculator() {
+        assert_eq!(add(2, 3), 5);
+        assert_eq!(multiply(4, 5), 20);
+    }
+    
+    #[test]
+    #[should_panic(expected = "division by zero")]
+    fn test_division_by_zero() {
+        divide(10, 0);
+    }
+    
+    #[test]
+    fn test_with_result() -> Result<(), String> {
+        if add(2, 2) == 4 {
+            Ok(())
+        } else {
+            Err(String::from("2 + 2 should equal 4"))
+        }
+    }
+}
+
+// 벤치마킹
+use criterion::{criterion_group, criterion_main, Criterion};
+
+fn benchmark_fibonacci(c: &mut Criterion) {
+    c.bench_function("fibonacci 20", |b| b.iter(|| fibonacci(20)));
+}
+
+criterion_group!(benches, benchmark_fibonacci);
+criterion_main!(benches);
+```
+
+== 패키지 관리와 Cargo
+```toml
+# Cargo.toml 예제
+[package]
+name = "my_project"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name <your.email@example.com>"]
+description = "A sample Rust project"
+license = "MIT"
+
+[dependencies]
+tokio = { version = "1.0", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+warp = "0.3"
+anyhow = "1.0"
+
+[dev-dependencies]
+criterion = "0.4"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+panic = "abort"
+```
+
+== 크로스 컴파일
+```bash
+# Rust 크로스 컴파일 설정
+rustup target add x86_64-unknown-linux-gnu
+rustup target add aarch64-unknown-linux-gnu
+
+# 크로스 컴파일러 설치
+sudo apt-get install gcc-x86-64-linux-gnu
+sudo apt-get install gcc-aarch64-linux-gnu
+
+# 크로스 컴파일 실행
+cargo build --target x86_64-unknown-linux-gnu --release
+```

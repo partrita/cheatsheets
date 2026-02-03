@@ -3,6 +3,8 @@ environments:
   default:
     channels:
     - url: https://conda.anaconda.org/conda-forge/
+    options:
+      pypi-prerelease-mode: if-necessary-or-explicit
     packages:
       linux-64:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/_libgcc_mutex-0.1-conda_forge.tar.bz2
@@ -11,7 +13,11 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.7.14-hbd8a1cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/cffi-1.17.1-py313hfab6e84_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cfgv-3.3.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/dart-sass-1.59.1-ha770c72_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/deno-1.37.2-h335b0a9_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/deno-dom-0.1.35-hd9586b0_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/distlib-0.4.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/esbuild-0.27.2-hfc2019e_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/filelock-3.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/icu-75.1-he02047a_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/identify-2.6.12-pyhd8ed1ab_0.conda
@@ -31,12 +37,14 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/linux-64/ncurses-6.5-h2d0b736_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nodeenv-1.9.1-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/openssl-3.5.1-h7b32b05_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.12.3-ha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pre-commit-4.2.0-pyha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyh29332c3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/python-3.13.5-hec9711d_102_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-8_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/pyyaml-6.0.2-py313h8060acc_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/linux-64/quarto-1.4.557-ha770c72_1.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8c095d6_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-80.9.0-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/linux-64/tk-8.6.13-noxft_hd72426e_102.conda
@@ -50,7 +58,11 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.7.14-hbd8a1cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/cffi-1.17.1-py313hc845a76_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cfgv-3.3.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/dart-sass-1.59.1-hce30654_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/deno-1.37.2-hce30654_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/deno-dom-0.1.35-hb9e0d3b_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/distlib-0.4.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/esbuild-0.27.2-h820172f_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/filelock-3.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/identify-2.6.12-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/libcxx-20.1.8-hf598326_1.conda
@@ -63,12 +75,14 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/ncurses-6.5-h5e97a16_3.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nodeenv-1.9.1-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/openssl-3.5.1-h81ee809_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pandoc-3.1.12.3-hce30654_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pre-commit-4.2.0-pyha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyh29332c3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/python-3.13.5-hf3f3da0_102_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-8_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/pyyaml-6.0.2-py313ha9b7d5b_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/osx-arm64/quarto-1.4.557-hce30654_1.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/readline-8.2-h1d1bf99_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-80.9.0-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/osx-arm64/tk-8.6.13-h892fb3f_2.conda
@@ -82,7 +96,11 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/noarch/ca-certificates-2025.7.14-h4c7d964_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/cffi-1.17.1-py313ha7868ed_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/cfgv-3.3.1-pyhd8ed1ab_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/dart-sass-1.59.1-h57928b3_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/deno-1.37.2-hc8b987e_1.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/deno-dom-0.1.35-h8b8d39b_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/distlib-0.4.0-pyhd8ed1ab_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/esbuild-0.27.2-h11686cb_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/filelock-3.18.0-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/identify-2.6.12-pyhd8ed1ab_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/libexpat-2.7.1-hac47afa_0.conda
@@ -93,12 +111,14 @@ environments:
       - conda: https://conda.anaconda.org/conda-forge/win-64/libzlib-1.3.1-h2466b09_2.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/nodeenv-1.9.1-pyhd8ed1ab_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/openssl-3.5.1-h725018a_0.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/pandoc-3.1.12.3-h57928b3_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pre-commit-4.2.0-pyha770c72_0.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/pycparser-2.22-pyh29332c3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/python-3.13.5-h7de537c_102_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/python_abi-3.13-8_cp313.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/pyyaml-6.0.2-py313hb4c8b1a_2.conda
+      - conda: https://conda.anaconda.org/conda-forge/win-64/quarto-1.4.557-h57928b3_1.conda
       - conda: https://conda.anaconda.org/conda-forge/noarch/setuptools-80.9.0-pyhff2d567_0.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/tk-8.6.13-h2c6b04d_2.conda
       - conda: https://conda.anaconda.org/conda-forge/win-64/typst-0.13.1-ha073cba_0.conda
@@ -227,6 +247,81 @@ packages:
   license_family: MIT
   size: 12973
   timestamp: 1734267180483
+- conda: https://conda.anaconda.org/conda-forge/linux-64/dart-sass-1.59.1-ha770c72_0.conda
+  sha256: 5eae84d272c5706dd4a733a4a3912e6a1d9d02fcd53546b26c44d4f0f7f104bc
+  md5: de2018928d25b2cf33d0634f908554ef
+  license: MIT
+  license_family: MIT
+  size: 2970979
+  timestamp: 1747420497129
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/dart-sass-1.59.1-hce30654_0.conda
+  sha256: ab31b6ddd47766305f92071ae22e6ed35db09f8b1b0cc372bb562d2e60a7e98e
+  md5: 217f2882952b396525f65c213785ba3b
+  license: MIT
+  license_family: MIT
+  size: 2558960
+  timestamp: 1747420435027
+- conda: https://conda.anaconda.org/conda-forge/win-64/dart-sass-1.59.1-h57928b3_0.conda
+  sha256: d8599cab2a09b725bf9fb9de72513cd6253162f07679213874361db5284c4e8a
+  md5: 7b884d6ae77792e5fdb47cc5c43f0676
+  license: MIT
+  license_family: MIT
+  size: 2866045
+  timestamp: 1747420839766
+- conda: https://conda.anaconda.org/conda-forge/linux-64/deno-1.37.2-h335b0a9_1.conda
+  sha256: b14a2f951839e1b511283ed135d31e1168e62c6f360d00ba55a52e38d2ed1e34
+  md5: 50fe6d0064adfd83846a6f9c87da03e3
+  depends:
+  - libgcc-ng >=12
+  license: MIT
+  license_family: MIT
+  size: 33937403
+  timestamp: 1698785299272
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/deno-1.37.2-hce30654_1.conda
+  sha256: 40c59e8035a9e2c3a712053316c41ead55b22e94a5e9904d52b108d4f8c48ddc
+  md5: 98041d72a6ee027b467e2014191ac25f
+  license: MIT
+  license_family: MIT
+  size: 29940099
+  timestamp: 1698784034240
+- conda: https://conda.anaconda.org/conda-forge/win-64/deno-1.37.2-hc8b987e_1.conda
+  sha256: 075fd651513a4458a67ad7f1f635019d342b3047ba9b453acb1fc65f39279581
+  md5: 9e817ed60642f1c1b4d19f7998b3ff21
+  depends:
+  - ucrt >=10.0.20348.0
+  - vc >=14.2,<15
+  - vc14_runtime >=14.29.30139
+  license: MIT
+  license_family: MIT
+  size: 27940247
+  timestamp: 1698788945614
+- conda: https://conda.anaconda.org/conda-forge/linux-64/deno-dom-0.1.35-hd9586b0_1.conda
+  sha256: 386c157bf2eebe4fc58e63c26784d084eaa71cf1020257c30a430624631415fd
+  md5: 263ee0870b18b013d9ec8539113ac69f
+  depends:
+  - deno >=1.24.2
+  license: MIT
+  license_family: MIT
+  size: 1062480
+  timestamp: 1682953401972
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/deno-dom-0.1.35-hb9e0d3b_1.conda
+  sha256: c5d93aa2c31af9ff7234ad95a65d166418e71d111f88fe7158c9d21eb5a49dd1
+  md5: 15158274af1f4064563645d278c07a79
+  depends:
+  - deno >=1.24.2
+  license: MIT
+  license_family: MIT
+  size: 373555
+  timestamp: 1682953826826
+- conda: https://conda.anaconda.org/conda-forge/win-64/deno-dom-0.1.35-h8b8d39b_1.conda
+  sha256: b8368da706bb912606eb5063e1535fe3075a23c063461a13cf95d05567ae4e15
+  md5: e1b95d707e592ee1f8d20986c449d927
+  depends:
+  - deno >=1.24.2
+  license: MIT
+  license_family: MIT
+  size: 298218
+  timestamp: 1682953841090
 - conda: https://conda.anaconda.org/conda-forge/noarch/distlib-0.4.0-pyhd8ed1ab_0.conda
   sha256: 6d977f0b2fc24fee21a9554389ab83070db341af6d6f09285360b2e09ef8b26e
   md5: 003b8ba0a94e2f1e117d0bd46aebc901
@@ -236,6 +331,27 @@ packages:
   license_family: APACHE
   size: 275642
   timestamp: 1752823081585
+- conda: https://conda.anaconda.org/conda-forge/linux-64/esbuild-0.27.2-hfc2019e_0.conda
+  sha256: abfc031fa9d08967664aec7aa29177d8f189720588620733b05036299933123d
+  md5: a2b69ce0b4caf7c9e7674b49724b6863
+  license: MIT
+  license_family: MIT
+  size: 4418422
+  timestamp: 1765944317194
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/esbuild-0.27.2-h820172f_0.conda
+  sha256: 2e23ea54fcf414e74dcaa2b97d3764cc85e6914961091596af4c84b1e5436b68
+  md5: 88bfae991b739ced6f772a0d0be60793
+  license: MIT
+  license_family: MIT
+  size: 3993130
+  timestamp: 1765944371859
+- conda: https://conda.anaconda.org/conda-forge/win-64/esbuild-0.27.2-h11686cb_0.conda
+  sha256: c6036b7ac38f8b01701f8705a979c9558bc7da9c125c78641c375897c056d7b8
+  md5: b988ee500d0969f680bd3e0ede4ed6a1
+  license: MIT
+  license_family: MIT
+  size: 4328838
+  timestamp: 1765944354827
 - conda: https://conda.anaconda.org/conda-forge/noarch/filelock-3.18.0-pyhd8ed1ab_0.conda
   sha256: de7b6d4c4f865609ae88db6fa03c8b7544c2452a1aa5451eb7700aad16824570
   md5: 4547b39256e296bb758166893e909a7c
@@ -599,6 +715,27 @@ packages:
   license_family: Apache
   size: 9327033
   timestamp: 1751392489008
+- conda: https://conda.anaconda.org/conda-forge/linux-64/pandoc-3.1.12.3-ha770c72_0.conda
+  sha256: 26bfcda675fbddd059a8861dc75b9e497980ec6c679ec2a27e7d74042c4b295b
+  md5: cdea66892b19a454f939487318b6c517
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 21002590
+  timestamp: 1710766932698
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/pandoc-3.1.12.3-hce30654_0.conda
+  sha256: 3bdfb8e65c7f7b050c07f5b84669024eaa38aa268195e1a804cbd20f07233fa4
+  md5: e14b5833daffe398ea21308cb0559477
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 22301217
+  timestamp: 1710767365075
+- conda: https://conda.anaconda.org/conda-forge/win-64/pandoc-3.1.12.3-h57928b3_0.conda
+  sha256: 0c36e2a3d53d9db8d6270b57548e90017edb6be09708910783143cf560f48ec7
+  md5: fb5e84d5b27eb70305880095e2dbf9d3
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 24893042
+  timestamp: 1710767473433
 - conda: https://conda.anaconda.org/conda-forge/noarch/platformdirs-4.3.8-pyhe01879c_0.conda
   sha256: 0f48999a28019c329cd3f6fd2f01f09fc32cc832f7d6bbe38087ddac858feaa3
   md5: 424844562f5d337077b445ec6b1398a7
@@ -755,6 +892,45 @@ packages:
   license_family: MIT
   size: 182783
   timestamp: 1737455202579
+- conda: https://conda.anaconda.org/conda-forge/linux-64/quarto-1.4.557-ha770c72_1.conda
+  sha256: 3b5d2458a3976dd022aa90deb447e0164e3e543c04045a30ff1bff88e12cbd5e
+  md5: c9a3499acf392113f4b1b080e9580d95
+  depends:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.12.3,<3.1.13.0a0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15548515
+  timestamp: 1725903279495
+- conda: https://conda.anaconda.org/conda-forge/osx-arm64/quarto-1.4.557-hce30654_1.conda
+  sha256: 03bd439c9b05211cc102793ac9fbb8e92158170e6bf464db7f63da052c050e70
+  md5: a7b8b3eaeb0d4d1ab2a679ae4cf0bb9f
+  depends:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.12.3,<3.1.13.0a0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15673171
+  timestamp: 1725903457143
+- conda: https://conda.anaconda.org/conda-forge/win-64/quarto-1.4.557-h57928b3_1.conda
+  sha256: 935a583ca7d1177a8a6bbaecf8ccfca2aeb1c8569600b7f9c7da32a3b72cfb01
+  md5: 34d6d6bd0403dac3e54456bdfac0bab2
+  depends:
+  - dart-sass
+  - deno >=1.37.2,<1.37.3.0a0
+  - deno-dom >=0.1.35,<0.1.36.0a0
+  - esbuild
+  - pandoc >=3.1.12.3,<3.1.13.0a0
+  license: GPL-2.0-or-later
+  license_family: GPL
+  size: 15502442
+  timestamp: 1725903521554
 - conda: https://conda.anaconda.org/conda-forge/linux-64/readline-8.2-h8c095d6_2.conda
   sha256: 2d6d0c026902561ed77cd646b5021aef2d4db22e57a5b0178dfc669231e06d2c
   md5: 283b96675859b20a825f8fa30f311446
