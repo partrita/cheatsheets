@@ -6,7 +6,15 @@ platforms = ["win-64", "osx-arm64", "linux-64"]
 version = "0.1.0"
 
 [tasks]
+build = "bash scripts/build_all.sh"
+check = "bash scripts/check_typst_compile.sh"
+clean = "rm -rf dist site_output website/pdfs website/docs website/index.qmd"
+site-gen = "python scripts/generate_site.py"
+site-build = { cmd = "quarto render website", depends-on = ["site-gen"] }
+site-preview = { cmd = "quarto preview website", depends-on = ["site-gen"] }
 
 [dependencies]
 typst = ">=0.13.1,<0.14"
 pre-commit = ">=4.2.0,<5"
+python = ">=3.10"
+quarto = ">=1.4"

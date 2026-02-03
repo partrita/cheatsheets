@@ -230,3 +230,388 @@ docker logs -f --tail 100 container_name
 # 컨테이너 리소스 사용량 확인
 docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}"
 ```
+
+= 10. Docker 보안 및 모범 사례
+
+== 보안 강화
+```bash
+# 비루트 사용자로 컨테이너 실행
+docker run --user 1000:1000 nginx
+
+# 읽기 전용 파일시스템
+docker run --read-only nginx
+
+# 보안 옵션 설정
+docker run --security-opt no-new-privileges nginx
+
+# 네트워크 격리
+docker run --network none nginx
+
+# 리소스 제한
+docker run --memory=512m --cpus=1.0 nginx
+
+# 환경 변수 보안
+docker run -e MYSQL_ROOT_PASSWORD_FILE=/run/secrets/mysql_root_password \
+  --secret mysql_root_password nginx
+```
+
+== 이미지 보안 스캔
+```bash
+# Docker Scout로 취약점 스캔
+docker scout quickview nginx:latest
+docker scout cves nginx:latest
+
+# Trivy로 보안 스캔
+trivy image nginx:latest
+
+# 이미지 서명 검증
+docker trust inspect nginx:latest
+```
+
+== 멀티스테이지 빌드 최적화
+```dockerfile
+# Build stage
+FROM node:18-alpine AS builder
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production
+
+# Production stage
+FROM node:18-alpine AS production
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
+WORKDIR /app
+COPY --from=builder --chown=nextjs:nodejs /app/node_modules ./node_modules
+COPY --chown=nextjs:nodejs . .
+USER nextjs
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+= 11. Docker Compose 고급 기능
+
+== 환경별 설정
+```yaml
+# docker-compose.yml
+version: '3.8'
+services:
+  web:
+    image: nginx:${NGINX_VERSION:-latest}
+    environment:
+      - NODE_ENV=${NODE_ENV:-development}
+    env_file:
+      - .env.local
+    configs:
+      - source: nginx_config
+        target: /etc/nginx/nginx.conf
+
+configs:
+  nginx_config:
+    file: ./nginx.conf
+
+# .env.production
+NGINX_VERSION=1.21
+NODE_ENV=production
+```
+
+== 서비스 의존성 관리
+```yaml
+version: '3.8'
+services:
+  db:
+    image: postgres:13
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  web:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+```
+
+== 볼륨과 네트워크 고급 설정
+```yaml
+version: '3.8'
+services:
+  app:
+    image: nginx
+    volumes:
+      - type: bind
+        source: ./config
+        target: /etc/nginx
+        read_only: true
+      - type: volume
+        source: app_data
+        target: /var/www
+    networks:
+      - frontend
+      - backend
+
+volumes:
+  app_data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /path/to/host/data
+
+networks:
+  frontend:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+  backend:
+    driver: bridge
+    internal: true
+```
+
+= 12. 프로덕션 배포 전략
+
+== Blue-Green 배포
+```bash
+# Blue 환경 (현재 운영)
+docker-compose -f docker-compose.blue.yml up -d
+
+# Green 환경 (새 버전) 배포
+docker-compose -f docker-compose.green.yml up -d
+
+# 트래픽 전환 (로드밸런서 설정 변경)
+# Blue 환경 종료
+docker-compose -f docker-compose.blue.yml down
+```
+
+== 롤링 업데이트
+```bash
+# 서비스 업데이트
+docker service update --image nginx:1.21 web
+
+# 배치 크기 설정
+docker service update --update-parallelism 2 web
+
+# 업데이트 실패 시 롤백
+docker service rollback web
+```
+
+== 헬스체크 및 모니터링
+```yaml
+version: '3.8'
+services:
+  web:
+    image: nginx
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+        failure_action: rollback
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 3
+```
+
+= 13. Docker Swarm 클러스터 관리
+
+== 클러스터 초기화
+```bash
+# 매니저 노드 초기화
+docker swarm init --advertise-addr 192.168.1.100
+
+# 워커 노드 조인
+docker swarm join --token SWMTKN-1-xxx 192.168.1.100:2377
+
+# 클러스터 정보 확인
+docker node ls
+docker info
+```
+
+== 서비스 배포
+```bash
+# 서비스 생성
+docker service create --name web --replicas 3 nginx:latest
+
+# 서비스 스케일링
+docker service scale web=5
+
+# 서비스 업데이트
+docker service update --image nginx:1.21 web
+
+# 서비스 제거
+docker service rm web
+```
+
+== 스택 배포
+```yaml
+# docker-stack.yml
+version: '3.8'
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 3
+      placement:
+        constraints:
+          - node.role == worker
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+# 스택 배포
+docker stack deploy -c docker-stack.yml myapp
+```
+
+= 14. 컨테이너 오케스트레이션 고급 기능
+
+== 시크릿 관리
+```bash
+# 시크릿 생성
+echo "mysecretpassword" | docker secret create db_password -
+
+# 서비스에 시크릿 연결
+docker service create --name db \
+  --secret db_password \
+  postgres:13
+
+# 시크릿 목록 확인
+docker secret ls
+```
+
+== 컨피그 관리
+```bash
+# 컨피그 생성
+docker config create nginx_config nginx.conf
+
+# 서비스에 컨피그 연결
+docker service create --name web \
+  --config source=nginx_config,target=/etc/nginx/nginx.conf \
+  nginx:latest
+```
+
+== 네트워크 오버레이
+```bash
+# 오버레이 네트워크 생성
+docker network create --driver overlay --attachable mynetwork
+
+# 서비스에 네트워크 연결
+docker service create --name web \
+  --network mynetwork \
+  nginx:latest
+```
+
+= 15. 성능 최적화 및 모니터링
+
+== 이미지 최적화
+```dockerfile
+# Alpine Linux 사용
+FROM node:18-alpine
+
+# 멀티스테이지 빌드로 크기 최소화
+FROM node:18-alpine AS deps
+WORKDIR /app
+COPY package*.json ./
+RUN npm ci --only=production && npm cache clean --force
+
+FROM node:18-alpine AS runner
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+RUN addgroup -g 1001 -S nodejs && \
+    adduser -S nextjs -u 1001 && \
+    chown -R nextjs:nodejs /app
+USER nextjs
+EXPOSE 3000
+CMD ["npm", "start"]
+```
+
+== 리소스 모니터링
+```bash
+# 컨테이너 리소스 사용량 실시간 모니터링
+docker stats --format "table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}"
+
+# 특정 컨테이너의 상세 정보
+docker inspect container_name | jq '.[0].State'
+
+# 로그 모니터링
+docker logs -f --tail 100 container_name
+```
+
+== 성능 튜닝
+```bash
+# 컨테이너 메모리 제한
+docker run --memory=1g --memory-swap=2g nginx
+
+# CPU 제한
+docker run --cpus=2.0 nginx
+
+# I/O 제한
+docker run --device-read-bps /dev/sda:1mb --device-write-bps /dev/sda:1mb nginx
+
+# 네트워크 대역폭 제한
+docker run --network-alias web nginx
+```
+
+= 16. 트러블슈팅 및 디버깅
+
+== 일반적인 문제 해결
+```bash
+# 컨테이너가 시작되지 않는 경우
+docker logs container_name
+docker inspect container_name
+
+# 디스크 공간 부족
+docker system df
+docker system prune -a
+
+# 네트워크 연결 문제
+docker network ls
+docker network inspect network_name
+
+# 볼륨 문제
+docker volume ls
+docker volume inspect volume_name
+```
+
+== 디버깅 도구
+```bash
+# 컨테이너 내부 접속
+docker exec -it container_name /bin/bash
+
+# 컨테이너 프로세스 확인
+docker top container_name
+
+# 컨테이너 파일시스템 변경사항
+docker diff container_name
+
+# 컨테이너 이벤트 모니터링
+docker events --filter container=container_name
+```
+
+== 로그 관리
+```bash
+# 로그 드라이버 설정
+docker run --log-driver=json-file --log-opt max-size=10m --log-opt max-file=3 nginx
+
+# 중앙화된 로깅 (ELK 스택)
+docker run --log-driver=fluentd --log-opt fluentd-address=localhost:24224 nginx
+
+# 로그 로테이션
+docker run --log-opt max-size=10m --log-opt max-file=3 nginx
+```

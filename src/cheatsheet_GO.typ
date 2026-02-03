@@ -1598,3 +1598,831 @@ func run2(done chan bool) {
     done <- true
 }
 ```
+
+= 고루틴과 채널 심화
+
+== 고루틴 풀 패턴
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "time"
+)
+
+type Worker struct {
+    id       int
+    jobQueue chan Job
+    quit     chan bool
+    wg       *sync.WaitGroup
+}
+
+type Job struct {
+    ID   int
+    Data string
+}
+
+func NewWorker(id int, jobQueue chan Job, wg *sync.WaitGroup) *Worker {
+    return &Worker{
+        id:       id,
+        jobQueue: jobQueue,
+        quit:     make(chan bool),
+        wg:       wg,
+    }
+}
+
+func (w *Worker) Start() {
+    go func() {
+        defer w.wg.Done()
+        for {
+            select {
+            case job := <-w.jobQueue:
+                fmt.Printf("Worker %d processing job %d: %s\n", w.id, job.ID, job.Data)
+                time.Sleep(time.Second) // 작업 시뮬레이션
+            case <-w.quit:
+                fmt.Printf("Worker %d stopping\n", w.id)
+                return
+            }
+        }
+    }()
+}
+
+func (w *Worker) Stop() {
+    w.quit <- true
+}
+
+func main() {
+    const numWorkers = 3
+    const numJobs = 10
+    
+    jobQueue := make(chan Job, numJobs)
+    var wg sync.WaitGroup
+    
+    // 워커 생성 및 시작
+    workers := make([]*Worker, numWorkers)
+    for i := 0; i < numWorkers; i++ {
+        wg.Add(1)
+        workers[i] = NewWorker(i+1, jobQueue, &wg)
+        workers[i].Start()
+    }
+    
+    // 작업 생성
+    go func() {
+        for i := 1; i <= numJobs; i++ {
+            job := Job{ID: i, Data: fmt.Sprintf("Task %d", i)}
+            jobQueue <- job
+        }
+        close(jobQueue)
+    }()
+    
+    // 모든 작업 완료 대기
+    wg.Wait()
+    
+    // 워커 정리
+    for _, worker := range workers {
+        worker.Stop()
+    }
+}
+```
+
+== 채널 패턴과 고급 사용법
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+    "time"
+)
+
+// 파이프라인 패턴
+func producer(nums ...int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for _, n := range nums {
+            out <- n
+        }
+    }()
+    return out
+}
+
+func square(in <-chan int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for n := range in {
+            out <- n * n
+        }
+    }()
+    return out
+}
+
+func filter(in <-chan int) <-chan int {
+    out := make(chan int)
+    go func() {
+        defer close(out)
+        for n := range in {
+            if n%2 == 0 {
+                out <- n
+            }
+        }
+    }()
+    return out
+}
+
+// Fan-out/Fan-in 패턴
+func fanOut(in <-chan int, numWorkers int) []<-chan int {
+    outputs := make([]<-chan int, numWorkers)
+    for i := 0; i < numWorkers; i++ {
+        output := make(chan int)
+        outputs[i] = output
+        go func(out chan<- int) {
+            defer close(out)
+            for n := range in {
+                out <- n * 2
+            }
+        }(output)
+    }
+    return outputs
+}
+
+func fanIn(inputs ...<-chan int) <-chan int {
+    out := make(chan int)
+    var wg sync.WaitGroup
+    
+    for _, input := range inputs {
+        wg.Add(1)
+        go func(ch <-chan int) {
+            defer wg.Done()
+            for n := range ch {
+                out <- n
+            }
+        }(input)
+    }
+    
+    go func() {
+        wg.Wait()
+        close(out)
+    }()
+    
+    return out
+}
+
+// 타임아웃 패턴
+func doWorkWithTimeout(duration time.Duration) (string, error) {
+    resultChan := make(chan string, 1)
+    errorChan := make(chan error, 1)
+    
+    go func() {
+        time.Sleep(duration)
+        resultChan <- "Work completed"
+    }()
+    
+    select {
+    case result := <-resultChan:
+        return result, nil
+    case <-time.After(2 * time.Second):
+        return "", fmt.Errorf("work timed out")
+    }
+}
+
+// 컨텍스트를 이용한 취소
+import "context"
+
+func workerWithContext(ctx context.Context, name string) {
+    for {
+        select {
+        case <-ctx.Done():
+            fmt.Printf("Worker %s cancelled: %v\n", name, ctx.Err())
+            return
+        default:
+            fmt.Printf("Worker %s working...\n", name)
+            time.Sleep(time.Second)
+        }
+    }
+}
+
+func main() {
+    // 파이프라인 예제
+    nums := producer(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)
+    squared := square(nums)
+    filtered := filter(squared)
+    
+    for result := range filtered {
+        fmt.Printf("Result: %d\n", result)
+    }
+    
+    // Fan-out/Fan-in 예제
+    input := producer(1, 2, 3, 4, 5)
+    outputs := fanOut(input, 3)
+    merged := fanIn(outputs...)
+    
+    for result := range merged {
+        fmt.Printf("Fan result: %d\n", result)
+    }
+    
+    // 타임아웃 예제
+    result, err := doWorkWithTimeout(3 * time.Second)
+    if err != nil {
+        fmt.Printf("Error: %v\n", err)
+    } else {
+        fmt.Printf("Result: %s\n", result)
+    }
+    
+    // 컨텍스트 취소 예제
+    ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
+    defer cancel()
+    
+    go workerWithContext(ctx, "Worker1")
+    go workerWithContext(ctx, "Worker2")
+    
+    time.Sleep(5 * time.Second)
+}
+```
+
+= 웹 개발 (Gin 프레임워크)
+
+== 기본 웹 서버 설정
+```go
+package main
+
+import (
+    "net/http"
+    "github.com/gin-gonic/gin"
+)
+
+type User struct {
+    ID    int    `json:"id"`
+    Name  string `json:"name"`
+    Email string `json:"email"`
+}
+
+var users = []User{
+    {ID: 1, Name: "Alice", Email: "alice@example.com"},
+    {ID: 2, Name: "Bob", Email: "bob@example.com"},
+}
+
+func main() {
+    r := gin.Default()
+    
+    // 미들웨어 설정
+    r.Use(gin.Logger())
+    r.Use(gin.Recovery())
+    r.Use(corsMiddleware())
+    
+    // 라우트 설정
+    api := r.Group("/api/v1")
+    {
+        api.GET("/users", getUsers)
+        api.GET("/users/:id", getUserByID)
+        api.POST("/users", createUser)
+        api.PUT("/users/:id", updateUser)
+        api.DELETE("/users/:id", deleteUser)
+    }
+    
+    // 정적 파일 서빙
+    r.Static("/static", "./static")
+    r.LoadHTMLGlob("templates/*")
+    
+    r.GET("/", func(c *gin.Context) {
+        c.HTML(http.StatusOK, "index.html", gin.H{
+            "title": "Go Web App",
+        })
+    })
+    
+    r.Run(":8080")
+}
+
+// CORS 미들웨어
+func corsMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        c.Header("Access-Control-Allow-Origin", "*")
+        c.Header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS")
+        c.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+        
+        if c.Request.Method == "OPTIONS" {
+            c.AbortWithStatus(204)
+            return
+        }
+        
+        c.Next()
+    }
+}
+
+// 핸들러 함수들
+func getUsers(c *gin.Context) {
+    c.JSON(http.StatusOK, gin.H{"users": users})
+}
+
+func getUserByID(c *gin.Context) {
+    id := c.Param("id")
+    for _, user := range users {
+        if fmt.Sprintf("%d", user.ID) == id {
+            c.JSON(http.StatusOK, user)
+            return
+        }
+    }
+    c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+}
+
+func createUser(c *gin.Context) {
+    var newUser User
+    if err := c.ShouldBindJSON(&newUser); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    
+    newUser.ID = len(users) + 1
+    users = append(users, newUser)
+    c.JSON(http.StatusCreated, newUser)
+}
+
+func updateUser(c *gin.Context) {
+    id := c.Param("id")
+    var updatedUser User
+    
+    if err := c.ShouldBindJSON(&updatedUser); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    
+    for i, user := range users {
+        if fmt.Sprintf("%d", user.ID) == id {
+            updatedUser.ID = user.ID
+            users[i] = updatedUser
+            c.JSON(http.StatusOK, updatedUser)
+            return
+        }
+    }
+    
+    c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+}
+
+func deleteUser(c *gin.Context) {
+    id := c.Param("id")
+    for i, user := range users {
+        if fmt.Sprintf("%d", user.ID) == id {
+            users = append(users[:i], users[i+1:]...)
+            c.JSON(http.StatusOK, gin.H{"message": "User deleted"})
+            return
+        }
+    }
+    c.JSON(http.StatusNotFound, gin.H{"error": "User not found"})
+}
+```
+
+== 데이터베이스 연동 (GORM)
+```go
+package main
+
+import (
+    "gorm.io/driver/sqlite"
+    "gorm.io/gorm"
+    "gorm.io/gorm/logger"
+)
+
+type Product struct {
+    gorm.Model
+    Code  string
+    Price uint
+}
+
+func main() {
+    // 데이터베이스 연결
+    db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{
+        Logger: logger.Default.LogMode(logger.Info),
+    })
+    if err != nil {
+        panic("failed to connect database")
+    }
+    
+    // 마이그레이션
+    db.AutoMigrate(&Product{})
+    
+    // CRUD 작업
+    // Create
+    db.Create(&Product{Code: "D42", Price: 100})
+    
+    // Read
+    var product Product
+    db.First(&product, 1) // primary key로 찾기
+    db.First(&product, "code = ?", "D42") // 조건으로 찾기
+    
+    // Update
+    db.Model(&product).Update("Price", 200)
+    db.Model(&product).Updates(Product{Price: 200, Code: "F42"})
+    db.Model(&product).Updates(map[string]interface{}{"Price": 200, "Code": "F42"})
+    
+    // Delete
+    db.Delete(&product, 1)
+}
+
+// 복잡한 쿼리 예제
+func complexQueries(db *gorm.DB) {
+    var products []Product
+    
+    // Where 조건
+    db.Where("price > ?", 50).Find(&products)
+    db.Where("code IN ?", []string{"D42", "F42"}).Find(&products)
+    
+    // 정렬
+    db.Order("price desc").Find(&products)
+    
+    // Limit과 Offset
+    db.Limit(10).Offset(20).Find(&products)
+    
+    // 조인
+    db.Joins("JOIN categories ON products.category_id = categories.id").
+        Where("categories.name = ?", "Electronics").Find(&products)
+    
+    // 그룹화
+    db.Select("code, sum(price) as total").
+        Group("code").
+        Having("sum(price) > ?", 100).
+        Find(&products)
+    
+    // 트랜잭션
+    db.Transaction(func(tx *gorm.DB) error {
+        if err := tx.Create(&Product{Code: "T1", Price: 100}).Error; err != nil {
+            return err
+        }
+        
+        if err := tx.Create(&Product{Code: "T2", Price: 200}).Error; err != nil {
+            return err
+        }
+        
+        return nil
+    })
+}
+```
+
+== RESTful API와 미들웨어
+```go
+package main
+
+import (
+    "net/http"
+    "strconv"
+    "time"
+    
+    "github.com/gin-gonic/gin"
+    "github.com/golang-jwt/jwt/v4"
+)
+
+// JWT 미들웨어
+func authMiddleware() gin.HandlerFunc {
+    return func(c *gin.Context) {
+        token := c.GetHeader("Authorization")
+        if token == "" {
+            c.JSON(http.StatusUnauthorized, gin.H{"error": "Authorization header required"})
+            c.Abort()
+            return
+        }
+        
+        // JWT 토큰 검증 로직
+        claims, err := validateToken(token)
+        if err != nil {
+            c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid token"})
+            c.Abort()
+            return
+        }
+        
+        c.Set("user_id", claims["user_id"])
+        c.Next()
+    }
+}
+
+// 요청 로깅 미들웨어
+func requestLogger() gin.HandlerFunc {
+    return gin.LoggerWithFormatter(func(param gin.LogFormatterParams) string {
+        return fmt.Sprintf("%s - [%s] \"%s %s %s %d %s \"%s\" %s\"\n",
+            param.ClientIP,
+            param.TimeStamp.Format(time.RFC1123),
+            param.Method,
+            param.Path,
+            param.Request.Proto,
+            param.StatusCode,
+            param.Latency,
+            param.Request.UserAgent(),
+            param.ErrorMessage,
+        )
+    })
+}
+
+// Rate Limiting 미들웨어
+func rateLimitMiddleware() gin.HandlerFunc {
+    // 간단한 메모리 기반 rate limiter
+    requests := make(map[string][]time.Time)
+    
+    return func(c *gin.Context) {
+        clientIP := c.ClientIP()
+        now := time.Now()
+        
+        // 1분간 최대 100 요청
+        if len(requests[clientIP]) >= 100 {
+            oldest := requests[clientIP][0]
+            if now.Sub(oldest) < time.Minute {
+                c.JSON(http.StatusTooManyRequests, gin.H{"error": "Rate limit exceeded"})
+                c.Abort()
+                return
+            }
+            requests[clientIP] = requests[clientIP][1:]
+        }
+        
+        requests[clientIP] = append(requests[clientIP], now)
+        c.Next()
+    }
+}
+
+// API 버전 관리
+func setupRoutes(r *gin.Engine) {
+    // API v1
+    v1 := r.Group("/api/v1")
+    {
+        v1.GET("/health", func(c *gin.Context) {
+            c.JSON(http.StatusOK, gin.H{"status": "healthy"})
+        })
+        
+        v1.POST("/login", loginHandler)
+        
+        protected := v1.Group("/")
+        protected.Use(authMiddleware())
+        {
+            protected.GET("/profile", getProfileHandler)
+            protected.POST("/logout", logoutHandler)
+        }
+    }
+    
+    // API v2
+    v2 := r.Group("/api/v2")
+    {
+        v2.GET("/health", func(c *gin.Context) {
+            c.JSON(http.StatusOK, gin.H{
+                "status": "healthy",
+                "version": "2.0",
+                "timestamp": time.Now(),
+            })
+        })
+    }
+}
+
+func loginHandler(c *gin.Context) {
+    var loginData struct {
+        Username string `json:"username"`
+        Password string `json:"password"`
+    }
+    
+    if err := c.ShouldBindJSON(&loginData); err != nil {
+        c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        return
+    }
+    
+    // 인증 로직
+    if loginData.Username == "admin" && loginData.Password == "password" {
+        token := generateToken(loginData.Username)
+        c.JSON(http.StatusOK, gin.H{"token": token})
+    } else {
+        c.JSON(http.StatusUnauthorized, gin.H{"error": "Invalid credentials"})
+    }
+}
+
+func generateToken(username string) string {
+    token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
+        "username": username,
+        "exp":      time.Now().Add(time.Hour * 24).Unix(),
+    })
+    
+    tokenString, _ := token.SignedString([]byte("secret"))
+    return tokenString
+}
+
+func validateToken(tokenString string) (jwt.MapClaims, error) {
+    token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+        return []byte("secret"), nil
+    })
+    
+    if err != nil {
+        return nil, err
+    }
+    
+    if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
+        return claims, nil
+    }
+    
+    return nil, fmt.Errorf("invalid token")
+}
+```
+
+== 테스팅
+```go
+package main
+
+import (
+    "net/http"
+    "net/http/httptest"
+    "testing"
+    
+    "github.com/gin-gonic/gin"
+    "github.com/stretchr/testify/assert"
+)
+
+func TestGetUsers(t *testing.T) {
+    gin.SetMode(gin.TestMode)
+    r := gin.New()
+    r.GET("/api/v1/users", getUsers)
+    
+    req, _ := http.NewRequest("GET", "/api/v1/users", nil)
+    w := httptest.NewRecorder()
+    
+    r.ServeHTTP(w, req)
+    
+    assert.Equal(t, http.StatusOK, w.Code)
+    assert.Contains(t, w.Body.String(), "users")
+}
+
+func TestCreateUser(t *testing.T) {
+    gin.SetMode(gin.TestMode)
+    r := gin.New()
+    r.POST("/api/v1/users", createUser)
+    
+    jsonData := `{"name": "Test User", "email": "test@example.com"}`
+    req, _ := http.NewRequest("POST", "/api/v1/users", strings.NewReader(jsonData))
+    req.Header.Set("Content-Type", "application/json")
+    
+    w := httptest.NewRecorder()
+    r.ServeHTTP(w, req)
+    
+    assert.Equal(t, http.StatusCreated, w.Code)
+    assert.Contains(t, w.Body.String(), "Test User")
+}
+
+// 벤치마크 테스트
+func BenchmarkGetUsers(b *testing.B) {
+    gin.SetMode(gin.TestMode)
+    r := gin.New()
+    r.GET("/api/v1/users", getUsers)
+    
+    req, _ := http.NewRequest("GET", "/api/v1/users", nil)
+    
+    b.ResetTimer()
+    for i := 0; i < b.N; i++ {
+        w := httptest.NewRecorder()
+        r.ServeHTTP(w, req)
+    }
+}
+
+// 테이블 기반 테스트
+func TestGetUserByID(t *testing.T) {
+    tests := []struct {
+        name     string
+        userID   string
+        expected int
+    }{
+        {"Valid user", "1", http.StatusOK},
+        {"Invalid user", "999", http.StatusNotFound},
+        {"Invalid ID format", "abc", http.StatusBadRequest},
+    }
+    
+    gin.SetMode(gin.TestMode)
+    r := gin.New()
+    r.GET("/api/v1/users/:id", getUserByID)
+    
+    for _, tt := range tests {
+        t.Run(tt.name, func(t *testing.T) {
+            req, _ := http.NewRequest("GET", "/api/v1/users/"+tt.userID, nil)
+            w := httptest.NewRecorder()
+            
+            r.ServeHTTP(w, req)
+            
+            assert.Equal(t, tt.expected, w.Code)
+        })
+    }
+}
+```
+
+== 배포와 운영
+
+=== Dockerfile
+```dockerfile
+# Multi-stage build
+FROM golang:1.21-alpine AS builder
+
+WORKDIR /app
+COPY go.mod go.sum ./
+RUN go mod download
+
+COPY . .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+
+FROM alpine:latest
+RUN apk --no-cache add ca-certificates
+WORKDIR /root/
+
+COPY --from=builder /app/main .
+COPY --from=builder /app/templates ./templates
+COPY --from=builder /app/static ./static
+
+EXPOSE 8080
+CMD ["./main"]
+```
+
+=== Docker Compose
+```yaml
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=password
+      - DB_NAME=myapp
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=myapp
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
+```
+
+=== Kubernetes 배포
+```yaml
+# deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-web-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: go-web-app
+  template:
+    metadata:
+      labels:
+        app: go-web-app
+    spec:
+      containers:
+      - name: go-web-app
+        image: go-web-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "postgres-service"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /api/v1/health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-web-app-service
+spec:
+  selector:
+    app: go-web-app
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+```

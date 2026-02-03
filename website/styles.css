@@ -1,0 +1,17 @@
+/* Custom styles for the cheatsheet website */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff; 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+    color: white;
+}

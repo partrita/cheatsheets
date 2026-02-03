@@ -125,3 +125,251 @@
   - `scp local_file user@host:/remote/path`
   - `scp user@host:/remote/path local_file`
 - `rsync -avz <source> <destination>`: 빠르고 효율적인 파일 동기화 도구.
+
+= 8. 시스템 관리 및 모니터링
+
+== 프로세스 관리 고급
+- `nice -n 10 command`: 프로세스 우선순위 설정 (낮은 우선순위)
+- `renice 5 -p <PID>`: 실행 중인 프로세스의 우선순위 변경
+- `ionice -c 1 -n 4 command`: I/O 우선순위 설정
+- `taskset -c 0,1 command`: 특정 CPU 코어에서 프로세스 실행
+- `chrt -f 50 command`: 실시간 스케줄링 정책 설정
+- `pgrep -f "pattern"`: 패턴으로 프로세스 검색
+- `pkill -f "pattern"`: 패턴으로 프로세스 종료
+- `killall process_name`: 프로세스 이름으로 종료
+- `kill -0 <PID>`: 프로세스 존재 여부 확인
+
+== 시스템 리소스 모니터링
+- `iostat -x 1`: 디스크 I/O 통계 (1초마다)
+- `iotop`: 실시간 I/O 사용량 모니터링
+- `vmstat 1`: 가상 메모리 통계
+- `sar -u 1`: CPU 사용률 통계
+- `sar -r 1`: 메모리 사용률 통계
+- `sar -d 1`: 디스크 활동 통계
+- `lsof -i :80`: 특정 포트를 사용하는 프로세스
+- `lsof -p <PID>`: 특정 프로세스가 열고 있는 파일
+- `fuser -v /path/to/file`: 파일을 사용하는 프로세스
+- `strace -p <PID>`: 프로세스의 시스템 콜 추적
+
+== 로그 관리 및 분석
+- `journalctl -u service_name`: 특정 서비스 로그
+- `journalctl -f`: 실시간 로그 모니터링
+- `journalctl --since "2023-01-01" --until "2023-12-31"`: 기간별 로그
+- `journalctl -p err`: 에러 레벨 이상의 로그
+- `logrotate -d /etc/logrotate.conf`: 로그 로테이션 테스트
+- `tail -f /var/log/syslog`: 시스템 로그 실시간 모니터링
+- `grep -i error /var/log/syslog`: 에러 로그 검색
+- `awk '/ERROR/ {print $0}' /var/log/app.log`: 특정 패턴 로그 추출
+
+= 9. 네트워크 관리 고급
+
+== 네트워크 설정 및 진단
+- `ip route show`: 라우팅 테이블 확인
+- `ip route add 192.168.1.0/24 via 192.168.1.1`: 정적 라우트 추가
+- `ip route del 192.168.1.0/24`: 라우트 삭제
+- `ip link show`: 네트워크 인터페이스 상태
+- `ip addr add 192.168.1.100/24 dev eth0`: IP 주소 추가
+- `ip addr del 192.168.1.100/24 dev eth0`: IP 주소 삭제
+- `ethtool eth0`: 네트워크 인터페이스 정보
+- `ethtool -s eth0 speed 1000 duplex full`: 네트워크 속도 설정
+- `mii-tool eth0`: 네트워크 연결 상태 확인
+
+== 방화벽 관리 (iptables)
+- `iptables -L`: 방화벽 규칙 목록
+- `iptables -A INPUT -p tcp --dport 22 -j ACCEPT`: SSH 허용
+- `iptables -A INPUT -p tcp --dport 80 -j ACCEPT`: HTTP 허용
+- `iptables -A INPUT -j DROP`: 모든 입력 차단
+- `iptables -F`: 모든 규칙 삭제
+- `iptables -I INPUT 1 -p tcp --dport 443 -j ACCEPT`: 규칙 삽입
+- `iptables -D INPUT 1`: 특정 규칙 삭제
+- `iptables-save > /etc/iptables/rules.v4`: 규칙 저장
+- `iptables-restore < /etc/iptables/rules.v4`: 규칙 복원
+
+== 네트워크 보안 및 모니터링
+- `nmap -sS target_ip`: 스텔스 스캔
+- `nmap -sV target_ip`: 서비스 버전 스캔
+- `nmap -O target_ip`: 운영체제 감지
+- `tcpdump -i eth0 port 80`: 특정 포트 트래픽 캡처
+- `tcpdump -i eth0 host 192.168.1.1`: 특정 호스트 트래픽 캡처
+- `wireshark`: GUI 네트워크 분석 도구
+- `netstat -tuln`: 수신 대기 포트 목록
+- `ss -tuln`: netstat의 최신 대체 도구
+- `lsof -i`: 네트워크 연결 상태
+
+= 10. 디스크 및 파일시스템 관리
+
+== 디스크 파티션 관리
+- `fdisk -l`: 디스크 파티션 정보
+- `fdisk /dev/sda`: 디스크 파티션 편집
+- `parted /dev/sda print`: 파티션 정보 (GPT 지원)
+- `mkfs.ext4 /dev/sda1`: ext4 파일시스템 생성
+- `mkfs.xfs /dev/sda1`: XFS 파일시스템 생성
+- `fsck /dev/sda1`: 파일시스템 검사 및 수리
+- `e2fsck -f /dev/sda1`: 강제 파일시스템 검사
+- `resize2fs /dev/sda1`: ext4 파일시스템 크기 조정
+
+== LVM (Logical Volume Manager)
+- `pvcreate /dev/sda1`: 물리 볼륨 생성
+- `vgcreate myvg /dev/sda1`: 볼륨 그룹 생성
+- `lvcreate -L 10G -n mylv myvg`: 논리 볼륨 생성
+- `lvextend -L +5G /dev/myvg/mylv`: 논리 볼륨 확장
+- `resize2fs /dev/myvg/mylv`: 파일시스템 확장
+- `lvremove /dev/myvg/mylv`: 논리 볼륨 삭제
+- `vgremove myvg`: 볼륨 그룹 삭제
+- `pvremove /dev/sda1`: 물리 볼륨 삭제
+
+== 디스크 성능 최적화
+- `hdparm -t /dev/sda`: 디스크 읽기 성능 테스트
+- `hdparm -T /dev/sda`: 캐시 읽기 성능 테스트
+- `hdparm -W 1 /dev/sda`: 쓰기 캐시 활성화
+- `hdparm -A 1 /dev/sda`: 읽기 캐시 활성화
+- `iostat -x 1`: 디스크 I/O 통계 모니터링
+- `iotop`: 실시간 I/O 사용량 모니터링
+
+= 11. 시스템 보안 및 하드닝
+
+== 사용자 및 권한 관리
+- `passwd -l username`: 사용자 계정 잠금
+- `passwd -u username`: 사용자 계정 잠금 해제
+- `chage -l username`: 패스워드 만료 정보
+- `chage -M 90 username`: 패스워드 최대 사용 기간 설정
+- `chage -m 7 username`: 패스워드 최소 사용 기간 설정
+- `usermod -L username`: 사용자 계정 잠금
+- `usermod -U username`: 사용자 계정 잠금 해제
+- `groupadd -g 1001 newgroup`: 특정 GID로 그룹 생성
+- `groupdel groupname`: 그룹 삭제
+
+== 파일 권한 및 보안
+- `chmod 755 file`: 파일 권한 설정
+- `chmod u+x file`: 사용자 실행 권한 추가
+- `chmod g-w file`: 그룹 쓰기 권한 제거
+- `chmod o-r file`: 기타 읽기 권한 제거
+- `chown user:group file`: 파일 소유자 및 그룹 변경
+- `chattr +i file`: 파일 불변 속성 설정
+- `chattr -i file`: 파일 불변 속성 해제
+- `lsattr file`: 파일 속성 확인
+- `umask 022`: 기본 파일 권한 마스크 설정
+
+== 시스템 보안 강화
+- `fail2ban-client status`: fail2ban 상태 확인
+- `fail2ban-client set sshd banip 192.168.1.100`: IP 차단
+- `fail2ban-client set sshd unbanip 192.168.1.100`: IP 차단 해제
+- `ufw status`: UFW 방화벽 상태
+- `ufw enable`: UFW 방화벽 활성화
+- `ufw allow 22/tcp`: SSH 포트 허용
+- `ufw deny 80/tcp`: HTTP 포트 차단
+- `ufw delete allow 22/tcp`: 규칙 삭제
+
+= 12. 백업 및 복구
+
+== tar를 이용한 백업
+```bash
+# 전체 시스템 백업 (제외 디렉토리 포함)
+tar --exclude=/proc --exclude=/sys --exclude=/dev \
+    --exclude=/tmp --exclude=/mnt --exclude=/media \
+    -czf /backup/system_backup_$(date +%Y%m%d).tar.gz /
+
+# 증분 백업
+tar --newer-mtime="2023-01-01" -czf incremental_backup.tar.gz /home
+
+# 백업 검증
+tar -tzf backup.tar.gz > /dev/null && echo "Backup is valid"
+```
+
+== rsync를 이용한 동기화
+```bash
+# 전체 디렉토리 동기화
+rsync -avz --delete /source/ /destination/
+
+# 네트워크를 통한 백업
+rsync -avz -e ssh user@remote:/source/ /local/destination/
+
+# 백업 진행 상황 표시
+rsync -avz --progress /source/ /destination/
+
+# 하드 링크를 이용한 백업 (공간 절약)
+rsync -avz --link-dest=/previous/backup /source/ /new/backup/
+```
+
+== dd를 이용한 디스크 복사
+```bash
+# 디스크 전체 복사
+dd if=/dev/sda of=/dev/sdb bs=4M status=progress
+
+# 디스크 이미지 생성
+dd if=/dev/sda of=/backup/disk_image.img bs=4M status=progress
+
+# 압축된 이미지 생성
+dd if=/dev/sda bs=4M | gzip > /backup/disk_image.img.gz
+
+# 이미지에서 복원
+gunzip -c /backup/disk_image.img.gz | dd of=/dev/sda bs=4M status=progress
+```
+
+= 13. 성능 튜닝 및 최적화
+
+== 커널 파라미터 튜닝
+```bash
+# 현재 커널 파라미터 확인
+sysctl -a | grep vm.swappiness
+
+# 임시 설정
+sysctl vm.swappiness=10
+
+# 영구 설정
+echo 'vm.swappiness=10' >> /etc/sysctl.conf
+
+# 일반적인 성능 튜닝 파라미터
+echo 'vm.swappiness=10' >> /etc/sysctl.conf
+echo 'vm.dirty_ratio=15' >> /etc/sysctl.conf
+echo 'vm.dirty_background_ratio=5' >> /etc/sysctl.conf
+echo 'net.core.rmem_max=16777216' >> /etc/sysctl.conf
+echo 'net.core.wmem_max=16777216' >> /etc/sysctl.conf
+```
+
+== 시스템 서비스 관리
+- `systemctl list-units --type=service`: 모든 서비스 목록
+- `systemctl list-units --type=service --state=running`: 실행 중인 서비스
+- `systemctl list-units --type=service --state=failed`: 실패한 서비스
+- `systemctl enable service_name`: 서비스 자동 시작 설정
+- `systemctl disable service_name`: 서비스 자동 시작 해제
+- `systemctl mask service_name`: 서비스 완전 차단
+- `systemctl unmask service_name`: 서비스 차단 해제
+- `systemctl daemon-reload`: systemd 설정 다시 로드
+
+== 메모리 및 스왑 관리
+- `swapon -s`: 스왑 사용량 확인
+- `swapon /dev/sda2`: 스왑 파티션 활성화
+- `swapoff /dev/sda2`: 스왑 파티션 비활성화
+- `free -h`: 메모리 사용량 확인
+- `cat /proc/meminfo`: 상세 메모리 정보
+- `vmstat 1`: 가상 메모리 통계
+- `slabtop`: 커널 슬랩 캐시 정보
+
+= 14. 트러블슈팅 및 디버깅
+
+== 시스템 부팅 문제 해결
+- `journalctl -b`: 현재 부팅 로그
+- `journalctl -b -1`: 이전 부팅 로그
+- `dmesg | grep -i error`: 커널 에러 메시지
+- `systemctl --failed`: 실패한 서비스 확인
+- `fsck /dev/sda1`: 파일시스템 검사
+- `grub-install /dev/sda`: GRUB 재설치
+- `update-grub`: GRUB 설정 업데이트
+
+== 네트워크 문제 해결
+- `ping -c 4 8.8.8.8`: 인터넷 연결 테스트
+- `traceroute google.com`: 라우팅 경로 추적
+- `nslookup google.com`: DNS 해석 테스트
+- `dig google.com`: DNS 쿼리 도구
+- `mtr google.com`: 네트워크 품질 테스트
+- `tcpdump -i eth0 icmp`: ICMP 패킷 캡처
+- `netstat -rn`: 라우팅 테이블 확인
+
+== 디스크 문제 해결
+- `dmesg | grep -i error`: 디스크 에러 확인
+- `smartctl -a /dev/sda`: 디스크 상태 확인
+- `badblocks -v /dev/sda`: 배드 블록 검사
+- `fsck -f /dev/sda1`: 강제 파일시스템 검사
+- `mount -o remount,ro /`: 읽기 전용으로 재마운트
+- `e2fsck -f /dev/sda1`: ext4 파일시스템 검사

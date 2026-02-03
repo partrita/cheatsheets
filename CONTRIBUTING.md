@@ -53,7 +53,7 @@ git checkout -b bugfix/issue-number     # 버그 수정 시
 변경 사항을 적용한 후에는 반드시 **테스트**를 수행하여 의도대로 작동하는지 확인해주세요. `typst` 파일을 추가하거나 수정했다면, 로컬에서 빌드하여 PDF가 올바르게 생성되는지 확인하는 것이 좋습니다.
 
 ```bash
-typst compile src/cheatsheet_your_new.typ
+pixi run build
 ```
 
 ### `pre-commit` 훅 실행 (선택 사항이지만 권장)
@@ -61,7 +61,7 @@ typst compile src/cheatsheet_your_new.typ
 코드를 커밋하기 전에 `pre-commit` 훅을 실행하여 코드 스타일 및 품질 검사를 수행하는 것을 강력히 권장합니다.
 
 ```bash
-pre-commit run --all-files
+pixi run check
 ```
 
 혹은 `pre-commit install`을 통해 Git 훅을 설치했다면 `git commit` 시 자동으로 실행됩니다.

@@ -265,3 +265,248 @@ async def main():
 
 asyncio.run(main())
 ```
+
+== 고급 데코레이터 패턴
+```python
+from functools import wraps
+import time
+
+def timing_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        start = time.time()
+        result = func(*args, **kwargs)
+        end = time.time()
+        print(f"{func.__name__} took {end - start:.4f} seconds")
+        return result
+    return wrapper
+
+def retry(max_attempts=3):
+    def decorator(func):
+        @wraps(func)
+        def wrapper(*args, **kwargs):
+            for attempt in range(max_attempts):
+                try:
+                    return func(*args, **kwargs)
+                except Exception as e:
+                    if attempt == max_attempts - 1:
+                        raise e
+                    print(f"Attempt {attempt + 1} failed: {e}")
+            return None
+        return wrapper
+    return decorator
+
+@timing_decorator
+@retry(max_attempts=3)
+def risky_function():
+    # Some risky operation
+    pass
+```
+
+== 메타클래스 (Metaclasses)
+```python
+class SingletonMeta(type):
+    _instances = {}
+    
+    def __call__(cls, *args, **kwargs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(*args, **kwargs)
+        return cls._instances[cls]
+
+class Database(metaclass=SingletonMeta):
+    def __init__(self):
+        self.connection = "database_connection"
+
+# 두 인스턴스는 동일한 객체
+db1 = Database()
+db2 = Database()
+print(db1 is db2)  # True
+```
+
+== 컨텍스트 관리자 심화
+```python
+from contextlib import contextmanager, ExitStack
+
+@contextmanager
+def file_manager(filename, mode):
+    file = open(filename, mode)
+    try:
+        yield file
+    finally:
+        file.close()
+
+# 여러 리소스 관리
+@contextmanager
+def multi_resource_manager():
+    with ExitStack() as stack:
+        file1 = stack.enter_context(open('file1.txt', 'r'))
+        file2 = stack.enter_context(open('file2.txt', 'w'))
+        yield file1, file2
+```
+
+== 데이터 클래스와 타입 힌트 심화
+```python
+from dataclasses import dataclass, field
+from typing import List, Optional, Union, Dict, Any
+from enum import Enum
+
+class Status(Enum):
+    PENDING = "pending"
+    RUNNING = "running"
+    COMPLETED = "completed"
+    FAILED = "failed"
+
+@dataclass
+class Task:
+    id: int
+    name: str
+    status: Status = Status.PENDING
+    dependencies: List[int] = field(default_factory=list)
+    metadata: Optional[Dict[str, Any]] = None
+    
+    def __post_init__(self):
+        if not self.name:
+            raise ValueError("Task name cannot be empty")
+
+# 사용 예제
+task = Task(
+    id=1,
+    name="Process Data",
+    dependencies=[2, 3],
+    metadata={"priority": "high"}
+)
+```
+
+== 비동기 프로그래밍 심화
+```python
+import asyncio
+import aiohttp
+from typing import List
+
+async def fetch_url(session: aiohttp.ClientSession, url: str) -> str:
+    async with session.get(url) as response:
+        return await response.text()
+
+async def fetch_multiple_urls(urls: List[str]) -> List[str]:
+    async with aiohttp.ClientSession() as session:
+        tasks = [fetch_url(session, url) for url in urls]
+        return await asyncio.gather(*tasks)
+
+# 비동기 제너레이터
+async def async_generator():
+    for i in range(5):
+        await asyncio.sleep(0.1)
+        yield i
+
+async def consume_async_generator():
+    async for value in async_generator():
+        print(f"Received: {value}")
+```
+
+== 프로퍼티와 디스크립터
+```python
+class Temperature:
+    def __init__(self):
+        self._celsius = 0
+    
+    @property
+    def celsius(self):
+        return self._celsius
+    
+    @celsius.setter
+    def celsius(self, value):
+        if value < -273.15:
+            raise ValueError("Temperature below absolute zero")
+        self._celsius = value
+    
+    @property
+    def fahrenheit(self):
+        return self._celsius * 9/5 + 32
+    
+    @fahrenheit.setter
+    def fahrenheit(self, value):
+        self.celsius = (value - 32) * 5/9
+
+# 디스크립터 예제
+class ValidatedAttribute:
+    def __init__(self, validator):
+        self.validator = validator
+        self.name = None
+    
+    def __set_name__(self, owner, name):
+        self.name = name
+    
+    def __get__(self, instance, owner):
+        return instance.__dict__.get(self.name)
+    
+    def __set__(self, instance, value):
+        if not self.validator(value):
+            raise ValueError(f"Invalid value: {value}")
+        instance.__dict__[self.name] = value
+
+def positive_number(value):
+    return isinstance(value, (int, float)) and value > 0
+
+class Product:
+    price = ValidatedAttribute(positive_number)
+    
+    def __init__(self, price):
+        self.price = price
+```
+
+== 함수형 프로그래밍 패턴
+```python
+from functools import reduce, partial
+from itertools import chain, groupby
+from operator import itemgetter
+
+# 함수 조합
+def compose(*functions):
+    return reduce(lambda f, g: lambda x: f(g(x)), functions, lambda x: x)
+
+# 파이프라인 예제
+def add_one(x): return x + 1
+def multiply_by_two(x): return x * 2
+def square(x): return x ** 2
+
+pipeline = compose(square, multiply_by_two, add_one)
+result = pipeline(3)  # ((3 + 1) * 2) ** 2 = 64
+
+# 부분 적용
+def multiply(x, y):
+    return x * y
+
+double = partial(multiply, 2)
+triple = partial(multiply, 3)
+
+# 그룹화
+data = [('A', 1), ('B', 2), ('A', 3), ('B', 4)]
+grouped = {k: list(v) for k, v in groupby(sorted(data), key=itemgetter(0))}
+```
+
+== 성능 최적화 기법
+```python
+# 메모이제이션
+from functools import lru_cache
+
+@lru_cache(maxsize=128)
+def fibonacci(n):
+    if n < 2:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+
+# 제너레이터 표현식으로 메모리 효율성
+def process_large_file(filename):
+    with open(filename, 'r') as file:
+        # 제너레이터 표현식으로 한 번에 하나씩 처리
+        processed_lines = (line.strip().upper() for line in file if line.strip())
+        return sum(len(line) for line in processed_lines)
+
+# 슬롯을 사용한 메모리 최적화
+class Point:
+    __slots__ = ['x', 'y']
+    
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+```
