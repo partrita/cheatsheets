@@ -50,6 +50,11 @@ Welcome to the collection of cheatsheets. Below you can find various cheatsheets
     
     for pdf in sorted(pdfs):
         filename = pdf.stem
+        
+        # Skip template files if they exist
+        if filename in ["conf", "icons"]:
+            continue
+            
         # Extract readable name: cheatsheet_go -> Go
         # cheatsheet_R_tidyverse -> R Tidyverse
         readable_name = filename.replace("cheatsheet_", "").replace("_", " ").title()
