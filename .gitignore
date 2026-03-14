@@ -301,3 +301,4 @@ site_libs/
 .quarto/
 
 .agent
+.typ_build_temp/
