@@ -51,11 +51,23 @@ Typst 문서를 직접 빌드하여 PDF 또는 다른 형식으로 변환할 수
     ```
     이 명령은 `dist/` 디렉토리에 모든 치트시트의 PDF 버전을 생성합니다.
 
-## 전체 Typst 문서 컴파일 오류 확인
-
 ```bash
 pixi run check
 ```
+
+### 특정 치트시트 개별 빌드 및 실시간 미리보기
+
+특정 파일만 빌드하거나, 수정하면서 실시간으로 결과를 확인하고 싶을 때 다음 명령어를 사용합니다.
+
+- **개별 PDF 빌드**:
+  ```bash
+  pixi run typst compile --font-path src/fonts src/특정파일.typ 특정파일.pdf
+  ```
+- **실시간 미리보기 (Watch Mode)**:
+  파일을 저장할 때마다 PDF가 자동으로 업데이트됩니다.
+  ```bash
+  pixi run typst watch --font-path src/fonts src/특정파일.typ
+  ```
 
 ## 웹사이트 생성 및 미리보기
 
