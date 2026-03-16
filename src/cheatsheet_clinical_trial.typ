@@ -12,13 +12,14 @@
 = 자주 쓰이는 약어
 - AE (Adverse Event, 이상사례): 임상시험용 의약품 투여 후 발생한 모든 바람직하지 않은 증상이나 질환. 약물과의 *인과관계 여부와 상관없이* 발생한 모든 사건을 포함함.
 - DLT (Dose-Limiting Toxicity, 용량 제한 독성): 투여 후 발생하는 심각한 부작용으로 인해, 그 이상의 용량 증량이 불가능하다고 판단되는 독성 수준. MTD 결정의 직접적인 기준이 됨.
-- RP2D (Recommended Phase 2 Dose, 2상 권장 용량): 1상(용량 탐색) 시험 결과를 분석하여 안전성과 유효성이 가장 균형 잡혔다고 판단된, 차기 2상 시험용 최적 용량.
-- TTR (Time To Response, 반응 도달 시간): 치료 시작부터 객관적인 종양 반응(PR 또는 CR)이 처음 관찰될 때까지 걸린 시간.
-- Q3W (Every 3 Weeks): 3주(21일) 간격의 약물 투여 주기.
-- SAD (Single Ascending Dose, 단일 용량 상승 시험): 코호트별로 약물을 한 번만 투여하며 용량을 단계적으로 높여 안전성과 내약성을 평가하는 기초 단계 시험.
+- FIH (First In Human):사람을 대상으로 하는 최초 임상시험(보통 1상 초기)을 의미. 
 - MAD (Multiple Ascending Dose, 다중 용량 상승 시험): 약물을 여러 번 반복 투여하며 용량을 높여가는 시험. 체내 약물 축적 및 정강상태(Steady-state)에서의 독성을 평가함.
 - MTD (Maximum Tolerated Dose, 최대 내약 용량): DLT가 허용 범위를 넘지 않으면서 투여할 수 있는 가장 높은 용량. 즉, '안전한 최대치'를 의미함.
 - RDE (Recommended Dose for Expansion): 용량 증량 단계 종료 후, 특정 환자군을 대상으로 더 넓게 시험하기 위해 선정된 추천 용량. 보통 MTD와 동일하거나 그 이하에서 결정됨.
+- RP2D (Recommended Phase 2 Dose, 2상 권장 용량): 1상(용량 탐색) 시험 결과를 분석하여 안전성과 유효성이 가장 균형 잡혔다고 판단된, 차기 2상 시험용 최적 용량.
+- SAD (Single Ascending Dose, 단일 용량 상승 시험): 코호트별로 약물을 한 번만 투여하며 용량을 단계적으로 높여 안전성과 내약성을 평가하는 기초 단계 시험.
+- TTR (Time To Response, 반응 도달 시간): 치료 시작부터 객관적인 종양 반응(PR 또는 CR)이 처음 관찰될 때까지 걸린 시간.
+- Q3W (Every 3 Weeks): 3주(21일) 간격의 약물 투여 주기.
 
 
 = RECIST 1.1
@@ -88,6 +89,7 @@ Common Terminology Criteria for Adverse Events (공통 용어 부작용 기준).
 == Kaplan-Meier 곡선
 
 OS/PFS 생존 분석에 사용됨.
+곡선의 높이는 특정 시점까지 생존(무진행 생존)할 확률을 의미하며, 곡선이 급격히 떨어질수록 사건(사망/진행) 발생률이 높다는 뜻으로 해석함.
 
 #figure(
   image("images/survival_plot.png", width: 100%),
@@ -97,6 +99,7 @@ OS/PFS 생존 분석에 사용됨.
 == Spider plot
 
 시간별 종양 반응 추적에 활용됨.
+각 선은 한 환자를 나타내며, 기준 대비 종양 크기 변화(%)가 시간이 지남에 따라 어떻게 증가·감소하는지 확인해 반응의 시작·지속·진행 시점을 파악함.
 
 #figure(
   image("images/spider_plot.png", width: 100%),
@@ -106,6 +109,7 @@ OS/PFS 생존 분석에 사용됨.
 == Swimmer plot
 
 환자별 사건 발생 타임라인을 보여줌.
+각 막대는 환자 한 명의 추적 기간을 나타내며, 막대의 길이와 표시된 기호를 통해 치료 기간, 반응 발생/소실, 진행, 중단 시점 등을 직관적으로 해석함.
 
 #figure(
   image("images/swimmer_plot.png", width: 100%),
@@ -115,6 +119,7 @@ OS/PFS 생존 분석에 사용됨.
 == Waterfall plot
 
 환자별 종양 크기 변화를 나타냄.
+각 막대는 환자별 최대 종양 크기 변화를 의미하며, 0선 아래로 내려간 막대는 종양 축소(부분/완전 반응 가능성), 위로 올라간 막대는 종양 증가(진행 또는 비반응)를 시각적으로 보여줌.
 
 #figure(
   image("images/waterfall_plot.png", width: 100%),
@@ -124,6 +129,7 @@ OS/PFS 생존 분석에 사용됨.
 == Forest plot
 
 메타분석 결과를 요약함.
+각 가로선은 개별 연구의 효과 추정치와 신뢰구간을, 다이아몬드는 전체 통합 효과와 신뢰구간을 나타내며, 수직 기준선(효과 없음) 기준으로 왼쪽/오른쪽 위치에 따라 유의한 이득 또는 위험 증가 여부를 판단함.
 
 #figure(
   image("images/forest_plot.png", width: 100%),
