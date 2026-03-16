@@ -21,11 +21,19 @@
 - TTR (Time To Response, 반응 도달 시간): 치료 시작부터 객관적인 종양 반응(PR 또는 CR)이 처음 관찰될 때까지 걸린 시간.
 - Q3W (Every 3 Weeks): 3주(21일) 간격의 약물 투여 주기.
 
+= 피험자 집단 (analysis set)
+분석 목적에 따라 ITT, FAS, PPS, EAS, SS로 나눔.
+
+- ITT (Intention-To-Treat): 무작위 배정된 모든 피험자를 최초 치료군대로 분석하는 기본 원칙. 완벽 적용은 추적 어려움으로 FAS로 대체.
+- FAS (Full Analysis Set): ITT에 가까운 집단으로, 최소 정당한 제외 사유(투여 미실시, 데이터 없음 등)만 제거.
+- PPS (Per Protocol Set, PP): 프로토콜 완전 준수, 치료 완료, 데이터 완전한 피험자만 포함. EAS보다 엄격.
+- EAS (Efficacy Analysis Set): 유효성 평가를 위한 사전 기준 충족 피험자 집단.
+- SS (Safety Analysis Set): 시험약 1회 이상 투여받은 모든 피험자. 안전성(부작용) 분석용.
 
 = RECIST 1.1
 Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). 종양의 크기 변화를 측정하여 항암제 효과를 객관적으로 평가함.
 
-== 반응 평가(Response Evaluation) 기준
+== 반응 평가 (Response Evaluation)
 - Target lesions (표적 병변): 치료 효과 평가를 위해 베이스라인에서 선정된 측정 가능한 병변. 병변 장경(Longest diameter)의 합을 추적 관리함. (최대 5개, 한 장기당 2개까지 선정)
 - CR (Complete Response, 완전 관해): 모든 표적 병변이 사라지고, 림프절 전이가 있었던 경우 단축이 10mm 미만으로 감소한 상태. 신규 병변이 없어야 함.
 - PR (Partial Response, 부분 관해): 베이스라인 대비 표적 병변 장경 합이 30% 이상 감소한 상태.
@@ -76,7 +84,9 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
 - AST/ALT (간 효소 수치): 간 세포 손상 정도를 나타내는 지표. 약물 유도성 간 손상(DILI) 확인을 위해 필수적으로 모니터링함.
 
 = CTCAE
-Common Terminology Criteria for Adverse Events (공통 용어 부작용 기준). 이상사례의 심각도를 등급으로 분류함.
+
+Common Terminology Criteria for Adverse Events (공통 용어 부작용 기준)의 약어. 미국 국립암연구소(NCI)가 개발한 이상사례의 심각도 분류 시스템.
+2025년 7월 NCI에서 발표된 최신 버전은 CTCAE v6.0이다.
 
 - Grade 1 (Mild): 경미 (무증상 또는 약한 증상).
 - Grade 2 (Moderate): 중등도 (국소적 치료 필요, 일상생활 일부 제한).
