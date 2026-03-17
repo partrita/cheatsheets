@@ -159,3 +159,26 @@ OS/PFS 생존 분석에 사용됨.
 - Clearance (CL, 청소율): 약물이 체내에서 제거되는 속도. 간 대사, 신장 배설 등에 영향받음.
 - Volume of Distribution (Vd, 분포용적): 약물이 체내에 분포하는 정도를 나타내는 가상 체적.
 - Steady State (정상상태): 반복 투여 시 약물의 투입량과 제거량이 평형에 도달한 상태.
+
+= 자주 사용되는 암종 약어
+
+임상에서 가장 흔히 사용되는 암종 약어 목록. NCCN/ESMO 가이드라인 기준 표준 치료법을 포함.
+
+​- AML (Acute myeloid leukemia): 급성골수성백혈병, 표준 치료: 화학요법/Veno+Azacitidine
+- BC (Breast cancer): 유방암, 표준 치료: 수술/방사선/호르몬요법/Trastuzumab
+- CC (Cervical cancer): 자궁경부암, 표준 치료: CCRT(Cisplatin+방사선)
+- CRC (Colorectal cancer): 대장암, 표준 치료: 수술/FOLFOX(항암화학요법)/FOLFIRI+Bevacizumab
+- EOC (Epithelial ovarian cancer): 난소상피암, 표준 치료: 수술+Platinum기반요법
+- GC (Gastric cancer): 위암, 표준 치료: 수술/FLOT/XELOX
+- HCC (Hepatocellular carcinoma): 간암, 표준 치료: TACE/Sorafenib/Lenvatinib
+- HNSCC (Head and neck squamous cell carcinoma): 두경부편평상피세포암, 표준 치료: 수술/CCRT
+- MM (Malignant melanoma): 흑색종, 표준 치료: 수술/면역치료(PD-1/MEK inhibitor)/표적치료(BRAF inhibitor)
+- NSCLC (Non-small cell lung cancer): 비소세포폐암, 표준 치료: 수술/방사선/표적치료(EGFR TKI)/면역치료
+- PC (Prostate cancer): 전립선암, 표준 치료: 수술/방사선/호르몬요법
+- PDAC(Pancreatic ductal adenocarcinoma): 췌장암, 표준 치료: 수술/Gemcitabine+nab-Paclitaxel/FOLFIRINOX.
+- RCC (Renal cell carcinoma): 신세포암, 표준 치료: 수술/표적치료(Sunitinib)/면역치료
+​- SCC (Squamous cell carcinoma): 편평세포암, 표준 치료: CCRT/수술
+- SCLC (Small cell lung cancer): 소세포폐암, 표준 치료: 화학요법(Platinum+ETP)+방사선
+- TC (Thyroid cancer): 갑상선암, 표준 치료: 수술+방사성요오드치료
+- UBC (Urothelial bladder cancer): 방광암, 표준 치료: BCG/수술/Cisplatin 기반 화학요법
+​
