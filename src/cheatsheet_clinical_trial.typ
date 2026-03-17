@@ -27,6 +27,13 @@
 - TTR (Time To Response, 반응 도달 시간): 치료 시작부터 객관적인 종양 반응(PR 또는 CR)이 처음 관찰될 때까지 걸린 시간.
 - Q3W (Every 3 Weeks): Q는 라틴어 Quaque(매번) 에서 온 단어, 3주(21일) 간격의 약물 투여 주기.
 
+= 임상 프로토콜
+
+- 3+3 디자인: 보통 1상 용량 증량에 쓰이는 고전적 설계(3명 시작, 필요시 3명 추가), 가장 낮은 용량에서 3명 투약 → DLT 0명이면 다음 단계 증량. DL1 1명이면 3명 추가. DLT 2명이면 이전 단계 용량이 MTD로 결정
+- BOIN 디자인: Bayesian Optimal Interval(베이지안 최적 구간), DLT 비율을 escalation/de-escalation 경계와 비교해 용량 조정 (3+3보다 정확·유연)
+​- 2L 디자인: 2nd line(1차 치료 실패 후) 대상 시험 설계, 2L 표준 치료 vs 신약 비교.
+- Arm1/2/3: Arm은 임상시험 내에서 서로 다른 치료를 받는 군(group)을 의미. 예를 들면 Arm 1(기존 표준 치료), Arm 2(신약 + 표준치료) Arm 3(신약 단독) 으로 PFS/OS를 비교하는 식.
+
 = 피험자 집단 (Analysis set)
 분석 목적에 따라 피험자를 ITT, FAS, PPS, EAS, SS로 나눔.
 
