@@ -70,16 +70,21 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
   [DoR], [응답 → PD/사망], [반응군(CR/PR)]
 )
 
-- Line of Therapy (치료 차수):
-  - 1st Line (1차 치료): 해당 질환에 대해 처음으로 시도하는 표준 치료.
-  - 2nd Line (2차 치료): 1차 치료 실패(내성 발생 등) 후 진행하는 다음 단계의 치료.
+= Line of Therapy (치료 차수):
+- 1st Line (1차 치료): 해당 질환에 대해 처음으로 시도하는 표준 치료.
+- 2nd Line (2차 치료): 1차 치료 실패(내성 발생 등) 후 진행하는 다음 단계의 치료.
+- 3rd Line (3차 치료): 2차 실패 후 시도. 선택적 치료로, 임상시험 참여나 타겟 치료제가 주로 적용되며 효과가 제한적.
+- Later Line (4차 이상): 여러 차수 실패 후 시도하는 치료. 치료 차수가 길어질수록 일반적인 항암제 독성 및 체력 저하가 누적되어 환자 관리 난이도가 증가.
 
 = Adverse Events (이상사례)
 
 - TRAE (Treatment-Related Adverse Event): 투여한 약물과의 인과관계를 배제할 수 없는(관련이 의심되는) 이상사례임.
 - TEAE (Treatment-Emergent Adverse Event): 약물 투여 전에는 없었으나 투여 후 새로 발생하거나 기존 증상이 악화된 모든 이상사례임.
 - TESAE (Treatment-Emergent Serious Adverse Event): 치료 과정 중 발생한 '중대한' 이상사례(SAE). 입원, 생명 위협, 영구적 장애 등이 해당됨.
-- irAE (Immune-Related Adverse Event): 면역항암제 투여로 인해 면역 체계가 과활성화되어 정상 조직을 공격하며 발생하는 부작용임.
+- irAE (Immune-Related Adverse Event): 면역항암제 투여로 인해 면역 체계가 과활성화되어 정상 조직을 공격하며 발생하는 부작용.
+  - 피부 반응: 발진, 가려움증(pruritus)이 가장 흔하며, 전체 irAE의 30-50%를 차지. 일반적으로 경증이지만 스테로이드로 관리.
+  - 갑상선 기능 이상: 갑상선염으로 인한 갑상선 기능 저하증(hypothyroidism)이 15% 정도 발생, pembrolizumab 환자에서 빈번.
+​  - 장염(colitis): 설사와 복통으로 나타나며, 중증(grade 3 이상) 시 입원 필요. ipilimumab 치료에서 높음.
 - SAE (Serious Adverse Event, 중대한 이상사례): 사망, 생명의 위협, 입원 연장, 지속적 장애 등을 초래하는 사건. 발생 시 24시간 이내에 규제 기관 보고 대상임.
 - AST/ALT (간 효소 수치): 간 세포 손상 정도를 나타내는 지표. 약물 유도성 간 손상(DILI) 확인을 위해 필수적으로 모니터링함.
 
