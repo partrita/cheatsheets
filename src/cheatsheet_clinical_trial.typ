@@ -27,8 +27,8 @@
 - TTR (Time To Response, 반응 도달 시간): 치료 시작부터 객관적인 종양 반응(PR 또는 CR)이 처음 관찰될 때까지 걸린 시간.
 - Q3W (Every 3 Weeks): Q는 라틴어 Quaque(매번) 에서 온 단어, 3주(21일) 간격의 약물 투여 주기.
 
-= 피험자 집단 (analysis set)
-분석 목적에 따라 ITT, FAS, PPS, EAS, SS로 나눔.
+= 피험자 집단 (Analysis set)
+분석 목적에 따라 피험자를 ITT, FAS, PPS, EAS, SS로 나눔.
 
 - ITT (Intention-To-Treat): 무작위 배정된 모든 피험자를 최초 치료군대로 분석하는 기본 원칙. 완벽 적용은 추적 어려움으로 FAS로 대체.
 - FAS (Full Analysis Set): ITT에 가까운 집단으로, 최소 정당한 제외 사유(투여 미실시, 데이터 없음 등)만 제거.
@@ -37,7 +37,8 @@
 - SS (Safety Analysis Set): 시험약 1회 이상 투여받은 모든 피험자. 안전성(부작용) 분석용.
 
 = RECIST 1.1
-Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). 종양의 크기 변화를 측정하여 항암제 효과를 객관적으로 평가함.
+RECIST(Response Evaluation Criteria In Solid Tumors)는 고형암 환자의 항암 치료 효과를 객관적으로 평가하기 위한 국제 표준 기준으로, 주로 CT나 MRI 같은 영상 검사를 통해 종양 크기 변화를 측정.
+치료 전 베이스라인 스캔 후 일정 주기(보통 6-8주)로 재평가하며, PR/CR 확인 시 최소 4주 간격 두 번 측정함. 최대 5개 병변(장기당 2개까지)을 선택해 가장 긴 직경 합(SLD)을 기준으로 평가함.
 
 == 반응 평가 (Response Evaluation)
 - Target lesions (표적 병변): 치료 효과 평가를 위해 베이스라인에서 선정된 측정 가능한 병변. 병변 장경(Longest diameter)의 합을 추적 관리함. (최대 5개, 한 장기당 2개까지 선정)
@@ -45,7 +46,6 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
 - PR (Partial Response, 부분 관해): 베이스라인 대비 표적 병변 장경 합이 30% 이상 감소한 상태.
 - SD (Stable Disease, 안정 병변): PR 기준에 도달할 만큼 충분히 줄어들지도, PD 기준에 해당할 만큼 늘어나지도 않은 상태.
 - PD (Progressive Disease, 질환 진행): 치료 중 기록된 가장 작은 장경 합(Nadir) 대비 20% 이상 증가하고, 절대수치로도 최소 5mm 이상 증가한 상태. 또는 신규 병변이 발생한 경우.
-
 
 #table(
   columns: (0.8fr, 1.2fr, 1.2fr),
@@ -59,7 +59,6 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
 )
 
 = 주요 평가 지표 (Endpoints)
-
 - OS (Overall Survival, 전체 생존 기간): 무작위 배정(또는 치료 시작)부터 어떤 원인에 의한 사망까지의 시간. 항암제 임상에서 가장 신뢰받는 골드 스탠다드 지표임.
 - ORR (Objective Response Rate, 객관적 반응률): 전체 환자 중 CR 또는 PR을 달성한 환자의 비율. 약물의 직접적인 항종양 효과를 보여줌.
 - DCR (Disease Control Rate, 질병 조절률): 종양이 줄어들거나(CR, PR) 최소한 더 커지지 않은(SD) 환자의 비율(CR + PR + SD).
@@ -76,14 +75,13 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
   [DoR], [응답 → PD/사망], [반응군(CR/PR)]
 )
 
-= Line of Therapy (치료 차수):
+= 치료 차수 (Line of Therapy)
 - 1st Line (1차 치료): 해당 질환에 대해 처음으로 시도하는 표준 치료.
 - 2nd Line (2차 치료): 1차 치료 실패(내성 발생 등) 후 진행하는 다음 단계의 치료.
 - 3rd Line (3차 치료): 2차 실패 후 시도. 선택적 치료로, 임상시험 참여나 타겟 치료제가 주로 적용되며 효과가 제한적.
 - Later Line (4차 이상): 여러 차수 실패 후 시도하는 치료. 치료 차수가 길어질수록 일반적인 항암제 독성 및 체력 저하가 누적되어 환자 관리 난이도가 증가.
 
-= Adverse Events (이상사례)
-
+= 이상사례 (Adverse Events)
 - TRAE (Treatment-Related Adverse Event): 투여한 약물과의 인과관계를 배제할 수 없는(관련이 의심되는) 이상사례임.
 - TEAE (Treatment-Emergent Adverse Event): 약물 투여 전에는 없었으나 투여 후 새로 발생하거나 기존 증상이 악화된 모든 이상사례임.
 - TESAE (Treatment-Emergent Serious Adverse Event): 치료 과정 중 발생한 '중대한' 이상사례(SAE). 입원, 생명 위협, 영구적 장애 등이 해당됨.
@@ -95,9 +93,8 @@ Response Evaluation Criteria In Solid Tumors(고형암 반응 평가 기준). �
 - AST/ALT (간 효소 수치): 간 세포 손상 정도를 나타내는 지표. 약물 유도성 간 손상(DILI) 확인을 위해 필수적으로 모니터링함.
 
 = CTCAE
-
-Common Terminology Criteria for Adverse Events (공통 용어 부작용 기준)의 약어. 미국 국립암연구소(NCI)가 개발한 이상사례의 심각도 분류 시스템.
-2025년 7월 NCI에서 발표된 최신 버전은 CTCAE v6.0이다.
+CTCAE(Common Terminology Criteria for Adverse Events)는 미국 국립암연구소(NCI)가 개발한 이상사례의 심각도 분류 시스템.
+2025년 7월 기준 최신 버전은 CTCAE v6.0이다.
 
 - Grade 1 (Mild): 경미 (무증상 또는 약한 증상).
 - Grade 2 (Moderate): 중등도 (국소적 치료 필요, 일상생활 일부 제한).
@@ -106,11 +103,9 @@ Common Terminology Criteria for Adverse Events (공통 용어 부작용 기준)�
 - Grade 5 (Death): 사망.
 
 = 임상시험 시각화 기법
+== Survival plot(Kaplan-Meier 곡선)
 
-== Kaplan-Meier 곡선
-
-OS/PFS 생존 분석에 사용됨.
-곡선의 높이는 특정 시점까지 생존(무진행 생존)할 확률을 의미하며, 곡선이 급격히 떨어질수록 사건(사망/진행) 발생률이 높다는 뜻으로 해석함.
+OS/PFS 생존 분석에 사용됨. 곡선의 높이는 특정 시점까지 생존(무진행 생존)할 확률을 의미하며, 곡선이 급격히 떨어질수록 사건(사망/진행) 발생률이 높다는 뜻으로 해석함.
 
 #figure(
   image("images/survival_plot.png", width: 100%),
@@ -119,8 +114,7 @@ OS/PFS 생존 분석에 사용됨.
 
 == Spider plot
 
-시간별 종양 반응 추적에 활용됨.
-각 선은 한 환자를 나타내며, 기준 대비 종양 크기 변화(%)가 시간이 지남에 따라 어떻게 증가·감소하는지 확인해 반응의 시작·지속·진행 시점을 파악함.
+시간별 종양 반응 추적에 활용됨. 각 선은 한 환자를 나타내며, 기준 대비 종양 크기 변화(%)가 시간이 지남에 따라 어떻게 증가·감소하는지 확인해 반응의 시작·지속·진행 시점을 파악함.
 
 #figure(
   image("images/spider_plot.png", width: 100%),
@@ -129,8 +123,7 @@ OS/PFS 생존 분석에 사용됨.
 
 == Swimmer plot
 
-환자별 사건 발생 타임라인을 보여줌.
-각 막대는 환자 한 명의 추적 기간을 나타내며, 막대의 길이와 표시된 기호를 통해 치료 기간, 반응 발생/소실, 진행, 중단 시점 등을 직관적으로 해석함.
+환자별 사건 발생 타임라인을 보여줌. 각 막대는 환자 한 명의 추적 기간을 나타내며, 막대의 길이와 표시된 기호를 통해 치료 기간, 반응 발생/소실, 진행, 중단 시점 등을 직관적으로 해석함.
 
 #figure(
   image("images/swimmer_plot.png", width: 100%),
@@ -139,8 +132,7 @@ OS/PFS 생존 분석에 사용됨.
 
 == Waterfall plot
 
-환자별 종양 크기 변화를 나타냄.
-각 막대는 환자별 최대 종양 크기 변화를 의미하며, 0선 아래로 내려간 막대는 종양 축소(부분/완전 반응 가능성), 위로 올라간 막대는 종양 증가(진행 또는 비반응)를 시각적으로 보여줌.
+환자별 종양 크기 변화를 나타냄. 각 막대는 환자별 최대 종양 크기 변화를 의미하며, 0선 아래로 내려간 막대는 종양 축소(부분/완전 반응 가능성), 위로 올라간 막대는 종양 증가(진행 또는 비반응)를 시각적으로 보여줌.
 
 #figure(
   image("images/waterfall_plot.png", width: 100%),
@@ -149,8 +141,7 @@ OS/PFS 생존 분석에 사용됨.
 
 == Forest plot
 
-메타분석 결과를 요약함.
-각 가로선은 개별 연구의 효과 추정치와 신뢰구간을, 다이아몬드는 전체 통합 효과와 신뢰구간을 나타내며, 수직 기준선(효과 없음) 기준으로 왼쪽/오른쪽 위치에 따라 유의한 이득 또는 위험 증가 여부를 판단함.
+메타분석 결과를 요약함. 각 가로선은 개별 연구의 효과 추정치와 신뢰구간을, 다이아몬드는 전체 통합 효과와 신뢰구간을 나타내며, 수직 기준선(효과 없음) 기준으로 왼쪽/오른쪽 위치에 따라 유의한 이득 또는 위험 증가 여부를 판단함.
 
 #figure(
   image("images/forest_plot.png", width: 100%),
@@ -169,10 +160,9 @@ OS/PFS 생존 분석에 사용됨.
 - Bioavailability (생체이용률): 투여된 약물 중 실제 전신 순환에 도달하는 비율.
 - Clearance (CL, 청소율): 약물이 체내에서 제거되는 속도. 간 대사, 신장 배설 등에 영향받음.
 - Volume of Distribution (Vd, 분포용적): 약물이 체내에 분포하는 정도를 나타내는 가상 체적.
-- Steady State (정상상태): 반복 투여 시 약물의 투입량과 제거량이 평형에 도달한 상태.
+- Steady State: 반복 투여 시 약물의 투입량과 제거량이 평형에 도달한 상태.
 
 = 자주 사용되는 암종 약어
-
 임상에서 가장 흔히 사용되는 암종 약어 목록. NCCN/ESMO 가이드라인 기준 표준 치료법을 포함.
 
 ​- AML (Acute myeloid leukemia): 급성골수성백혈병, 표준 치료: 화학요법/Veno+Azacitidine
