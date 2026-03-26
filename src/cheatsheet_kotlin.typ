@@ -9,53 +9,49 @@
 = 1. 변수, 타입, Null 안정성
 
 - 변수 선언:
-  - `val`: 읽기 전용 (immutable) 변수. Java의 `final`과 유사.
-  - `var`: 재할당 가능한 (mutable) 변수.
-- 타입 추론: `val name = "Kotlin"` (컴파일러가 `String`으로 추론)
-- 기본 타입: `Int`, `Double`, `Boolean`, `Char`, `String` 등. Java와 달리 모든 것이 객체.
-- Null 안정성 (Null Safety): Kotlin의 핵심 기능. Null Pointer Exception(NPE)을 방지.
-  - `String?`: Null이 될 수 있는 타입.
-  - `String`: Null이 될 수 없는 타입.
-- 안전한 호출 (Safe Call): `val length = name?.length` (name이 null이면 null 반환)
-- 엘비스 연산자 (Elvis Operator): `val length = name?.length ?: -1` (name이 null이면 -1 반환)
-- Not-null 단언 (Not-null assertion): `val length = name!!.length` (name이 null이면 NPE 발생, 주의해서 사용)
+  - `val`: 읽기 전용 (immutable) 변수. Java의 `final` 대응
+  - `var`: 재할당 가능 (mutable) 변수
+- 타입 추론: `val name = "Kotlin"` (String 자동 추론)
+- 기본 타입: `Int`, `Double`, `Boolean`, `Char`, `String` 등 (모두 객체)
+- Null 안정성 (Null Safety):
+  - `String?`: Null 허용 타입
+  - `String`: Null 불허 타입
+  - 안전한 호출: `obj?.prop` (Null이면 Null 반환)
+  - 엘비스 연산자: `obj ?: "default"` (Null이면 우측 값 반환)
+  - Not-null 단언: `obj!!` (Null이면 NPE 발생, 주의)
 
 = 2. 제어 흐름
 
-- `if-else`: Java와 유사. 표현식으로 사용 가능.
+- `if-else`: 표현식으로 사용 가능
   ```kotlin
   val max = if (a > b) a else b
   ```
-- `when`: Java의 `switch`를 대체하는 강력한 기능.
+- `when`: Java의 `switch`를 대체하는 강력한 조건문
   ```kotlin
   when (x) {
       1 -> print("x == 1")
-      2, 3 -> print("x is 2 or 3")
-      in 4..7 -> print("x is in the range")
-      is String -> print("x is a String")
-      else -> print("otherwise")
+      2, 3 -> print("2 또는 3")
+      in 4..7 -> print("범위 내 존재")
+      is String -> print("문자열 타입")
+      else -> print("기타")
   }
   ```
-- `for` 루프:
+- 루프:
   ```kotlin
-  for (item in collection) print(item)
-  for (i in 1..5) { ... } // 1, 2, 3, 4, 5
-  for (i in 1 until 5) { ... } // 1, 2, 3, 4
+  for (item in coll) print(item)
+  for (i in 1..5) { ... }      // 1~5 포함
+  for (i in 1 until 5) { ... } // 5 미포함
   for (i in 5 downTo 1 step 2) { ... } // 5, 3, 1
   ```
-- `while` / `do-while`: Java와 동일.
 
 = 3. 함수
 
-- 함수 정의: `fun` 키워드 사용.
+- 정의: `fun` 키워드 사용
   ```kotlin
-  fun sum(a: Int, b: Int): Int {
-      return a + b
-  }
+  fun sum(a: Int, b: Int): Int = a + b // 단일 표현식 함수
   ```
-- 단일 표현식 함수: `fun sum(a: Int, b: Int) = a + b`
-- 기본 인자 (Default Arguments): `fun greet(name: String, message: String = "Hello") { ... }`
-- 명명된 인자 (Named Arguments): `greet(message = "Hi", name = "Bob")`
+- 기본 인수: `fun greet(name: String, msg: String = "Hi")`
+- 명명된 인수: `greet(msg = "Hello", name = "Kim")`
 
 = 4. 클래스와 객체
 
@@ -65,84 +61,50 @@
       var age: Int = 0
   }
   ```
-- 데이터 클래스 (Data Class): `equals()`, `hashCode()`, `toString()`, `copy()` 등을 자동으로 생성.
+- 데이터 클래스 (Data Class): `equals`, `hashCode`, `toString`, `copy` 자동 생성
   ```kotlin
   data class User(val name: String, val age: Int)
   ```
-- 상속: `open` 키워드로 상속 허용. `:` 사용.
+- 상속: `open` 키워드 필요. `:` 사용
   ```kotlin
   open class Shape
   class Rectangle : Shape()
   ```
-- 인터페이스: `interface MyInterface { fun myMethod() }`
-- 객체 (Object): 싱글턴(Singleton)을 쉽게 생성.
+- 인터페이스: `interface MyInterface { fun method() }`
+- 객체 (Object): 싱글턴(Singleton) 정의 시 사용
   ```kotlin
-  object DataProviderManager {
-      fun registerDataProvider(...) { ... }
-  }
+  object Manager { fun work() { ... } }
   ```
 
-= 5. 확장 함수 및 프로퍼티 (Extensions)
+= 5. 확장 기능 (Extensions)
 
-기존 클래스를 수정하지 않고 새로운 함수나 프로퍼티를 추가.
+기존 클래스 수정 없이 함수/프로퍼티 추가
 ```kotlin
-fun String.initials(): String {
-    return this.split(' ').map { it.first() }.joinToString("")
-}
-
-val name = "John Doe"
-println(name.initials()) // JD
+fun String.initials(): String = split(' ').map { it.first() }.joinToString("")
 ```
 
 = 6. 고차 함수와 람다
 
 - 람다 표현식: `{ 인자 -> 본문 }`
+- 컬렉션 함수: `filter`, `map`, `forEach`, `reduce` 등
   ```kotlin
-  val sum = { x: Int, y: Int -> x + y }
-  println(sum(1, 2)) // 3
-  ```
-- 고차 함수: 함수를 인자로 받거나 함수를 반환하는 함수.
-- 컬렉션 함수: `filter`, `map`, `forEach`, `reduce` 등.
-  ```kotlin
-  val numbers = listOf(1, 2, 3, 4, 5)
-  val evens = numbers.filter { it % 2 == 0 } // [2, 4]
-  val squared = numbers.map { it * it } // [1, 4, 9, 16, 25]
+  val evens = list.filter { it % 2 == 0 }
+  val squared = list.map { it * it }
   ```
 
 = 7. 코루틴 (Coroutines)
 
-비동기 코드를 쉽게 작성하기 위한 기능.
-- `suspend` 함수: 일시 중단 가능한 함수.
-- 코루틴 빌더:
-  - `launch`: 결과를 반환하지 않는 코루틴 시작.
-  - `async`: 결과를 `Deferred` 객체로 반환하는 코루틴 시작. `await()`로 결과 수신.
-  - `runBlocking`: 코루틴이 완료될 때까지 현재 스레드를 블로킹.
-
-```kotlin
-import kotlinx.coroutines.*
-
-fun main() = runBlocking { // this: CoroutineScope
-    launch { // 새로운 코루틴을 시작하고 계속 진행
-        delay(1000L) // 1초간 논블로킹 지연
-        println("World!")
-    }
-    println("Hello,")
-}
-```
+비동기 프로그래밍 지원
+- `suspend` 함수: 일시 중단 가능 함수
+- 빌더:
+  - `launch`: 결과 없는 코루틴 실행
+  - `async`: `Deferred` 결과 반환 (await로 수신)
+  - `runBlocking`: 코루틴 완료까지 스레드 블로킹
 
 = 8. 스코프 함수 (Scope Functions)
 
-객체의 컨텍스트 내에서 코드 블록을 실행. `let`, `run`, `with`, `apply`, `also`.
+객체 컨텍스트 내 코드 실행
+- `let`: Null 체크 및 결과 반환 시 주로 사용
+- `apply`: 객체 속성 설정 및 자신 반환
+- `run`, `with`, `also` 등 상황에 따라 선택
 
-- `let`: non-null 값에 대해 코드 블록을 실행하고 람다 결과를 반환.
-  ```kotlin
-  val name: String? = "Kotlin"
-  name?.let { println("Name is $it") }
-  ```
-- `apply`: 객체를 설정하는 데 사용. 객체 자신을 반환.
-  ```kotlin
-  val person = Person("John").apply {
-      age = 30
-      city = "New York"
-  }
-  ```

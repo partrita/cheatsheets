@@ -13,94 +13,73 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>문서 제목</title>
+    <title>제목</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
 </head>
 <body>
-    <!-- 페이지 콘텐츠 -->
+    <!-- 콘텐츠 -->
 </body>
 </html>
 ```
 
-= 2. 주요 시맨틱 태그
+= 2. 시맨틱 태그 (Semantic Tags)
 
-- `<header>`: 페이지나 섹션의 머리말. 로고, 제목, 네비게이션 포함.
-- `<nav>`: 주요 네비게이션 링크.
-- `<main>`: 페이지의 주요 콘텐츠. 문서에 하나만 존재해야 함.
-- `<article>`: 독립적으로 배포하거나 재사용할 수 있는 콘텐츠 (블로그 포스트, 뉴스 기사).
-- `<section>`: 문서의 일반적인 구획. 보통 제목을 포함.
-- `<aside>`: 보조 콘텐츠 (사이드바, 광고 등).
-- `<footer>`: 페이지나 섹션의 꼬리말. 저작권, 연락처 정보 등.
-- `<figure>` & `<figcaption>`: 이미지, 다이어그램 등에 주석을 붙일 때 사용.
+- `<header>`: 머리말. 로고, 제목, 메뉴 등 포함
+- `<nav>`: 주요 네비게이션 링크 모음
+- `<main>`: 문서의 핵심 콘텐츠 (전체에서 단 하나)
+- `<article>`: 독립적 콘텐츠 (뉴스, 블로그 등)
+- `<section>`: 문서 구획 분할 (보통 제목 포함)
+- `<aside>`: 보조 콘텐츠 (사이드바, 광고 등)
+- `<footer>`: 꼬리말. 저작권, 연락처 정보 등
+- `<figure>` / `<figcaption>`: 이미지와 설명문 결합
 
 = 3. 텍스트 관련 태그
 
-- `<h1>` - `<h6>`: 제목.
-- `<p>`: 문단.
-- `<a>`: 하이퍼링크. `href` 속성으로 URL 지정.
-- `<strong>`: 중요한 텍스트 (굵게 표시).
-- `<em>`: 강조하는 텍스트 (기울임꼴).
-- `<blockquote>`: 인용 블록.
-- `<code>`: 코드 조각.
-- `<pre>`: 미리 서식이 지정된 텍스트 (공백, 줄바꿈 유지).
-- `<br>`: 줄바꿈.
-- `<hr>`: 수평선.
+- `<h1>` ~ `<h6>`: 중요도 순 제목
+- `<p>`: 문단 정의
+- `<a>`: 하이퍼링크 (`href` 속성 사용)
+- `<strong>`: 중요 텍스트 (굵게)
+- `<em>`: 강조 텍스트 (기울임)
+- `<blockquote>`: 긴 인용문 블록
+- `<code>`: 짧은 코드 조각
+- `<pre>`: 서식 유지 텍스트 (공백/줄바꿈 보존)
+- `<br>`: 단순 줄바꿈
+- `<hr>`: 수평 구분선
 
-= 4. 목록 태그
+= 4. 목록 및 테이블
 
-- `<ul>`: 순서 없는 목록 (Unordered List).
-- `<ol>`: 순서 있는 목록 (Ordered List).
-- `<li>`: 목록의 각 항목 (List Item).
-- `<dl>`, `<dt>`, `<dd>`: 정의 목록 (Definition List).
+- `<ul>` / `<li>`: 순서 없는 목록
+- `<ol>` / `<li>`: 순서 있는 목록
+- `<dl>` / `<dt>` / `<dd>`: 용어 정의 목록
+- `<table>`: 표 생성
+- `<thead>`, `<tbody>`, `<tfoot>`: 표 구획 지정
+- `<tr>`, `<th>`, `<td>`: 행, 헤더 셀, 데이터 셀
 
 = 5. 폼 (Forms)
 
-- `<form>`: 사용자 입력을 위한 양식. `action`, `method` 속성.
-- `<input>`: 다양한 종류의 입력 필드.
-  - `type="text"`: 텍스트 입력.
-  - `type="password"`: 비밀번호 입력.
-  - `type="email"`: 이메일 주소.
-  - `type="number"`: 숫자.
-  - `type="date"`: 날짜 선택.
-  - `type="checkbox"`: 체크박스.
-  - `type="radio"`: 라디오 버튼.
-  - `type="submit"`: 제출 버튼.
-  - `type="file"`: 파일 선택.
-- `<label>`: 입력 필드의 라벨. `for` 속성으로 `input`의 `id`와 연결.
-- `<textarea>`: 여러 줄 텍스트 입력.
-- `<select>` & `<option>`: 드롭다운 목록.
-- `<button>`: 클릭 가능한 버튼.
+- `<form>`: 사용자 입력 양식 영역
+- `<input>`: 다양한 입력 필드
+  - `text`, `password`, `email`, `number`
+  - `checkbox`, `radio`, `file`, `submit`
+- `<label>`: 입력 필드 이름표 (`for` 속성으로 연결)
+- `<textarea>`: 다중행 텍스트 입력
+- `<select>` / `<option>`: 드롭다운 선택 메뉴
+- `<button>`: 클릭 가능한 버튼
 
 = 6. 미디어 태그
 
-- `<img>`: 이미지. `src`, `alt` 속성 필수.
-- `<audio>`: 오디오 콘텐츠. `controls` 속성으로 제어판 표시.
-- `<video>`: 비디오 콘텐츠. `controls`, `width`, `height` 속성.
-- `<source>`: `<audio>`, `<video>`를 위한 여러 미디어 리소스 정의.
+- `<img>`: 이미지 표시 (`src`, `alt` 필수)
+- `<audio>` / `<video>`: 오디오/비디오 재생 (`controls` 속성)
+- `<source>`: 미디어 자원 경로 지정
 
-= 7. 테이블 태그
+= 7. 주요 공통 속성 (Attributes)
 
-- `<table>`: 테이블.
-- `<thead>`: 테이블 헤더 그룹.
-- `<tbody>`: 테이블 본문 그룹.
-- `<tfoot>`: 테이블 푸터 그룹.
-- `<tr>`: 테이블 행 (Table Row).
-- `<th>`: 테이블 헤더 셀 (Table Header).
-- `<td>`: 테이블 데이터 셀 (Table Data).
-- `colspan`, `rowspan`: 셀 병합.
-
-= 8. 주요 속성 (Attributes)
-
-- `id`: 문서 내에서 고유한 식별자.
-- `class`: 스타일링이나 스크립트에서 사용할 하나 이상의 클래스 이름.
-- `style`: 인라인 CSS 스타일.
-- `title`: 요소에 대한 추가 정보 (툴팁으로 표시).
-- `data-*`: 사용자 정의 데이터 속성.
-- `href`: `<a>` 태그의 링크 주소.
-- `src`: `<img>`, `<script>`, `<audio>`, `<video>` 태그의 리소스 소스.
-- `alt`: `<img>` 태그의 대체 텍스트.
-- `disabled`: `input`, `button` 등을 비활성화.
-- `placeholder`: `input`, `textarea`에 입력 예시 텍스트 표시.
-- `required`: 폼 제출 시 필수 입력 필드로 지정.
+- `id`: 고유 식별자
+- `class`: 스타일/스크립트용 그룹 식별자
+- `style`: 인라인 CSS 스타일
+- `title`: 요소 추가 정보 (툴팁 표시)
+- `data-*`: 사용자 정의 데이터 저장
+- `disabled`: 요소 비활성화
+- `placeholder`: 입력 힌트 메시지
+- `required`: 필수 입력 항목 지정

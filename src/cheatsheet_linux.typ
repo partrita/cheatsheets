@@ -8,63 +8,61 @@
 
 = 1. 파일 및 디렉토리 관리
 
-- `ls`: 디렉토리 내용을 나열합니다. (`-l` 상세, `-a` 숨김 파일, `-h` 읽기 쉬운 크기, `-t` 시간순 정렬, `-R` 재귀)
-- `cd`: 디렉토리를 변경합니다. (`~` 홈, `-` 이전, `..` 상위)
-- `pwd`: 현재 작업 디렉토리를 인쇄합니다.
-- `mkdir -p <path>`: 중간 경로의 디렉토리도 함께 생성합니다.
-- `rm`: 파일이나 디렉토리를 삭제합니다. (`-r` 재귀, `-f` 강제, `-v` 과정 표시)
-- `cp`: 파일이나 디렉토리를 복사합니다. (`-r` 재귀, `-p` 속성 유지, `-a` 아카이브 모드)
-- `mv`: 파일이나 디렉토리를 이동하거나 이름을 바꿉니다.
-- `touch`: 빈 파일을 생성하거나 파일의 타임스탬프를 업데이트합니다.
-- `find <path> -type f -name "*.txt"`: 특정 경로에서 `.txt` 확장자를 가진 파일을 찾습니다.
-- `grep -r "pattern" .`: 현재 디렉토리부터 재귀적으로 파일 내용에서 패턴을 검색합니다.
-- `chmod`: 파일 권한을 변경합니다. (`u` 사용자, `g` 그룹, `o` 기타, `+` 추가, `-` 제거, `rwx` 권한)
-  - `chmod u+x script.sh`: 사용자에게 실행 권한을 추가합니다.
-- `chown <user>:<group> <file>`: 파일의 소유자와 그룹을 변경합니다. (`-R` 재귀)
-- `stat <file>`: 파일의 상세 정보(inode, 크기, 접근 시간 등)를 표시합니다.
-- `ln -s <target> <link_name>`: 심볼릭 링크를 생성합니다.
-- `du -sh <dir>`: 디렉토리의 총 사용량을 요약하여 보여줍니다.
-- `df -h`: 파일 시스템의 디스크 공간 사용량을 보여줍니다.
+- `ls`: 디렉토리 내용 나열 (`-l` 상세, `-a` 숨김 파일, `-h` 읽기 쉬운 크기, `-t` 시간순 정렬, `-R` 재귀)
+- `cd`: 디렉토리 변경 (`~` 홈, `-` 이전, `..` 상위)
+- `pwd`: 현재 작업 디렉토리 출력
+- `mkdir -p <path>`: 중간 경로 디렉토리 포함 생성
+- `rm`: 파일 또는 디렉토리 삭제 (`-r` 재귀, `-f` 강제, `-v` 과정 표시)
+- `cp`: 파일 또는 디렉토리 복사 (`-r` 재귀, `-p` 속성 유지, `-a` 아카이브 모드)
+- `mv`: 파일 또는 디렉토리 이동 및 이름 변경
+- `touch`: 빈 파일 생성 또는 타임스탬프 업데이트
+- `find <path> -type f -name "*.txt"`: 특정 경로 `.txt` 파일 검색
+- `grep -r "pattern" .`: 현재 디렉토리 기준 내용 패턴 재귀 검색
+- `chmod`: 파일 권한 변경 (`u` 사용자, `g` 그룹, `o` 기타, `+` 추가, `-` 제거, `rwx` 권한)
+  - `chmod u+x script.sh`: 사용자 실행 권한 추가
+- `chown <user>:<group> <file>`: 파일 소유자 및 그룹 변경 (`-R` 재귀)
+- `stat <file>`: 파일 상세 정보(inode, 크기, 시간 등) 표시
+- `ln -s <target> <link_name>`: 심볼릭 링크 생성
+- `du -sh <dir>`: 디렉토리 총 사용량 요약 표시
+- `df -h`: 파일 시스템 디스크 공간 사용량 표시
 
 = 2. 텍스트 처리 및 리디렉션
 
-- `cat`: 파일 내용을 출력하고 연결합니다.
-- `less` / `more`: 파일 내용을 페이지 단위로 봅니다.
-- `head -n 20 <file>`: 파일의 첫 20줄을 봅니다.
-- `tail -n 20 <file>`: 파일의 마지막 20줄을 봅니다.
-  - `tail -f <logfile>`: 로그 파일을 실시간으로 모니터링합니다.
-- `sort`: 텍스트 줄을 정렬합니다. (`-n` 숫자순, `-r` 역순, `-k` 필드 지정)
-- `uniq`: 중복된 줄을 제거합니다. (`-c` 중복 횟수 표시)
-- `cut -d',' -f1-3 <file.csv>`: 쉼표로 구분된 파일에서 첫 3개 필드를 잘라냅니다.
-- `sed 's/old/new/g' <file>`: 스트림 편집기를 사용하여 파일 내용의 'old'를 'new'로 치환합니다.
-- `awk '{print $1, $3}' <file>`: 파일에서 첫 번째와 세 번째 필드를 출력합니다.
-- `>`: 표준 출력을 파일로 리디렉션 (덮어쓰기).
-- `>>`: 표준 출력을 파일로 리디렉션 (추가).
-- `<`: 파일 내용을 표준 입력으로 사용.
-- `2>`: 표준 에러를 파일로 리디렉션.
-- `&>`: 표준 출력과 표준 에러를 모두 리디렉션.
-- `|`: 파이프. 한 명령어의 출력을 다른 명령어의 입력으로 연결.
+- `cat`: 파일 내용 출력 및 연결
+- `less` / `more`: 파일 내용 페이지 단위 열람
+- `head -n 20 <file>`: 파일 상단 20줄 열람
+- `tail -n 20 <file>`: 파일 하단 20줄 열람
+  - `tail -f <logfile>`: 로그 파일 실시간 모니터링
+- `sort`: 텍스트 줄 정렬 (`-n` 숫자순, `-r` 역순, `-k` 필드 지정)
+- `uniq`: 중복 줄 제거 (`-c` 중복 횟수 표시)
+- `cut -d',' -f1-3 <file.csv>`: 쉼표 구분 파일 첫 3개 필드 추출
+- `sed 's/old/new/g' <file>`: 스트림 편집기 활용 문자열 치환
+- `awk '{print $1, $3}' <file>`: 파일 첫 번째 및 세 번째 필드 출력
+- `>`: 표준 출력 파일 리디렉션 (덮어쓰기)
+- `>>`: 표준 출력 파일 리디렉션 (추가)
+- `<`: 파일 내용 표준 입력 사용
+- `2>`: 표준 에러 파일 리디렉션
+- `&>`: 표준 출력 및 에러 모두 리디렉션
+- `|`: 파이프. 명령어 간 출력-입력 연결
   - `ps aux | grep "nginx"`
-
-
 
 = 3. 시스템 정보 및 모니터링
 
-- `uname -a`: 모든 커널 정보를 인쇄합니다.
-- `lscpu`: CPU 아키텍처 정보를 표시합니다.
-- `free -h`: 메모리 및 스왑 사용량을 표시합니다.
-- `top`: 실행 중인 프로세스와 시스템 리소스를 실시간으로 표시합니다.
-- `htop`: `top`의 개선된 버전 (설치 필요).
-- `ps aux`: 모든 실행 중인 프로세스를 BSD 스타일로 표시합니다.
-- `pstree`: 프로세스를 트리 형태로 보여줍니다.
-- `kill <PID>`: 프로세스를 종료합니다. (`-9` 강제 종료, `-15` 정상 종료)
-- `pkill <name>`: 이름으로 프로세스를 종료합니다.
-- `ip addr` 또는 `ifconfig`: 네트워크 인터페이스와 IP 주소를 표시합니다.
-- `netstat -tulnp`: 수신 대기 중인 모든 TCP/UDP 포트와 해당 포트를 사용하는 프로세스를 표시합니다.
-- `ss`: `netstat`의 최신 대체 도구.
-- `uptime`: 시스템 가동 시간과 부하 평균을 보여줍니다.
-- `dmesg`: 커널 링 버퍼 메시지를 인쇄합니다. (부팅 및 하드웨어 관련 문제 진단)
-- `journalctl`: systemd 로그를 조회합니다. (`-u <service>` 특정 서비스, `-f` 실시간)
+- `uname -a`: 모든 커널 정보 출력
+- `lscpu`: CPU 아키텍처 정보 표시
+- `free -h`: 메모리 및 스왑 사용량 표시
+- `top`: 실행 프로세스 및 시스템 리소스 실시간 표시
+- `htop`: `top` 개선 버전 (설치 필요)
+- `ps aux`: 실행 프로세스 BSD 스타일 표시
+- `pstree`: 프로세스 트리 형태 표시
+- `kill <PID>`: 프로세스 종료 (`-9` 강제 종료, `-15` 정상 종료)
+- `pkill <name>`: 이름 기준 프로세스 종료
+- `ip addr` 또는 `ifconfig`: 네트워크 인터페이스 및 IP 주소 표시
+- `netstat -tulnp`: 대기 포트 및 사용 프로세스 표시
+- `ss`: `netstat` 대체 도구
+- `uptime`: 시스템 가동 시간 및 부하 평균 표시
+- `dmesg`: 커널 링 버퍼 메시지 출력 (부팅 및 하드웨어 진단)
+- `journalctl`: systemd 로그 조회 (`-u <service>` 특정 서비스, `-f` 실시간)
 
 = 4. 패키지 관리
 
@@ -84,78 +82,78 @@
 
 = 5. 사용자 및 권한 관리
 
-- `useradd -m <username>`: 홈 디렉토리와 함께 새 사용자를 추가합니다.
-- `usermod -aG <group> <user>`: 사용자를 특정 그룹에 추가합니다.
-- `userdel -r <username>`: 홈 디렉토리와 함께 사용자를 삭제합니다.
-- `passwd <username>`: 사용자의 비밀번호를 변경합니다.
-- `su - <username>`: 다른 사용자의 환경으로 완전히 전환합니다.
-- `sudo <command>`: root 권한으로 명령을 실행합니다.
-- `visudo`: `/etc/sudoers` 파일을 안전하게 편집합니다.
+- `useradd -m <username>`: 홈 디렉토리 포함 새 사용자 추가
+- `usermod -aG <group> <user>`: 사용자 특정 그룹 추가
+- `userdel -r <username>`: 홈 디렉토리 포함 사용자 삭제
+- `passwd <username>`: 사용자 비밀번호 변경
+- `su - <username>`: 타 사용자 환경 완전 전환
+- `sudo <command>`: root 권한 명령 실행
+- `visudo`: `/etc/sudoers` 파일 안전 편집
 
 = 6. 압축 및 아카이빙
 
-- `tar`: 아카이브를 만들거나 풀 때 사용. 다른 압축 도구와 함께 사용됨.
-  - `tar -cvf archive.tar /path/to/dir`: `.tar` 아카이브 생성 (압축 없음).
-  - `tar -czvf archive.tar.gz /path/to/dir`: `gzip`으로 압축하며 아카이브 생성.
-  - `tar -cjvf archive.tar.bz2 /path/to/dir`: `bzip2`로 압축하며 아카이브 생성.
-  - `tar -cJvf archive.tar.xz /path/to/dir`: `xz`로 압축하며 아카이브 생성.
-  - `tar -xvf archive.tar`: `.tar` 아카이브 풀기.
-  - `tar -xzvf archive.tar.gz`: `gzip`으로 압축된 아카이브 풀기.
-  - `tar -xjvf archive.tar.bz2`: `bzip2`로 압축된 아카이브 풀기.
-  - `tar -xJvf archive.tar.xz`: `xz`로 압축된 아카이브 풀기.
+- `tar`: 아카이브 생성 및 해제. 타 압축 도구 병행 사용
+  - `tar -cvf archive.tar /path/to/dir`: `.tar` 아카이브 생성 (압축 없음)
+  - `tar -czvf archive.tar.gz /path/to/dir`: `gzip` 압축 아카이브 생성
+  - `tar -cjvf archive.tar.bz2 /path/to/dir`: `bzip2` 압축 아카이브 생성
+  - `tar -cJvf archive.tar.xz /path/to/dir`: `xz` 압축 아카이브 생성
+  - `tar -xvf archive.tar`: `.tar` 아카이브 해제
+  - `tar -xzvf archive.tar.gz`: `gzip` 압축 아카이브 해제
+  - `tar -xjvf archive.tar.bz2`: `bzip2` 압축 아카이브 해제
+  - `tar -xJvf archive.tar.xz`: `xz` 압축 아카이브 해제
 
 - `gzip` / `gunzip`:
-  - `gzip file`: `file`을 압축하여 `file.gz` 생성 (원본 파일 삭제).
-  - `gunzip file.gz`: `file.gz`의 압축을 해제 (원본 파일 삭제). `-k` 옵션으로 원본 유지 가능.
+  - `gzip file`: `file` 압축 `file.gz` 생성 (원본 삭제)
+  - `gunzip file.gz`: `file.gz` 압축 해제 (원본 삭제). `-k` 옵션 원본 유지
 
-- `zip` / `unzip`: Windows 환경과 호환성이 좋음.
-  - `zip -r archive.zip /path/to/dir`: 디렉토리를 `.zip`으로 압축.
-  - `unzip archive.zip`: `.zip` 파일 압축 해제.
+- `zip` / `unzip`: Windows 환경 호환성 우수
+  - `zip -r archive.zip /path/to/dir`: 디렉토리 `.zip` 압축
+  - `unzip archive.zip`: `.zip` 파일 압축 해제
 
 - 기타 압축 해제 명령어:
-  - `bunzip2 file.bz2`: `.bz2` 파일 압축 해제.
-  - `unxz file.xz`: `.xz` 파일 압축 해제.
+  - `bunzip2 file.bz2`: `.bz2` 파일 압축 해제
+  - `unxz file.xz`: `.xz` 파일 압축 해제
 
 = 7. SSH 및 네트워크 파일 전송
 
-- `ssh <user>@<host>`: 원격 호스트에 SSH로 연결합니다.
-  - `ssh -p <port> <user>@<host>`: 포트 지정.
-  - `ssh -i /path/to/key <user>@<host>`: 개인키 지정.
-- `scp`: 원격 호스트와 파일을 안전하게 복사합니다.
+- `ssh <user>@<host>`: 원격 호스트 SSH 연결
+  - `ssh -p <port> <user>@<host>`: 포트 지정
+  - `ssh -i /path/to/key <user>@<host>`: 개인키 지정
+- `scp`: 원격 호스트 간 파일 안전 복사
   - `scp local_file user@host:/remote/path`
   - `scp user@host:/remote/path local_file`
-- `rsync -avz <source> <destination>`: 빠르고 효율적인 파일 동기화 도구.
+- `rsync -avz <source> <destination>`: 효율적 파일 동기화 도구
 
 = 8. 시스템 관리 및 모니터링
 
 == 프로세스 관리 고급
-- `nice -n 10 command`: 프로세스 우선순위 설정 (낮은 우선순위)
-- `renice 5 -p <PID>`: 실행 중인 프로세스의 우선순위 변경
+- `nice -n 10 command`: 프로세스 우선순위 설정 (낮음)
+- `renice 5 -p <PID>`: 실행 중 프로세스 우선순위 변경
 - `ionice -c 1 -n 4 command`: I/O 우선순위 설정
-- `taskset -c 0,1 command`: 특정 CPU 코어에서 프로세스 실행
+- `taskset -c 0,1 command`: 특정 CPU 코어 프로세스 실행
 - `chrt -f 50 command`: 실시간 스케줄링 정책 설정
-- `pgrep -f "pattern"`: 패턴으로 프로세스 검색
-- `pkill -f "pattern"`: 패턴으로 프로세스 종료
-- `killall process_name`: 프로세스 이름으로 종료
+- `pgrep -f "pattern"`: 패턴 기준 프로세스 검색
+- `pkill -f "pattern"`: 패턴 기준 프로세스 종료
+- `killall process_name`: 프로세스 이름 기준 종료
 - `kill -0 <PID>`: 프로세스 존재 여부 확인
 
 == 시스템 리소스 모니터링
-- `iostat -x 1`: 디스크 I/O 통계 (1초마다)
+- `iostat -x 1`: 디스크 I/O 통계 (1초 단위)
 - `iotop`: 실시간 I/O 사용량 모니터링
 - `vmstat 1`: 가상 메모리 통계
 - `sar -u 1`: CPU 사용률 통계
 - `sar -r 1`: 메모리 사용률 통계
 - `sar -d 1`: 디스크 활동 통계
-- `lsof -i :80`: 특정 포트를 사용하는 프로세스
-- `lsof -p <PID>`: 특정 프로세스가 열고 있는 파일
-- `fuser -v /path/to/file`: 파일을 사용하는 프로세스
-- `strace -p <PID>`: 프로세스의 시스템 콜 추적
+- `lsof -i :80`: 특정 포트 사용 프로세스
+- `lsof -p <PID>`: 특정 프로세스 오픈 파일
+- `fuser -v /path/to/file`: 파일 사용 프로세스
+- `strace -p <PID>`: 프로세스 시스템 콜 추적
 
 == 로그 관리 및 분석
 - `journalctl -u service_name`: 특정 서비스 로그
 - `journalctl -f`: 실시간 로그 모니터링
 - `journalctl --since "2023-01-01" --until "2023-12-31"`: 기간별 로그
-- `journalctl -p err`: 에러 레벨 이상의 로그
+- `journalctl -p err`: 에러 레벨 이상 로그
 - `logrotate -d /etc/logrotate.conf`: 로그 로테이션 테스트
 - `tail -f /var/log/syslog`: 시스템 로그 실시간 모니터링
 - `grep -i error /var/log/syslog`: 에러 로그 검색
@@ -193,7 +191,7 @@
 - `tcpdump -i eth0 host 192.168.1.1`: 특정 호스트 트래픽 캡처
 - `wireshark`: GUI 네트워크 분석 도구
 - `netstat -tuln`: 수신 대기 포트 목록
-- `ss -tuln`: netstat의 최신 대체 도구
+- `ss -tuln`: netstat 대체 도구
 - `lsof -i`: 네트워크 연결 상태
 
 = 10. 디스크 및 파일시스템 관리
@@ -236,7 +234,7 @@
 - `chage -m 7 username`: 패스워드 최소 사용 기간 설정
 - `usermod -L username`: 사용자 계정 잠금
 - `usermod -U username`: 사용자 계정 잠금 해제
-- `groupadd -g 1001 newgroup`: 특정 GID로 그룹 생성
+- `groupadd -g 1001 newgroup`: 특정 GID 그룹 생성
 - `groupdel groupname`: 그룹 삭제
 
 == 파일 권한 및 보안
@@ -262,7 +260,7 @@
 
 = 12. 백업 및 복구
 
-== tar를 이용한 백업
+== tar 이용 백업
 ```bash
 # 전체 시스템 백업 (제외 디렉토리 포함)
 tar --exclude=/proc --exclude=/sys --exclude=/dev \
@@ -276,22 +274,22 @@ tar --newer-mtime="2023-01-01" -czf incremental_backup.tar.gz /home
 tar -tzf backup.tar.gz > /dev/null && echo "Backup is valid"
 ```
 
-== rsync를 이용한 동기화
+== rsync 이용 동기화
 ```bash
 # 전체 디렉토리 동기화
 rsync -avz --delete /source/ /destination/
 
-# 네트워크를 통한 백업
+# 네트워크 통한 백업
 rsync -avz -e ssh user@remote:/source/ /local/destination/
 
 # 백업 진행 상황 표시
 rsync -avz --progress /source/ /destination/
 
-# 하드 링크를 이용한 백업 (공간 절약)
+# 하드 링크 이용 백업 (공간 절약)
 rsync -avz --link-dest=/previous/backup /source/ /new/backup/
 ```
 
-== dd를 이용한 디스크 복사
+== dd 이용 디스크 복사
 ```bash
 # 디스크 전체 복사
 dd if=/dev/sda of=/dev/sdb bs=4M status=progress
@@ -299,10 +297,10 @@ dd if=/dev/sda of=/dev/sdb bs=4M status=progress
 # 디스크 이미지 생성
 dd if=/dev/sda of=/backup/disk_image.img bs=4M status=progress
 
-# 압축된 이미지 생성
+# 압축 이미지 생성
 dd if=/dev/sda bs=4M | gzip > /backup/disk_image.img.gz
 
-# 이미지에서 복원
+# 이미지 복원
 gunzip -c /backup/disk_image.img.gz | dd of=/dev/sda bs=4M status=progress
 ```
 
@@ -319,7 +317,7 @@ sysctl vm.swappiness=10
 # 영구 설정
 echo 'vm.swappiness=10' >> /etc/sysctl.conf
 
-# 일반적인 성능 튜닝 파라미터
+# 일반 성능 튜닝 파라미터
 echo 'vm.swappiness=10' >> /etc/sysctl.conf
 echo 'vm.dirty_ratio=15' >> /etc/sysctl.conf
 echo 'vm.dirty_background_ratio=5' >> /etc/sysctl.conf
@@ -329,13 +327,13 @@ echo 'net.core.wmem_max=16777216' >> /etc/sysctl.conf
 
 == 시스템 서비스 관리
 - `systemctl list-units --type=service`: 모든 서비스 목록
-- `systemctl list-units --type=service --state=running`: 실행 중인 서비스
-- `systemctl list-units --type=service --state=failed`: 실패한 서비스
+- `systemctl list-units --type=service --state=running`: 실행 중 서비스
+- `systemctl list-units --type=service --state=failed`: 실패 서비스
 - `systemctl enable service_name`: 서비스 자동 시작 설정
 - `systemctl disable service_name`: 서비스 자동 시작 해제
 - `systemctl mask service_name`: 서비스 완전 차단
 - `systemctl unmask service_name`: 서비스 차단 해제
-- `systemctl daemon-reload`: systemd 설정 다시 로드
+- `systemctl daemon-reload`: systemd 설정 재로드
 
 == 메모리 및 스왑 관리
 - `swapon -s`: 스왑 사용량 확인
@@ -352,7 +350,7 @@ echo 'net.core.wmem_max=16777216' >> /etc/sysctl.conf
 - `journalctl -b`: 현재 부팅 로그
 - `journalctl -b -1`: 이전 부팅 로그
 - `dmesg | grep -i error`: 커널 에러 메시지
-- `systemctl --failed`: 실패한 서비스 확인
+- `systemctl --failed`: 실패 서비스 확인
 - `fsck /dev/sda1`: 파일시스템 검사
 - `grub-install /dev/sda`: GRUB 재설치
 - `update-grub`: GRUB 설정 업데이트
@@ -371,5 +369,5 @@ echo 'net.core.wmem_max=16777216' >> /etc/sysctl.conf
 - `smartctl -a /dev/sda`: 디스크 상태 확인
 - `badblocks -v /dev/sda`: 배드 블록 검사
 - `fsck -f /dev/sda1`: 강제 파일시스템 검사
-- `mount -o remount,ro /`: 읽기 전용으로 재마운트
+- `mount -o remount,ro /`: 읽기 전용 재마운트
 - `e2fsck -f /dev/sda1`: ext4 파일시스템 검사

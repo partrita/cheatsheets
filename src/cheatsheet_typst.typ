@@ -7,15 +7,13 @@
   footer: "https://typst.app/docs/",
 )
 
-// 여기에 문서 내용을 작성하세요
-
-#iconUnicode("\u{f0c1}", size: 14pt, color: blue) // 링크 아이콘
-#iconUnicode("\u{f0e0}", size: 14pt, color: blue) // 이메일 아이콘
-#iconUnicode("\u{f095}", size: 14pt, color: blue) // 전화 아이콘
-#iconUnicode("\u{f0c0}", size: 14pt, color: blue) // 주소 아이콘
-#iconUnicode("\u{f0c2}", size: 14pt, color: blue) // 위치 아이콘
-#iconUnicode("\u{f0c3}", size: 14pt, color: blue) // 지도 아이콘
-#iconUnicode("\u{f0c4}", size: 14pt, color: blue) // 시간 아이콘
+#iconUnicode("\u{f0c1}", size: 14pt, color: blue) // 링크
+#iconUnicode("\u{f0e0}", size: 14pt, color: blue) // 이메일
+#iconUnicode("\u{f095}", size: 14pt, color: blue) // 전화
+#iconUnicode("\u{f0c0}", size: 14pt, color: blue) // 주소
+#iconUnicode("\u{f0c2}", size: 14pt, color: blue) // 위치
+#iconUnicode("\u{f0c3}", size: 14pt, color: blue) // 지도
+#iconUnicode("\u{f0c4}", size: 14pt, color: blue) // 시간
 
 = 섹션 1: 기본 문법
 
@@ -92,8 +90,7 @@ align:(center, right),
   ],
 )<logo>
 
-logo as the one shown in @logo will cease to exist if
-we don't take action!
+@logo 로고 확인
 
 #text(12pt, weight: "bold")[사각형]
 #rect(width: 3cm, height: 1cm, fill: blue, radius: 4pt)
@@ -104,7 +101,7 @@ we don't take action!
 #text(12pt, weight: "bold")[선]
 #line(length: 100%, stroke: 0.5pt + rgb("#2e3440"))
 
-= 섹션 4: 고급 기능(예시)
+= 섹션 4: 고급 기능
 
 #text(12pt, weight: "bold")[변수 정의]
 #let my-variable = "Hello, Typst!"
@@ -134,35 +131,35 @@ I am #amazed(color: purple)[amazed]!
   "반복 " + str(i) + "\n"
 }
 
-= 섹션 5: 글꼴 변경 예시
+= 섹션 5: 글꼴 변경
 
 #text(font: "KoPubWorldBatang")[
   = 배경
-  빙하의 경우, 유체 역학 원리로 얼음의 움직임과 온도, 압력, 그리고 물과 같은 다른 유체의 요인으로 이해할 수 있습니다.
+  빙하 유체 역학 원리로 얼음 움직임, 온도, 압력, 유체 요인 이해 가능.
 ]
 
-= 섹션 6: Typst 문법 안내서
+= 섹션 6: Typst 문법 안내
 
-Typst는 마크업 언어입니다. 즉, 간단한 문법을 사용하여 문서 스타일을 쉽고 자동으로 지정할 수 있습니다.
+Typst 마크업 언어. 간단한 문법으로 문서 스타일 자동 지정 가능.
 
 == 모드
 
-Typst에는 세 가지 문법 모드가 있습니다: 마크업, 수학, 코드.
+Typst 3가지 문법 모드: 마크업, 수학, 코드.
 
 + 마크업
-  - 마크업 모드는 Typst 문서의 기본 모드입니다.
-  - 마크업을 `[[..]]`로 감쌉니다.	`{let name = [*Typst!*]}`
+  - 문서 기본 모드.
+  - 마크업을 `[[..]]`로 감쌈. `{let name = [*Typst!*]}`
 + 수학
-  - 수학 모드에서는 수학 공식을 작성할 수 있습니다.
-  - 수식을 `[$..$]`로 감쌉니다.	`[$-x$는 $x$의 반대입니다.]`
+  - 수학 공식 작성 모드.
+  - 수식을 `[$..$]`로 감쌈. `[$-x$는 $x$의 반대]`
 + 코드
-  - 코드 모드에서는 Typst의 스크립팅 기능을 사용할 수 있습니다.
-  -	코드 앞에 `#`를 붙입니다.	`[Number: #(1 + 2)]`
-  - `#`를 사용하여 코드 모드에 진입한 후에는 중간에 마크업 또는 수학 모드로 다시 전환하지 않는 한 추가 해시를 사용할 필요가 없습니다.
+  - 스크립팅 기능 사용 모드.
+  - 코드 앞 `#` 추가. `[Number: #(1 + 2)]`
+  - `#` 진입 후 모드 전환 전까지 추가 해시 불필요.
 
 === 마크업
 
-Typst는 가장 일반적인 문서 요소에 대한 내장 마크업을 제공합니다. 대부분의 문법 요소는 해당 함수에 대한 단순한 단축키입니다. 아래 표는 사용 가능한 모든 마크업을 나열하고 해당 문법 및 사용법에 대해 자세히 알아볼 수 있는 가장 좋은 위치에 연결됩니다.
+주요 문서 요소 내장 마크업 제공. 대부분 함수 단축키.
 
 + 단락 구분: 빈 줄
 + 강한 강조: `[*강조*]`
@@ -185,14 +182,14 @@ Typst는 가장 일반적인 문서 요소에 대한 내장 마크업을 제공�
 
 === 코드 모드
 
-코드 블록과 표현식 내에서는 선행 `#` 문자 없이 시작할 수 있습니다. 많은 문법 요소는 표현식에 특화되어 있습니다.
+코드 블록 및 표현식 내 선행 `#` 없이 시작 가능.
 
 + 없음(None): `{none}`
 + 자동(Auto): `{auto}`
 + 부울(Boolean): `{false}`, `{true}`
 + 정수(Integer): `{10}`, `{0xff}`
-+ 부동 소수점 숫자(Floating-point number): `{3.14}`, `{1e5}`
-+ 길이(Length): `{2pt}`, `{3mm}`, `{1em}`, ..
++ 부동 소수점(Floating-point): `{3.14}`, `{1e5}`
++ 길이(Length): `{2pt}`, `{3mm}`, `{1em}`
 + 각도(Angle): `{90deg}`, `{1rad}`
 + 분수(Fraction): `{2fr}`
 + 비율(Ratio): `{50%}`
@@ -201,4 +198,4 @@ Typst는 가장 일반적인 문서 요소에 대한 내장 마크업을 제공�
 
 === 이스케이프
 
-이스케이프는 입력하기 어렵거나 Typst에서 특별한 의미를 갖는 특수 문자를 삽입하는 데 사용됩니다. 문자를 이스케이프하려면 백슬래시 앞에 붙입니다. 모든 유니코드 코드포인트를 삽입하려면 16진수 이스케이프 시퀀스: `[\u{1f600}]`를 작성할 수 있습니다.
+입력하기 어렵거나 특수 의미 문장 삽입 시 사용. 백슬래시(`\`) 접두어 사용. 유니코드 삽입 시 16진수 시퀀스 `[\u{1f600}]` 작성 가능.

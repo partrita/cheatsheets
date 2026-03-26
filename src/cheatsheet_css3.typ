@@ -8,119 +8,69 @@
 
 = 1. 선택자 (Selectors)
 
-- 기본 선택자:
-  - `*`: 전체 선택자.
-  - `element`: 태그 선택자 (예: `p`, `div`).
-  - `.class`: 클래스 선택자.
-  - `#id`: 아이디 선택자.
-- 조합 선택자:
-  - `A B`: 자손 선택자 (A의 모든 하위 B).
-  - `A > B`: 자식 선택자 (A의 바로 아래 B).
-  - `A + B`: 인접 형제 선택자 (A 바로 뒤의 B).
-  - `A ~ B`: 일반 형제 선택자 (A 뒤의 모든 B).
-- 가상 클래스 (Pseudo-classes):
-  - `:hover`, `:focus`, `:active`: 사용자 동작.
-  - `:nth-child(n)`, `:first-child`, `:last-child`: 위치 기반.
-- 가상 요소 (Pseudo-elements):
-  - `::before`, `::after`: 요소의 내용 앞/뒤에 콘텐츠 추가.
-  - `::placeholder`: 입력 필드의 플레이스홀더 텍스트.
+- 기본: `*` (전체), `element` (태그), `.class` (클래스), `#id` (아이디)
+- 조합:
+  - `A B`: 자손 (모든 하위)
+  - `A > B`: 자식 (직계 하위)
+  - `A + B`: 인접 형제 (바로 뒤)
+  - `A ~ B`: 일반 형제 (뒤에 오는 모든)
+- 가상 클래스: `:hover` (마우스 오버), `:focus` (포커스), `:nth-child(n)` (순서)
+- 가상 요소: `::before` / `::after` (앞/뒤에 콘텐츠 삽입)
 
 = 2. 박스 모델 (Box Model)
 
-- `width`, `height`: 콘텐츠 영역의 너비/높이.
-- `padding`: 콘텐츠와 테두리 사이의 여백.
-- `border`: 테두리. (예: `border: 1px solid black;`)
-- `margin`: 테두리 바깥의 여백.
-- `box-sizing`: 박스 크기 계산 방식.
-  - `content-box` (기본값): `width`와 `height`가 콘텐츠 영역만 포함.
-  - `border-box`: `width`와 `height`가 `padding`과 `border`를 포함.
+- `width` / `height`: 콘텐츠 영역 크기
+- `padding`: 테두리 안쪽 여백
+- `border`: 테두리 선
+- `margin`: 테두리 바깥쪽 여백
+- `box-sizing`:
+  - `content-box`: 너비에 padding/border 미포함 (기본)
+  - `border-box`: 너비에 padding/border 포함 (권장)
 
 = 3. 레이아웃 (Layout)
 
-== Display
-- `display: block;`: 블록 레벨 요소. 너비 100%.
-- `display: inline;`: 인라인 요소. 콘텐츠 너비만큼 차지.
-- `display: inline-block;`: `inline`처럼 배치되지만 `block`처럼 `width`, `height` 지정 가능.
-- `display: none;`: 요소를 화면에서 완전히 숨김.
+== Display & Position
+- `display`: `block`, `inline`, `inline-block`, `none` (숨김)
+- `position`:
+  - `static`: 기본 위치
+  - `relative`: 현재 위치 기준 상대 이동
+  - `absolute`: 상위 요소 기준 절대 위치
+  - `fixed`: 브라우저 창 기준 고정
+  - `sticky`: 스크롤에 따라 고정/해제
 
-== Position
-- `position: static;` (기본값)
-- `position: relative;`: 원래 위치를 기준으로 `top`, `right`, `bottom`, `left`로 이동.
-- `position: absolute;`: 가장 가까운 `position`이 `static`이 아닌 조상 요소를 기준으로 위치.
-- `position: fixed;`: 뷰포트(브라우저 창)를 기준으로 위치. 스크롤해도 고정.
-- `position: sticky;`: 스크롤 위치에 따라 `relative`와 `fixed` 사이를 전환.
+== Flexbox (1차원)
+- 컨테이너: `flex-direction`, `justify-content` (주축 정렬), `align-items` (교차축 정렬), `gap`
+- 아이템: `flex-grow` (확장), `flex-shrink` (축소), `order` (순서)
 
-== Flexbox
-1차원 레이아웃을 위한 강력한 모델.
-- 컨테이너 속성 (`display: flex;`):
-  - `flex-direction`: `row`, `column` 등 주축 방향 설정.
-  - `justify-content`: 주축 방향 정렬.
-  - `align-items`: 교차축 방향 정렬.
-  - `flex-wrap`: 줄바꿈 여부.
-  - `gap`: 아이템 사이의 간격.
-- 아이템 속성:
-  - `flex-grow`: 팽창 비율.
-  - `flex-shrink`: 수축 비율.
-  - `flex-basis`: 기본 크기.
-  - `order`: 배치 순서.
-
-== Grid
-2차원 레이아웃을 위한 모델.
-- 컨테이너 속성 (`display: grid;`):
-  - `grid-template-columns`, `grid-template-rows`: 그리드 트랙의 크기 정의.
-  - `grid-gap` 또는 `gap`: 그리드 셀 사이의 간격.
-  - `justify-items`, `align-items`: 셀 내부 아이템 정렬.
-- 아이템 속성:
-  - `grid-column`, `grid-row`: 그리드 라인을 이용해 아이템 배치.
+== Grid (2차원)
+- 컨테이너: `grid-template-columns/rows`, `justify-items`, `align-items`
+- 아이템: `grid-column`, `grid-row`
 
 = 4. 타이포그래피 (Typography)
 
-- `font-family`: 글꼴 지정.
-- `font-size`: 글자 크기.
-- `font-weight`: 글자 굵기 (`normal`, `bold`, `100`-`900`).
-- `color`: 글자 색상.
-- `text-align`: 텍스트 정렬 (`left`, `center`, `right`).
-- `line-height`: 줄 높이.
-- `letter-spacing`: 자간.
-- `text-decoration`: `none`, `underline`, `line-through`.
+- `font-family`: 글꼴
+- `font-size`: 크기
+- `font-weight`: 굵기
+- `text-align`: 정렬 (`left`, `center`, `right`)
+- `line-height`: 줄 간격
+- `text-decoration`: 장식 (`none`, `underline`)
 
 = 5. 전환 및 애니메이션
 
-== Transition
-프로퍼티 값 변경을 부드럽게 표현.
-`transition: property duration timing-function delay;`
-`transition: background-color 0.5s ease-in-out;`
-
-== Animation
-`@keyframes`으로 애니메이션 시퀀스를 정의.
-```css
-@keyframes slide-in {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(0); }
-}
-
-.element {
-  animation: slide-in 1s ease-out forwards;
-}
-```
+- `transition`: 속성 변경 시 부드러운 효과 적용
+- `@keyframes`: 애니메이션 단계 정의
+- `animation`: 정의된 키프레임 적용 및 제어
 
 = 6. 미디어 쿼리 (Media Queries)
 
-반응형 디자인의 핵심. 특정 조건(예: 화면 크기)에 따라 다른 스타일을 적용.
+반응형 디자인 구현
 ```css
-/* 화면 너비가 600px 이하일 때 */
 @media (max-width: 600px) {
-  .container {
-    flex-direction: column;
-  }
+  /* 화면 너비 600px 이하 스타일 */
 }
 ```
 
 = 7. 단위 (Units)
 
-- 절대 단위: `px`, `pt`
-- 상대 단위:
-  - `%`: 부모 요소에 대한 백분율.
-  - `em`: 부모 요소의 `font-size`에 대한 배수.
-  - `rem`: 루트 요소(`html`)의 `font-size`에 대한 배수.
-  - `vw`, `vh`: 뷰포트 너비/높이에 대한 백분율.
+- 절대 단위: `px`
+- 상대 단위: `%` (부모 대비), `em` (부모 폰트 대비), `rem` (루트 폰트 대비), `vw/vh` (화면 너비/높이 대비)

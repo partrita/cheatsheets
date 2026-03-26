@@ -8,11 +8,11 @@
 
 = 1. 프로젝트 및 앱 설정
 
-- 새 프로젝트 시작:
+- 프로젝트 시작:
   `django-admin startproject <project_name>`
-- 새 앱 생성:
+- 앱 생성:
   `python manage.py startapp <app_name>`
-- `settings.py`에 앱 등록:
+- `settings.py` 앱 등록:
   ```python
   INSTALLED_APPS = [
       ...
@@ -24,7 +24,7 @@
 
 = 2. 모델 (Models)
 
-`models.py` 파일에 데이터베이스 스키마를 정의합니다.
+`models.py` 내 데이터베이스 스키마 정의.
 
 - 모델 정의:
   ```python
@@ -43,64 +43,58 @@
   - `DateTimeField`, `DateField`, `TimeField`
   - `ForeignKey`, `ManyToManyField`, `OneToOneField`
 - 마이그레이션:
-  - `python manage.py makemigrations`: 모델 변경사항에 대한 마이그레이션 파일 생성.
-  - `python manage.py migrate`: 마이그레이션을 데이터베이스에 적용.
+  - `python manage.py makemigrations`: 모델 변경사항 마이그레이션 파일 생성.
+  - `python manage.py migrate`: 마이그레이션 DB 적용.
 
 = 3. 쿼리셋 (QuerySet) API
 
-데이터베이스와 상호작용하는 방법.
+DB 상호작용 방법.
 
-- 모든 객체 가져오기:
-  `Post.objects.all()`
-- 특정 객체 가져오기 (기본 키):
-  `Post.objects.get(pk=1)`
+- 모든 객체 조회: `Post.objects.all()`
+- 특정 객체 조회(PK): `Post.objects.get(pk=1)`
 - 필터링:
   `Post.objects.filter(title__startswith='Django')`
   `Post.objects.exclude(created_at__year=2023)`
-- 정렬:
-  `Post.objects.order_by('-created_at')`
-- 객체 생성:
-  `Post.objects.create(title='New Post', content='Content')`
-- 객체 저장 및 업데이트:
+- 정렬: `Post.objects.order_by('-created_at')`
+- 객체 생성: `Post.objects.create(title='New', content='...')`
+- 객체 수정/저장:
   ```python
   post = Post.objects.get(pk=1)
-  post.title = 'Updated Title'
+  post.title = 'Updated'
   post.save()
   ```
-- 객체 삭제:
-  `post.delete()`
+- 객체 삭제: `post.delete()`
 
 = 4. 뷰 (Views)
 
-`views.py` 파일에 비즈니스 로직을 작성합니다.
+`views.py` 내 비즈니스 로직 작성.
 
-- 함수 기반 뷰 (Function-Based Views):
+- 함수 기반 뷰 (FBV):
   ```python
   from django.shortcuts import render
   from .models import Post
 
   def post_list(request):
       posts = Post.objects.all()
-      return render(request, 'app_name/post_list.html', {'posts': posts})
+      return render(request, 'app/post_list.html', {'posts': posts})
   ```
-- 클래스 기반 뷰 (Class-Based Views):
+- 클래스 기반 뷰 (CBV):
   ```python
   from django.views.generic import ListView
   from .models import Post
 
   class PostListView(ListView):
       model = Post
-      template_name = 'app_name/post_list.html'
+      template_name = 'app/post_list.html'
       context_object_name = 'posts'
   ```
 
-= 5. URL
+= 5. URL 설정
 
-`urls.py` 파일에서 URL 패턴과 뷰를 연결합니다.
+`urls.py` 내 URL 패턴-뷰 연결.
 
 - 프로젝트 `urls.py`:
   ```python
-  from django.contrib import admin
   from django.urls import path, include
 
   urlpatterns = [
@@ -115,35 +109,28 @@
 
   urlpatterns = [
       path('', views.post_list, name='post_list'),
-      # 클래스 기반 뷰 사용 시
-      # path('', views.PostListView.as_view(), name='post_list'),
   ]
   ```
 
 = 6. 템플릿 (Templates)
 
-HTML 파일에 Django 템플릿 언어(DTL)를 사용합니다.
+HTML 내 DTL(Django Template Language) 사용.
 
 - 변수 출력: `{{ my_variable }}`
-- 태그 사용:
+- 제어 태그:
   ```html
   {% for post in posts %}
       <h2>{{ post.title }}</h2>
-      <p>{{ post.content|truncatewords:30 }}</p>
   {% endfor %}
 
-  {% if user.is_authenticated %}
-      <p>Welcome, {{ user.username }}!</p>
-  {% endif %}
+  {% if user.is_authenticated %}...{% endif %}
   ```
 - URL 참조: `{% url 'post_list' %}`
-- 템플릿 상속:
-  - `{% extends 'base.html' %}`
-  - `{% block content %}{% endblock %}`
+- 상속: `{% extends 'base.html' %}`, `{% block content %}{% endblock %}`
 
 = 7. 폼 (Forms)
 
-`forms.py` 파일에 폼을 정의합니다.
+`forms.py` 내 폼 정의.
 
 ```python
 from django import forms
@@ -154,19 +141,17 @@ class PostForm(forms.ModelForm):
         model = Post
         fields = ['title', 'content']
 ```
-- 뷰에서 폼 처리:
+- 뷰 폼 처리:
   ```python
   def post_create(request):
       if request.method == 'POST':
           form = PostForm(request.POST)
-          if form.is_valid():
-              form.save()
-              # ...
+          if form.is_valid(): form.save()
       else:
           form = PostForm()
-      return render(request, 'app_name/post_form.html', {'form': form})
+      return render(request, 'app/post_form.html', {'form': form})
   ```
-- 템플릿에서 폼 렌더링:
+- 템플릿 폼 렌더링:
   ```html
   <form method="post">
       {% csrf_token %}
@@ -177,7 +162,7 @@ class PostForm(forms.ModelForm):
 
 = 8. 관리자 (Admin)
 
-`admin.py` 파일에 모델을 등록하여 관리자 페이지에서 관리합니다.
+`admin.py` 모델 등록 및 관리자 페이지 관리.
 
 ```python
 from django.contrib import admin
@@ -185,5 +170,4 @@ from .models import Post
 
 admin.site.register(Post)
 ```
-- 관리자 계정 생성:
-  `python manage.py createsuperuser`
+- 관리자 계정 생성: `python manage.py createsuperuser`
