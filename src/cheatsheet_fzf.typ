@@ -62,12 +62,12 @@
 
 = 7. 다른 도구와의 연동 실례
 
-- **Git 협업**:
+- *Git 협업*:
   - 브랜치 전환: `git branch | fzf | xargs git checkout`
   - 로그 상세 확인: `git log --oneline | fzf --preview 'git show {+1}'`
-- **파일 검색 및 편집**:
+- *파일 검색 및 편집*:
   - `rg`(ripgrep) 검색 후 편집기로 열기: `rg --line-number . | fzf | cut -d: -f1,2 | xargs nvim`
-- **프로세스 관리**:
+- *프로세스 관리*:
   - 프로세스 선택 종료: `ps -ef | fzf --multi | awk '{print $2}' | xargs kill -9`
 
 = 8. 환경 변수 설정
