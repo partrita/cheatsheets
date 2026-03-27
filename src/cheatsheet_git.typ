@@ -10,40 +10,39 @@
 
 = GIT CHEAT SHEET
 
-Git은 로컬 컴퓨터에서 GitHub 관련 작업을 담당하는 무료 오픈소스 분산 버전 관리 시스템입니다.  
-이 치트시트는 자주 사용하는 주요 Git 명령어를 쉽게 참고할 수 있도록 정리한 것입니다.
+Git은 로컬 환경에서 소스 코드의 버전을 관리하고 GitHub 등과 연동하여 협업할 수 있게 돕는 오픈소스 분산 버전 관리 시스템입니다. 이 치트시트는 자주 사용하는 주요 Git 명령어를 빠르게 참고할 수 있도록 정리한 것입니다.
 
 == STAGE & SNAPSHOT  
-스냅샷과 Git 스테이징 영역 작업
+스냅샷 기록 및 스테이징 영역 작업
 
-- `git status`: 작업 디렉토리에서 수정된 파일과 스테이지된 파일 상태 표시  
-- `git add [file]`: 현재 상태의 파일을 다음 커밋에 포함하도록 스테이지함  
-- `git reset [file]`: 작업 디렉토리 변경사항은 유지하며 스테이징 해제  
-- `git diff`: 스테이지되지 않은 변경사항 비교  
-- `git diff --staged`: 스테이지된 변경사항 비교 (커밋 전)  
-- `git commit -m [설명 메시지]`: 스테이지된 내용을 새 커밋으로 저장
+- `git status`: 현재 작업 디렉토리의 수정된 파일과 스테이징 영역의 상태를 표시합니다.
+- `git add [file]`: 변경된 파일의 현재 상태를 다음 커밋에 포함되도록 스테이징 영역에 추가합니다.
+- `git reset [file]`: 작업 디렉토리의 내용은 유지한 채, 스테이징 영역에 추가된 파일만 제외합니다.
+- `git diff`: 아직 스테이징되지 않은 변경 사항을 비교합니다.
+- `git diff --staged`: 스테이징 영역에 있는, 커밋 직전의 변경 사항을 비교합니다.
+- `git commit -m [메시지]`: 스테이징 영역의 변경 내용을 새로운 커밋으로 영구히 저장합니다.
 
 == SETUP  
-모든 로컬 저장소에서 사용할 사용자 정보 설정
+사용자 정보 및 전역 설정
 
-- `git config --global user.name [이름]`: 버전 이력 검토 시 식별 가능한 이름 설정  
-- `git config --global user.email [이메일]`: 각 기록에 연동될 이메일 주소 설정  
-- `git config --global color.ui auto`: 명령어 결과 자동 컬러링
+- `git config --global user.name [이름]`: 커밋 이력에 기록될 사용자 이름을 설정합니다.
+- `git config --global user.email [이메일]`: 커밋 이력에 연결될 이메일 주소를 설정합니다.
+- `git config --global color.ui auto`: 명령어 실행 결과에 가독성을 높여주는 색상을 자동으로 적용합니다.
 
 == SETUP & INIT  
-사용자 정보 설정, 저장소 초기화 및 복제
+저장소 초기화 및 복제
 
-- `git init`: 기존 디렉토리를 Git 저장소로 초기화  
-- `git clone [url]`: URL을 통해 원격 저장소 전체 복제
+- `git init`: 현재 디렉토리를 새로운 Git 저장소로 초기화합니다.
+- `git clone [url]`: 지정한 URL의 원격 저장소를 로컬로 복제해 옵니다.
 
 == BRANCH & MERGE  
-브랜치 작업 분리, 전환 및 병합
+독립적인 작업 흐름 관리 및 병합
 
-- `git branch`: 현재 브랜치 목록 표시 (활성 브랜치 옆에 `*` 표시)  
-- `git branch [브랜치 이름]`: 현재 커밋에서 새 브랜치 생성  
-- `git checkout [브랜치 이름]`: 다른 브랜치로 전환  
-- `git merge [브랜치]`: 지정한 브랜치의 변경사항을 현재 브랜치에 병합  
-- `git log`: 현재 브랜치의 커밋 이력 표시
+- `git branch`: 현재 브랜치 목록을 보여주며, 활성 브랜치 옆에는 `*` 표시가 붙습니다.
+- `git branch [이름]`: 현재 커밋을 기준으로 새로운 브랜치를 생성합니다.
+- `git checkout [이름]`: 지정한 브랜치로 작업 환경을 전환합니다.
+- `git merge [이름]`: 지정한 브랜치의 변경 사항을 현재 브랜치에 병합합니다.
+- `git log`: 현재 브랜치의 전체 커밋 이력을 표시합니다.
 
 == INSTALLATION & GUIS  
 플랫폼별 설치 및 GUI 도구
@@ -53,159 +52,157 @@ Git은 로컬 컴퓨터에서 GitHub 관련 작업을 담당하는 무료 오픈
 - Git for All Platforms (Linux, Solaris 등): http://git-scm.com  
 
 == SHARE & UPDATE  
-원격 저장소에서 업데이트 가져오기 및 로컬 저장소 갱신
+원격 저장소 동기화 및 갱신
 
-- `git remote add [별칭] [url]`: 원격 저장소 URL을 별칭으로 추가  
-- `git fetch [별칭]`: 원격 저장소의 모든 브랜치 가져오기  
-- `git merge [별칭]/[브랜치]`: 원격 브랜치를 현재 브랜치로 병합하여 최신화  
-- `git push [별칭] [브랜치]`: 로컬 브랜치 커밋을 원격 저장소에 전송  
-- `git pull`: 추적 중인 원격 브랜치의 변경사항을 가져와 병합
+- `git remote add [별칭] [url]`: 원격 저장소 URL에 별칭(보통 origin)을 부여하여 추가합니다.
+- `git fetch [별칭]`: 원격 저장소의 모든 브랜치 정보를 가져옵니다.
+- `git merge [별칭]/[브랜치]`: 가져온 원격 브랜치를 현재 로컬 브랜치에 병합하여 최신 상태로 만듭니다.
+- `git push [별칭] [브랜치]`: 로컬에서 작업한 커밋들을 원격 저장소로 전송합니다.
+- `git pull`: 원격 저장소의 최신 변경 사항을 가져와 현재 브랜치에 즉시 병합합니다.
 
 == TRACKING PATH CHANGES  
-파일 삭제 및 경로 변경 버전 관리
+파일 삭제 및 경로 변경 관리
 
-- `git rm [file]`: 프로젝트에서 파일 삭제하고 삭제를 커밋에 준비  
-- `git mv [기존 경로] [새 경로]`: 파일 경로 변경 및 스테이지  
-- `git log --stat -M`: 경로 이동이 감지된 커밋 로그 표시
+- `git rm [file]`: 프로젝트에서 파일을 삭제하고 그 상태를 스테이징 영역에 기록합니다.
+- `git mv [기존] [신규]`: 파일 경로를 변경하거나 이름을 바꾸고, 그 상태를 스테이징 영역에 기록합니다.
+- `git log --stat -M`: 파일의 이동이나 이름 변경 이력이 포함된 커밋 로그를 표시합니다.
 
 == TEMPORARY COMMITS  
-수정한 추적 파일을 임시 저장 후 브랜치 변경
+작업 중인 변경 사항 임시 저장
 
-- `git stash`: 수정 및 스테이지한 변경사항 임시 저장  
-- `git stash list`: 임시 저장한 변경사항 목록  
-- `git stash pop`: 임시 저장된 변경사항 적용 및 목록에서 제거  
-- `git stash drop`: 임시 저장항목 삭제
+- `git stash`: 현재의 수정 사항을 임시로 저장하고 작업 디렉토리를 깨끗하게 비웁니다.
+- `git stash list`: 임시 저장된 변경 사항의 목록을 확인합니다.
+- `git stash pop`: 가장 최근에 저장한 변경 사항을 다시 적용하고 목록에서 제거합니다.
+- `git stash drop`: 특정 임시 저장 항목을 삭제합니다.
 
 == REWRITE HISTORY  
-브랜치 수정, 커밋 업데이트 및 이력 재작성
+브랜치 수정 및 이력 재작성
 
-- `git rebase [브랜치]`: 현재 브랜치 커밋을 지정 브랜치 이후로 옮겨 적용  
-- `git reset --hard [커밋]`: 스테이징 영역 초기화 및 작업 디렉토리를 지정 커밋 상태로 재설정
+- `git rebase [브랜치]`: 현재 브랜치의 커밋들을 지정한 브랜치 끝으로 옮겨 이력을 재구성합니다.
+- `git reset --hard [커밋]`: 스테이징 영역을 초기화하고 작업 디렉토리를 특정 커밋 상태로 강제 복구합니다.
 
 == INSPECT & COMPARE  
-로그, 변경점, 객체 정보 확인
+이력 조회 및 변경 사항 확인
 
-- `git log`: 현재 활성 브랜치의 커밋 이력  
-- `git log branchB..branchA`: branchB에는 없고 branchA에만 있는 커밋 표시  
-- `git log --follow [파일]`: 이름이 변경된 파일도 포함한 변경 커밋 표시  
-- `git diff branchB...branchA`: branchA에만 있는 변경사항 비교  
-- `git show [SHA]`: Git 객체(커밋, 태그, 파일 등) 상세 표시
+- `git log`: 현재 활성 브랜치의 커밋 기록을 조회합니다.
+- `git log B..A`: branchB에는 없고 branchA에만 존재하는 커밋들을 표시합니다.
+- `git log --follow [파일]`: 파일 이름이 바뀌었더라도 해당 파일의 전체 변경 이력을 추적하여 보여줍니다.
+- `git diff B...A`: branchA에만 있는 변경 사항들을 비교하여 보여줍니다.
+- `git show [SHA]`: 특정 커밋이나 태그 등의 상세 정보를 확인합니다.
 
 == IGNORING PATTERNS  
-원하지 않는 파일의 스테이징 및 커밋 방지
+추적 제외 설정
 
-- `git config --global core.excludesfile [파일경로]`: 모든 로컬 저장소에 적용할 시스템 전역 무시 패턴 파일 설정
-- `.gitignore` 파일을 생성하여 문자열 또는 와일드카드(glob) 패턴으로 제외할 파일을 지정 가능
+- `git config --global core.excludesfile [경로]`: 모든 로컬 저장소에 적용할 전역 무시 패턴 파일을 설정합니다.
+- `.gitignore`: 프로젝트 루트에 생성하여 특정 파일이나 디렉토리가 Git 추적 대상에서 제외되도록 지정합니다.
 
 == 고급 Git 워크플로우
 
 === Git Rebase 심화
-- `git rebase -i HEAD~3`: 최근 3개 커밋을 대화형으로 리베이스
-- `git rebase --onto main feature-branch`: 특정 브랜치를 다른 베이스로 리베이스
-- `git rebase --continue`: 충돌 해결 후 리베이스 계속
-- `git rebase --abort`: 리베이스 중단하고 원래 상태로 복원
-- `git rebase --skip`: 현재 커밋 건너뛰기
+- `git rebase -i HEAD~3`: 최근 3개의 커밋을 대화형으로 수정하거나 합칩니다.
+- `git rebase --onto main feature`: 특정 브랜치를 다른 베이스 브랜치로 옮깁니다.
+- `git rebase --continue`: 충돌을 해결한 후 리베이스 작업을 계속합니다.
+- `git rebase --abort`: 리베이스 작업을 중단하고 원래 상태로 되돌립니다.
+- `git rebase --skip`: 현재 커밋을 건너뛰고 리베이스를 진행합니다.
 
 === Cherry-pick과 고급 병합
-- `git cherry-pick <commit-hash>`: 특정 커밋만 현재 브랜치에 적용
-- `git cherry-pick <start>..<end>`: 커밋 범위를 체리픽
-- `git cherry-pick --no-commit <commit-hash>`: 커밋하지 않고 변경사항만 스테이징
-- `git merge --no-ff feature-branch`: Fast-forward 병합 방지
-- `git merge --squash feature-branch`: 모든 변경사항을 하나의 커밋으로 병합
+- `git cherry-pick <SHA>`: 특정 커밋의 변경 사항만 현재 브랜치에 적용합니다.
+- `git cherry-pick <start>..<end>`: 특정 범위의 커밋들을 한꺼번에 적용합니다.
+- `git cherry-pick --no-commit <SHA>`: 커밋을 생성하지 않고 변경 사항만 스테이징 영역에 추가합니다.
+- `git merge --no-ff [브랜치]`: Fast-forward 관계라도 강제로 병합 커밋을 생성합니다.
+- `git merge --squash [브랜치]`: 해당 브랜치의 모든 변경 사항을 하나의 커밋으로 합쳐서 병합합니다.
 
-=== Submodule 관리
-- `git submodule add <repository-url> <path>`: 서브모듈 추가
-- `git submodule init`: 서브모듈 초기화
-- `git submodule update`: 서브모듈 업데이트
-- `git submodule update --remote`: 서브모듈을 원격 저장소의 최신 커밋으로 업데이트
-- `git submodule foreach git pull origin main`: 모든 서브모듈에서 pull 실행
+=== 서브모듈(Submodule) 관리
+- `git submodule add <url> <경로>`: 다른 저장소를 현재 프로젝트의 하위 디렉토리로 추가합니다.
+- `git submodule init`: 서브모듈을 초기화합니다.
+- `git submodule update`: 서브모듈의 내용을 업데이트합니다.
+- `git submodule update --remote`: 원격 저장소의 최신 커밋으로 서브모듈을 갱신합니다.
+- `git submodule foreach git pull origin main`: 모든 서브모듈에서 일괄적으로 pull을 실행합니다.
 
 === Git Hooks와 자동화
-- `pre-commit`: 커밋 전 실행되는 훅 (코드 검사, 테스트 등)
-- `post-commit`: 커밋 후 실행되는 훅 (알림, 배포 등)
-- `pre-push`: 푸시 전 실행되는 훅 (테스트, 린트 등)
-- `commit-msg`: 커밋 메시지 검증 훅
+- `pre-commit`: 커밋 직전에 실행되는 훅으로, 코드 스타일이나 테스트 검증에 자주 쓰입니다.
+- `post-commit`: 커밋 직후에 실행되는 훅으로, 알림 발송 등에 활용됩니다.
+- `pre-push`: 푸시 직전에 실행되는 훅으로, 최종 검증 작업에 사용됩니다.
+- `commit-msg`: 작성한 커밋 메시지가 특정 규칙을 따르는지 검사합니다.
 
 === 고급 브랜치 관리
-- `git branch -m old-name new-name`: 브랜치 이름 변경
-- `git branch --set-upstream-to=origin/main feature-branch`: 업스트림 브랜치 설정
-- `git branch --unset-upstream`: 업스트림 브랜치 설정 해제
-- `git branch -d --force branch-name`: 강제로 브랜치 삭제
-- `git branch --merged`: 병합된 브랜치 목록
-- `git branch --no-merged`: 병합되지 않은 브랜치 목록
+- `git branch -m [기존] [신규]`: 브랜치 이름을 변경합니다.
+- `git branch --set-upstream-to=origin/main [브랜치]`: 로컬 브랜치의 업스트림 브랜치를 설정합니다.
+- `git branch --unset-upstream`: 설정된 업스트림 브랜치를 해제합니다.
+- `git branch -d --force [이름]`: 작업이 완료되지 않았더라도 브랜치를 강제로 삭제합니다.
+- `git branch --merged`: 이미 병합된 브랜치 목록을 확인합니다.
+- `git branch --no-merged`: 아직 병합되지 않은 브랜치 목록을 확인합니다.
 
-=== Git Stash 고급 사용법
-- `git stash push -m "message"`: 메시지와 함께 스태시
-- `git stash list`: 스태시 목록 확인
-- `git stash show stash@{0}`: 특정 스태시의 변경사항 확인
-- `git stash apply stash@{0}`: 스태시 적용 (스태시 유지)
-- `git stash pop stash@{0}`: 스태시 적용 후 삭제
-- `git stash branch new-branch stash@{0}`: 스태시에서 새 브랜치 생성
+=== Git Stash 고급 활용
+- `git stash push -m "메시지"`: 설명과 함께 변경 사항을 임시 저장합니다.
+- `git stash list`: 저장된 모든 스태시 목록을 확인합니다.
+- `git stash show stash@{0}`: 특정 스태시 항목의 변경 내용을 확인합니다.
+- `git stash apply stash@{0}`: 스태시를 적용하되 목록에서 삭제하지는 않습니다.
+- `git stash pop stash@{0}`: 스태시를 적용하고 목록에서 삭제합니다.
+- `git stash branch [이름] stash@{0}`: 임시 저장된 상태에서 새로운 브랜치를 생성하여 이동합니다.
 
-=== Git Bisect로 버그 찾기
-- `git bisect start`: 이분 탐색 시작
-- `git bisect bad <commit>`: 문제가 있는 커밋 표시
-- `git bisect good <commit>`: 정상인 커밋 표시
-- `git bisect run <script>`: 자동으로 이분 탐색 실행
-- `git bisect reset`: 이분 탐색 종료
+=== Git Bisect로 버그 추적
+- `git bisect start`: 버그가 발생한 지점을 찾는 이분 탐색을 시작합니다.
+- `git bisect bad <커밋>`: 버그가 존재하는 커밋임을 표시합니다.
+- `git bisect good <커밋>`: 버그가 없는 정상 커밋임을 표시합니다.
+- `git bisect run <스크립트>`: 스크립트를 이용해 자동으로 이분 탐색을 실행합니다.
+- `git bisect reset`: 탐색을 종료하고 원래 브랜치로 돌아갑니다.
 
-=== Git Worktree로 여러 브랜치 동시 작업
-- `git worktree add ../feature-branch feature-branch`: 새 작업 트리 추가
-- `git worktree list`: 작업 트리 목록
-- `git worktree remove ../feature-branch`: 작업 트리 제거
-- `git worktree prune`: 사용하지 않는 작업 트리 정리
+=== Git Worktree로 다중 브랜치 동시 작업
+- `git worktree add [경로] [브랜치]`: 별도 디렉토리에 다른 브랜치를 체크아웃하여 동시에 작업합니다.
+- `git worktree list`: 활성화된 모든 작업 트리 목록을 확인합니다.
+- `git worktree remove [경로]`: 추가했던 작업 트리를 제거합니다.
+- `git worktree prune`: 유효하지 않은 작업 트리 정보를 정리합니다.
 
 === Git Reflog로 복구
-- `git reflog`: HEAD 변경 이력 확인
-- `git reflog show branch-name`: 특정 브랜치의 변경 이력
-- `git reset --hard HEAD@{2}`: reflog를 사용한 복구
-- `git cherry-pick HEAD@{2}`: 특정 시점의 커밋 복구
+- `git reflog`: HEAD의 변경 이력을 상세히 확인하여 실수로 삭제한 커밋 등을 찾습니다.
+- `git reflog show [브랜치]`: 특정 브랜치의 변경 이력을 확인합니다.
+- `git reset --hard HEAD@{2}`: reflog에 기록된 특정 시점으로 강제 복구합니다.
+- `git cherry-pick HEAD@{2}`: 특정 시점의 커밋만 선택하여 복구합니다.
 
 === Git Config 고급 설정
-- `git config --global core.autocrlf true`: Windows에서 줄바꿈 자동 변환
-- `git config --global core.safecrlf true`: 줄바꿈 변환 검사
-- `git config --global pull.rebase true`: pull 시 rebase 사용
-- `git config --global init.defaultBranch main`: 기본 브랜치명 설정
-- `git config --global alias.co checkout`: 명령어 별칭 설정
-- `git config --global alias.br branch`: 브랜치 명령어 별칭
-- `git config --global alias.ci commit`: 커밋 명령어 별칭
+- `git config --global core.autocrlf true`: OS별 줄바꿈 차이를 자동으로 변환합니다.
+- `git config --global core.safecrlf true`: 줄바꿈 변환 중 데이터 손실 여부를 검사합니다.
+- `git config --global pull.rebase true`: pull 시 병합 대신 기본적으로 리베이스를 사용합니다.
+- `git config --global init.defaultBranch main`: 기본 브랜치 이름을 설정합니다.
+- `git config --global alias.co checkout`: 자주 쓰는 명령어의 단축어를 설정합니다.
 
 === Git LFS (Large File Storage)
-- `git lfs install`: Git LFS 초기화
-- `git lfs track "*.psd"`: 특정 파일 타입을 LFS로 추적
-- `git lfs track "*.zip"`: 압축 파일을 LFS로 추적
-- `git lfs ls-files`: LFS로 추적되는 파일 목록
-- `git lfs pull`: LFS 파일 다운로드
+- `git lfs install`: 대용량 파일 관리를 위한 LFS를 초기화합니다.
+- `git lfs track "*.psd"`: 특정 확장자 파일을 LFS 추적 대상으로 지정합니다.
+- `git lfs track "*.zip"`: 압축 파일을 LFS로 관리하도록 설정합니다.
+- `git lfs ls-files`: LFS로 관리 중인 파일 목록을 확인합니다.
+- `git lfs pull`: LFS 원격 서버에서 파일을 가져옵니다.
 
-=== Git Archive로 배포 패키지 생성
-- `git archive --format=zip --output=release.zip main`: ZIP 형식으로 아카이브
-- `git archive --format=tar.gz --output=release.tar.gz main`: TAR.GZ 형식으로 아카이브
-- `git archive --format=zip --prefix=project/ main`: 접두사와 함께 아카이브
+=== Git Archive로 배포용 아카이브 생성
+- `git archive --format=zip --output=release.zip main`: 작업 내용을 ZIP 형식으로 묶어 내보냅니다.
+- `git archive --format=tar.gz --output=release.tar.gz main`: TAR.GZ 형식으로 내보냅니다.
+- `git archive --format=zip --prefix=project/ main`: 특정 접두사 경로를 포함하여 아카이브를 만듭니다.
 
-=== 고급 Git 명령어 조합
+=== 유용한 고급 명령어 조합
 ```bash
-# 최근 커밋들의 통계
+# 최근 10개 커밋의 요약 정보와 통계 확인
 git log --oneline --stat -10
 
-# 특정 파일의 변경 이력
-git log --follow -- filename
+# 파일 이름이 변경되었더라도 특정 파일의 전체 이력을 추적
+git log --follow -- [파일명]
 
-# 브랜치별 커밋 수 비교
+# 특정 브랜치 간의 커밋 개수 비교
 git rev-list --count main
-git rev-list --count feature-branch
+git rev-list --count [브랜치]
 
-# 특정 기간의 커밋
+# 특정 기간 동안의 커밋 내역 조회
 git log --since="2023-01-01" --until="2023-12-31"
 
-# 특정 작성자의 커밋
-git log --author="John Doe"
+# 특정 작성자가 수행한 커밋 조회
+git log --author="Name"
 
-# 커밋 메시지로 검색
+# 커밋 메시지 내용으로 검색
 git log --grep="bug fix"
 
-# 파일 변경 내용과 함께 보기
-git log -p filename
+# 파일 변경 내용(patch)과 함께 로그 확인
+git log -p [파일명]
 
-# 그래프로 브랜치 히스토리 보기
+# 브랜치 전체의 히스토리를 그래프 형태로 한눈에 보기
 git log --graph --oneline --all
 ```
