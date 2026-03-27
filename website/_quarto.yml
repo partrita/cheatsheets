@@ -3,7 +3,7 @@ project:
   output-dir: ../site_output
 
 website:
-  title: "Cheatsheets"
+  title: "컨닝페이퍼"
   navbar:
     left:
       - href: index.qmd
@@ -15,5 +15,3 @@ website:
 format:
   html:
     theme: flatly
-    css: styles.css
-    copy-code: true
