@@ -75,24 +75,24 @@ uv는 Rust로 작성된 초고속 파이썬 패키지 설치 및 환경 관리 �
 
 = 효율적인 uv 개발 워크플로우 예시
 
-1. **프로젝트 시작**:
+1. *프로젝트 시작*:
    ```bash
    uv init my-project
    cd my-project
    ```
-2. **필요한 의존성 추가**:
+2. *필요한 의존성 추가*:
    ```bash
    uv add fastapi uvicorn
    ```
-3. **개발 도구 추가**:
+3. *개발 도구 추가*:
    ```bash
    uv add pytest --group dev
    ```
-4. **환경 동기화**:
+4. *환경 동기화*:
    ```bash
    uv sync
    ```
-5. **애플리케이션 실행**:
+5. *애플리케이션 실행*:
    ```bash
    uv run uvicorn main:app --reload
    ```

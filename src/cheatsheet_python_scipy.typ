@@ -25,7 +25,7 @@ SciPy는 과학적, 공학적 수치 계산을 위해 설계된 파이썬 생태
 
 기술 통계부터 확률 분포, 가설 검정까지 폭넓은 통계 기능을 지원합니다.
 
-- **기초 통계 요약**:
+- *기초 통계 요약*:
   ```python
   from scipy import stats
   import numpy as np
@@ -33,14 +33,14 @@ SciPy는 과학적, 공학적 수치 계산을 위해 설계된 파이썬 생태
   # 개수, 최소/최대, 평균, 분산, 왜도, 첨도 등을 한꺼번에 확인합니다.
   stats.describe(data) 
   ```
-- **T-검정 (T-test)**:
+- *T-검정 (T-test)*:
   ```python
   # 두 집단 간 평균의 차이가 유의미한지 검정합니다 (독립 표본).
   group1 = stats.norm.rvs(loc=5, scale=10, size=500)
   group2 = stats.norm.rvs(loc=5, scale=10, size=500)
   result = stats.ttest_ind(group1, group2)
   ```
-- **주요 확률 분포**:
+- *주요 확률 분포*:
   - `stats.norm`: 정규 분포
   - `stats.binom`: 이항 분포
   - `.rvs()`: 랜덤 표본(Random Variates) 생성
@@ -52,7 +52,7 @@ SciPy는 과학적, 공학적 수치 계산을 위해 설계된 파이썬 생태
 
 함수의 최솟값을 탐색하거나, 방정식의 해를 구하고 데이터를 특정 곡선에 맞추는 작업을 수행합니다.
 
-- **함수 최솟값 찾기 (Minimize)**:
+- *함수 최솟값 찾기 (Minimize)*:
   ```python
   from scipy.optimize import minimize
   def rosen(x): # 로젠브록(Rosenbrock) 함수 정의
@@ -61,7 +61,7 @@ SciPy는 과학적, 공학적 수치 계산을 위해 설계된 파이썬 생태
   # Nelder-Mead 알고리즘을 사용하여 최적의 x값을 탐색합니다.
   res = minimize(rosen, x0, method='nelder-mead')
   ```
-- **커브 피팅 (Curve Fitting)**:
+- *커브 피팅 (Curve Fitting)*:
   ```python
   from scipy.optimize import curve_fit
   def model_func(x, a, b, c):
@@ -74,17 +74,17 @@ SciPy는 과학적, 공학적 수치 계산을 위해 설계된 파이썬 생태
 
 표준 선형대수 연산을 더욱 빠르고 정밀하게 처리합니다.
 
-- **역행렬**: `linalg.inv(A)`
-- **행렬식**: `linalg.det(A)`
-- **특이값 분해 (SVD)**: `linalg.svd(A)`
-- **고유값 및 고유벡터**: `linalg.eig(A)`
-- **최소 자승법**: `linalg.lstsq(A, b)`
+- *역행렬*: `linalg.inv(A)`
+- *행렬식*: `linalg.det(A)`
+- *특이값 분해 (SVD)*: `linalg.svd(A)`
+- *고유값 및 고유벡터*: `linalg.eig(A)`
+- *최소 자승법*: `linalg.lstsq(A, b)`
 
 = 6. 수치 적분 (`scipy.integrate`)
 
-- **정적분 계산**:
+- *정적분 계산*:
   `integrate.quad(lambda x: x**2, 0, 4)`
-- **상미분 방정식(ODE) 풀이**:
+- *상미분 방정식(ODE) 풀이*:
   `integrate.solve_ivp(fun, t_span, y0)`
 
 = 7. 데이터 보간법 (`scipy.interpolate`)
