@@ -302,3 +302,7 @@ site_libs/
 
 .agent
 .typ_build_temp/
+
+# Large files
+src/fonts/
+pdfs/
