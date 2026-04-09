@@ -500,3 +500,38 @@ auto end = std::chrono::high_resolution_clock::now();
 std::chrono::duration<double, std::milli> ms = end - start;
 std::cout << "실행 시간: " << ms.count() << "ms" << std::endl;
 ```
+
+
+= Google Style Guide
+
+== 1. 명명 규칙 (Naming)
+
+- #highlight[파일 이름]: `my_useful_class.cc` (소문자, 언더스코어)
+- #highlight[타입 (클래스/구조체)]: `MyExcitingClass` (UpperCamelCase)
+- #highlight[변수 (로컬/데이터 멤버)]: `my_local_variable`, `my_member_variable_` (소문자, 멤버는 뒤에 언더스코어)
+- #highlight[상수/열거형]: `kDaysInAWeek` (소문자 k로 시작하는 CamelCase)
+- #highlight[함수]: `MyExcitingFunction()` (UpperCamelCase)
+- #highlight[네임스페이스]: `my_namespace` (소문자)
+- #highlight[매크로]: `MY_MACRO_THAT_SCARES_SMALL_CHILDREN`
+
+== 2. 헤더 파일 (Header Files)
+
+- #highlight[Self-contained]: 헤더는 그 자체로 컴파일 가능해야 함.
+- #highlight[#define Guard]: `#ifndef PROJECT_PATH_FILE_H_` 형식 준수.
+- #highlight[Include 순서]: 관련 헤더 -> C 시스템 -> C++ 표준 -> 다른 라이브러리 -> 프로젝트 헤더.
+- #highlight[Inline 함수]: 10줄 이하의 짧은 경우만 헤더에 정의.
+
+== 3. 클래스 (Classes)
+
+- #highlight[Constructors]: 생성자에서 가상 함수 호출 금지. 인자가 하나인 생성자는 `explicit` 키워드 사용.
+- #highlight[Struct vs Class]: 단순 데이터 전달용은 `struct`, 로직이 포함되면 `class` 사용.
+- #highlight[Inheritance]: `public` 상속만 사용. 다중 상속은 지양. `override` 또는 `final` 명시.
+- #highlight[Access Control]: 데이터 멤버는 `private`으로 유지.
+
+== 4. 프로그래밍 관례
+
+- #highlight[Smart Pointers]: 소유권 모델을 명확히 함 (`std::unique_ptr` 선호).
+- #highlight[Namespaces]: 코드는 네임스페이스 안에 배치. `using namespace std;` 금지.
+- #highlight[Output Parameters]: 결과값은 가급적 반환값으로 전달. 출력 인자는 참조 대신 포인터 사용 고려.
+- #highlight[C++20]: 최신 표준(C++20) 사용을 지향하되 비표준 확장 기능 사용 금지.
+- #highlight[Exceptions]: Google 내부에서는 지양하나 오픈소스에서는 상황에 맞춰 사용.

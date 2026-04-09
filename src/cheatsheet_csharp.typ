@@ -175,3 +175,39 @@ public async Task<string> GetDataAsync() {
 // 호출
 string data = await GetDataAsync();
 ```
+
+
+= Google Style Guide
+
+== 1. 명명 규칙 (Naming)
+
+- #highlight[클래스/메서드/속성]: `PascalCase`
+- #highlight[인터페이스]: `IPascalCase` (I 접두사)
+- #highlight[로컬 변수/매개변수]: `camelCase`
+- #highlight[비공개 필드]: `_camelCase` (언더스코어 접두사)
+- #highlight[파일/디렉토리]: `PascalCase.cs`
+- #highlight[약어]: `MyRpc` (단어처럼 취급하여 첫 글자만 대문자)
+
+== 2. 포매팅 (Formatting)
+
+- #highlight[들여쓰기]: 공백 2개 (탭 금지)
+- #highlight[줄 길이]: 최대 100자
+- #highlight[중괄호]: 줄 바꿈 없이 시작 brace `{` 사용 (Java 스타일)
+- #highlight[빈 블록]: `{}` 처럼 간결하게 표현 가능
+- #highlight[Modifiers]: `public protected ... async` 순서 준수
+
+== 3. 프로그래밍 관례
+
+- #highlight[Constants]: 가능하면 항상 `const` 사용, 불가능하면 `readonly` 고려.
+- #highlight[Collections]: 입력은 가장 제한적인 타입 (`IEnumerable`, `IReadOnlyList`) 사용 권장.
+- #highlight[Struct vs Class]: 기본적으로 `class` 사용. 매우 작고 수명이 짧은 데이터에만 `struct` 고려.
+- #highlight[Delegates]: `SomeDelegate?.Invoke()` 처럼 안전하게 호출.
+- #highlight[Extension Methods]: 원본 소스를 수정할 수 없을 때만 제한적으로 사용.
+
+== 4. C# 기능 활용
+
+- #highlight[var]: 타입이 명확할 때만 사용 (`var apple = new Apple();`).
+- #highlight[LINQ]: 가급적 한 줄로 작성. 복잡한 체인은 명령형 코드로 대체 고려.
+- #highlight[Attributes]: 필드/메서드 바로 위 줄에 작성. 여러 속성은 각 줄에 별도로 작성.
+- #highlight[Lambda]: 복잡한 로직은 명명된 메서드로 분리.
+- #highlight[Object Initializer]: 'Plain old data' 타입에만 사용 권장.

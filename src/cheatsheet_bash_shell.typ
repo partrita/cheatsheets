@@ -110,3 +110,36 @@
 - `getopts`: 스크립트에 전달된 옵션과 플래그를 체계적으로 파싱합니다.
 - `readlink -f "$0"`: 현재 실행 중인 스크립트 파일의 실제 절대 경로를 얻습니다.
 - `shebang`: 스크립트의 첫 줄에 `#!/bin/bash` 또는 `#!/usr/bin/env bash`를 작성하여 실행할 인터프리터를 지정합니다.
+
+
+= Google Style Guide
+
+== 1. 기본 원칙
+
+- #highlight[쉘 선택]: 실행 파일에는 `Bash`만 허용 (`#!/bin/bash`).
+- #highlight[언제 사용하나]: 데이터 조작이 적고 다른 유틸리티를 주로 호출하는 작은 유틸리티나 래퍼 스크립트.
+- #highlight[복잡도]: 스크립트가 100줄을 넘거나 제어 흐름이 복잡해지면 파이썬 등 구조화된 언어로 재작성 권장.
+
+== 2. 포매팅 (Formatting)
+
+- #highlight[들여쓰기]: 공백 2개 (탭 금지).
+- #highlight[줄 길이]: 최대 80자.
+- #highlight[제어 구조]: `; then`과 `; do`를 `if`/`for`/`while`과 같은 줄에 배치.
+- #highlight[파이프라인]: 한 줄에 다 안 들어가면 줄당 하나의 파이프로 나누고 2칸 들여쓰기.
+- #highlight[변수 확장]: `"$var"`보다 `"${var}"` 형식을 선호하며, 항상 따옴표를 사용할 것.
+
+== 3. 명명 규칙 (Naming)
+
+- #highlight[함수]: `lower_with_under()`, 패키지는 `::`로 구분.
+- #highlight[변수]: `lower_with_under`.
+- #highlight[상수/환경 변수]: `UPPER_WITH_UNDER`, 파일 상단에 선언.
+- #highlight[로컬 변수]: 함수 내에서는 항상 `local` 키워드 사용.
+
+== 4. 기능 및 관례
+
+- #highlight[Command Substitution]: 백틱(` `) 대신 `$(command)` 사용.
+- #highlight[Test]: `[` 나 `test` 대신 `[[ ... ]]` 사용 권장.
+- #highlight[산술 연산]: `let`이나 `expr` 대신 `(( ... ))` 또는 `$(( ... ))` 사용.
+- #highlight[Wildcards]: 파일 이름 확장 시 명시적 경로 사용 (`rm ./*` 가 `rm *` 보다 안전).
+- #highlight[Error]: 모든 오류 메시지는 `STDERR`로 출력.
+- #highlight[Check]: `ShellCheck` 도구 사용 강력 권장.

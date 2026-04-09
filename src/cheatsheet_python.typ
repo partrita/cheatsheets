@@ -508,3 +508,40 @@ class Point:
         self.y = y
 ```
 
+
+
+= Google Style Guide
+
+== 1. 명명 규칙 (Naming)
+
+- #highlight[모듈]: `lower_with_under.py`
+- #highlight[패키지]: `lower_with_under`
+- #highlight[클래스]: `CapWords` (UpperCamelCase)
+- #highlight[함수 및 메서드]: `lower_with_under()`
+- #highlight[변수 (로컬/전역)]: `lower_with_under`
+- #highlight[상수]: `CAPS_WITH_UNDER`
+- #highlight[비공개(Internal)]: 앞부분에 언더스코어 하나 추가 (`_single_leading_underscore`)
+
+== 2. 포매팅 (Formatting)
+
+- #highlight[들여쓰기]: 공백 4개 (탭 사용 금지)
+- #highlight[줄 길이]: 최대 80자
+- #highlight[세미콜론]: 문장 끝에 세미콜론(;) 사용 금지
+- #highlight[괄호]: 불필요한 괄호 사용 자제 (단, 줄 바꿈을 위한 묵시적 줄 결합에는 권장)
+- #highlight[빈 줄]: 최상위 정의(클래스/함수) 사이에는 2줄, 메서드 사이에는 1줄
+
+== 3. 프로그래밍 관례
+
+- #highlight[Imports]: 패키지와 모듈만 import (함수나 클래스 직접 import 지양). 항상 전체 경로(Full Path) 사용.
+- #highlight[Exceptions]: 예외를 사용하여 흐름 제어. `except:` 처럼 모든 예외를 잡는 구문 지양 (`Exception` 명시 권장).
+- #highlight[Global State]: 가변 전역 상태 사용 지양.
+- #highlight[Type Annotations]: 공용 API에는 타입 힌트 추가 권장.
+- #highlight[Docstrings]: 모든 함수, 클래스, 모듈에 작성 (`"""..."""` 형식).
+
+== 4. 주요 Do's & Don'ts
+
+- #highlight[Do]: 기본 이터레이터와 연산자 사용 (`if x:` 는 `if len(x) != 0:` 보다 선호됨).
+- #highlight[Do]: 파일/소켓 처리는 `with` 문 사용.
+- #highlight[Don't]: 가변 객체(List, Dict 등)를 함수의 기본 인자로 사용 금지.
+- #highlight[Don't]: `assert` 문을 핵심 로직 검증에 사용 금지 (최적화 시 무시될 수 있음).
+- #highlight[Don't]: 람다 함수가 복잡해지면 일반 함수로 정의.

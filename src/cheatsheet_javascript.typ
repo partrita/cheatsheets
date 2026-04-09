@@ -92,3 +92,38 @@
 - *Template Literals*: `` `Hello ${name}` `` 형식을 사용하여 문자열 내 변수 삽입
 - *Array.from()*: 유사 배열 객체를 실제 배열로 변환
 - *Object.entries() / fromEntries()*: 객체를 엔트리 배열로 변환하거나 그 반대 작업 수행
+
+
+= Google Style Guide
+
+== 1. 명명 규칙 (Naming)
+
+- #highlight[함수/변수/속성]: `lowerCamelCase`
+- #highlight[클래스/인터페이스]: `UpperCamelCase`
+- #highlight[상수]: `UPPER_SNAKE_CASE`
+- #highlight[비공개 필드]: 언더스코어 접미사 (`_private_`)
+- #highlight[파일 이름]: `my_file.js` (소문자, 언더스코어 또는 대시)
+
+== 2. 포매팅 (Formatting)
+
+- #highlight[들여쓰기]: 공백 2개 (탭 금지)
+- #highlight[줄 길이]: 최대 80자
+- #highlight[세미콜론]: 반드시 사용 (자동 삽입 의존 금지)
+- #highlight[따옴표]: 작은따옴표(`'`) 선호
+- #highlight[중괄호]: K&R 스타일 (Egyptian brackets)
+
+== 3. 프로그래밍 관례
+
+- #highlight[변수 선언]: `const`와 `let` 사용 필수 (`var` 사용 금지).
+- #highlight[모듈]: `goog.module` 또는 ES6 모듈 (`import`/`export`) 사용.
+- #highlight[Default Exports]: 사용 금지 (명명된 내보내기만 사용).
+- #highlight[This]: 클래스 생성자나 메서드 내에서만 사용 권장.
+- #highlight[Getters/Setters]: 지양 (일반 메서드 선호, 필요 시 `getFoo()`/`setFoo()`).
+
+== 4. 언어 기능 활용
+
+- #highlight[배열 리터럴]: `new Array()` 대신 `[]` 사용. 트레일링 콤마(,) 권장.
+- #highlight[객체 리터럴]: `quoted`와 `unquoted` 키 혼용 금지. 메서드 단축 표기(`method() {}`) 권장.
+- #highlight[Arrow Functions]: 익명 함수와 `this` 바인딩 시 선호.
+- #highlight[Type Casting]: `Number()`, `String()` 등 명시적 함수 사용.
+- #highlight[JSDoc]: 타입 정보를 포함하여 충실히 작성.

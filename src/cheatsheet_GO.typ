@@ -297,3 +297,36 @@ Go는 강력한 표준 라이브러리와 더불어 `Gin`, `GORM` 등의 외부 
 = 배포 및 운영
 
 Docker와 같은 컨테이너 기술이나 Kubernetes 환경에 맞춘 멀티스테이지 빌드 설정을 통해 작은 크기의 실행 바이너리로 배포할 수 있으며, 높은 성능과 안정성을 제공합니다.
+
+
+= Google Style Guide
+
+== 1. 핵심 원칙
+
+- #highlight[Clarity]: 코드의 의도와 근거가 명확해야 함.
+- #highlight[Simplicity]: 가장 단순한 방식으로 목표를 달성할 것.
+- #highlight[Concision]: 신호 대 잡음비(signal-to-noise ratio)를 높임.
+- #highlight[Maintainability]: 유지보수가 용이하게 작성.
+- #highlight[Consistency]: 전체 코드베이스와 일관성 유지.
+
+== 2. 명명 규칙 (Naming)
+
+- #highlight[MixedCaps]: `MixedCaps` 또는 `mixedCaps` 사용 (언더스코어 지양).
+- #highlight[Exported]: 대문자로 시작하면 내보내기 가능, 소문자는 패키지 내부 전용.
+- #highlight[Package]: 짧고 명확한 소문자 (언더스코어/캡스 금지).
+- #highlight[Receiver]: 1~2자의 짧은 이름 (`f *File`) 권장.
+- #highlight[Variables]: 범위가 좁을수록 짧은 이름 사용.
+
+== 3. 포매팅 (Formatting)
+
+- #highlight[gofmt]: 모든 Go 파일은 `gofmt` 도구로 포맷팅되어야 함.
+- #highlight[줄 길이]: 고정된 제한은 없으나, 너무 길면 리팩토링 고려.
+- #highlight[Indentation]: 탭(Tabs)을 사용하여 들여쓰기.
+
+== 4. 프로그래밍 관례
+
+- #highlight[Error Handling]: `if err != nil { return err }` 패턴 준수. 에러는 값으로 취급.
+- #highlight[Panic]: 라이브러리 코드에서 `panic` 사용 금지 (에러 반환 권장).
+- #highlight[Interfaces]: 작게 유지 (보통 1~2개 메서드). 사용처에서 정의 선호.
+- #highlight[Concurrency]: 채널과 뮤텍스 중 적합한 것 선택. 채널은 소유권과 흐름 제어에 유리.
+- #highlight[Tests]: 테이블 기반 테스트(`Table-driven testing`) 권장.

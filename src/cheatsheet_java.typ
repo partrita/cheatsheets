@@ -151,3 +151,39 @@ list.add("Java");
   - *Heap*: 객체가 생성되는 영역이며 GC(Garbage Collector)의 관리 대상입니다.
   - *Stack*: 메서드 호출 시 생성되는 지역 변수와 매개변수가 저장됩니다.
   - *Method Area*: 클래스 정보, 상수가 저장되는 공유 영역입니다.
+
+
+= Google Style Guide
+
+== 1. 명명 규칙 (Naming)
+
+- #highlight[패키지]: `com.example.project` (소문자 연속)
+- #highlight[클래스/인터페이스]: `UpperCamelCase` (명사형)
+- #highlight[메서드]: `lowerCamelCase` (동사형)
+- #highlight[상수]: `UPPER_SNAKE_CASE` (static final)
+- #highlight[변수 (로컬/필드)]: `lowerCamelCase`
+- #highlight[타입 변수]: `T`, `E` (단일 대문자) 또는 `RequestT` (T 접미사)
+
+== 2. 포매팅 (Formatting)
+
+- #highlight[들여쓰기]: 공백 2개 (탭 금지)
+- #highlight[줄 길이]: 최대 100자
+- #highlight[중괄호]: K&R 스타일 (줄 바꿈 없이 시작 brace `{` 사용)
+- #highlight[빈 블록]: `{}` 처럼 간결하게 표현 가능 (단, multi-block 문장은 제외)
+- #highlight[문장]: 한 줄에 하나의 문장만 작성
+
+== 3. 프로그래밍 관례
+
+- #highlight[Wildcard Imports]: 사용 금지 (`import java.util.*;` 금지).
+- #highlight[Override]: `@Override` 어노테이션 반드시 사용.
+- #highlight[Exceptions]: 예외를 무시하지 말 것 (무시해야 한다면 주석으로 이유 명시).
+- #highlight[Static Members]: 클래스 이름으로 접근 (`MyClass.staticMethod()`).
+- #highlight[Modifiers]: JLS 권장 순서 준수 (`public protected private abstract ...`).
+
+== 4. 주요 관례 및 Javadoc
+
+- #highlight[Javadoc]: 모든 public 클래스와 멤버에 필수. 첫 문장은 완전한 문장이 아닌 요약 구문이어야 함.
+- #highlight[Block Tags]: `@param`, `@return`, `@throws`, `@deprecated` 순서로 작성.
+- #highlight[Annotations]: 하나의 어노테이션은 별도의 줄에 작성 (단, 단일 인자 없는 어노테이션은 예외).
+- #highlight[Local Variables]: 처음 사용되는 지점 근처에서 선언하여 범위를 최소화.
+- #highlight[Long Literals]: `L` 접미사 사용 (소문자 `l` 금지).

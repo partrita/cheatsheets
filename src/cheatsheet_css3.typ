@@ -124,3 +124,38 @@
   - `em`: 부모 요소의 `font-size`에 대한 배수.
   - `rem`: 루트 요소(`html`)의 `font-size`에 대한 배수.
   - `vw`, `vh`: 뷰포트 너비/높이에 대한 백분율.
+
+
+= Google Style Guide
+
+== 1. 공통 원칙
+
+- #highlight[Protocol]: 이미지 등 모든 리소스에 `HTTPS` 사용.
+- #highlight[Indentation]: 공백 2개 (탭 금지).
+- #highlight[Capitalization]: 모든 코드(태그, 속성, 셀렉터 등)는 소문자만 사용.
+- #highlight[Encoding]: `UTF-8` 사용 (BOM 없음). HTML에 `<meta charset="utf-8">` 명시.
+
+== 2. HTML 가이드
+
+- #highlight[Doctype]: 항상 `<!doctype html>` 사용.
+- #highlight[Validity]: 유효한 HTML 작성. W3C 밸리데이터 활용.
+- #highlight[Semantics]: 태그 목적에 맞게 사용 (`div` 대신 `a`, `p`, `header` 등).
+- #highlight[Multimedia]: `alt` 속성 등으로 대체 텍스트 제공 필수.
+- #highlight[Optional Tags]: 파일 크기 최적화를 위해 선택적 태그(html, body, li 등) 생략 가능.
+- #highlight[Quotation]: 속성값에는 큰따옴표(`"`) 사용.
+
+== 3. CSS 가이드
+
+- #highlight[Class Naming]: 의미론적 또는 일반적인 이름 사용 (기능 중심). 하이픈(`-`)으로 단어 구분.
+- #highlight[ID Selectors]: ID 셀렉터(` #id`) 사용 지양 (Class 셀렉터 권장).
+- #highlight[Shorthand]: 가능한 한 단축 속성(`font`, `margin` 등) 사용.
+- #highlight[0 & Units]: 값이 0인 경우 단위 생략 (`margin: 0;`).
+- #highlight[Hex Notation]: 가능하면 3자리 헥사 코드 사용 (`#abc`).
+- #highlight[Important]: `!important` 사용 자제. 셀렉터 우선순위 활용.
+
+== 4. 포매팅 및 관례
+
+- #highlight[Order]: CSS 선언은 알파벳 순서로 정렬 권장.
+- #highlight[Spacing]: 블록 시작 전 공백 1개, 속성 콜론(`:`) 뒤 공백 1개 사용.
+- #highlight[Comments]: 복잡한 코드에는 섹션 구분 주석 작성.
+- #highlight[Separation]: 구조(HTML), 표현(CSS), 동작(JS)을 엄격히 분리.
