@@ -29,21 +29,26 @@ jobs:
           PDF_OUTPUT_PATHS=""
           PDF_FILENAMES_FOR_RELEASE=""
 
-          # src/ 디렉토리 내의 모든 .typ 파일에 대해 반복
-          for typ_file_path in src/*.typ; do
+          # src/ko/ 및 src/en/ 디렉토리 내의 모든 .typ 파일에 대해 반복 (템플릿 제외)
+          while IFS= read -r -d '' typ_file_path; do
             # 파일명에서 .typ 확장자 제거 (예: main.typ -> main)
             filename=$(basename "$typ_file_path" .typ)
+            # 폴더명에서 언어 코드 추출 (예: src/en/main.typ -> en)
+            lang=$(basename "$(dirname "$typ_file_path")")
 
             # 소스 경로 목록에 추가 (공백으로 구분)
             TYP_SOURCE_PATHS+="$typ_file_path "
 
-            # 최종 PDF 파일명 (예: 2025-07-14_main.pdf)
-            PDF_NAME="${CURRENT_DATE}_${filename}.pdf"
+            # 최종 PDF 파일명 (예: 2025-07-14_en_main.pdf)
+            PDF_NAME="${CURRENT_DATE}_${lang}_${filename}.pdf"
+            
             # 출력 경로 목록에 추가 (공백으로 구분)
+            # src/ 폴더에 평평하게(flatten) 저장하여 업로드 및 릴리스 시 찾기 쉽게 합니다.
             PDF_OUTPUT_PATHS+="src/$PDF_NAME "
-            # 릴리스에 사용할 PDF 파일명 목록에 추가 (한 줄에 하나씩)
+            
+            # 릴리스에 사용할 PDF 파일명 목록에 추가
             PDF_FILENAMES_FOR_RELEASE+="$PDF_NAME"$'\n'
-          done
+          done < <(find src/ -name "*.typ" -not -path "src/templates/*" -print0)
 
           # 마지막 공백 제거
           TYP_SOURCE_PATHS=$(echo "$TYP_SOURCE_PATHS" | sed 's/ *$//')
@@ -59,6 +64,8 @@ jobs:
 
       - name: Typst로 PDF 컴파일
         uses: ammar-ahmed22/compile-typst-action@main
+        env:
+          TYPST_ROOT: ${{ github.workspace }}
         with:
           # 동적으로 생성된 소스 경로 목록 사용 (공백으로 구분된 문자열)
           source_paths: ${{ steps.generate_file_lists.outputs.typ_source_paths }}
