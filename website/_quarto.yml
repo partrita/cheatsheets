@@ -3,7 +3,7 @@ project:
   output-dir: ../site_output
 
 website:
-  title: "컨닝페이퍼"
+  title: "My collection of cheatsheet"
   navbar:
     left:
       - href: index.qmd
