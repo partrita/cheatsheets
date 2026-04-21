@@ -2,8 +2,8 @@
 
 #show: template.with(
   title: "Rust 치트시트",
-  header: [#datetime.today().display()],
-  footer: "",
+  header: [Last updated: #datetime.today().display()],
+  footer: "Rust Cheat Sheet (cheats.rs)",
 )
 
 = 1. 변수 및 기본 데이터 타입
@@ -78,27 +78,60 @@
 - *벡터 (Vector)*: `Vec<T>`. 크기 조절이 가능한 동적 배열입니다.
 - *문자열 (String)*: UTF-8 형식의 동적 문자열로 힙 메모리에 할당됩니다.
 - *해시맵 (HashMap)*: 키-값(Key-Value) 쌍을 저장하는 연관 컨테이너입니다.
+- *슬라이스 (Slice)*: `&[T]`. 컬렉션의 연속된 부분을 참조합니다.
 
-= 8. 에러 처리 (Error Handling)
+= 8. 타입 변환 (Type Conversions)
+
+- *as 키워드*: `x as u64`. 숫자 타입 간 변환이나 포인터 캐스팅에 사용합니다.
+- *From & Into*: `impl From<A> for B`. `B::from(a)` 또는 `a.into()`로 변환 (손실 없음).
+- *TryFrom & TryInto*: 실패 가능성이 있는 변환. `Result`를 반환합니다.
+- *AsRef & AsMut*: 타입 `A`를 참조 `&B` 또는 `&mut B`로 저렴하게 변환합니다.
+- *Deref*: `*x` 연산 시 동작 정의. 스마트 포인터가 실제 데이터처럼 동작하게 합니다.
+- *String 변환*: `s.parse::<i32>()` (문자열 → 숫자), `x.to_string()` (숫자 → 문자열).
+
+= 9. 이터레이터 (Iterators)
+
+- *생성*:
+  - `iter()`: 불변 참조 (`&T`) 순회.
+  - `iter_mut()`: 가변 참조 (`&mut T`) 순회.
+  - `into_iter()`: 소유권 이동 (`T`) 또는 적절한 타입 순회.
+- *어댑터 (Lazy)*:
+  - `map(|x| ...)`: 각 요소 변환.
+  - `filter(|x| ...)`: 조건에 맞는 요소만 선택.
+  - `enumerate()`: 인덱스와 함께 반환 `(index, value)`.
+  - `zip(other)`: 두 이터레이터를 하나로 묶음.
+  - `take(n)`, `skip(n)`: 개수 제한 및 건너뛰기.
+- *소비 (Consumer)*:
+  - `collect()`: 이터레이터를 컬렉션(Vec 등)으로 변환.
+  - `fold(init, |acc, x| ...)`: 하나의 값으로 축약.
+  - `for_each(|x| ...)`: 각 요소에 대해 실행.
+  - `find(|x| ...)`, `any(|x| ...)`: 요소 검색 및 조건 확인.
+
+= 10. 에러 처리 (Error Handling)
 
 - *panic!*: 복구가 불가능한 치명적인 에러가 발생했을 때 프로그램을 즉시 종료합니다.
 - *Result\<T, E\>*: 성공(`Ok(T)`) 또는 실패(`Err(E)`)를 나타내는 열거형으로, 복구 가능한 에러 처리에 사용됩니다.
 - *? 연산자*: 에러 발생 시 해당 에러를 호출자에게 즉시 전달(전파)하여 코드를 간결하게 만듭니다.
 
-= 9. 제네릭(Generics), 트레잇(Traits), 라이프타임(Lifetimes)
+= 11. 제네릭(Generics), 트레잇(Traits), 라이프타임(Lifetimes)
 
 - *제네릭*: 타입을 추상화하여 다양한 데이터 타입에 동작하는 유연한 코드를 작성합니다.
-- *트레잇*: 여러 타입이 공통적으로 가져야 할 동작(인터페이스)을 정의합니다.
-- *라이프타임*: 참조자가 유효한 범위를 명시하여 메모리 안전성을 보장하고 댕글링 포인터를 방지합니다.
+- *트레잇 (Traits)*:
+  - `Clone` / `Copy`: 값의 복제 및 복사 동작 정의.
+  - `Debug` / `Display`: 포맷팅 출력 (`{:?}` vs `{}`).
+  - `Default`: 기본값 생성 (`Default::default()`).
+  - `Drop`: 메모리 해제(소멸자) 시 동작 정의.
+  - `PartialEq` / `Eq`: 값의 비교 동작 정의.
+- *라이프타임*: 참조자가 유효한 범위를 명시하여 메모리 안전성을 보장합니다.
 
-= 10. 스마트 포인터 (Smart Pointers)
+= 12. 스마트 포인터 (Smart Pointers)
 
 - *Box`<T>`*: 값을 힙 메모리에 할당하고 소유권을 관리합니다.
 - *Rc`<T>`*: 단일 스레드 환경에서 여러 소유자를 허용하는 참조 카운팅 스마트 포인터입니다.
 - *Arc`<T>`*: 여러 스레드에서 안전하게 소유권을 공유할 수 있는 원자적 참조 카운팅 포인터입니다.
 - *RefCell`<T>` / Mutex`<T>`*: 런타임에 빌림 규칙을 검사하여 내부 가변성(Interior Mutability)을 제공합니다.
 
-= 11. 고급 Rust 문법 및 활용
+= 13. 고급 Rust 문법 및 활용
 
 == 제네릭과 트레잇 바운드 심화
 ```rust

@@ -15,8 +15,23 @@ Bash (Bourne Again SHell) is the default command processor for most Linux distri
   - `chmod +x script.sh`: Add execute permission.
   - `./script.sh`: Run the script.
 - Variables:
-  - Declaration: `VAR_NAME="value"` (No spaces around `=`).
-  - Access: `${VAR_NAME}` or `$VAR_NAME`.
+  - Declaration: `foo="value"` (No spaces around `=`. `foo = bar` is interpreted as calling `foo` with arguments).
+  - Access: `${foo}` or `$foo`.
+- Quotes:
+  - `' '` (Single quotes): Literals, no expansion. (`'$foo'` -> `$foo`)
+  - `" "` (Double quotes): Variable expansion. (`"$foo"` -> `value`)
+- Substitutions:
+  - Command: `$(CMD)` runs command and replaces it with its output.
+  - Process: `<(CMD)` runs command and replaces it with a temporary file path containing the output. (`diff <(ls a) <(ls b)`)
+- Special Variables:
+  - `$0`: Script name.
+  - `$1` - `$9`: Script arguments.
+  - `$#`: Number of arguments.
+  - `$@`: All arguments.
+  - `$?`: Exit status of last command (0 = Success).
+  - `$$`: PID of current script.
+  - `!!`: Entire last command (e.g., `sudo !!`).
+  - `$_`: Last argument of the last command.
 
 = 2. Navigation and File Operations
 

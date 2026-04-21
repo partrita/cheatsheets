@@ -35,8 +35,14 @@
   - R 데이터 분석을 위한 Tidyverse 패키지 모음의 핵심 사용법(dplyr, ggplot2, tidyr 등)을 안내합니다. 데이터 전처리, 변환, 시각화에 대한 가이드라인을 제공합니다.
 - Typst 문법 ([`src/cheatsheet_typst_syntax.typ`](src/cheatsheet_typst_syntax.typ)):
   - 새로운 조판 시스템 Typst로 문서를 작성하기 위한 기본 문법, 레이아웃 조작, 수식 작성, 예제 코드 등을 포함합니다. 아름다운 문서를 만들고 싶은 분들께 강력 추천합니다.
-- Gemini CLI ([`src/cheatsheet_gemini_cli.typ`](src/cheatsheet_gemini_cli.typ)):
+- Gemini CLI ([`src/ko/cheatsheet_gemini_cli.typ`](src/ko/cheatsheet_gemini_cli.typ)):
   - Gemini CLI의 주요 명령어, 옵션, 슬래시 명령어 및 스킬 관리 방법을 정리했습니다. AI 에이전트를 효율적으로 활용하는 데 도움이 됩니다.
+- Claude Code ([`src/ko/cheatsheet_claude_code.typ`](src/ko/cheatsheet_claude_code.typ)):
+  - Claude Code의 최신 명령어(v2.1.116), 단축키, MCP 서버 및 에이전트 구성을 정리한 요약 문서입니다.
+- PowerShell ([`src/ko/cheatsheet_powershell.typ`](src/ko/cheatsheet_powershell.typ)):
+  - PowerShell의 기본 명령어, 파일 관리, 파이프라인 조작 및 시스템 관리 명령어를 정리했습니다.
+- 실용 셸 스크립트 ([`src/ko/cheatsheet_shell_scripts.typ`](src/ko/cheatsheet_shell_scripts.typ)):
+  - 클립보드, 파일 관리, 인터넷, 텍스트 처리 등 실무에서 유용하게 쓰이는 다양한 셸 스크립트 도구들을 정리했습니다.
 - 기타: Python, mypy, nvim 등 다양한 도구와 언어에 대한 치트시트가 포함되어 있습니다. 특정 주제에 대한 치트시트가 필요하다면 `src/` 디렉토리를 탐색해보세요.
 
 
