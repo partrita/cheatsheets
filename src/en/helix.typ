@@ -133,32 +133,23 @@ Move the selection according to its location in the syntax tree.
 == Unimpaired (Bracket [ ])
 Navigate between structured elements (TS).
 
-- \]d, [d: Next, Prev diagnostic.
-- \]f, [f: Next, Prev function.
-- \]t, [t: Next, Prev type/class.
-- \]a, [a: Next, Prev argument.
-- \]c, [c: Next, Prev comment.
-- \]T, [T: Next, Prev test.
-- \]g, [g: Next, Prev change.
-- \]Space, [Space: Add newline below, above.
+- `]d`, `[d`: Next, Prev diagnostic.
+- `]f`, `[f`: Next, Prev function.
+- `]t`, `[t`: Next, Prev type/class.
+- `]a`, `[a`: Next, Prev argument.
+- `]c`, `[c`: Next, Prev comment.
+- `]T`, `[T`: Next, Prev test.
+- `]g`, `[g`: Next, Prev change.
+- `]Space`, `[Space`: Add newline below, above.
 
 == Commands
-- :w, :q, :wq: Save, Quit, Both.
-- :e <file>, :o: Open file.
-- :bn, :bp: Next, Prev buffer.
-- :t <theme>: Set theme.
-- :h <cmd>: Help.
-- :tree-sitter-subtree: View syntax tree.
+- `:w`, `:q`, `:wq`: Save, Quit, Both.
+- `:e <file>`, `:o`: Open file.
+- `:bn`, `:bp`: Next, Prev buffer.
+- `:t <theme>`: Set theme.
+- `:h <cmd>`: Help.
+- `:tree-sitter-subtree`: View syntax tree.
 
-= Ecosystem
-== Migrating from Vim
-- Selection -> Action paradigm.
-- Multiline f, t.
-- Built-in LSP & Tree-sitter.
-
-== Helix mode
-- helix-mode for Emacs.
-- zellij native support.
 
 = Configuration
 == Editor (config.toml)

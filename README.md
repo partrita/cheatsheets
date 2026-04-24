@@ -27,7 +27,7 @@
 
 현재 제공되는 주요 치트시트는 다음과 같습니다. 앞으로도 유용한 자료들이 계속 추가될 예정입니다.
 
-- Go 언어 ([`src/ko/GO.typ`](src/ko/GO.typ)):
+- Go 언어 ([`src/ko/go.typ`](src/ko/go.typ)):
   - Go 언어의 기본 문법, 패키지 관리, 고루틴(Goroutines), 채널(Channels) 등 병행성(concurrency) 핵심 개념을 명확하게 정리했습니다. 분산 시스템 개발에 관심 있는 분들께 유용합니다.
 - Seurat ([`src/ko/R_seurat.typ`](src/ko/R_seurat.typ)):
   - R 기반의 단일 세포 RNA 시퀀싱(scRNA-seq) 분석 도구인 Seurat의 주요 명령어 및 표준 워크플로우를 다룹니다. 생물정보학 연구자들에게 필수적인 자료입니다.

@@ -97,12 +97,12 @@ Rust's most unique feature for memory safety without a garbage collector.
 
 = Type Conversions
 
-- *as Keyword*: `x as u64`. Used for numeric casting and pointer conversion.
-- *From & Into*: `impl From<A> for B`. Use `B::from(a)` or `a.into()` for lossless conversion.
-- *TryFrom & TryInto*: Fallible conversions. Returns a `Result`.
-- *AsRef & AsMut*: Cheap reference-to-reference conversion (`&A` to `&B`).
-- *Deref*: Define behavior for `*x`. Allows smart pointers to behave like the underlying data.
-- *String conversion*: `s.parse::<i32>()` (str to int), `x.to_string()` (int to String).
+- *`as` Keyword*: `x as u64`. Used for numeric casting and pointer conversion.
+- *`From` & `Into`*: `impl From<A> for B`. Use `B::from(a)` or `a.into()` for lossless conversion.
+- *`TryFrom` & `TryInto`*: Fallible conversions. Returns a `Result`.
+- *`AsRef` & `AsMut`*: Cheap reference-to-reference conversion (`&A` to `&B`).
+- *`Deref`*: Define behavior for `*x`. Allows smart pointers to behave like the underlying data.
+- *`String` conversion*: `s.parse::<i32>()` (str to int), `x.to_string()` (int to String).
 
 = Iterators
 
