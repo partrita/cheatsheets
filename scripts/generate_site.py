@@ -81,8 +81,8 @@ Welcome to the collection of cheatsheets. You can view and download them in both
         if base_name in ["conf", "icons"]:
             continue
             
-        # Format a readable name: cheatsheet_python_pandas -> Python Pandas
-        display_name = base_name.replace("cheatsheet_", "").replace("_", " ").title()
+        # Format a readable name: python_pandas -> Python Pandas
+        display_name = base_name.replace("_", " ").title()
         
         langs = cheatsheets[base_name]
         
