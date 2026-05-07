@@ -226,22 +226,22 @@ execute:
 == 코드 청크 옵션 (`#|` 접두사)
 ````markdown
 ```{python}
-#| label: fig-scatter          # 레이블 (상호참조용)
-#| fig-cap: "산점도"           # 그림 캡션
-#| echo: true                  # 코드 출력 여부
-#| eval: true                  # 코드 실행 여부
-#| output: true                # 결과 출력 여부
-#| warning: false              # 경고 숨김
-#| error: false                # 오류 숨김
-#| include: true               # 코드+결과 포함 여부
-#| code-fold: true             # 코드 접기 (HTML)
+#| label: fig-scatter# 레이블 (상호참조용)
+#| fig-cap: "산점도" # 그림 캡션
+#| echo: true        # 코드 출력 여부
+#| eval: true        # 코드 실행 여부
+#| output: true      # 결과 출력 여부
+#| warning: false    # 경고 숨김
+#| error: false      # 오류 숨김
+#| include: true     # 코드+결과 포함 여부
+#| code-fold: true   # 코드 접기 (HTML)
 #| code-summary: "코드 보기"   # 접힌 코드 라벨
-#| fig-width: 6                # 그림 너비(인치)
-#| fig-height: 4               # 그림 높이(인치)
-#| fig-align: center           # 그림 정렬
-#| cache: true                 # 결과 캐시
+#| fig-width: 6      # 그림 너비(인치)
+#| fig-height: 4     # 그림 높이(인치)
+#| fig-align: center # 그림 정렬
+#| cache: true       # 결과 캐시
 #| dependson: "other-label"    # 캐시 의존성
-#| column: page                # 레이아웃 열 위치
+#| column: page      # 레이아웃 열 위치
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -363,7 +363,7 @@ format:
     toc-depth: 3
     toc-location: left        # left / right / body
     number-sections: true
-    theme: cosmo              # cosmo, flatly, darkly 등
+    theme: cosmo    # cosmo, flatly, darkly 등
     highlight-style: github
     code-fold: true
     code-tools: true
@@ -425,7 +425,7 @@ format:
 ---
 format:
   revealjs:
-    theme: moon             # default, moon, sky, beige 등
+    theme: moon   # default, moon, sky, beige 등
     slide-number: true
     chalkboard: true
     multiplex: true
@@ -648,7 +648,7 @@ jobs:
       - uses: quarto-dev/quarto-actions/setup@v2
       - uses: quarto-dev/quarto-actions/publish@v2
         with:
-          target: gh-pages
+target: gh-pages
 ```
 
 == Netlify
@@ -682,14 +682,14 @@ myproject/
 == `_quarto.yml` 주요 옵션
 ```yaml
 project:
-  type: website          # default / website / blog / book / manuscript
+  type: website# default / website / blog / book / manuscript
   output-dir: _site      # 출력 디렉토리
-  render:                # 렌더링 포함/제외 패턴
+  render:      # 렌더링 포함/제외 패턴
     - "*.qmd"
     - "!drafts/"
 
 execute:
-  freeze: auto           # auto: 변경 시만 재실행 / true: 항상 캐시 사용
+  freeze: auto # auto: 변경 시만 재실행 / true: 항상 캐시 사용
   cache: true
 ```
 
@@ -791,7 +791,7 @@ email: "contact@example.com"
 == 문서 언어 (Document Language)
 ```yaml
 ---
-lang: ko              # BCP 47 언어 태그
+lang: ko    # BCP 47 언어 태그
 ---
 ```
 - 교차 참조 레이블 자동 번역: "Figure" → "그림", "Table" → "표"
@@ -826,8 +826,8 @@ y = x * 2  # <2>
 ```yaml
 ---
 filters:
-  - my-filter.lua        # Lua 필터
-  - quarto               # Quarto 내장 필터
+  - my-filter.lua
+  - quarto
 ---
 ```
 ```lua
@@ -851,7 +851,7 @@ notebook-filters:
 == 코드 하이라이팅
 ```yaml
 ---
-highlight-style: github     # github, monokai, zenburn 등
+highlight-style: github
 code-line-numbers: true
 ---
 ```
@@ -863,7 +863,7 @@ format:
   html:
     code-fold: true
     code-summary: "코드 보기"
-    code-tools: true        # 코드 복사 버튼 추가
+    code-tools: true
 ---
 ```
 

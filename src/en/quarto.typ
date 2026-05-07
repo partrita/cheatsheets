@@ -227,20 +227,20 @@ execute:
 ```{python}
 #| label: fig-scatter        # Label (for cross-referencing)
 #| fig-cap: "Scatter Plot"   # Figure caption
-#| echo: true                # Show code
-#| eval: true                # Run code
-#| output: true              # Show output
+#| echo: trued   # Show code
+#| eval: trued   # Run code
+#| output: trued # Show output
 #| warning: false            # Hide warnings
-#| error: false              # Hide errors
+#| error: falsed # Hide errors
 #| include: true             # Include code+output
 #| code-fold: true           # Collapsible code (HTML)
 #| code-summary: "Show code" # Collapsed label
-#| fig-width: 6              # Figure width (inches)
+#| fig-width: 6d # Figure width (inches)
 #| fig-height: 4             # Figure height (inches)
 #| fig-align: center         # Figure alignment
-#| cache: true               # Cache results
+#| cache: trued  # Cache results
 #| dependson: "other-label"  # Cache dependency
-#| column: page              # Layout column position
+#| column: paged # Layout column position
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -365,7 +365,7 @@ format:
     toc-depth: 3
     toc-location: left        # left / right / body
     number-sections: true
-    theme: cosmo              # cosmo, flatly, darkly, etc.
+    theme: cosmod # cosmo, flatly, darkly, etc.
     highlight-style: github
     code-fold: true
     code-tools: true
