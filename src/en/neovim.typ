@@ -204,7 +204,7 @@ then call require("lazy").setup with your plugin list.
 - `Ctrl-a Ctrl-x`: Increment / decrement number under cursor.
 - `gf`: Go to file under cursor.
 - `ga`: Show ASCII / Unicode value of char under cursor.
-- `:checkhealth`: Run health diagnostics for plugins and settings.
+- `:checkhealth``: Run health diagnostics for plugins and settings.
 
 == Common Search Patterns
 - Find function definitions: search for the function keyword with word boundaries
