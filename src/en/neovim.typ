@@ -21,7 +21,7 @@ Neovim is a hyperextensible Vim-based text editor emphasizing extensibility and 
 - `h j k l`: Left / Down / Up / Right
 - `w b e`: Next word start / Prev word start / Word end
 - `W B E`: Same but WORD (whitespace-delimited)
-- `0 ^ $`: Line start / First non-blank / Line end
+- `0 ^ \$`: Line start / First non-blank / Line end
 - `gg G`: File start / File end
 - `5G` or `:5`: Jump to line 5
 - `%`: Jump to matching bracket/paren
@@ -49,9 +49,9 @@ Neovim is a hyperextensible Vim-based text editor emphasizing extensibility and 
 - `R`: Replace mode (overwrites characters)
 
 == Operators (combine with motions)
-- `d`: Delete --- `dd` (line), `dw`, `d$`, `d3j`
+- `d`: Delete --- `dd` (line), `dw`, `d\$, `d3j`
 - `c`: Change (delete + insert) --- `cw`, ci-paren (ci with motion), `C`
-- `y`: Yank (copy) --- `yy`, `yw`, `y$`
+- `y`: Yank (copy) --- `yy`, `yw`, `y\$`
 - `> <`: Indent right / left --- `>>`, `5>>`, `>G`
 - `=`: Auto-indent --- `==` (line), `gg=G` (whole file)
 - `gU gu`: Uppercase / lowercase (e.g., `gUw`, `guw`)
@@ -101,9 +101,9 @@ Neovim is a hyperextensible Vim-based text editor emphasizing extensibility and 
 - `"0p`: Paste last yank (not affected by delete)
 - `q<letter>`: Start recording macro into register
 - `q`: Stop recording
-- `@<letter>`: Play macro
-- `5@a`: Play macro a five times
-- `@@`: Replay last macro
+- `\@<letter>`: Play macro
+- `5\@a`: Play macro a five times
+- `\@\@`: Replay last macro
 - `:reg`: View all register contents
 
 = Splits, Tabs and Buffers
@@ -204,7 +204,7 @@ then call require("lazy").setup with your plugin list.
 - `Ctrl-a Ctrl-x`: Increment / decrement number under cursor.
 - `gf`: Go to file under cursor.
 - `ga`: Show ASCII / Unicode value of char under cursor.
-- `:checkhealth``: Run health diagnostics for plugins and settings.
+- `:checkhealth`: Run health diagnostics for plugins and settings.
 
 == Common Search Patterns
 - Find function definitions: search for the function keyword with word boundaries

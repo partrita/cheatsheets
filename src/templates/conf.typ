@@ -1,5 +1,5 @@
-#let sans_font = ("Noto Sans KR", "Noto Sans CJK KR")
-#let serif_font = ("Noto Serif KR", "Noto Serif CJK KR")
+#let sans_font = "Noto Sans KR"
+#let serif_font = "Noto Serif KR"
 #let mono_font = "JBD2"
 
 #let template(title: "", header: "", footer: "", body) = {
