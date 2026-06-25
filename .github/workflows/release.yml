@@ -16,7 +16,7 @@ jobs:
 
     steps:
       - name: 저장소 체크아웃
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Typ 파일 목록 및 PDF 파일명 설정
         id: generate_file_lists # 스텝 ID
@@ -74,7 +74,7 @@ jobs:
           fonts_path: 'src/fonts'
 
       - name: 컴파일된 PDF 아티팩트 업로드
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: compiled-pdfs # 아티팩트 이름 명확화 (복수 파일)
           path: src/*.pdf # src 디렉토리 내의 모든 PDF 파일 업로드
@@ -92,7 +92,7 @@ jobs:
         run: mkdir -p ./downloaded_pdf # 아티팩트를 다운로드할 디렉토리 생성
 
       - name: 컴파일된 PDF 아티팩트 다운로드
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: compiled-pdfs # 업로드 시 사용한 아티팩트 이름과 동일
           path: ./downloaded_pdf/ # 지정된 디렉토리로 다운로드
@@ -125,7 +125,7 @@ jobs:
           echo "EOF" >> "$GITHUB_OUTPUT"
 
       - name: GitHub 릴리스 생성
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v3
         with:
           # 태그 이름: 브랜치명-v빌드넘버-릴리스날짜시간 (예: main-v123-2025.07.14-1114)
           tag_name: ${{ github.ref_name }}-v${{ github.run_number }}-${{ steps.release_datetime.outputs.tag_datetime }}
