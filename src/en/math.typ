@@ -55,7 +55,7 @@
 
 = Calculus and Analysis
 
-- $diff y / diff x$: Derivative of $y$ with respect to $x$.
+- $dif y / dif x$: Derivative of $y$ with respect to $x$.
 - $partial$: Partial derivative.
 - $integral$: Integral.
 - $integral.double, integral.triple$: Multiple integrals.

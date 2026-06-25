@@ -136,7 +136,7 @@ I am #amazed(color: purple)[amazed]!
 
 = 섹션 5: 글꼴 변경 예시
 
-#text(font: "KoPubWorldBatang")[
+#text(font: "Noto Serif CJK KR")[ 
   = 배경
   빙하의 경우, 유체 역학 원리로 얼음의 움직임과 온도, 압력, 그리고 물과 같은 다른 유체의 요인으로 이해할 수 있습니다.
 ]
