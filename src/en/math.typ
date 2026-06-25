@@ -76,7 +76,6 @@
 - $det(bold(A))$: Determinant of matrix $A$.
 - $times$: Cross product.
 - $dot$: Dot product (Scalar product).
-- $times.circle$: Kronecker product.
 
 = Greek Letters (Commonly used)
 
