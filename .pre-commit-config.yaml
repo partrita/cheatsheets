@@ -4,8 +4,8 @@ repos:
     hooks:
       - id: typst-compile-check
         name: Typst Compilation Check
-        entry: ./scripts/check_typst_compile.sh
+        entry: ./scripts/typst_build.sh check
         language: system
-        files: '\.typ$'
+        files: '\\.typ$'
         pass_filenames: false
         always_run: true
