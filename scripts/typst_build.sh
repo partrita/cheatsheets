@@ -57,7 +57,7 @@ while IFS= read -r -d '' typ_file; do
     echo "ERROR: $typ_file 컴파일 실패" >&2
     failures=$((failures + 1))
   fi
-done < <(find "$SRC_DIR" -name "*.typ" -not -path "src/templates/*" -print0)
+done < <(find "$SRC_DIR" -name "*.typ" -not -path "*/templates/*" -print0)
 
 if [[ "$failures" -gt 0 ]]; then
   echo "--- Typst 컴파일 중 $failures개 파일 실패 ---" >&2
