@@ -20,7 +20,7 @@
 = 플러그인 관리
 - `mise plugins ls`: 현재 설치된 플러그인 목록을 확인합니다.
 - `mise plugins add <name>`: 새로운 도구 플러그인을 추가합니다. (예: `mise plugins add nodejs`)
-- `mise plugins add <name> <git-url>`: 특정 Git 리포지토리 주소를 통해 플러그인을 추가합니다.
+- `mise plugins add <name> <git-url>`: Git 저장소 URL을 지정하여 플러그인을 추가합니다.
 - `mise plugins rm <name>`: 설치된 플러그인을 제거합니다.
 - `mise plugins update <name>`: 특정 플러그인을 최신 상태로 업데이트합니다. (`--all` 옵션으로 전체 업데이트 가능)
 

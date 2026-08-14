@@ -27,7 +27,7 @@
 - Samtools: SAM/BAM 파일을 조작하고 분석하기 위한 필수 도구 모음.
   - `samtools view -bS in.sam > out.bam`: SAM을 BAM으로 변환
   - `samtools sort in.bam -o sorted.bam`: BAM 파일 정렬
-  - `samtools index sorted.bam`: 정렬된 BAM 파일 인덱싱 (빠른 접근을 위해 필요)
+  - `samtools index sorted.bam`: 정렬된 BAM 파일 인덱싱 (빠른 임의 접근용)
   - `samtools flagstat in.bam`: 정렬 통계 확인
   - `samtools depth`: 특정 위치의 커버리지(coverage) 계산
 
@@ -42,7 +42,7 @@
   - `bedtools intersect`: 두 파일 간의 겹치는 구간 찾기
   - `bedtools merge`: 겹치는 구간을 하나로 합치기
   - `bedtools closest`: 한 파일의 구간에 가장 가까운 다른 파일의 구간 찾기
-  - `bedtools coverage`: 한 파일의 구간이 다른 파일의 구간에 의해 얼마나 커버되는지 계산
+  - `bedtools coverage`: 한 파일의 구간이 다른 파일의 구간과 얼마나 겹치는지(커버리지) 계산
 
 = RNA-Seq 분석
 - 전처리: `FastQC` (품질 관리), `Trimmomatic` (어댑터 및 품질 트리밍)

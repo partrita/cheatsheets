@@ -7,7 +7,7 @@
 )
 
 = 기본 개념
-NixOS는 선언적(declarative) 구성 모델을 사용하는 Linux 배포판입니다. 시스템의 전체 구성이 `/etc/nixos/configuration.nix` 파일 하나에 정의되며, 이를 통해 재현 가능하고 신뢰할 수 있는 시스템을 구축할 수 있습니다. Nix 패키지 관리자를 기반으로 합니다.
+NixOS는 선언적(declarative) 구성 모델을 사용하는 Linux 배포판입니다. 시스템의 전체 구성이 `/etc/nixos/configuration.nix` 파일 하나에 정의되며, 시스템 상태를 손쉽게 재현하고 안정적으로 관리할 수 있습니다. Nix 패키지 관리자를 기반으로 합니다.
 
 = 시스템 관리
 - `nixos-rebuild switch`: `/etc/nixos/configuration.nix` 파일의 변경사항을 적용하여 시스템을 업데이트합니다.

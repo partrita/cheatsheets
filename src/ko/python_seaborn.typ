@@ -10,7 +10,7 @@
 // 주요 내용 시작
 = 데이터셋 로드 (Dataset Loading)
 
-Seaborn은 연습 및 예제를 위해 다양한 유명 공개 데이터셋을 내장하고 있습니다.
+Seaborn은 시각화 실습용 유명 공개 데이터셋(tips, iris 등)을 내장하고 있습니다.
 
 ```python
 import seaborn as sns
@@ -45,7 +45,7 @@ plt.show()
 ```
 
 == 박스 플롯 (Box Plot)
-사분위수를 통해 데이터의 분포와 이상치(Outlier)를 한눈에 파악합니다.
+사분위수 기반으로 데이터 분포와 이상치(Outlier)를 한눈에 파악합니다.
 ```python
 sns.boxplot(x="day", y="total_bill", hue="smoker", data=tips)
 plt.title("요일 및 흡연 여부별 계산서 분포")
@@ -86,7 +86,7 @@ plt.show()
 단일 또는 다중 변수의 데이터 분포 특성을 분석합니다.
 
 == 히스토그램 (Histogram - histplot)
-데이터의 구간별 빈도를 나타내며, `kde=True` 옵션으로 밀도 곡선을 추가할 수 있습니다.
+데이터의 구간별 빈도를 나타내며, `kde=True` 옵션으로 커널 밀도 추정 곡선을 함께 표시합니다.
 ```python
 sns.histplot(data=tips, x="total_bill", kde=True, bins=20)
 plt.title("총 계산서 금액 분포")

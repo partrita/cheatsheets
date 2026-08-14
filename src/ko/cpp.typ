@@ -78,7 +78,7 @@ int main() {
       return 반환값;
   }
   ```
-- 함수 오버로딩: 이름은 같지만 매개변수의 타입이나 개수가 다른 여러 함수를 정의할 수 있습니다.
+- 함수 오버로딩: 함수명이 같아도 매개변수 타입이나 개수가 다르면 별개의 함수로 오버로딩할 수 있습니다.
 - 기본 매개변수 (Default Arguments): `void print(int value, int base=10);`
 
 = 포인터(Pointer)와 참조(Reference)
@@ -380,14 +380,14 @@ public:
     void info() { std::cout << "General Type" << std::endl; }
 };
 
-// 특정 타입에 대한 완전 특수화
+// 특정 타입 대상 완전 특수화(Full Specialization)
 template<>
 class Container<std::string> {
 public:
     void info() { std::cout << "String Type" << std::endl; }
 };
 
-// 포인터 타입에 대한 부분 특수화
+// 포인터 타입 대상 부분 특수화(Partial Specialization)
 template<typename T>
 class Container<T*> {
 public:
@@ -481,7 +481,7 @@ if (cond) [[likely]] {
 
 == 메모리 레이아웃 및 캐시 효율
 ```cpp
-// 캐시 적중률(Cache Hit)을 높이기 위해 행 우선 순회 권장
+// 캐시 지역성(Cache Locality) 향상을 위한 행 우선(Row-major) 순회
 for (int i = 0; i < N; ++i) {
     for (int j = 0; j < M; ++j) {
         process(matrix[i][j]); // 인접 메모리 연속 접근
@@ -519,7 +519,7 @@ std::cout << "실행 시간: " << ms.count() << "ms" << std::endl;
 - Self-contained: 헤더는 그 자체로 컴파일 가능해야 함.
 - \#define Guard: `#ifndef PROJECT_PATH_FILE_H_` 형식 준수.
 - Include 순서: 관련 헤더 -> C 시스템 -> C++ 표준 -> 다른 라이브러리 -> 프로젝트 헤더.
-- Inline 함수: 10줄 이하의 짧은 경우만 헤더에 정의.
+- 인라인 함수: 10줄 이하의 간결한 함수만 헤더에 정의.
 
 == 클래스 (Classes)
 

@@ -129,7 +129,7 @@ int aliceAge = ages["Alice"];
 
 = LINQ (Language-Integrated Query)
 
-데이터 소스에 대한 쿼리 기능을 제공.
+다양한 데이터 컬렉션에 대한 통합 쿼리(LINQ) 구문 제공.
 ```csharp
 var scores = new List<int> { 97, 92, 81, 60 };
 

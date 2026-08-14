@@ -8,11 +8,11 @@
 
 = Node.js 핵심 개념
 
-Node.js는 확장성 있는 네트워크 애플리케이션 개발을 위해 설계된 서버 측 JavaScript 실행 환경입니다.
+Node.js는 확장성 높은 네트워크 애플리케이션 개발을 위한 Chrome V8 기반 서버 측 JavaScript 런타임입니다.
 
 - *Node.js*: Chrome V8 JavaScript 엔진으로 빌드된 JavaScript 런타임 환경입니다.
 - *비동기 I/O*: Non-blocking I/O 모델을 채택하여 데이터 집약적인 실시간 애플리케이션에서 높은 성능을 발휘합니다.
-- *이벤트 기반*: 이벤트 루프를 통해 비동기 작업을 효율적으로 관리하고 처리합니다.
+- *이벤트 기반*: 이벤트 루프 기반으로 비동기 논블로킹(Non-blocking) I/O 작업을 효율적으로 처리합니다.
 - *단일 스레드 구조*: 메인 실행 스레드는 하나이지만, 내부적으로는 파일 시스템이나 네트워크 작업 등을 위해 스레드 풀(Libuv)을 활용합니다.
 - *NPM (Node Package Manager)*: 세계 최대의 오픈 소스 라이브러리 생태계를 보유한 패키지 관리 도구입니다.
 
@@ -21,7 +21,7 @@ Node.js는 확장성 있는 네트워크 애플리케이션 개발을 위해 설
 - *Node.js 설치*: 공식 홈페이지(https://nodejs.org)에서 최신 LTS 버전을 다운로드하는 것을 권장합니다.
 - *버전 확인*: 터미널에서 `node -v` 또는 `node --version`으로 설치된 버전을 확인합니다.
 - *NPM 버전 확인*: `npm -v` 명령어를 사용합니다.
-- *nvm (Node Version Manager)*: 한 시스템 내에서 여러 버전의 Node.js를 쉽게 설치하고 전환할 수 있게 돕는 도구입니다.
+- *nvm (Node Version Manager)*: 동일 시스템 내에서 여러 Node.js 버전을 손쉽게 설치·전환하는 버전 관리 도구.
   - 설치: `curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash`
   - 버전 설치: `nvm install 18` (18버전 최신 설치), `nvm install node` (최신 안정 버전 설치)
   - 버전 전환: `nvm use 18.17.0`
@@ -94,7 +94,7 @@ function fetchData(callback) {
 ```
 
 == Promise (프로미스)
-비동기 작업의 미래 결과를 나타내는 객체로, 체이닝을 통해 가독성을 높입니다.
+비동기 작업의 미래 결과를 나타내는 객체로, 메서드 체이닝으로 가독성을 높입니다.
 
 == Async/Await (에이싱크/어웨이트)
 프로미스를 기반으로 비동기 코드를 동기 코드처럼 직관적으로 작성할 수 있게 해주는 현대적인 방식입니다. (가장 권장됨)
@@ -157,7 +157,7 @@ app.listen(3000, () => console.log('서버 실행 중...'));
 - *Axios*: 브라우저와 Node.js를 모두 지원하는 강력한 HTTP 클라이언트.
 - *Bcrypt*: 비밀번호 보안 해싱을 위한 라이브러리.
 - *JWT (JSON Web Token)*: 토큰 기반 인증 구현 시 사용.
-- *ORM/ODM*: Sequelize (SQL), Mongoose (MongoDB) 등을 통해 데이터베이스 작업을 객체 지향적으로 수행합니다.
+- *ORM/ODM*: Sequelize(SQL), Mongoose(MongoDB) 등의 라이브러리로 데이터베이스 작업을 객체 지향적으로 수행합니다.
 
 = 성능 최적화 및 프로덕션 관리
 

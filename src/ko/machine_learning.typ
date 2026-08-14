@@ -7,7 +7,7 @@
 )
 
 = 머신러닝의 종류
-- 지도 학습 (Supervised Learning): 입력(X)과 정답(Y) 데이터 쌍을 학습하여, 새로운 입력에 대한 정답을 예측.
+- 지도 학습 (Supervised Learning): 입력(X)과 정답(Y) 데이터 쌍을 학습하여, 새로운 입력의 정답을 예측.
   - `회귀 (Regression)`: 연속적인 값을 예측. (예: 집값 예측)
   - `분류 (Classification)`: 이산적인 범주를 예측. (예: 스팸 메일 분류)
 - 비지도 학습 (Unsupervised Learning): 정답이 없는 데이터를 학습하여 데이터의 숨겨진 구조나 패턴을 발견.

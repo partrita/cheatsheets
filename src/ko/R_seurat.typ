@@ -1,12 +1,12 @@
 #import "../templates/conf.typ": *
 
 #show: template.with(
-  title: "Seurat 치트 시트",
+  title: "Seurat 치트시트",
   header: [#datetime.today().display()],
   footer: "https://satijalab.org/seurat/articles/essential_commands.html",
 )
 
-// 여기에 문서 내용을 작성하세요
+// Seurat v5 치트시트
 
 = 표준 `Seurat` 워크플로우
 
@@ -41,7 +41,7 @@ DimPlot(object = pbmc, reduction = 'umap') # UMAP 시각화
 ```
 
 ```r
-# %>%를 사용하여 여러 명령을 연결할 수 있습니다.
+# %>% 또는 |> 연산자로 명령 체이닝 가능
 pbmc <- SCTransform(pbmc) %>% RunPCA() %>% FindNeighbors(dims=1:30) %>%
   FindClusters() %>% RunUMAP(dims=1:30)
 ```
@@ -52,7 +52,7 @@ pbmc <- SCTransform(pbmc) %>% RunPCA() %>% FindNeighbors(dims=1:30) %>%
 
 ```r
 # 셀 및 특징 이름과 총 개수 가져오기
-# 동일한 출력을 얻는 여러 방법을 보여줍니다.
+# 동일한 결과를 얻는 다양한 접근 방식
 # 셀 이름
 colnames(pbmc)
 Cells(pbmc)
@@ -89,31 +89,31 @@ VariableFeatures(cbmc[["ADT"]]) <- var.gene.names
 == 아이덴티티 클래스 레이블
 
 ```r
-# 셀 아이덴티티 설정 및 검색
+# 세포 식별자(Identity) 설정 및 조회
 
-# 메타데이터의 기존 열로 아이덴티티 클래스 설정
+# 메타데이터 열을 기준으로 세포 식별자 지정
 Idents(object = pbmc) <- 'seurat_annotations'
 
-# 셀 아이덴티티 보기, 요약 테이블 가져오기
+# 세포 식별자 확인 및 요약 테이블 생성
 Idents(pbmc)
 table(Idents(pbmc))
 
-# 모든 셀에 대해 아이덴티티를 CD4 T 세포로 설정
+# 모든 세포의 식별자(Identity)를 CD4 T 세포로 지정
 Idents(pbmc) <- 'CD4 T cells'
 
-# 선택된 셀 그룹에 설정
+# 특정 세포 그룹에 식별자 지정
 pbmc.cells <- Cells(pbmc)
 Idents(object = pbmc, cells = pbmc.cells[1:10]) <- 'CD4 T cells'
 
-# 셀 아이덴티티 클래스 가져오기
+# 세포 식별자 클래스 조회
 Idents(object = pbmc)
 levels(x = pbmc)
 
-# 셀 아이덴티티 클래스를 메타데이터에 저장
+# 세포 식별자 정보를 메타데이터에 저장
 pbmc[['old.ident']] <- Idents(object = pbmc)
 pbmc <- StashIdent(object = pbmc, save.name = 'old.ident')
 
-# 아이덴티티 클래스 이름 변경
+# 식별자 클래스 이름 변경(Rename)
 pbmc <- RenameIdents(object = pbmc, 'CD4 T cells' = 'T Helper cells')
 ```
 
@@ -189,7 +189,7 @@ FetchData(object = pbmc, vars = c('PC_1', 'nFeature_RNA', 'MS4A1'),layer = 'coun
 == Seurat 객체 부분 집합화
 
 ```r
-# 아이덴티티 클래스를 기반으로 Seurat 객체 부분 집합화, ?SubsetData 참조
+# 식별자 클래스 기준으로 Seurat 객체 서브셋 추출, ?SubsetData 참조
 subset(x = pbmc, idents = 'B')
 subset(x = pbmc, idents = c('Naive CD4 T', 'CD8 T'), invert = TRUE)
 
@@ -203,16 +203,16 @@ subset(x = pbmc, subset = MS4A1 > 2.5, idents = 'B')
 # 객체 메타데이터의 값에 따라 부분 집합화
 subset(x = pbmc, subset = groups == "g1")
 
-# 아이덴티티 클래스당 셀 수 다운샘플링
+# 식별자 클래스별 세포 수 다운샘플링
 subset(x = pbmc, downsample = 100)
 ```
 
 == 레이어 분할
 
 ```r
-# Seurat v5에서는 사용자가 이제 객체를 다른 레이어로 직접 분할할 수 있습니다.
-# 발현 데이터는 하나의 객체에 유지되지만, 여러 샘플을 레이어로 분할합니다.
-# 레이어를 분할한 후 통합 워크플로우를 바로 진행할 수 있습니다.
+# Seurat v5에서는 객체를 여러 레이어로 직접 분할할 수 있습니다.
+# 발현 데이터는 단일 객체에 유지되면서 샘플별로 레이어가 분할됩니다.
+# 레이어 분할 후 바로 통합 워크플로우 진행 가능
 ifnb[["RNA"]] <- split(ifnb[["RNA"]],f = ifnb$stim)
 Layers(ifnb)
 
@@ -231,7 +231,7 @@ ifnb_list$STIM
 ```
 
 == 객체 병합 (통합 없이)
-Seurat v5에서는 병합 시 단일 객체를 생성하지만, 발현 정보는 통합을 위해 다른 레이어로 분할된 상태로 유지됩니다. 통합을 진행하지 않을 경우, 병합 후 레이어를 다시 결합하십시오.
+Seurat v5에서는 병합 시 단일 객체가 생성되며, 발현 정보는 통합(Integration)을 위해 레이어별로 유지됩니다. 별도 통합을 거치지 않는다면 병합 후 레이어를 다시 결합(JoinLayers)합니다.
 
 ```r
 # 두 Seurat 객체 병합
@@ -243,7 +243,7 @@ merge(x = pbmc1, y = list(pbmc2, pbmc3))
 ```
 
 == 객체 병합 (통합 포함)
-자세한 정보는 [통합 소개](https://satijalab.org/seurat/articles/integration_introduction.html)를 참조하십시오.
+자세한 내용은 [Seurat 통합 가이드](https://satijalab.org/seurat/articles/integration_introduction.html)를 참고하세요.
 
 ```r
 merged_obj <- merge(x = ifnb_list$CTRL, y = ifnb_list$STIM)
@@ -256,32 +256,32 @@ merged_obj <- IntegrateLayers(
   orig.reduction = "pca", new.reduction = 'integrated.rpca',
   verbose = FALSE)
 
-# 이제 통합이 완료되었으므로 레이어를 다시 결합합니다.
+# 통합 완료 후 레이어 재결합
 merged_obj[["RNA"]] <- JoinLayers(merged_obj)
 ```
 
 = 유사 벌크 분석 (Pseudobulk analysis)
 
 == 여러 범주를 기반으로 셀 그룹화
-`donor_id` 열을 메타데이터에 추가하는 방법에 대한 정보는 [DE 안내서](https://satijalab.org/seurat/articles/de_vignette.html)를 참조하십시오.
+`donor_id` 열을 메타데이터에 추가하는 방법은 [DE 가이드](https://satijalab.org/seurat/articles/de_vignette.html)를 참고하세요.
 
 ```r
-# 셀 유형별로만 유사 벌크화
+# 셀 유형별로만 유사 벌크 집계
 bulk <- AggregateExpression(ifnb,group.by ='seurat_annotations', return.seurat = TRUE)
 Cells(bulk)
 
-# 자극 조건 및 셀 유형별로 유사 벌크화
+# 자극 조건 및 셀 유형별로 유사 벌크 집계
 bulk <- AggregateExpression(ifnb,group.by = c('stim','seurat_annotations'), return.seurat = TRUE)
 Cells(bulk)
 
-# 자극 조건, 셀 유형 및 기증자별로 유사 벌크화
+# 자극 조건, 셀 유형 및 기증자별로 유사 벌크 집계
 bulk <- AggregateExpression(ifnb,group.by = c('stim','seurat_annotations',"donor_id"), return.seurat = TRUE)
 Cells(bulk)
 ```
 
 = `Seurat`에서의 시각화
 
-Seurat에는 방대한 ggplot2 기반 플로팅 라이브러리가 있습니다. 모든 플로팅 함수는 기본적으로 ggplot2 플롯을 반환하므로 ggplot2를 사용하여 쉽게 사용자 정의할 수 있습니다.
+Seurat은 풍부한 ggplot2 기반 시각화 함수를 제공합니다. 모든 시각화 함수는 기본적으로 ggplot2 객체를 반환하므로 다양한 커스텀이 가능합니다.
 
 ```r
 # 차원 축소 플롯
@@ -318,15 +318,15 @@ DoHeatmap(object = pbmc,features = heatmap_markers)
 # 그룹당 최대 100개의 셀을 포함하는 히트맵
 DoHeatmap(pbmc,heatmap_markers,cells = subset(pbmc,downsample = 100))
 
-# 플로팅 함수는 이제 ggplot2 객체를 반환하므로 테마, 제목 및 옵션을 추가할 수 있습니다.
+# 시각화 함수가 ggplot2 객체를 반환하므로 테마, 제목, 옵션을 덧붙여 커스텀할 수 있습니다.
 VlnPlot(object = pbmc, features = "MS4A1", split.by = "groups")
 DotPlot(object = pbmc, features = c("LYZ", "CCL5", "IL32"), split.by = "groups")
 FeaturePlot(object = pbmc, features = c("MS4A1", "CD79A"), blend = TRUE)
 DimPlot(object = pbmc) + DarkTheme()
-DimPlot(object = pbmc) + labs(title = 'Seurat을 사용하여 클러스터링하고\n두 차원 UMAP에 표시된 2,700개 PBMC')
+DimPlot(object = pbmc) + labs(title = 'Seurat 클러스터링 기반 2차원 UMAP 시각화 (2,700개 PBMC)')
 ```
 
-Seurat은 ggplot2 플롯에 추가하여 빠르게 사용자 정의할 수 있는 많은 사전 빌드된 테마를 제공합니다.
+Seurat은 ggplot2 플롯에 바로 적용할 수 있는 다양한 내장 테마를 지원합니다.
 
 ```r
 # 플로팅 헬퍼 함수는 DimPlot, FeaturePlot, CellScatter, FeatureScatter와 같은 ggplot2 기반 산점도에서 작동합니다.
@@ -345,7 +345,7 @@ LabelPoints(plot = plot, points = TopCells(object = pbmc[["pca"]]), repel = TRUE
 
 = 다중 어세이 특징
 
-Seurat을 사용하면 단일 셀 수준에서 다양한 어세이(예: CITE-seq의 ADT 카운트 또는 통합/배치 보정 데이터) 간에 쉽게 전환할 수 있습니다. 대부분의 함수는 이제 어세이 매개변수를 받지만, 반복적인 문장을 피하기 위해 기본 어세이를 설정할 수 있습니다.
+Seurat은 단일 세포 수준에서 여러 어세이(예: CITE-seq ADT 카운트, 통합/배치 보정 데이터) 간 전환을 지원합니다. 대부분의 함수에서 `assay` 인자를 직접 지정하거나 기본 어세이를 설정해 작업할 수 있습니다.
 
 ```r
 cbmc <- CreateSeuratObject(counts = cbmc.rna)

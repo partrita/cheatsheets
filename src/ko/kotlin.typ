@@ -13,7 +13,7 @@
   - `var`: 재할당이 가능한(Mutable) 변수입니다.
 - 타입 추론: `val name = "Kotlin"`과 같이 작성하면 컴파일러가 초기값을 바탕으로 타입을 자동으로 추론합니다.
 - 기본 데이터 타입: `Int`, `Double`, `Boolean`, `Char`, `String` 등을 제공합니다. Kotlin에서는 Java와 달리 모든 타입을 객체로 취급합니다.
-- Null 안정성 (Null Safety): 객체 지향 언어의 고질적인 문제인 Null Pointer Exception(NPE)을 컴파일 단계에서 방지할 수 있는 Kotlin의 핵심 기능입니다.
+- Null 안정성 (Null Safety): 컴파일 시점에 널 가능성을 엄격히 체크하여 NullPointerException(NPE)을 원천 방지하는 핵심 기능.
   - `String?`: Null 값을 가질 수 있는 타입입니다.
   - `String`: Null 값을 가질 수 없는 타입입니다.
 - 안전한 호출 (Safe Call): `name?.length`와 같이 사용하며, `name`이 `null`일 경우 에러 대신 `null`을 반환합니다.
@@ -22,7 +22,7 @@
 
 = 제어 흐름
 
-- `if-else` 조건문: Java와 유사하지만, Kotlin에서는 구문(Statement)이 아닌 표현식(Expression)으로 사용하여 직접 값을 반환할 수 있습니다.
+- `if-else` 조건문: Kotlin의 `if-else`는 구문(Statement)이 아닌 표현식(Expression)이므로 결과를 변수에 직접 할당할 수 있습니다.
   ```kotlin
   val max = if (a > b) a else b
   ```
@@ -75,7 +75,7 @@
 
 = 확장 기능 (Extensions)
 
-상속이나 데코레이터 패턴을 사용하지 않고도 기존 클래스에 새로운 함수나 프로퍼티를 멤버인 것처럼 추가할 수 있는 기능입니다.
+기존 클래스를 수정하거나 상속하지 않고도 새로운 메서드나 프로퍼티를 확장하는 기능.
 ```kotlin
 fun String.initials(): String {
     // 공백으로 분리 후 각 단어의 첫 글자만 추출하여 합칩니다.
@@ -99,7 +99,7 @@ println(name.initials()) // 결과: JD
 
 = 코루틴 (Coroutines)
 
-비동기 프로그래밍을 마치 동기 코드처럼 직관적이고 효율적으로 작성할 수 있도록 돕는 경량 스레드 모델입니다.
+스레드 차단(Blocking) 없이 비동기 로직을 동기식 코드처럼 직관적으로 작성하는 경량 코루틴 프레임워크.
 - `suspend` 함수: 현재 스레드를 차단하지 않고 실행을 일시 중단할 수 있는 비동기 함수입니다.
 - 코루틴 빌더:
   - `launch`: 결과를 반환하지 않는 비동기 작업을 시작합니다.

@@ -6,7 +6,7 @@
   footer: "https://github.com/Jam3/math-as-code",
 )
 
-이 문서는 복잡한 수학 표기법을 Python 코드와 비교하여, 개발자들이 수학적 개념을 프로그래밍 관점에서 더 쉽게 이해할 수 있도록 돕는 참고 자료입니다.
+수학 표기법을 Python 코드와 1:1로 대조하여 수학적 개념을 프로그래밍 관점에서 직관적으로 이해할 수 있도록 정리한 치트시트입니다.
 
 = 서문
 
@@ -14,7 +14,7 @@
 
 더 자세한 목록은 #link("https://en.wikipedia.org/wiki/List_of_mathematical_symbols")[위키피디아 - 수학 기호 목록]을 참조해 주시기 바랍니다.
 
-참고로, 여기에 제시된 많은 코드 예제는 부동 소수점 값을 사용하므로 수치적으로 완벽하게 안정적이지 않을 수 있습니다. 수치 해석상의 주의 사항에 대해서는 Mikola Lysenko의 #link("https://github.com/mikolalysenko/robust-arithmetic-notes")[Robust Arithmetic Notes]를 참고하세요.
+부동소수점 연산의 특성상 일부 예제는 미세한 오차가 발생할 수 있습니다. 수치 해석에 관한 자세한 내용은 Mikola Lysenko의 #link("https://github.com/mikolalysenko/robust-arithmetic-notes")[Robust Arithmetic Notes]를 참고하세요.
 
 
 = 목차
@@ -115,7 +115,7 @@ print(math.sqrt(2)) # 결과: 1.4142135623730951
 
 $i = sqrt(-1)$
 
-파이썬은 기본적으로 `complex` 타입과 `cmath` 표준 모듈을 통해 복소수 연산을 지원합니다. (파이썬에서는 허수 단위로 $i$ 대신 $j$를 사용합니다)
+파이썬은 기본적으로 `complex` 타입과 `cmath` 표준 모듈로 복소수 연산을 지원합니다. (파이썬에서는 허수 단위로 $i$ 대신 $j$를 사용합니다)
 
 ```python
 complex(1, 1)  # (1+1j)

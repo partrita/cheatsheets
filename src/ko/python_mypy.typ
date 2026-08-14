@@ -10,7 +10,7 @@
 
 = 변수
 
-기술적으로 아래에 표시된 타입 어노테이션의 대부분은 중복입니다. mypy는 일반적으로 변수의 값으로부터 타입을 추론할 수 있기 때문입니다. 자세한 내용은 Type inference and type annotations을 참조하세요.
+mypy는 변수 초기값으로부터 타입을 자동 추론하므로 아래 예시의 많은 어노테이션은 설명용입니다. 자세한 내용은 Type inference and type annotations 문서를 참고하세요.
 
 ```python
 # 변수의 타입을 선언하는 방법입니다
@@ -19,7 +19,7 @@ age: int = 1
 # 변수를 어노테이션하기 위해 초기화할 필요는 없습니다
 a: int  # Ok (할당되기 전까지는 런타임에 값이 없음)
 
-# 이렇게 하는 것은 조건부 분기에서 유용할 수 있습니다
+# 조건부 분기에서 변수 타입을 미리 지정할 때 유용합니다
 child: bool
 if age < 18:
     child = True
@@ -30,7 +30,7 @@ else:
 = 유용한 내장 타입
 
 ```python
-# 대부분의 타입에 대해서는 어노테이션에 타입의 이름을 사용하면 됩니다.
+# 대부분의 타입은 어노테이션에 타입 이름을 그대로 적으면 됩니다.
 # 따라서 기술적으로 이 어노테이션들은 중복입니다
 x: int = 1
 x: float = 1.0
@@ -67,7 +67,7 @@ x: list[int | str] = [3, 5, "test", "fun"]  # Python 3.10+
 # 이전 버전에서는 Union을 사용합니다
 x: list[Union[int, str]] = [3, 5, "test", "fun"]
 
-# None일 수 있는 값에 대해서는 Optional[X]를 사용합니다
+# None이 될 수 있는 값에는 Optional[X]를 사용합니다
 # Optional[X]는 X | None 또는 Union[X, None]과 같습니다
 x: Optional[str] = "something" if some_condition() else None
 if x is not None:
@@ -133,7 +133,7 @@ quux(3, y=5)  # Ok
 quux(3, 5)  # error: Too many positional arguments for "quux"
 quux(x=3, y=5)  # error: Unexpected keyword argument "x" for "quux"
 
-# 이것은 각 위치 인수와 각 키워드 인수가 "str"임을 의미합니다
+# 모든 위치 인수와 키워드 인수가 "str" 타입임을 나타냅니다
 def call(self, *args: str, **kwargs: str) -> str:
     reveal_type(args)  # 드러난 타입은 "tuple[str, ...]"
     reveal_type(kwargs)  # 드러난 타입은 "dict[str, str]"
@@ -146,7 +146,7 @@ def call(self, *args: str, **kwargs: str) -> str:
 ```python
 class BankAccount:
     # "__init__" 메서드는 아무것도 반환하지 않으므로,
-    # 아무것도 반환하지 않는 다른 메서드와 마찬가지로 반환 타입 "None"을 가집니다
+    # 아무것도 반환하지 않는 다른 메서드와 마찬가지로 반환 타입이 "None"입니다
     def __init__(self, account_name: str, initial_balance: int = 0) -> None:
         # mypy는 매개변수의 타입을 기반으로 이 인스턴스 변수들의
         # 올바른 타입을 추론합니다.
@@ -194,11 +194,11 @@ class Car:
 # 클래스에서 동적 속성을 원한다면,
 # "__setattr__" 또는 "__getattr__"을 오버라이드하세요
 class A:
-    # 이것은 x가 "value"와 같은 타입인 경우 모든 A.x에 대한 할당을 허용합니다
+    # x가 "value"와 일치하는 타입이면 임의의 A.x 속성 할당을 허용합니다
     # (임의의 타입을 허용하려면 "value: Any"를 사용하세요)
     def __setattr__(self, name: str, value: int) -> None: ...
 
-    # 이것은 x가 반환 타입과 호환되는 경우 모든 A.x에 대한 액세스를 허용합니다
+    # x가 반환 타입과 호환되는 경우 임의의 A.x 속성 접근을 허용합니다
     def __getattr__(self, name: str) -> int: ...
 
 a = A()
@@ -206,12 +206,12 @@ a.foo = 42  # 작동함
 a.bar = 'Ex-parrot'  # 타입 검사 실패
 ```
 
-= 혼란스럽거나 복잡한 경우
+= 특수 상황 및 예외 처리
 
 ```python
 from typing import Union, Any, Optional, TYPE_CHECKING, cast
 
-# 프로그램의 어느 곳에서든 표현식에 대해 mypy가 추론하는 타입을 알아보려면,
+# mypy가 특정 표현식에서 추론하는 타입을 확인하려면
 # reveal_type()으로 감싸세요. Mypy는 타입과 함께 오류 메시지를 출력합니다;
 # 코드를 실행하기 전에 다시 제거하세요.
 reveal_type(1)  # 드러난 타입은 "builtins.int"
@@ -229,13 +229,13 @@ x.whatever() * x["you"] + x("want") - any(x) and all(x) is super  # 오류 없�
 # 코드가 mypy를 혼란스럽게 하거나 mypy의 완전한 버그에 부딪힐 때,
 # 특정 줄의 오류를 억제하려면 "type: ignore" 주석을 사용하세요.
 # 문제를 설명하는 주석을 추가하는 것이 좋은 관행입니다.
-x = confusing_function()  # type: ignore  # confusing_function은 여기서 None을 반환하지 않을 것입니다. 왜냐하면 ...
+x = confusing_function()  # type: ignore  # confusing_function은 이 분기에서 None을 반환하지 않음 (이유 기재)
 
-# "cast"는 표현식의 추론된 타입을 오버라이드할 수 있게 해주는 도우미 함수입니다.
-# 이것은 mypy만을 위한 것이며 -- 런타임 검사는 없습니다.
+# "cast"는 표현식의 추론 타입을 강제로 오버라이드하는 헬퍼 함수입니다.
+# 정적 분석(mypy)에만 유효하며 런타임 검사는 수행되지 않습니다.
 a = [4]
 b = cast(list[int], a)  # 문제없이 통과
-c = cast(list[str], a)  # 거짓말임에도 불구하고 문제없이 통과 (런타임 검사 없음)
+c = cast(list[str], a)  # 실제 런타임 타입과 다르더라도 mypy는 통과함 (런타임 검사 없음)
 reveal_type(c)  # 드러난 타입은 "builtins.list[builtins.str]"
 print(c)  # 여전히 [4]를 출력 ... 객체는 런타임에 변경되거나 캐스팅되지 않습니다
 
@@ -268,13 +268,13 @@ f(range(1, 3))
 # Mapping은 변경하지 않을 dict-like 객체("__getitem__"이 있는)를 설명하고,
 # MutableMapping은 변경할 수 있는 객체("__setitem__"이 있는)를 설명합니다
 def f(my_mapping: Mapping[int, str]) -> list[int]:
-    my_mapping[5] = 'maybe'  # mypy는 이 줄에 대해 불평할 것입니다...
+    my_mapping[5] = 'maybe'  # mypy에서 타입 불일치 오류 발생...
     return list(my_mapping.keys())
 
 f({3: 'yes', 4: 'no'})
 
 def f(my_mapping: MutableMapping[int, str]) -> set[str]:
-    my_mapping[5] = 'maybe'  # ...하지만 mypy는 이것은 문제없다고 합니다.
+    my_mapping[5] = 'maybe'  # ...하지만 MutableMapping이므로 정상 통과함
     return set(my_mapping.values())
 
 f({3: 'yes', 4: 'no'})
@@ -298,9 +298,9 @@ def get_sys_IO(mode: str = 'w') -> IO[str]:
 = 전방 참조
 
 ```python
-# 클래스가 정의되기 전에 참조하고 싶을 수 있습니다.
-# 이것을 "전방 참조"라고 합니다.
-def f(foo: A) -> int:  # 이것은 런타임에 'A' is not defined로 실패할 것입니다
+# 클래스를 정의하기 전에 미리 타입으로 참조해야 하는 경우:
+# 이를 "전방 참조(Forward Reference)"라고 합니다.
+def f(foo: A) -> int:  # 런타임에 'A' is not defined NameError 발생
     ...
 
 # 하지만 다음과 같은 특별한 임포트를 추가하면:
@@ -309,12 +309,12 @@ from __future__ import annotations
 def f(foo: A) -> int:  # Ok
     ...
 
-# 또 다른 옵션은 타입을 따옴표로 묶는 것입니다
+# 문자열 따옴표로 감싸는 방법도 가능합니다
 def f(foo: 'A') -> int:  # 이것도 ok
     ...
 
 class A:
-    # 이것은 해당 클래스의 정의 내부에서 타입 어노테이션에 클래스를 참조해야 하는 경우에도 발생할 수 있습니다
+    # 클래스 메서드 내부에서 자기 자신 클래스 타입을 반환 타입 등으로 참조할 때도 발생합니다
     @classmethod
     def create(cls) -> A:
         ...
@@ -324,7 +324,7 @@ class A:
 
 = 데코레이터
 
-데코레이터 함수는 제네릭을 통해 표현할 수 있습니다. 자세한 내용은 Declaring decorators를 참조하세요.
+데코레이터 함수는 제네릭(ParamSpec, TypeVar)을 활용해 정밀하게 타입 어노테이션할 수 있습니다. 자세한 내용은 Declaring decorators 문서를 참고하세요.
 
 ```python
 from typing import Any, Callable, TypeVar
@@ -340,7 +340,7 @@ def decorator_args(url: str) -> Callable[[F], F]:
 
 = 코루틴과 asyncio
 
-코루틴 타이핑 및 비동기 코드에 대한 전체 세부 사항은 Typing async/await를 참조하세요.
+코루틴 타입 지정 및 비동기 코드 타이핑에 관한 세부 사항은 Typing async/await 문서를 참고하세요.
 
 ```python
 import asyncio

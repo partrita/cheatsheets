@@ -30,7 +30,7 @@ Artisan은 Laravel에서 제공하는 강력한 커맨드 라인 인터페이스
   `php artisan migrate`
 - *라우트 목록 확인*: 정의된 모든 URL 경로 목록을 출력합니다.
   `php artisan route:list`
-- *Tinker (REPL)*: 애플리케이션의 환경에서 직접 PHP 코드를 실행하고 데이터를 조작할 수 있는 대화형 쉘입니다.
+- *Tinker (REPL)*: Laravel 애플리케이션 컨텍스트에서 PHP 코드 실행 및 Eloquent 모델 조작이 가능한 대화형 REPL 셸.
 
 = 라우팅 (Routing)
 
@@ -80,7 +80,7 @@ class PostController extends Controller
 
 = 블레이드 템플릿 (Blade)
 
-Laravel의 강력하고 직관적인 템플릿 엔진으로, HTML 내에서 PHP 코드를 깔끔하게 작성할 수 있게 돕습니다.
+HTML 내에서 간결하고 직관적인 문법으로 뷰를 작성할 수 있는 Laravel 템플릿 엔진.
 
 - *변수 출력*: `{{ $variable }}` 형식을 사용하여 데이터를 안전하게 출력합니다.
 - *주석 작성*: `{{-- 블레이드 전용 주석입니다. --}}`
@@ -96,7 +96,7 @@ Laravel의 강력하고 직관적인 템플릿 엔진으로, HTML 내에서 PHP 
 
 = 엘로퀀트 ORM (Eloquent)
 
-데이터베이스 작업을 객체 지향적으로 처리할 수 있게 해주는 Laravel의 강력한 Active Record 패턴 구현체입니다.
+테이블 레코드를 객체 지향적으로 조작할 수 있는 Active Record 기반 ORM.
 
 - *모델 정의*: `app/Models/Post.php`와 같이 클래스를 정의하여 테이블과 매핑합니다.
 - *데이터 조회*:
@@ -110,7 +110,7 @@ Laravel의 강력하고 직관적인 템플릿 엔진으로, HTML 내에서 PHP 
 
 = 관계 정의 (Relationships)
 
-테이블 간의 연관 관계를 메서드 형태로 정의하여 쉽게 데이터를 가져올 수 있습니다.
+일대일, 일대다, 다대다 관계를 모델 메서드로 정의해 관련 데이터를 직관적으로 로드합니다.
 
 - *주요 관계 유형*:
   - 일대다(1:N): `hasMany()`, `belongsTo()`

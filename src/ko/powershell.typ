@@ -8,7 +8,7 @@
 
 = 도움말 및 탐색 (Help & Navigation)
 
-- `Get-Help <cmd>`: 명령어에 대한 도움말 확인 (예: `Get-Help Get-Service`).
+- `Get-Help <cmd>`: 명령어 도움말 확인 (예: `Get-Help Get-Service`).
 - `Update-Help`: 최신 도움말 파일을 인터넷에서 다운로드합니다.
 - `Get-Command`: 현재 세션에서 사용 가능한 모든 명령어를 나열합니다.
 - `Get-Alias`: 현재 정의된 별칭(Alias) 목록을 표시합니다 (예: `dir`, `ls`, `cd`).
@@ -42,7 +42,7 @@
   - `Get-Service | ? Status -eq "Running"`
 - `Select-Object`: 특정 속성만 선택하거나 출력 개수를 제한합니다.
   - `Get-Process | Select-Object Name, CPU -First 10`
-- `ForEach-Object` (별칭: `%`): 각 객체에 대해 루프를 실행합니다.
+- `ForEach-Object` (별칭: `%`): 파이프라인으로 전달된 각 객체를 순회합니다.
 - `Sort-Object`: 속성을 기준으로 정렬합니다 (`-Descending`으로 내림차순).
 
 = 네트워크 및 웹 (Networking & Web)

@@ -57,7 +57,7 @@
 
 = 블록, Proc, 람다
 
-Ruby의 강력한 기능으로, 코드 블록을 메서드에 전달할 수 있습니다.
+Ruby의 핵심 기능으로, 코드 블록을 메서드에 인자로 전달할 수 있습니다.
 
 - 블록 (Block): `do ... end` 또는 `{ ... }`.
   ```ruby
@@ -148,7 +148,7 @@ my_hash[:city] = "Seoul" # 추가/수정
 
 ```ruby
 begin
-  # 예외가 발생할 수 있는 코드
+  # 예외 발생 가능 코드
 rescue SomeError => e
   # 특정 예외 처리
   puts "Error: #{e.message}"

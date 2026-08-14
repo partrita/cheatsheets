@@ -110,7 +110,7 @@ Neovim은 효율적인 텍스트 편집을 위해 강력하고 다양한 키보�
 - `Ctrl-a`, `Ctrl-x`: 커서 위치의 숫자 값 증가 또는 감소.
 
 == LSP (Language Server Protocol) 연동
-Neovim 내장 LSP를 통해 IDE급 코드 인텔리전스를 활용할 수 있습니다. (설정 필요)
+Neovim 내장 LSP 클라이언트로 자동완성, 정의 이동, 리팩토링 등 IDE급 기능을 제공합니다 (설정 필요).
 - `gd`: 정의(Definition)로 이동
 - `gr`: 참조(References) 목록 확인
 - `K`: 현재 심볼 정보 확인 (Hover 정보)
@@ -119,7 +119,7 @@ Neovim 내장 LSP를 통해 IDE급 코드 인텔리전스를 활용할 수 있�
 - `<leader>rn`: 이름 변경 (Rename)
 
 == 퍼지 파인더 (Telescope, fzf 등) 활용
-파일이나 버퍼, 심볼을 빠르게 검색하기 위해 `Telescope` 등 플러그인 사용을 권장합니다.
+파일, 버퍼, 라이브 Grep, LSP 심볼 검색에 `Telescope` 플러그인을 권장합니다.
 - 예시 (Telescope 기준):
   - `<leader>ff`: 파일 검색
   - `<leader>fg`: 텍스트 검색 (Live Grep)
@@ -173,7 +173,7 @@ Neovim 내장 LSP를 통해 IDE급 코드 인텔리전스를 활용할 수 있�
 
 = 고급 편집 기법 및 활용
 
-== 매크로 활용을 통한 자동화
+== 매크로를 활용한 작업 자동화
 ```vim
 " 1. 반복 작업 기록 및 실행
 " - 기록 시작: qa (a 레지스터 사용)

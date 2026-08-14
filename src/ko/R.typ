@@ -36,7 +36,7 @@
 = 제어 구조 및 함수
 
 - if-else: `if (condition) { ... } else { ... }`. `ifelse(test, yes, no)` 벡터화된 버전.
-- for, while, repeat: 루프. R에서는 벡터화 연산이 더 효율적이므로 가능한 한 루프를 피하는 것이 좋음.
+- for, while, repeat: 루프. R은 벡터 연산에 최적화되어 있으므로 가급적 반복문 대신 벡터 연산이나 apply 계열 함수를 권장함.
 - apply 계열 함수:
   - `apply(X, MARGIN, FUN)`: MARGIN (1: 행, 2: 열)에 함수 적용.
   - `lapply(X, FUN)`: 리스트/벡터 각 요소에 함수 적용, 결과를 리스트로 반환.
@@ -47,7 +47,7 @@
   ```R
   my_function <- function(arg1, arg2 = default) {
     # 함수 본문
-    return(result) # return()은 명시적으로 사용하거나 마지막 표현식의 값이 반환됨
+    return(result) # return()을 명시하거나 마지막 표현식의 평가값이 자동 반환됨
   }
   ```
 
@@ -82,7 +82,7 @@
 
 == `ggplot2`: 데이터 시각화의 문법
 
-그래프를 구성 요소(데이터, 심미성 매핑, 기하학적 객체 등)의 레이어로 만듦.
+데이터, 미적 매핑(Aesthetics), 기하학적 객체(Geom) 등의 레이어를 쌓아 시각화 구성.
 - 기본 구조:
   ```R
   ggplot(data = <DATA>, mapping = aes(<MAPPINGS>)) +

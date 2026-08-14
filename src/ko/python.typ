@@ -158,7 +158,7 @@ class <enum_name>(Enum):
 
 = 덕 타이핑 (Duck Types)
 
-특정 메서드 집합이 정의되어 있다면 해당 타입으로 간주하는 파이썬의 암시적 타입 시스템입니다.
+특정 특수 메서드(Magic Method) 집합을 구현하면 해당 프로토콜이나 인터페이스를 만족하는 것으로 간주하는 파이썬의 덕 타이핑(Duck Typing) 메커니즘.
 
 == 비교 가능 (Comparable)
 - `__eq__(self, other)`: `==` 연산자 동작 정의. 기본값은 `self is other`입니다.

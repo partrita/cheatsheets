@@ -54,7 +54,7 @@
 [tool.poetry]
 name = "my-awesome-project"
 version = "0.1.0"
-description = "프로젝트에 대한 간단한 설명"
+description = "프로젝트 요약 설명"
 authors = ["홍길동 <gildong@example.com>"]
 license = "MIT"
 readme = "README.md"
@@ -96,7 +96,7 @@ build-backend = "poetry.core.masonry.api"
 1. *프로젝트 시작*: `poetry new my-project` 명령으로 기초 구조 생성
 2. *가상 환경 경로 설정*: `poetry config virtualenvs.in-project true` 설정 (IDE 연동에 유리)
 3. *의존성 구성*: `poetry add pandas`, `poetry add --group dev pytest` 등으로 패키지 추가
-4. *개발 진행*: `poetry shell`로 가상 환경에 진입하거나 `poetry run`을 통해 코드 실행
+4. *개발 진행*: `poetry shell`로 가상 환경에 진입하거나 `poetry run`으로 가상 환경 내 명령 실행
 5. *검증 및 테스트*: `poetry run pytest` 명령으로 테스트 수행
 6. *버전 관리*: `poetry.lock` 파일을 포함하여 Git에 커밋 (팀원 간 동일 환경 보장)
 7. *패키지 배포*: `poetry publish --build` 명령으로 PyPI 등에 최종 결과물 배포

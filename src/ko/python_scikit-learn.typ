@@ -11,13 +11,13 @@
 1.  *데이터 준비*: 입력 특성(X)과 예측 대상인 타겟(y)을 분리합니다.
 2.  *모델 선택*: 해결하려는 문제에 적합한 알고리즘 클래스를 임포트합니다.
 3.  *모델 인스턴스화*: 하이퍼파라미터를 설정하여 모델 객체를 생성합니다.
-4.  *학습*: `model.fit(X, y)`를 통해 모델을 학습시킵니다.
-5.  *예측*: `model.predict(X_new)`로 새로운 데이터에 대한 예측값을 생성합니다.
+4.  *학습*: `model.fit(X, y)`로 모델을 학습합니다.
+5.  *예측*: `model.predict(X_new)`로 신규 데이터의 예측값을 산출합니다.
 6.  *평가*: 다양한 지표를 활용해 모델의 성능을 정밀하게 측정합니다.
 
 = 데이터 전처리 (Preprocessing)
 
-데이터의 품질을 높이기 위해 `sklearn.preprocessing` 모듈을 활용합니다.
+데이터 전처리 및 스케일링을 위해 `sklearn.preprocessing` 모듈을 활용합니다.
 
 - *스케일링 (Scaling)*:
   - `StandardScaler`: 데이터를 평균 0, 분산 1이 되도록 표준화합니다.
@@ -41,7 +41,7 @@ X_scaled = scaler.fit_transform(X)
 == 지도 학습 (Supervised Learning)
 - *회귀 (Regression)*:
   - `LinearRegression`: 가장 기본적인 선형 회귀 모델입니다.
-  - `Ridge`, `Lasso`: 과적합 방지를 위해 규제(Regularization)가 추가된 선형 모델입니다.
+  - `Ridge`, `Lasso`: L2/L1 가중치 규제를 적용하여 과적합을 방지하는 선형 회귀 모델.
   - `SVR`: 서포트 벡터 머신 기반의 회귀 모델입니다.
   - `RandomForestRegressor`: 결정 트리 앙상블 기반의 강력한 회귀 모델입니다.
 - *분류 (Classification)*:
@@ -60,7 +60,7 @@ X_scaled = scaler.fit_transform(X)
 
 = 데이터 분할 및 교차 검증
 
-`sklearn.model_selection` 모듈을 통해 모델의 일반화 성능을 높입니다.
+`sklearn.model_selection` 모듈로 교차 검증과 하이퍼파라미터 튜닝을 수행합니다.
 
 - *학습/테스트 데이터 분할*:
   ```python

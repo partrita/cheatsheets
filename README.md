@@ -22,30 +22,6 @@
 
 각 치트시트의 PDF 버전은 릴리즈 페이지에 자동으로 업로드됩니다. 가장 최신 버전의 치트시트를 손쉽게 확인하고 다운로드하여 오프라인에서도 편리하게 활용하세요.
 
-
-## ✨ 주요 치트시트 목록
-
-현재 제공되는 주요 치트시트는 다음과 같습니다. 앞으로도 유용한 자료들이 계속 추가될 예정입니다.
-
-- Go 언어 ([`src/ko/go.typ`](src/ko/go.typ)):
-  - Go 언어의 기본 문법, 패키지 관리, 고루틴(Goroutines), 채널(Channels) 등 병행성(concurrency) 핵심 개념을 명확하게 정리했습니다. 분산 시스템 개발에 관심 있는 분들께 유용합니다.
-- Seurat ([`src/ko/R_seurat.typ`](src/ko/R_seurat.typ)):
-  - R 기반의 단일 세포 RNA 시퀀싱(scRNA-seq) 분석 도구인 Seurat의 주요 명령어 및 표준 워크플로우를 다룹니다. 생물정보학 연구자들에게 필수적인 자료입니다.
-- Tidyverse ([`src/ko/R_tidyverse.typ`](src/ko/R_tidyverse.typ)):
-  - R 데이터 분석을 위한 Tidyverse 패키지 모음의 핵심 사용법(dplyr, ggplot2, tidyr 등)을 안내합니다. 데이터 전처리, 변환, 시각화에 대한 가이드라인을 제공합니다.
-- Typst 문법 ([`src/ko/typst.typ`](src/ko/typst.typ)):
-  - 새로운 조판 시스템 Typst로 문서를 작성하기 위한 기본 문법, 레이아웃 조작, 수식 작성, 예제 코드 등을 포함합니다. 아름다운 문서를 만들고 싶은 분들께 강력 추천합니다.
-- Gemini CLI ([`src/ko/gemini_cli.typ`](src/ko/gemini_cli.typ)):
-  - Gemini CLI의 주요 명령어, 옵션, 슬래시 명령어 및 스킬 관리 방법을 정리했습니다. AI 에이전트를 효율적으로 활용하는 데 도움이 됩니다.
-- Claude Code ([`src/ko/claude_code.typ`](src/ko/claude_code.typ)):
-  - Claude Code의 최신 명령어(v2.1.116), 단축키, MCP 서버 및 에이전트 구성을 정리한 요약 문서입니다.
-- PowerShell ([`src/ko/powershell.typ`](src/ko/powershell.typ)):
-  - PowerShell의 기본 명령어, 파일 관리, 파이프라인 조작 및 시스템 관리 명령어를 정리했습니다.
-- 실용 셸 스크립트 ([`src/ko/shell_scripts.typ`](src/ko/shell_scripts.typ)):
-  - 클립보드, 파일 관리, 인터넷, 텍스트 처리 등 실무에서 유용하게 쓰이는 다양한 셸 스크립트 도구들을 정리했습니다.
-- 기타: Python, mypy, nvim 등 다양한 도구와 언어에 대한 치트시트가 포함되어 있습니다. 특정 주제에 대한 치트시트가 필요하다면 `src/` 디렉토리를 탐색해보세요.
-
-
 ## 🛠️ Typst 문서 빌드 방법
 
 Typst 문서를 직접 빌드하여 PDF 또는 다른 형식으로 변환할 수 있습니다.

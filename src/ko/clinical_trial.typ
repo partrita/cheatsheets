@@ -17,10 +17,10 @@
 - FIH (First In Human):사람을 대상으로 하는 최초 임상시험(보통 1상 초기)을 의미.
 - HR (Hazard Ratio, 위험비): 생존 분석에서 두 그룹의 사건 발생 속도(위험률) 비율을 의미합니다. HR > 1이면 기준군 대비 위험이 증가한 것입니다.
 - MAD (Multiple Ascending Dose, 다중 용량 상승 시험): 약물을 여러 번 반복 투여하며 용량을 높여가는 시험. 체내 약물 축적 및 정강상태(Steady-state)에서의 독성을 평가함.
-- MTD (Maximum Tolerated Dose, 최대 내약 용량): DLT가 허용 범위를 넘지 않으면서 투여할 수 있는 가장 높은 용량. 즉, '안전한 최대치'를 의미함.
+- MTD (Maximum Tolerated Dose, 최대 내약 용량): DLT가 허용 범위 이내로 유지되는 최고 투여 용량 (안전한 최대 용량 한계).
 - OR (Odds ratio, 오즈비): 사건 발생 확률(p)을 비발생 확률(1-p)로 나눈 값(p/(1-p)). "노출이 있는 집단에서 사건이 일어날 가능성의 비율이, 노출이 없는 집단에 비해 몇 배인지”를 나타내는 지표. OR > 1 이면 노출이 사건 위험을 높임.
 - P (P-value): 결과가 우연일 확률(통상 0.05 기준)이 극히 낮아 통계적으로 유의미함을 나타냄. 
-- RDE (Recommended Dose for Expansion): 용량 증량 단계 종료 후, 특정 환자군을 대상으로 더 넓게 시험하기 위해 선정된 추천 용량. 보통 MTD와 동일하거나 그 이하에서 결정됨.
+- RDE (Recommended Dose for Expansion): 용량 증량 단계 종료 후 코호트 확장을 위해 설정한 추천 용량 (보통 MTD 이하로 결정).
 - RR (Relative Risk, 상대위험도): 노출군과 비노출군 간 사건 발생 확률의 비율을 나타내는 통계 지표. 코호트 연구에서 주로 사용되며 오즈비(OR)와 유사, 차이점은 실제 확률을 직접 비교하는 것.
 - RP2D (Recommended Phase 2 Dose, 2상 권장 용량): 1상(용량 탐색) 시험 결과를 분석하여 안전성과 유효성이 가장 균형 잡혔다고 판단된, 차기 2상 시험용 최적 용량.
 - SAD (Single Ascending Dose, 단일 용량 상승 시험): 코호트별로 약물을 한 번만 투여하며 용량을 단계적으로 높여 안전성과 내약성을 평가하는 기초 단계 시험.
@@ -44,11 +44,11 @@
 - SS (Safety Analysis Set): 시험약 1회 이상 투여받은 모든 피험자. 안전성(부작용) 분석용.
 
 = RECIST 1.1
-RECIST(Response Evaluation Criteria In Solid Tumors)는 고형암 환자의 항암 치료 효과를 객관적으로 평가하기 위한 국제 표준 기준으로, 주로 CT나 MRI 같은 영상 검사를 통해 종양 크기 변화를 측정.
+RECIST는 고형암 환자의 항암 치료 반응을 객관적으로 평가하는 국제 표준 가이드라인으로, CT·MRI 영상 기반의 종양 크기 변화를 측정함.
 치료 전 베이스라인 스캔 후 일정 주기(보통 6-8주)로 재평가하며, PR/CR 확인 시 최소 4주 간격 두 번 측정함. 최대 5개 병변(장기당 2개까지)을 선택해 가장 긴 직경 합(SLD)을 기준으로 평가함.
 
 == 반응 평가 (Response Evaluation)
-- Target lesions (표적 병변): 치료 효과 평가를 위해 베이스라인에서 선정된 측정 가능한 병변. 병변 장경(Longest diameter)의 합을 추적 관리함. (최대 5개, 한 장기당 2개까지 선정)
+- Target lesions (표적 병변): 베이스라인에서 선정한 측정 가능한 대표 병변. 최장 직경(Longest Diameter)의 합을 추적 관찰함 (최대 5개, 장기당 최대 2개).
 - CR (Complete Response, 완전 관해): 모든 표적 병변이 사라지고, 림프절 전이가 있었던 경우 단축이 10mm 미만으로 감소한 상태. 신규 병변이 없어야 함.
 - PR (Partial Response, 부분 관해): 베이스라인 대비 표적 병변 장경 합이 30% 이상 감소한 상태.
 - SD (Stable Disease, 안정 병변): PR 기준에 도달할 만큼 충분히 줄어들지도, PD 기준에 해당할 만큼 늘어나지도 않은 상태.
@@ -92,12 +92,12 @@ RECIST(Response Evaluation Criteria In Solid Tumors)는 고형암 환자의 항�
 - TRAE (Treatment-Related Adverse Event): 투여한 약물과의 인과관계를 배제할 수 없는(관련이 의심되는) 이상사례임.
 - TEAE (Treatment-Emergent Adverse Event): 약물 투여 전에는 없었으나 투여 후 새로 발생하거나 기존 증상이 악화된 모든 이상사례임.
 - TESAE (Treatment-Emergent Serious Adverse Event): 치료 과정 중 발생한 '중대한' 이상사례(SAE). 입원, 생명 위협, 영구적 장애 등이 해당됨.
-- irAE (Immune-Related Adverse Event): 면역항암제 투여로 인해 면역 체계가 과활성화되어 정상 조직을 공격하며 발생하는 부작용.
+- irAE (Immune-Related Adverse Event): 면역항암제 투여로 면역계가 과활성화되어 정상 장기 조직을 공격해 발생하는 면역 매개 부작용.
   - 피부 반응: 발진, 가려움증(pruritus)이 가장 흔하며, 전체 irAE의 30-50%를 차지. 일반적으로 경증이지만 스테로이드로 관리.
   - 갑상선 기능 이상: 갑상선염으로 인한 갑상선 기능 저하증(hypothyroidism)이 15% 정도 발생, pembrolizumab 환자에서 빈번.
 ​  - 장염(colitis): 설사와 복통으로 나타나며, 중증(grade 3 이상) 시 입원 필요. ipilimumab 치료에서 높음.
 - SAE (Serious Adverse Event, 중대한 이상사례): 사망, 생명의 위협, 입원 연장, 지속적 장애 등을 초래하는 사건. 발생 시 24시간 이내에 규제 기관 보고 대상임.
-- AST/ALT (간 효소 수치): 간 세포 손상 정도를 나타내는 지표. 약물 유도성 간 손상(DILI) 확인을 위해 필수적으로 모니터링함.
+- AST/ALT (간 효소 수치): 간세포 손상 척도. 약물 유도성 간손상(DILI) 모니터링 필수 지표.
 
 = CTCAE
 CTCAE(Common Terminology Criteria for Adverse Events)는 미국 국립암연구소(NCI)가 개발한 이상사례의 심각도 분류 시스템.
@@ -130,7 +130,7 @@ OS/PFS 생존 분석에 사용됨. 곡선의 높이는 특정 시점까지 생�
 
 == Swimmer plot
 
-환자별 사건 발생 타임라인을 보여줌. 각 막대는 환자 한 명의 추적 기간을 나타내며, 막대의 길이와 표시된 기호를 통해 치료 기간, 반응 발생/소실, 진행, 중단 시점 등을 직관적으로 해석함.
+환자별 임상 사건 타임라인을 막대 그래프로 시각화. 환자 개별 치료 기간, 반응 개시/소실, 질환 진행(PD), 투약 중단 시점 등을 직관적으로 파악함.
 
 #figure(
   image("../images/swimmer_plot.png", width: 100%),

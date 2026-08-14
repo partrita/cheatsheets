@@ -37,7 +37,7 @@
 
 = 다중 환경 관리 (Features)
 
-`pixi`는 "features" 기능을 통해 용도별로 여러 환경을 관리할 수 있습니다. 예를 들어, 기본 개발 환경과 별개로 테스트나 문서 빌드용 의존성을 그룹화할 수 있습니다.
+`pixi`의 Features 기능을 사용하면 개발, 테스트, 문서 빌드 등 목적별 의존성을 개별 환경으로 분리하여 관리할 수 있습니다.
 
 - `pixi.toml`에서 feature 정의 예시:
   ```toml
@@ -75,7 +75,7 @@ platforms = ["linux-64", "osx-64", "win-64"] # 지원 플랫폼
 [tasks]
 start = "python main.py"
 lint = "ruff check ."
-# 작업에 대한 상세 설명 추가 가능
+# 작업 상세 설명 추가 가능
 format = { cmd = "ruff format .", description = "코드 포맷팅 실행" }
 # 특정 feature 환경에서 구동될 작업 정의
 test = { cmd = "pytest", env = "test" }
@@ -116,7 +116,7 @@ mkdocs-material = "*"
 = 왜 Pixi인가?
 
 Pixi는 `conda`의 강력한 패키지 관리 기능과 `pip`의 유연함을 결합한 도구로, `cargo`나 `npm`과 같은 현대적인 사용자 경험을 제공합니다.
-- 완벽한 재현성: `pixi.lock` 파일을 통해 모든 플랫폼에서 동일한 환경을 보장합니다.
+- 완벽한 재현성: `pixi.lock` 파일로 모든 플랫폼에서 100% 동일한 빌드 재현성을 보장합니다.
 - 압도적인 속도: 병렬 다운로드와 효율적인 의존성 해결 알고리즘으로 환경을 빠르게 구축합니다.
 - 통합 관리: 의존성 관리, 작업 실행, 가상 환경 제어를 하나의 도구로 처리합니다.
 - 진정한 크로스 플랫폼: Windows, macOS, Linux 어디서나 일관되게 작동합니다.

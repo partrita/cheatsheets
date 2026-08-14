@@ -43,7 +43,7 @@
   - `DateTimeField`, `DateField`, `TimeField`
   - `ForeignKey`, `ManyToManyField`, `OneToOneField`
 - 마이그레이션:
-  - `python manage.py makemigrations`: 모델 변경사항에 대한 마이그레이션 파일 생성.
+  - `python manage.py makemigrations`: 모델 변경 사항을 바탕으로 신규 마이그레이션 파일 생성.
   - `python manage.py migrate`: 마이그레이션을 데이터베이스에 적용.
 
 = 쿼리셋 (QuerySet) API

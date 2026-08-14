@@ -19,13 +19,13 @@ print(f"PyTorch version: {torch.__version__}")
 ```
 
 == 텐서 (Tensors) 생성 및 연산
-PyTorch의 핵심 데이터 구조인 텐서는 다차원 배열을 다루는 데 최적화되어 있습니다.
+PyTorch의 기본 데이터 구조인 텐서(Tensor)는 다차원 배열 연산 및 GPU 가속에 최적화되어 있습니다.
 
 ```python
 # 스칼라 값으로부터 텐서 생성
 scalar = torch.tensor(7)
 
-# 특정 크기(3x4)의 무작위 값을 가진 텐서 생성
+# 특정 크기(3x4)의 난수 텐서 생성
 random_tensor = torch.rand(size=(3, 4))
 
 # 텐서 간의 요소별 곱셈 연산
@@ -44,7 +44,7 @@ if torch.cuda.is_available():
 elif torch.backends.mps.is_available():
     device = "mps"   # Apple Silicon 환경
 else:
-    device = "cpu"   # 가속기가 없는 경우 기본 CPU 사용
+    device = "cpu"   # GPU 가속기가 없으면 기본 CPU 사용
 
 print(f"현재 사용 중인 장치: {device}")
 
@@ -55,7 +55,7 @@ print(f"텐서 위치: {x.device}")
 ```
 
 == 실험 재현성을 위한 시드 고정
-매번 실행할 때마다 동일한 결과를 보장하기 위해 랜덤 시드를 설정합니다.
+실행 간 재현성(Reproducibility) 확보를 위한 난수 시드 고정:
 
 ```python
 torch.manual_seed(42)

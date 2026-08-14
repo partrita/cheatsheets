@@ -8,7 +8,7 @@
 
 = Polars란?
 
-Polars는 Rust로 빌드된 초고속 데이터프레임 라이브러리입니다. 멀티코어 프로세싱을 활용하여 Pandas보다 훨씬 빠른 성능을 제공하며, 직관적인 API를 가지고 있습니다.
+Polars는 Rust 기반의 초고속 멀티스레드 데이터프레임 라이브러리입니다. Apache Arrow 메모리 모델과 쿼리 최적화 엔진으로 대규모 데이터를 빠르게 처리합니다.
 
 ```python
 import polars as pl
@@ -32,7 +32,7 @@ import polars as pl
 
 = 표현식 (Expressions)
 
-Polars의 핵심 개념. 컬럼에 대한 변환 작업을 정의하며, 지연 평가(Lazy Evaluation)와 최적화를 가능하게 합니다.
+Polars의 핵심 빌딩 블록. 컬럼 변환 식을 선언적으로 정의하며, 지연 평가(Lazy Evaluation) 시 쿼리 플래너가 이를 최적화합니다.
 
 - 컬럼 선택: `pl.col('column_name')`
 - 모든 컬럼 선택: `pl.all()`

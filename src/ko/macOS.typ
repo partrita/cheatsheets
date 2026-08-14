@@ -41,7 +41,7 @@
 - `pgrep <process_name>`: 프로세스 이름으로 PID를 검색합니다.
 - `pkill <process_name>`: 프로세스 이름으로 프로세스를 종료합니다.
 - `sysctl -n hw.ncpu`: CPU 코어 수를 확인합니다.
-- `system_profiler <dataType>`: 특정 데이터 타입에 대한 시스템 프로필 정보를 자세히 보여줍니다. (예: `SPHardwareDataType`)
+- `system_profiler <dataType>`: 특정 데이터 타입의 상세 시스템 프로필 정보를 출력합니다. (예: `SPHardwareDataType`)
 - `scutil --get HostName`: 호스트 이름을 확인합니다.
 - `lsof -i :<port>`: 특정 포트를 사용하고 있는 프로세스를 확인합니다.
 - `caffeinate`: Mac이 잠자기 모드로 들어가는 것을 방지합니다.
