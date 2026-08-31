@@ -6,7 +6,6 @@
 ![GitHub pull requests](https://img.shields.io/github/issues-pr/partrita/cheatsheets)
 ![GitHub license](https://img.shields.io/github/license/partrita/cheatsheets)
 
-
 ![](./demo.png)
 
 ## 🚀 소개
@@ -16,7 +15,6 @@
 > 종이로 뽑아서 컴퓨터 주변에 두기 위해 만들었습니다.
 
 관심 있는 모든 분들이 이 자료를 통해 작업 효율성을 높이고 새로운 지식을 습득하는 데 도움을 받으시길 바랍니다.
-
 
 ## 📥 PDF 다운로드
 
@@ -46,14 +44,14 @@ pixi run check
 특정 파일만 빌드하거나, 수정하면서 실시간으로 결과를 확인하고 싶을 때 다음 명령어를 사용합니다.
 
 - 개별 PDF 빌드:
-  ```bash
-  pixi run typst compile --font-path src/fonts src/특정파일.typ 특정파일.pdf
-  ```
+    ```bash
+    pixi run typst compile --font-path src/fonts src/특정파일.typ 특정파일.pdf
+    ```
 - 실시간 미리보기 (Watch Mode):
   파일을 저장할 때마다 PDF가 자동으로 업데이트됩니다.
-  ```bash
-  pixi run typst watch --font-path src/fonts src/특정파일.typ
-  ```
+    ```bash
+    pixi run typst watch --font-path src/fonts src/특정파일.typ
+    ```
 
 ## 웹사이트 생성 및 미리보기
 
@@ -68,6 +66,7 @@ pixi run site-preview
 ```bash
 pixi run site-build
 ```
+
 이 결과물은 `site_output/` 디렉토리에 생성됩니다.
 
 ## 🤝 기여 방법
@@ -82,7 +81,6 @@ pixi run site-build
 6.  여러분의 기여가 병합되기를 기다리세요.
 
 자세한 기여 가이드라인은 [CONTRIBUTING.md](./CONTRIBUTING.md) 파일을 참고해주세요. 여러분의 참여는 이 저장소를 더욱 풍성하게 만듭니다.
-
 
 ## 📜 라이선스
 
