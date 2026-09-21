@@ -1,153 +1,134 @@
 #import "../templates/conf.typ": *
 
 #show: template.with(
-  title: "Claude Code Cheatsheet (v2.1.116)",
-  header: [Last updated: 2026-04-20],
-  footer: "Claude Code Cheat Sheet (cc.storyfox.cz)",
+  title: "Claude Code Cheat Sheet",
+  header: [Last updated: #datetime.today().display()],
+  footer: "Claude Code CLI Assistant Cheat Sheet",
 )
+
+= Installation & Setup
+
+Claude Code is an AI-powered CLI assistant for software engineering tasks.
+
+- *Install*: `npm install -g @anthropics/claude-code`
+- *Login*: `claude auth login`
+- *Check Auth Status*: `claude auth status`
+- *Show User Info*: `claude auth whoami`
+- *Logout*: `claude auth logout`
+
+= Quick Start
+
+- *Start Interactive Session*: `claude`
+- *Run Single Command*: `claude "help me write a Python function"`
+- *Resume Previous Session*: `claude --resume`
+- *Start with Memory Enabled*: `claude --memory`
+- *Enable Extended Thinking*: `claude --think`
+- *Analyze Image/Diagram*: `claude "analyze screenshot" --image path/to/image.png`
+
+= Core Commands
+
+== File Operations & Refactoring
+- Read and analyze a file: `claude "read file.py"`
+- Edit an existing file: `claude "edit file.py"`
+- Create a new file: `claude "create file.py"`
+- Fix failing tests: `claude "fix tests"`
+- Refactor existing code: `claude "refactor code"`
+
+== Git Integration
+- Create git commit with message: `claude "create commit"`
+- Create pull request: `claude "create PR"`
+- Review git changes: `claude "review changes"`
+- Resolve merge conflicts: `claude "fix merge conflicts"`
 
 = Keyboard Shortcuts
 
-== General Control
-- `Ctrl + C`: Cancel input/generation
-- `Ctrl + D`: Exit session
-- `Ctrl + L`: Clear prompt + force full screen redraw
-- `Ctrl + O`: Toggle transcript viewer (verbose)
-- `Ctrl + U`: Clear entire input buffer
-- `Ctrl + Y`: Restore cleared input buffer
+== Session & Navigation
+- `Ctrl + C`: Cancel input / generation
+- `Ctrl + D`: Exit interactive mode
+- `Ctrl + L`: Clear prompt and redraw screen
+- `Ctrl + O`: Toggle transcript viewer
+- `Ctrl + U` / `Ctrl + Y`: Clear / restore input buffer
 - `Ctrl + R`: Reverse search history
-- `Ctrl + G`: Open in editor (Ctrl+X Ctrl+E)
+- `Ctrl + V`: Paste image from clipboard
 - `Ctrl + B`: Background running tasks
-- `Ctrl + T`: Toggle task list
-- `Ctrl + V`: Paste image
-- `Ctrl + X Ctrl + K`: Kill background agents (press twice)
-- `Esc Esc`: Rewind or summarize
-- `Esc`: Cancel/Undo
-
-== Mode Switching & Input
-- `Shift + Tab`: Cycle permission modes (Default → Accept Edits → Plan → ...)
-- `Alt + P`: Switch model
+- `Shift + Tab`: Cycle permission modes (Default → Accept Edits → Plan)
+- `Alt + P`: Switch AI model
 - `Alt + T`: Toggle extended thinking
-- `Alt + O`: Toggle fast mode
-- `\ + Enter`: Newline
-- `Ctrl + J`: Control sequence newline
+- `\ + Enter` / `Ctrl + J`: Insert newline
 
 = Slash Commands
 
-== Session & Files
-- `/clear`: Clear conversation
+== Session Management
+- `/help`: Show available commands
+- `/clear`: Clear conversation history
+- `/reset`: Reset conversation state
+- `/exit`: Exit interactive mode
+- `/version`: Show Claude Code version
+- `/undo` / `/rewind`: Roll back to checkpoint
 - `/compact [focus]`: Compact context
-- `/branch [name]`: Branch conversation (/fork alias)
-- `/cost`: Token usage (per-model + cache)
-- `/context`: Visualize context (grid)
-- `/diff`: Interactive diff viewer
-- `/copy [N]`: Copy last (or Nth) response
-- `/recap`: Summarize session context on return
-- `/undo` / `/rewind`: Rewind to checkpoint
-- `/export`: Export conversation
-- `/resume [session]`: Resume by ID/name
-- `/focus`: Toggle focus view (fullscreen only)
+- `/cost`: Display token usage & cost
 
-== Config & Tools
-- `/config`: Manage configuration
-- `/model [model]`: Switch model & effort
-- `/fast [on|off]`: Toggle fast mode
-- `/theme`: Change color theme (Auto/Terminal match)
-- `/permissions`: View/update permissions
-- `/effort [level]`: Set effort (low/med/high/xhigh/max)
-- `/color [color]`: Set prompt-bar color
-- `/keybindings`: Customize shortcuts
-- `/terminal-setup`: Configure terminal keybindings
-- `/init`: Create CLAUDE.md
-- `/memory`: Edit CLAUDE.md & auto memory
-- `/mcp`: Manage MCP servers UI
-- `/hooks`: Manage hooks
-- `/skills`: List available skills
-- `/agents`: Manage agent configurations
-- `/reload-plugins`: Hot-reload plugins
-- `/add-dir <path>`: Add working directory
+== Settings & Configuration
+- `/settings` / `/config`: Open settings panel
+- `/model [model]`: Change AI model & effort
+- `/memory on` / `/memory off`: Toggle memory
+- `/permissions`: View/update tool permissions
+- `/init`: Initialize `CLAUDE.md`
 
-== Special & Review
-- `/plan [desc]`: Enter plan mode directly
-- `/review [PR]`: Review PR locally
-- `/ultrareview [PR#]`: Cloud review (multi-agent)
-- `/simplify [focus]`: Code review + fix (3 agents)
-- `/security-review`: Scan for vulnerabilities
-- `/less-permission-prompts`: Add allowlist for fewer prompts
-- `/loop [interval] [prompt]`: Recurring task
-- `/voice`: Toggle voice dictation
-- `/doctor`: Diagnose installation
-- `/rc` / `/remote-control`: Remote control mode
-- `/desktop`: Continue in Desktop app
-- `/rename [name]`: Rename current session
-- `/btw <question>`: Side question (no context cost)
-- `/insights`: Analyze sessions report
+== Productivity
+- `/save`: Save conversation
+- `/load`: Load previous conversation
+- `/export`: Export conversation to file
+- `/diff`: Open interactive diff viewer
 
-= MCP & Agent Management
+= Common Workflows
 
-== MCP Server Management
-- `--transport http`: Remote HTTP server (requires auth)
-- `--transport stdio`: Local process server
-- `--transport sse`: Remote SSE server
-- `claude mcp list`: List all servers
-- `claude mcp serve`: Run Claude Code as an MCP server
+== Code Review
+- Review specific file for bugs: `claude "review this code for bugs" file.py`
+- Review all git changes: `claude "review my git changes"`
+- Suggest code improvements: `claude "suggest improvements" src/`
 
-== Scopes & Config
-- Local: `~/.claude.json`
-- Project: `project.mcp.json`
-- User: `~/.claude.json`
+== Testing & Documentation
+- Generate unit tests: `claude "write tests for this function"`
+- Fix failing tests: `claude "fix these test failures"`
+- Analyze test coverage: `claude "analyze test coverage"`
+- Generate README: `claude "create README for this project"`
+- Add documentation comments: `claude "add documentation to this function"`
+- Generate API documentation: `claude "generate API docs"`
 
-== Agents & Skills
-- *Built-in Agents*: Explore, Plan, General, Bash
-- *Frontmatter*: `permissionMode`, `isolation`, `memory`, `background`, `maxTurns`
-- *Skill Locations*: `.claude/skills/` (Project), `~/.claude/skills/` (Personal)
+== Debugging & Optimization
+- Debug error message: `claude "help debug this error: [error message]"`
+- Performance analysis: `claude "why is this code slow?"`
+- Explain implementation: `claude "explain how this works" complex_function.py`
 
-= Memory & File Structure
+= IDE Integrations & Configuration
 
-== CLAUDE.md Locations
-- `./CLAUDE.md`: Project (team-shared)
-- `./CLAUDE.local.md`: Local personal (gitignored)
-- `~/.claude/CLAUDE.md`: Personal (global)
-- `/etc/claude-code/CLAUDE.md`: Managed policy (org)
+== VS Code Integration
+- Install extension: `code --install-extension anthropic.claude-code`
+- Open in VS Code: `claude --vscode`
+- Shortcuts: `Ctrl+Shift+P` -> `"Claude: Ask"`, `"Claude: Review"`
 
-== Rules & Import
-- `.claude/rules/*.md`: Project rules
-- `~/.claude/rules/*.md`: User rules
-- `paths: frontmatter`: Path-specific rules
-- `@path/to/file`: Import in CLAUDE.md
+== CLI Configuration
+- Set default editor: `claude config set editor code`
+- Set working directory: `claude config set workdir /path/to/project`
+- View all settings: `claude config list`
+- Reset configuration: `claude config reset`
+- Set timeout: `claude config set timeout 30`
 
-== Auto Memory
-- Automatically loads `MEMORY.md` and topic files from `~/.claude/projects/<id>/memory/`
+= Global Options & Troubleshooting
 
-= Workflow & Tips
+== Global CLI Options
+- `--resume`: Resume previous session
+- `--memory` / `--no-memory`: Enable/disable memory
+- `--think`: Enable extended thinking
+- `--no-color`: Disable colored output
+- `--verbose`: Enable verbose logging
+- `--clear-cache`: Clear cache
+- `--proxy <url>`: Use proxy (e.g. `claude --proxy http://proxy:8080`)
 
-- *Thinking & Effort*: `Alt + T` toggle, `xhigh` level (between high/max), "ultrathink" for max effort
-- *Auto Mode*: Max subscribers (Opus 4.7) no longer need `--enable-auto-mode`
-- *Git Worktrees*: `--worktree` for isolation, `isolation: worktree` agent exclusive tree
-- *Context*: Optimize with `/compact` (1M supported, Opus 4.6+), `CLAUDE.md` persists
-- *Voice Mode*: Activate with `/voice`, hold Space to record & send (20 languages)
-- *SendMessage*: Auto-resume functionality (replaces resume)
-
-= CLI & Environment
-
-== Core Environment Variables
-- `ANTHROPIC_API_KEY`, `ANTHROPIC_MODEL`
-- `ANTHROPIC_BASE_URL`: Proxy/gateway override
-- `ANTHROPIC_BETAS`: Additional beta headers
-- `MAX_THINKING_TOKENS`: Limit (0=off)
-- `ENABLE_PROMPT_CACHING_1H`: Opt into 1h TTL
-- `FORCE_PROMPT_CACHING_5M`: Force 5-min TTL
-- `CLAUDE_CODE_ENABLE_AWAY_SUMMARY`: Force recap
-- `CLAUDECODE`: Detect CC shell (=1)
-- `API_TIMEOUT_MS`: API timeout (default 600s)
-- `CLAUDE_CODE_DISABLE_CRON`: Disable tasks
-
-== CLI Commands & Flags
-- `claude auth login`: Sign in (--sso, --console)
-- `claude update`: Update Claude Code
-- `-n / --name`: Session name
-- `--allowedTools` / `--disallowedTools`: Tool control
-- `--dangerously-skip-permissions`: Skip all prompts ⚠️
-- `--system-prompt`: Custom system prompt
-- `--settings <file>`: Load settings JSON
-- `--output-format`: text/json/stream-json
+== Troubleshooting
+- *Clear Authentication*: `claude auth logout && claude auth login`
+- *Reset Configuration*: `claude config reset`
+- *Clear Cache*: `claude --clear-cache`
+- *Debug Logging*: `claude --verbose --debug`
+- *Clear Memory*: `claude "clear memory"`
