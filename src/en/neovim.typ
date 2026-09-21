@@ -8,213 +8,290 @@
 
 = Core Concepts
 
-Neovim is a hyperextensible Vim-based text editor emphasizing extensibility and modern features. It is fully backward-compatible with Vim while adding built-in LSP, Lua scripting, and Tree-sitter.
+Neovim is a hyperextensible modal text editor. It provides built-in LSP, Lua configuration, Tree-sitter integration, and modern package management.
 
-- *Built-in LSP*: IDE-level autocompletion and diagnostics without external plugins.
-- *Tree-sitter*: High-performance syntax highlighting and structural code selection.
-- *Lua API*: Full scriptability via Lua (init.lua) in addition to Vimscript.
-- *Modern defaults*: Better terminal support, true color, and sane out-of-box settings.
+- *Modal Editing*: Normal (navigate), Insert (type), Visual (select), Command (execute).
+- *Lua First*: Configure via `~/.config/nvim/init.lua`.
+- *Built-in LSP & Treesitter*: Native IDE features and syntax parsing.
+- *Native Package Manager*: Manage plugins directly using `vim.pack` (Neovim 0.12+).
 
-= Navigation
+= Essential Navigation
 
-== Cursor Movement
+== Fast Cursor Motions
 - `h j k l`: Left / Down / Up / Right
-- `w b e`: Next word start / Prev word start / Word end
-- `W B E`: Same but WORD (whitespace-delimited)
-- `0 ^ \$`: Line start / First non-blank / Line end
-- `gg G`: File start / File end
-- `5G` or `:5`: Jump to line 5
-- `%`: Jump to matching bracket/paren
-- `f<char> F<char>`: Find char forward/backward on line (`;` repeat, `,` reverse)
-- `t<char> T<char>`: Till char (one before) forward/backward
-- `H M L`: Top / Middle / Bottom of screen
-- `Ctrl-d Ctrl-u`: Scroll half-page down / up
-- `Ctrl-f Ctrl-b`: Scroll full-page forward / backward
-- `zz zt zb`: Center / Top / Bottom cursor on screen
+- `w` / `b`: Start of next / previous word
+- `e` / `ge`: End of current / previous word
+- `0` / `^` / `\$`: Line start / First non-blank / Line end
+- `gg` / `G`: Go to first / last line
+- `:<N>` or `<N>G`: Jump to line number N
+- `%`: Jump to matching bracket `()`, `{}`, `[]`
+- `f<char>` / `F<char>`: Jump forward / backward to char (`;` next, `,` prev)
+- `t<char>` / `T<char>`: Jump till before char forward / backward
+- `Ctrl-d` / `Ctrl-u`: Scroll half-page down / up
+- `zz` / `zt` / `zb`: Center / Top / Bottom current line on screen
 
-== Marks and Jumps
-- `ma`: Set mark a at cursor
-- `` `a ``: Jump to exact position of mark a
-- `'a`: Jump to line of mark a
-- `Ctrl-o Ctrl-i`: Jump backward / forward in jump list
-- `g;` and `g,`: Previous / next position in change list
+== Jump List and Marks
+- `Ctrl-o` / `Ctrl-i`: Jump to older / newer cursor position
+- `g;` / `g,`: Jump to older / newer edit position
+- `m<a-z>`: Set local mark
+- `'<a-z>` / `` `<a-z>` ``: Jump to mark line / exact position
+- `''`: Jump back to position before last jump
 
-= Editing
+= High-Frequency Editing
 
-== Entering Insert Mode
-- `i I`: Insert before cursor / at line start
-- `a A`: Append after cursor / at line end
-- `o O`: Open new line below / above
-- `s S`: Substitute char / whole line
-- `R`: Replace mode (overwrites characters)
+== Insert Mode Triggers
+- `i` / `I`: Insert before cursor / at line start
+- `a` / `A`: Append after cursor / at line end
+- `o` / `O`: Open new line below / above
+- `s` / `S`: Substitute char / whole line
+- `C`: Change from cursor to line end (`c\$`)
+- `D`: Delete from cursor to line end (`d\$`)
 
-== Operators (combine with motions)
-- `d`: Delete --- `dd` (line), `dw`, `d\$, `d3j`
-- `c`: Change (delete + insert) --- `cw`, ci-paren (ci with motion), `C`
-- `y`: Yank (copy) --- `yy`, `yw`, `y\$`
-- `> <`: Indent right / left --- `>>`, `5>>`, `>G`
-- `=`: Auto-indent --- `==` (line), `gg=G` (whole file)
-- `gU gu`: Uppercase / lowercase (e.g., `gUw`, `guw`)
-- `~`: Toggle case of character under cursor
+== Operator + Motion (`d`, `c`, `y`)
+- `dd` / `yy`: Delete (cut) / Yank (copy) current line
+- `cc`: Change whole line
+- `p` / `P`: Paste after / before cursor
+- `x`: Delete single character
+- `r<char>`: Replace single character
+- `~`: Toggle case of character
+- `>` / `<`: Indent right / left (`>>` / `<<` for current line)
+- `==`: Auto-indent current line (`gg=G` whole file)
+- `.`: *Repeat last change* (very important)
 
-== Text Objects
-- `iw aw`: Inner word / a word (with surrounding space)
-- `is as`: Inner sentence / a sentence
-- `ip ap`: Inner paragraph / a paragraph
-- `ib ab`: Inside / around parentheses
-- `iB aB`: Inside / around curly braces
-- `i[ a[`: Inside / around square brackets
-- `i" a"` / `i' a'`: Inside / around double/single quotes
-- `it at`: Inside / around XML/HTML tag
+== Essential Text Objects
+Combine with operators: `d` (delete), `c` (change), `y` (yank), `v` (select).
+- `ciw` / `diw` / `yiw`: Change / Delete / Yank inner word
+- `caw` / `daw`: Change / Delete word including trailing space
+- `ci"` / `ca"`: Inside / Around double quotes
+- `ci'` / `ca'`: Inside / Around single quotes
+- `ci(` / `ca(`: Inside / Around parentheses (also `cib` / `cab`)
+- `ci{` / `ca{`: Inside / Around curly braces (also `ciB` / `caB`)
+- `ci[` / `ca[`: Inside / Around square brackets
+- `cit` / `cat`: Inside / Around HTML/XML tags
+- `cip` / `dap`: Inside / Around paragraph
 
-== Undo / Redo
-- `u`: Undo last change
-- `Ctrl-r`: Redo
-- `U`: Restore last changed line
-- `:earlier 5m`: Revert to state 5 minutes ago
-- `:later 5m`: Move forward 5 minutes in undo history
+= Visual & Block Mode
 
-= Visual Mode
-- `v`: Character-wise visual
-- `V`: Line-wise visual
-- `Ctrl-v`: Block (column) visual
-- `gv`: Reselect last visual selection
-- `o`: Move cursor to other end of selection
-- `I` in block mode: Insert at start of each selected line
+- `v`: Character visual selection
+- `V`: Line visual selection
+- `Ctrl-v`: Block (column) visual selection
+- `gv`: Re-select last visual area
+- `o`: Switch cursor to other end of selection
 
-= Search and Replace
-- `/pattern`: Search forward
+== Multi-Line Block Editing
+1. Press `Ctrl-v` and select multiple lines vertically.
+2. Press `I` (insert at start) or `A` (append at end).
+3. Type text.
+4. Press `Esc`: The change applies to all selected lines.
+
+= Search & Replace
+
+- `/pattern`: Search forward (`n` next, `N` previous)
 - `?pattern`: Search backward
-- `n N`: Next / previous match
-- Asterisk or pound key: Search word under cursor forward / backward
+- `*` / `\#`: Search exact word under cursor forward / backward
+- `:noh` or `<Esc>`: Clear search highlights
 - `:%s/old/new/g`: Replace all in file
-- `:%s/old/new/gc`: Replace all with confirmation
-- `:5,10s/old/new/g`: Replace in lines 5-10
+- `:%s/old/new/gc`: Replace with confirmation prompt
+- `cgn`: Change current search match, then press `.` to repeat on next match
 - `:g/pattern/d`: Delete all lines matching pattern
-- `:g/pattern/norm dd`: Apply normal command to matching lines
-- `cgn`: Change next search match (repeatable with `.`)
+- `:v/pattern/d`: Delete all lines not matching pattern
 
-= Registers and Macros
-- `"ay`: Yank into register a
-- `"ap`: Paste from register a
-- `"+y / "+p`: System clipboard yank / paste
-- `"0p`: Paste last yank (not affected by delete)
-- `q<letter>`: Start recording macro into register
-- `q`: Stop recording
-- `\@<letter>`: Play macro
-- `5\@a`: Play macro a five times
-- `\@\@`: Replay last macro
-- `:reg`: View all register contents
+= Windows, Buffers & Tabs
 
-= Splits, Tabs and Buffers
-
-== Splits
-- `:sp` / `:vsp`: Horizontal / vertical split
-- `Ctrl-w h/j/k/l`: Move between splits
-- `Ctrl-w H/J/K/L`: Move split to far edge
-- `Ctrl-w =`: Equalize split sizes
-
-== Tabs
-- `:tabe <file>`: Open file in new tab
-- `gt gT`: Next / previous tab
-- `2gt`: Go to tab 2
-- `:tabc`: Close current tab
+== Splits (Windows)
+- `:vsp` / `:sp`: Vertical / Horizontal split
+- `Ctrl-w v` / `Ctrl-w s`: Split vertical / horizontal
+- `Ctrl-w h/j/k/l`: Move focus to left/down/up/right split
+- `Ctrl-w c` / `Ctrl-w o`: Close current split / Close all other splits
+- `Ctrl-w =`: Equalize split widths and heights
 
 == Buffers
-- `:ls` or `:buffers`: List all buffers
-- `:b <N>` or `:b <name>`: Switch to buffer
-- `:bn :bp`: Next / previous buffer
-- `:bd`: Delete (close) buffer
-- `:wa`: Write all buffers
-- `Ctrl-^`: Toggle between two recent buffers
+- `:ls` or `:buffers`: List active buffers
+- `:b <name/number>`: Switch to buffer
+- `:bn` / `:bp`: Next / Previous buffer
+- `:bd`: Delete (close) current buffer
+- `Ctrl-^`: Toggle between current and alternate buffer
 
-= Built-in LSP
+== Tabs
+- `:tabnew [file]`: Open new tab page
+- `gt` / `gT`: Next / Previous tab
+- `<N>gt`: Go to tab number N
+- `:tabclose`: Close current tab
 
-Configure via nvim-lspconfig or built-in vim.lsp.
+= Built-in Neovim Features
 
-- `K`: Hover documentation
+== Built-in LSP Keymaps
+Neovim includes native LSP client support:
+- `K`: Show hover documentation
 - `gd`: Go to definition
 - `gD`: Go to declaration
-- `gr`: List references
+- `gr`: Show references (or `vim.lsp.buf.references()`)
 - `gi`: Go to implementation
-- `gt`: Go to type definition
-- Leader + ca: Code actions
-- Leader + rn: Rename symbol
-- `[d ]d`: Previous / next diagnostic
-- `:LspInfo`: Show LSP server status
+- `[d` / `]d`: Jump to previous / next diagnostic
+- `vim.lsp.buf.rename()`: Rename symbol
+- `vim.lsp.buf.code_action()`: Code actions
+- `vim.lsp.buf.format()`: Format current buffer
+- `:checkhealth`: Check Neovim setup, providers, and LSP status
 
-= Telescope (Fuzzy Finder)
-
-Install: nvim-telescope/telescope.nvim
-
-Recommended key mappings in init.lua:
-- Leader + ff: find_files
-- Leader + fg: live_grep (search text in files)
-- Leader + fb: buffers
-- Leader + fh: help_tags
-- Leader + fs: lsp_document_symbols
-- Leader + fr: oldfiles (recent files)
-
-= Terminal
+== Built-in Terminal
 - `:terminal`: Open terminal buffer
-- `i`: Enter terminal insert mode
-- `Ctrl-\ Ctrl-n`: Exit terminal mode to normal mode
-- `:split | terminal`: Open terminal in horizontal split
+- `i` / `a`: Enter terminal typing mode
+- `Ctrl-\ Ctrl-n`: Exit terminal mode back to Normal mode
 
-= Configuration (init.lua)
+= Configuration (`init.lua`)
 
-File path: `~/.config/nvim/init.lua`
+Set basic options in `~/.config/nvim/init.lua`:
 
-Key options via vim.opt namespace:
-- `number = true`: show line numbers
-- `relativenumber = true`: relative line numbers
-- `expandtab = true`: spaces instead of tabs
-- `shiftwidth = 2`: 2-space indent
-- `termguicolors = true`: true color support
-- `ignorecase` + `smartcase`: smart search case sensitivity
-- `scrolloff = 8`: keep 8 lines context when scrolling
-- `undofile = true`: persistent undo history
+```lua
+-- Leader key
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
-Key mappings via vim.keymap.set:
-- Space as leader: `vim.g.mapleader = " "`
-- Leader w to save, Leader q to quit
-- Esc to clear search highlight
-- Ctrl-h/j/k/l to navigate between splits
-- `jk` in insert mode as quick Esc
+-- Essential options
+local opt = vim.opt
+opt.number = true          -- Show line number
+opt.relativenumber = true  -- Relative line numbers
+opt.expandtab = true       -- Spaces instead of tabs
+opt.shiftwidth = 2        -- Indent size
+opt.tabstop = 2
+opt.smartindent = true     -- Auto indent
+opt.ignorecase = true      -- Case-insensitive search
+opt.smartcase = true       -- Case-sensitive if capital typed
+opt.termguicolors = true   -- True color support
+opt.scrolloff = 8          -- Scroll offset lines
+opt.signcolumn = "yes"     -- Keep sign column open
+opt.undofile = true        -- Persistent undo
 
-= Plugin Management (lazy.nvim)
+-- Keymaps: vim.keymap.set(mode, lhs, rhs, opts)
+local keymap = vim.keymap.set
+keymap("n", "<Esc>", "<cmd>nohlsearch<CR>")
+keymap("n", "<leader>w", "<cmd>w<CR>")
+keymap("n", "<leader>q", "<cmd>q<CR>")
+keymap("n", "<C-h>", "<C-w>h")
+keymap("n", "<C-l>", "<C-w>l")
+keymap("n", "<C-j>", "<C-w>j")
+keymap("n", "<C-k>", "<C-w>k")
+```
 
-Install lazy.nvim, then declare plugins:
-- nvim-treesitter/nvim-treesitter: Syntax highlighting
-- neovim/nvim-lspconfig: LSP configuration helpers
-- nvim-telescope/telescope.nvim: Fuzzy finder
-- hrsh7th/nvim-cmp: Autocompletion engine
-- catppuccin/nvim: Colorscheme
-- lewis6991/gitsigns.nvim: Git status in the gutter
-- nvim-lualine/lualine.nvim: Statusline
-- numToStr/Comment.nvim: Comment toggling
+= Plugin Management (`vim.pack`)
 
-Bootstrap: clone lazy.nvim into stdpath data dir, prepend to rtp,
-then call require("lazy").setup with your plugin list.
+Neovim 0.12+ provides native plugin management via `vim.pack`.
 
-= Pro Tips
+== Adding Plugins with `vim.pack.add`
 
-== Efficiency
-- `.`: Repeat last change --- the single most powerful Vim command.
-- `Ctrl-a Ctrl-x`: Increment / decrement number under cursor.
-- `gf`: Go to file under cursor.
-- `ga`: Show ASCII / Unicode value of char under cursor.
-- `:checkhealth`: Run health diagnostics for plugins and settings.
+Declare plugins in your `init.lua`:
 
-== Common Search Patterns
-- Find function definitions: search for the function keyword with word boundaries
-- Delete trailing whitespace: use the substitute command on line ends
-- Remove consecutive blank lines: use global substitute
-- Surround word with quotes: use a macro or surround.vim plugin
+```lua
+vim.pack.add({
+  -- String: Git repository URL
+  "https://github.com/folke/tokyonight.nvim",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/echasnovski/mini.nvim",
+  "https://github.com/keaising/im-select.nvim",
 
-== Git Integration (vim-fugitive)
-- :Git -- open git status window (interactive)
-- :Gdiff -- diff the current file against HEAD
-- :Gwrite -- stage the current file
-- :Git commit -- open commit message buffer
-- :Git push / :Git pull -- push and pull branches
+  -- Table: Specification with branch/tag
+  {
+    src = "https://github.com/nvim-telescope/telescope.nvim",
+    version = "0.1.x",
+  },
+})
+
+-- Configure plugins after pack loading
+vim.cmd.colorscheme("tokyonight")
+require("gitsigns").setup()
+require("im_select").setup({})
+```
+
+== `vim.pack` Commands & Operations
+- `:packadd <name>`: Load optional package on demand
+- `vim.pack.update()`: Update installed packages to latest revisions
+- `vim.pack.del()`: Delete managed package
+- `vim.pack-lockfile`: Auto-generated lockfile with exact git commit SHAs for reproducibility
+- `:help vim.pack`: Open built-in documentation
+
+= Recommended Modern Plugins
+
+== Syntax & Parsing
+- *nvim-treesitter/nvim-treesitter*: Advanced AST-based syntax highlighting, indentation, and incremental selection.
+
+== LSP & Tooling
+- *neovim/nvim-lspconfig*: Standard configurations for language servers.
+- *williamboman/mason.nvim*: Portable package manager for LSP servers, DAP servers, linters, and formatters.
+- *williamboman/mason-lspconfig.nvim*: Bridge between mason.nvim and lspconfig.
+
+== Autocompletion
+- *Saghen/blink.cmp*: Fast, modern, performant completion engine with snippet and LSP integration.
+- *hrsh7th/nvim-cmp*: Widely-used modular completion engine with extensive source plugins.
+
+== Fuzzy Finder & Navigation
+- *nvim-telescope/telescope.nvim*: Highly customizable fuzzy finder for files, git commits, grep, and LSP symbols.
+- *ibhagwan/fzf-lua* or *folke/snacks.nvim*: High-speed fuzzy search alternative.
+
+== Git Integration
+- *lewis6991/gitsigns.nvim*: Git signs in the signcolumn, inline diff previews, hunk staging, and blame lines.
+- *tpope/vim-fugitive*: Comprehensive Git command wrapper for Neovim.
+
+== Editing & UI Enhancements
+- *echasnovski/mini.nvim*: Fast, independent Lua modules for surrounding, comments, AI text-objects, and file browsing.
+- *keaising/im-select.nvim*: Automatically switches input method (IME) to English on leaving Insert mode.
+- *nvim-lualine/lualine.nvim*: Fast and configurable statusline.
+- *folke/which-key.nvim*: Popup display showing available keybindings as you type.
+
+= mini.nvim Module Guide
+
+`mini.nvim` provides modular, standalone utilities. Enable modules individually:
+
+```lua
+require('mini.surround').setup()
+require('mini.comment').setup()
+require('mini.ai').setup()
+require('mini.pairs').setup()
+require('mini.files').setup()
+require('mini.bracketed').setup()
+```
+
+== mini.surround (Delimiter Management)
+- `saiw"`: Add surrounding `"` around inner word
+- `sd"`: Delete surrounding `"`
+- `sr"'`: Replace surrounding `"` with `'`
+- `sh)`: Highlight surrounding `()`
+
+== mini.comment (Fast Commenting)
+- `gcc`: Toggle comment on current line
+- `gc` (in Visual mode): Toggle comment on selection
+- `gc<motion>`: Toggle comment over motion (e.g. `gcip` on paragraph)
+
+== mini.ai (Enhanced Text Objects)
+- `via` / `cia`: Select / Change inside function argument
+- `vaa` / `daa`: Select / Delete around function argument with comma
+- `vif` / `cif`: Inside function body
+- `vaf` / `daf`: Around whole function definition
+
+== mini.files (Buffer-Based File Manager)
+- `MiniFiles.open()`: Open file explorer
+- Navigate with `h j k l`.
+- Edit file names directly like buffer text.
+- Save buffer (`:w`) to commit file renames, creations, or deletions.
+
+== mini.bracketed (Bracket Navigation)
+- `[b` / `]b`: Previous / next buffer
+- `[d` / `]d`: Previous / next diagnostic
+- `[q` / `]q`: Previous / next quickfix entry
+
+= IME Switching (`im-select.nvim`)
+
+Automatically restores English input method when leaving Insert mode. This avoids typing errors in Normal mode.
+
+```lua
+require('im_select').setup({
+  -- Default English IM engine
+  -- macOS: "com.apple.keylayout.ABC"
+  -- Windows: "1033"
+  -- Linux (fcitx5): "keyboard-us"
+  default_im_select = "keyboard-us",
+  -- Restore previous IM when re-entering Insert mode
+  set_previous_events = { "InsertEnter" },
+})
+```
